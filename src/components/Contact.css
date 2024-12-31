@@ -44,7 +44,7 @@
   width: 550px;
   background-color: #333;
   padding: 25px;
-  border-radius: 15px;
+  /* border-radius: 15px; */
 }
 
 .contact-form h3 {
@@ -89,8 +89,8 @@
   width: 288px;
   background-color: black;
   padding: 20px;
-  margin-top: 7vh;
-  border-radius: 15px;
+  /* margin-top: 7vh; */
+  /* border-radius: 15px; */
 }
 
 .contact-info h3, .contact-info h4 {
