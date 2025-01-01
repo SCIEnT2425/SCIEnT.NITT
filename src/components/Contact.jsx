@@ -60,7 +60,7 @@ const Contact = () => {
           </p>
           <h4>Email us at</h4>
           <p>
-            scient.nitt@edu
+          scient@nitt.edu
             <br />
           </p>
           <h4>Where to find us</h4>
