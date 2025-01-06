@@ -1,36 +1,3 @@
-# version: '3.8'
-
-# services:
-#   frontend:
-#     build:
-#       context: .
-#       dockerfile: Dockerfile
-#     ports:
-#       - "3000:80" # Map Nginx port 80 to localhost:3000
-#     depends_on:
-#       - backend
-#     networks:
-#       - app-network
-
-#   backend:
-#     build:
-#       context: ./server
-#       dockerfile: Dockerfile
-#     ports:
-#       - "5000:5000" # Map backend port 5000
-#     environment:
-#       - PORT=5000
-#       - MONGO_URI=mongodb+srv://teamSCIEnT:SCIEnT1990@cluster0.jjczn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-#       - JWT_SECRET=sec
-#       - EMAIL_USER=
-#       - EMAIL_PASS=
-#     networks:
-#       - app-network
-
-# networks:
-#   app-network:
-
-# version: '3.8'
 
 services:
   frontend:

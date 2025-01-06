@@ -20,7 +20,7 @@ exports.resetCredits = async () => {
       { $set: { credits: 14 } }
      );
 
-    console.log("Credits have been reset: 100 for SCIEnT, 14 for others.");
+    // console.log("Credits have been reset: 100 for SCIEnT, 14 for others.");
   } catch (error) {
     console.error("Error resetting credits:", error);
   }
@@ -28,7 +28,7 @@ exports.resetCredits = async () => {
 
 exports.resetBookings = async () => {
     await Booking.deleteMany({});
-    console.log("All bookings have been deleted.");
+    // console.log("All bookings have been deleted.");
 };
 
 exports.getAvailableSlots = async (req, res) => {

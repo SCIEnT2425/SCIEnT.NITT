@@ -28,7 +28,7 @@ exports.login = async (req, res) => {
     const club = await Club.findOne({ username });
     if (!club)
       return res.status(400).send('Invalid name or password.');
-    console.log('test1');
+    // console.log('test1');
 
     // Compare the provided password with the hashed password in the database
     const isPasswordCorrect = await bcrypt.compare(password, club.password);
@@ -36,7 +36,7 @@ exports.login = async (req, res) => {
       return res.status(400).send('Invalid username or password.');
     }
 
-    console.log('test2');
+    // console.log('test2');
 
     // Generate JWT token with 'isAdmin' flag
     const token = jwt.sign(

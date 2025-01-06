@@ -51,7 +51,7 @@ const createSlot = async (slotData) => {
   try {
     const slot = new Slot(slotData);
     await slot.save();
-    console.log(`Slot created for ${slotData.room} at ${slotData.startTime}`);
+    // console.log(`Slot created for ${slotData.room} at ${slotData.startTime}`);
   } catch (error) {
     if (error.code === 11000) {
       console.warn("Duplicate slot detected, skipping:", slotData.startTime);
