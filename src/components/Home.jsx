@@ -6,12 +6,6 @@ import "./Home.css";
 const Home = () => {
   return (
     <div className="home-main-container">
-      {/* <div className="banner">
-        <div className="heading">SCIENT</div>
-        <div className="desc">
-          Student Centre for Innovation in Engineering and Technology
-        </div>
-      </div> */}
       
       <div className="card-container">
         <div className="card">

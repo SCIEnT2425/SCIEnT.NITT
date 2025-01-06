@@ -6,7 +6,7 @@ import {
   FaEnvelope,
   FaFacebook,
 } from "react-icons/fa";
-import logo from "../assets/logo.svg";
+import logo from "../assets/logo_s.png";
 
 const Footer = () => {
   return (

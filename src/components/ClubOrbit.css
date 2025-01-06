@@ -12,8 +12,7 @@ html {
   float: left;
   width: 100%;
   overflow: hidden;
-  /* min-width: 100vw; */
-  /* min-height: 100vh; */
+
 }
 .logo-orbitcenter{
   height: 40px;
@@ -29,9 +28,7 @@ html {
   object-fit: contain;
 }
 
-/* .ring-1 li img {
-  object-fit: contain;
-} */
+
 .ecell {
   background-color: wheat;
   height: 0.1em;
@@ -183,9 +180,7 @@ ul[class^="ring"] li {
   margin: -0.8em;
 }
 
-/*
-  center;
-*/
+
 .orbit-center .p1 {
   font-size: 20px;
   padding-bottom: 20px;
@@ -195,7 +190,6 @@ ul[class^="ring"] li {
   font-size: 17px;
 }
 .orbit-center {
-  /* z-index: 5; */
   font-size: 1.6rem;
   width: fit-content;
   height: fit-content;
@@ -203,14 +197,12 @@ ul[class^="ring"] li {
   font-family: sans-serif;
   font-size: 30px;
   font-weight: 600;
-  /* line-height: 30px; */
   letter-spacing: 0.02em;
   text-align: justified;
 
   padding: 10px;
   color: white;
   text-align: center;
-  /* background: black; */
   border-radius: 10%;
 }
 .orbit-center:hover .orbit-center__icon {
@@ -222,9 +214,7 @@ ul[class^="ring"] li {
   transition: all 300ms ease-in-out;
 }
 
-/* 
-animations 
-*/
+
 @-webkit-keyframes clockwiseRotate {
   from {
     transform: rotate(0deg);
@@ -257,9 +247,7 @@ animations
     transform: rotate(-360deg);
   }
 }
-/* 
-icons 
-*/
+
 .fa-heart-o {
   background: #b71c1c;
   color: white;
@@ -277,7 +265,6 @@ icons
   object-fit: cover;
   height: 100px;
   width: 100px;
-  /* border: 50%; */
 }
 
 .fa-safari {
@@ -360,7 +347,6 @@ icons
   color: white;
 }
 
-/* small tablets */
 @media screen and (max-width: 470px) {
   .orbit-wrap {
     height: 8em;
@@ -368,7 +354,6 @@ icons
     font-size: 3.1em;
   }
   .ring-3 li img {
-    /* object-fit: contain; */
     height: 44px;
     width: 42px;
     border-radius: 10px;
@@ -382,7 +367,6 @@ icons
     font-size: 10px;
   }
   .orbit-center {
-    /* z-index: 5; */
     font-size: 1.6rem;
     width: fit-content;
     height: fit-content;
@@ -390,14 +374,12 @@ icons
     font-family: sans-serif;
     font-size: 30px;
     font-weight: 600;
-    /* line-height: 30px; */
     letter-spacing: 0.02em;
     text-align: justified;
 
     padding: 10px;
     color: white;
     text-align: center;
-    /* background: black; */
     border-radius: 10%;
   }
   .ring-3 {
