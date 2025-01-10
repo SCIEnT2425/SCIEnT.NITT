@@ -191,14 +191,14 @@ const SlotBooking = () => {
         }
 
         // Fetch slots
-        const slotsResponse = await axios.get('http://localhost:5000/api/clubs/slots/available', {
+        const slotsResponse = await axios.get(`${process.env.BACKEND_URL}/api/clubs/slots/available`, {
           headers: { Authorization: `Bearer ${token}` },
           params: { date: selectedDate, room: selectedRoom },
         });
         setSlots(slotsResponse.data.slots);
 
         // Fetch bookings
-        const bookingsResponse = await axios.get('http://localhost:5000/api/bookings/pastbookings', {
+        const bookingsResponse = await axios.get(`${process.env.BACKEND_URL}/api/bookings/pastbookings`, {
           headers: { Authorization: `Bearer ${token}` },
           params: { date: selectedDate },
         });

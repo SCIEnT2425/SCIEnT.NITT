@@ -24,7 +24,7 @@ COPY --from=build /app/build /usr/share/nginx/html
 # Add nginx configuration to handle React Router
 RUN echo '                                                           \
 server {                                                            \
-    listen 80;                                                      \
+    listen 3000;                                                    \
     location / {                                                    \
         root /usr/share/nginx/html;                                 \
         index index.html index.htm;                                 \

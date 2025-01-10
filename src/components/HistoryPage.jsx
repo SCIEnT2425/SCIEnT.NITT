@@ -28,7 +28,7 @@ const HistoryPage = () => {
   useEffect(() => {
     const fetchHistoryData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/bookings/history', {
+        const response = await fetch(`${process.env.BACKEND_URL}/api/bookings/history`, {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${localStorage.getItem("authToken")}`, // JWT token
@@ -53,7 +53,7 @@ const HistoryPage = () => {
   useEffect(() => {
     const fetchClubs = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/clubs/clubdata", {
+        const response = await fetch(`${process.env.BACKEND_URL}/api/clubs/clubdata`, {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${localStorage.getItem('authToken')}`, // Add token in the header

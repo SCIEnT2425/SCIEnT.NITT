@@ -128,7 +128,7 @@ function BookingForm() {
     const fetchClubData = async () => {
       try {
         const token = localStorage.getItem("authToken");
-        const response = await axios.get("http://localhost:5000/api/clubs/credits", {
+        const response = await axios.get(`${process.env.BACKEND_URL}/api/clubs/credits`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const clubData = response.data;
@@ -168,7 +168,7 @@ function BookingForm() {
         return;
       }
   
-      const response = await fetch("http://localhost:5000/api/bookings/", {
+      const response = await fetch(`${process.env.BACKEND_URL}/api/bookings/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

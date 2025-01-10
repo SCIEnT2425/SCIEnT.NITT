@@ -24,11 +24,11 @@ import {
 const Request = () => {
   const [requests, setRequests] = useState([]);
 
-  // Fetch pending bookings from the backend
+  // Fetch pending bookings from the backendD
   useEffect(() => {
     const fetchPendingBookings = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/admin/pending-bookings', {
+        const response = await fetch(`${process.env.BACKEND_URL}/api/admin/pending-bookings`, {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${localStorage.getItem('authToken')}`, // JWT token
@@ -52,7 +52,7 @@ const Request = () => {
   // Approve booking
   const approveBooking = async (bookingId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/approve/${bookingId}`, {
+      const response = await fetch(`${process.env.BACKEND_URL}/api/admin/approve/${bookingId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ const Request = () => {
   // Reject booking
   const rejectBooking = async (bookingId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/reject/${bookingId}`, {
+      const response = await fetch(`${process.env.BACKEND_URL}/api/admin/reject/${bookingId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

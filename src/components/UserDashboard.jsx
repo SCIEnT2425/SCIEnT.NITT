@@ -44,7 +44,7 @@ const UserDashboard = () => {
         }
 
         // API call to fetch credits
-        const response = await axios.get("http://localhost:5000/api/clubs/credits", {
+        const response = await axios.get(`${process.env.BACKEND_URL}/api/clubs/credits`, {
           headers: {
             Authorization: `Bearer ${token}`, // Include token in Authorization header
           },
