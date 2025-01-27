@@ -2,8 +2,6 @@ services:
   frontend:
     build:
       context: ./ # Assuming this is your frontend directory
-    # ports:
-    #   - "6000:80"
     environment:
       - NODE_ENV=production
     depends_on:
@@ -14,11 +12,9 @@ services:
   backend:
     build:
       context: ./server # Adjust this path to your backend directory
-    # ports:
-    #   - "6000:6000"
     environment:
       - PORT=3001
-      - MONGO_URI=mongo://admin:password@db:27017/scient?authSource=admin
+      - MONGO_URI=mongodb://admin:password@db:27017/scient?authSource=admin
       - JWT_SECRET=sec
       - EMAIL_USER=${EMAIL_USER}
       - EMAIL_PASS=${EMAIL_PASS}
@@ -43,7 +39,7 @@ services:
     environment:
       ME_CONFIG_MONGODB_URL: mongodb://admin:password@db:27017/scient?authSource=admin
       ME_CONFIG_BASICAUTH_USERNAME: admin
-      ME_CONFIG_BASICAUTH_PASSWORD: password
+      ME_CONFIG_BASICAUTH_PASSWORD: scient1964
       ME_CONFIG_SITE_BASEURL: /db-client/
     depends_on:
       - db
@@ -52,6 +48,7 @@ services:
 
 networks:
   scient-network:
+    external: true
 
 volumes:
   db-data:

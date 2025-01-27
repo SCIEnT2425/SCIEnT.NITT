@@ -17,7 +17,7 @@ const Prof = () => {
     }
 
     try {
-      const response = await fetch(`${process.env.BACKEND_URL}/api/admin/clubs/reset-password`, {
+      const response = await fetch(`/api/admin/clubs/reset-password`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

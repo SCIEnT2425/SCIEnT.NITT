@@ -16,7 +16,7 @@ const Roombook = () => {
 
     try {
       // Send login request to backend
-      const response = await axios.post(`${process.env.BACKEND_URL}/api/auth/login`, {
+      const response = await axios.post(`/api/auth/login`, {
         username: formData.username,
         password: formData.password,
       });

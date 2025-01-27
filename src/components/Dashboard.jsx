@@ -31,7 +31,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchClubs = async () => {
       try {
-        const response = await fetch(`${process.env.BACKEND_URL}/api/clubs/clubdata`, {
+        const response = await fetch(`/api/clubs/clubdata`, {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${localStorage.getItem('authToken')}`, // Add token in the header
