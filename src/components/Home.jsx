@@ -14,22 +14,35 @@ const Home = () => {
             <h2>OUR VISION</h2>
             <p>
 
-To inspire students to innovate, and help transform idea concepts to socially relevant products.<br />
+To inspire students to innovate, and help transform idea concepts to socially relevant products.
+<br />
+
+</p>
+<p>
+
 <br/>
 To build an ecosystem that will encourage more students to aspire and build real-world ready innovations that make a positive difference to society.
 
             </p>
           </div>
         </div>
-        <div className="card">
+        <div className="Mission_card">
           <img src={b} alt="Our Mission" />
           <div className="overlay">
             <h2>OUR MISSION</h2>
             <p>
-            Encourage students to come up with innovative ideas and apply their technical knowledge to solve problems. <br />
+            Encourage students to come up with innovative ideas and apply their technical knowledge to solve problems. 
+            <br />
+            </p>
+
+            <p>
 Help transform the concepts into prototypes, and further assist in developing them into viable real-world solutions. <br />
+</p>
+<p>
 Offer a conducive space and necessary tools to collaborate and work on projects that span across disciplines. <br/>
-{/* Provide an ecosystem of mentorship, training, industry interface, and material assistance to help advance the progress of innovation and entrepreneurship. */}
+</p>
+<p>
+Provide an ecosystem of mentorship, training, industry interface, and material assistance to help advance the progress of innovation and entrepreneurship.
             </p>
           </div>
         </div>
