@@ -1,30 +1,40 @@
-const Slot = require('../models/Slot');
+const axios = require("axios");
+const Slot = require("../models/Slot");
+
+const getISTTime = async () => {
+  try {
+    const response = await axios.get("https://www.timeapi.io/api/Time/current/zone?timeZone=Asia/Kolkata");
+    return new Date(response.data.dateTime);
+  } catch (error) {
+    console.error("Error fetching IST time:", error);
+    return new Date();
+  }
+};
 
 const createSlotsForWeek = async () => {
   try {
-    await Slot.deleteMany({});
-    console.log("Existing slots cleared.");
+    console.log("Deleting existing slots...");
+    await Slot.deleteMany({}); // Ensure slots are deleted
+    await new Promise((resolve) => setTimeout(resolve, 5000)); // Wait for MongoDB to sync
 
+    console.log("Dropping existing indices...");
     await Slot.collection.dropIndexes();
-    console.log("Existing indices dropped.");
+    await new Promise((resolve) => setTimeout(resolve, 5000)); // Ensure index drop is completed
 
-    const rooms = ['Conference Hall', 'New Computer Lab', 'Old Computer Lab'];
+    console.log("Starting slot creation...");
 
-    // Get current date in UTC and calculate the start of the week in IST
-    const now = new Date();
-    const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay())); 
-    startOfWeek.setHours(0, 0, 0, 0); 
-    const istOffset = 5 * 60 + 30; // IST is UTC+5:30
-    startOfWeek.setMinutes(startOfWeek.getMinutes() + istOffset); 
+    const rooms = ["Conference Hall", "New Computer Lab", "Old Computer Lab"];
+    const nowIST = await getISTTime();
+    const startOfWeek = new Date(nowIST.setDate(nowIST.getDate() - nowIST.getDay()));
 
-    for (let day = 0; day < 7; day++) {
+    for (let day = 1; day < 6; day++) {
       const startOfDay = new Date(startOfWeek);
       startOfDay.setDate(startOfWeek.getDate() + day);
-      startOfDay.setHours(8, 0, 0, 0); 
+      startOfDay.setHours(8, 0, 0, 0);
 
-      const slotTime = new Date(startOfDay);
+      let slotTime = new Date(startOfDay);
       const endOfDay = new Date(startOfDay);
-      endOfDay.setHours(22, 0, 0, 0); 
+      endOfDay.setHours(22, 0, 0, 0);
 
       while (slotTime < endOfDay) {
         const slotCreationPromises = [];
@@ -32,16 +42,17 @@ const createSlotsForWeek = async () => {
         for (const room of rooms) {
           const startTime = new Date(slotTime);
           const endTime = new Date(startTime);
-          endTime.setMinutes(endTime.getMinutes() + 30); 
+          endTime.setMinutes(endTime.getMinutes() + 30);
 
           slotCreationPromises.push(createSlot({ room, startTime, endTime }));
         }
+
         await Promise.all(slotCreationPromises);
         slotTime.setMinutes(slotTime.getMinutes() + 30);
       }
     }
 
-    console.log("Slots for the week created successfully.");
+    console.log("Slots created successfully.");
   } catch (error) {
     console.error("Error creating slots:", error);
   }
@@ -51,12 +62,12 @@ const createSlot = async (slotData) => {
   try {
     const slot = new Slot(slotData);
     await slot.save();
-    // console.log(Slot created for ${slotData.room} at ${slotData.startTime});
+    // console.log(✅ Slot created: ${slotData.room} at ${slotData.startTime.toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })});
   } catch (error) {
     if (error.code === 11000) {
-      console.warn("Duplicate slot detected, skipping:", slotData.startTime);
+      // console.warn("⚠ Duplicate slot detected, skipping:", slotData.startTime);
     } else {
-      console.error("Unexpected error:", error);
+      // console.error("❌ Unexpected error:", error);
     }
   }
 };
