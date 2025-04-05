@@ -29,7 +29,7 @@ const UserHistory = () => {
   useEffect(() => {
     const fetchHistoryData = async () => {
       try {
-        const response = await fetch(`/api/bookings/history`, {
+        const response = await fetch(`http://localhost:5000/api/bookings/history`, {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${localStorage.getItem("authToken")}`, // JWT token
@@ -54,7 +54,7 @@ const UserHistory = () => {
   useEffect(() => {
     const fetchClubs = async () => {
       try {
-        const response = await fetch(`/api/clubs/clubdata`, {
+        const response = await fetch(`http://localhost:5000/api/clubs/clubdata`, {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${localStorage.getItem('authToken')}`, // Add token in the header
@@ -110,7 +110,7 @@ const UserHistory = () => {
     const bookingStartTime = new Date(slotStartTime);
     
     try {
-      const response = await fetch(`/api/bookings/${bookingId}`, {
+      const response = await fetch(`http://localhost:5000/api/bookings/${bookingId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
