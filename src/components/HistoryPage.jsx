@@ -20,6 +20,34 @@ import {
   scient 
 } from '../assets';
 
+// Converts UTC time to IST
+const toIST = (utcString) => {
+  const utcDate = new Date(utcString);
+  const istOffset = 5.5 * 60; // IST offset in minutes
+  return new Date(utcDate.getTime() + istOffset * 60000);
+};
+
+const formatTime = (utcString) => {
+  const istDate = toIST(utcString);
+  return istDate.toLocaleTimeString('en-IN', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+    timeZone: 'Asia/Kolkata',
+  });
+};
+
+const formatDate = (utcString) => {
+  const istDate = toIST(utcString);
+  return istDate.toLocaleDateString('en-IN', {
+    weekday: 'short',
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    timeZone: 'Asia/Kolkata',
+  });
+};
+
 const HistoryPage = () => {
   const [historyData, setHistoryData] = useState([]);
   const [clubs, setClubs] = useState([]); // Store clubs data
@@ -28,7 +56,7 @@ const HistoryPage = () => {
   useEffect(() => {
     const fetchHistoryData = async () => {
       try {
-        const response = await fetch(`/api/bookings/history`, {
+        const response = await fetch(`http://localhost:5000/api/bookings/history`, {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${localStorage.getItem("authToken")}`, // JWT token
@@ -53,7 +81,7 @@ const HistoryPage = () => {
   useEffect(() => {
     const fetchClubs = async () => {
       try {
-        const response = await fetch(`/api/clubs/clubdata`, {
+        const response = await fetch(`http://localhost:5000/api/clubs/clubdata`, {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${localStorage.getItem('authToken')}`, // Add token in the header
@@ -68,20 +96,6 @@ const HistoryPage = () => {
 
     fetchClubs();
   }, []);
-
-  const formatTime = (dateString) => {
-    const options = { hour: '2-digit', minute: '2-digit' };
-    return new Date(dateString).toLocaleTimeString([], options);
-  };
-
-  const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString([], {
-      weekday: 'short', // e.g., "Mon"
-      year: 'numeric',
-      month: 'short', // e.g., "Jan"
-      day: 'numeric',
-    });
-  };
 
   const clubLogos = {
     SPIDER: spider,

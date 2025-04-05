@@ -148,10 +148,6 @@ const styles = {
   },
 };
 
-
-
-
-
 const clubLogos = {
   SPIDER: spider,
   DELTA: delta,
@@ -191,14 +187,14 @@ const SlotBooking = () => {
         }
 
         // Fetch slots
-        const slotsResponse = await axios.get(`/api/clubs/slots/available`, {
+        const slotsResponse = await axios.get(`http://localhost:5000/api/clubs/slots/available`, {
           headers: { Authorization: `Bearer ${token}` },
           params: { date: selectedDate, room: selectedRoom },
         });
         setSlots(slotsResponse.data.slots);
 
         // Fetch bookings
-        const bookingsResponse = await axios.get(`/api/bookings/pastbookings`, {
+        const bookingsResponse = await axios.get(`http://localhost:5000/api/bookings/pastbookings`, {
           headers: { Authorization: `Bearer ${token}` },
           params: { date: selectedDate },
         });
@@ -225,17 +221,31 @@ const SlotBooking = () => {
     navigate('/userdashboard/bookingform');
   };
 
-  const formatTime = (dateString) => {
-    const options = { hour: '2-digit', minute: '2-digit' };
-    return new Date(dateString).toLocaleTimeString([], options);
+  const toIST = (utcString) => {
+    const utcDate = new Date(utcString);
+    const istOffset = 5.5 * 60; // IST is UTC +5:30
+    const istDate = new Date(utcDate.getTime() + istOffset * 60000);
+    return istDate;
   };
-
-  const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString([], {
+  
+  const formatTime = (utcString) => {
+    const istDate = toIST(utcString);
+    return istDate.toLocaleTimeString('en-IN', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true,
+      timeZone: 'Asia/Kolkata',
+    });
+  };
+  
+  const formatDate = (utcString) => {
+    const istDate = toIST(utcString);
+    return istDate.toLocaleDateString('en-IN', {
       weekday: 'short',
       year: 'numeric',
       month: 'short',
       day: 'numeric',
+      timeZone: 'Asia/Kolkata',
     });
   };
 
