@@ -1,4 +1,3 @@
-//const axios = require("axios");
 const Slot = require("../models/Slot");
 
 const createSlotsForWeek = async () => {
@@ -15,10 +14,11 @@ const createSlotsForWeek = async () => {
 
     const rooms = ["Conference Hall", "New Computer Lab", "Old Computer Lab"];
 
-    // Create a date object in IST (Asia/Kolkata)
+    // Create a date object in IST
     const now = new Date();
     const nowIST = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
-    // Get start of the current week (Monday) in IST
+
+    // Get Monday of current week in IST
     const startOfWeekIST = new Date(nowIST);
     const dayOfWeek = startOfWeekIST.getDay();
     const diffToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
@@ -26,26 +26,28 @@ const createSlotsForWeek = async () => {
     startOfWeekIST.setHours(0, 0, 0, 0);
 
     for (let day = 0; day < 5; day++) {
-      const dayIST = new Date(startOfWeekIST);
-      dayIST.setDate(startOfWeekIST.getDate() + day);
-      dayIST.setHours(8, 0, 0, 0);
+      // Base date for the day
+      const date = new Date(startOfWeekIST);
+      date.setDate(startOfWeekIST.getDate() + day);
 
-      const endOfDayIST = new Date(dayIST);
-      endOfDayIST.setHours(22, 0, 0, 0);
+      // 2:30 AM IST = 21:00 UTC (previous day)
+      const startTimeIST = new Date(date);
+      startTimeIST.setUTCHours(2, 30, 0, 0); // Set to 2:30 AM IST
 
-      let slotTimeIST = new Date(dayIST);
+      // 4:30 PM IST = 11:00 UTC (same day)
+      const endTimeIST = new Date(date);
+      endTimeIST.setUTCHours(16, 30, 0, 0); // Set to 4:30 PM IST
 
-      while (slotTimeIST < endOfDayIST) {
+      let slotTimeIST = new Date(startTimeIST);
+
+      while (slotTimeIST < endTimeIST) {
         const slotCreationPromises = [];
 
         for (const room of rooms) {
-          const startTimeIST = new Date(slotTimeIST);
-          const endTimeIST = new Date(startTimeIST);
-          endTimeIST.setMinutes(endTimeIST.getMinutes() + 30);
-        
-          const startTimeUTC = new Date(startTimeIST.getTime());
-          const endTimeUTC = new Date(endTimeIST.getTime());
-        
+          const startTimeUTC = new Date(slotTimeIST);
+          const endTimeUTC = new Date(startTimeUTC);
+          endTimeUTC.setMinutes(endTimeUTC.getMinutes() + 30);
+
           slotCreationPromises.push(createSlot({ room, startTime: startTimeUTC, endTime: endTimeUTC }));
         }
 
