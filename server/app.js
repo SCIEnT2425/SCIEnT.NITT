@@ -3,7 +3,7 @@ const connectDB = require("./config/db");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cron = require("node-cron");
-const path = require('path');
+const path = require("path");
 const createSlotsForWeek = require("./utils/createSlots");
 const errorHandler = require("./middleware/errorHandler");
 
@@ -12,11 +12,8 @@ const { resetCredits, resetBookings } = require("./controllers/clubController");
 // Load environment variables
 dotenv.config();
 
-
-// Connect to database
-connectDB();
-
 const app = express();
+
 // Serve static files from the 'public' directory
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
@@ -34,7 +31,7 @@ app.use("/api/temp", require("./temporary/temp-route"));
 // Error handler middleware
 app.use(errorHandler);
 
-// Schedule slots
+// Schedule cron jobs (they’ll run at specific times)
 cron.schedule("59 23 * * 0", async () => {
   console.log("Creating slots for the upcoming week...");
   try {
@@ -46,7 +43,7 @@ cron.schedule("59 23 * * 0", async () => {
 });
 
 cron.schedule("59 23 * * 6", async () => {
-  console.log("Deleteting all existing Bookings...");
+  console.log("Deleting all existing Bookings...");
   try {
     await resetBookings();
     console.log("Deleted all Bookings");
@@ -65,11 +62,22 @@ cron.schedule("59 23 * * 6", async () => {
   }
 });
 
-// Create slots on startup
-createSlotsForWeek()
-  .then(() => console.log("Slots for the week created successfully on startup."))
-  .catch((err) => console.error("Error creating slots on startup:", err));
+// 🔗 Connect to DB, then seed slots and start server
+connectDB().then(async () => {
+  try {
+    console.log("MongoDB connected");
 
-// Start the server
-const PORT = process.env.PORT || 6000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    // Create slots after DB connection
+    await createSlotsForWeek();
+    console.log("Slots for the week created successfully on startup.");
+
+    const PORT = process.env.PORT || 6000;
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  } catch (err) {
+    console.error("Error during server startup:", err);
+    process.exit(1);
+  }
+}).catch(err => {
+  console.error("Failed to connect to MongoDB:", err);
+  process.exit(1);
+});
