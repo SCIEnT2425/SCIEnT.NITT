@@ -17,9 +17,7 @@ const createSlotsForWeek = async () => {
 
     // Create a date object in IST (Asia/Kolkata)
     const now = new Date();
-    const offsetInMillis = 5 * 60 * 60 * 1000 + 30 * 60 * 1000;
-    const IST = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
-    const nowIST = new Date(IST.getTime() - offsetInMillis);
+    const nowIST = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
     // Get start of the current week (Monday) in IST
     const startOfWeekIST = new Date(nowIST);
     const dayOfWeek = startOfWeekIST.getDay();
@@ -44,11 +42,10 @@ const createSlotsForWeek = async () => {
           const startTimeIST = new Date(slotTimeIST);
           const endTimeIST = new Date(startTimeIST);
           endTimeIST.setMinutes(endTimeIST.getMinutes() + 30);
-
-          // Convert IST times to UTC before saving
-          const startTimeUTC = new Date(startTimeIST.toLocaleString("en-US", { timeZone: "UTC" }));
-          const endTimeUTC = new Date(endTimeIST.toLocaleString("en-US", { timeZone: "UTC" }));
-
+        
+          const startTimeUTC = new Date(startTimeIST.getTime());
+          const endTimeUTC = new Date(endTimeIST.getTime());
+        
           slotCreationPromises.push(createSlot({ room, startTime: startTimeUTC, endTime: endTimeUTC }));
         }
 
