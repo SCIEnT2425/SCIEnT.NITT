@@ -221,33 +221,8 @@ const SlotBooking = () => {
     navigate('/userdashboard/bookingform');
   };
 
-  const toIST = (utcString) => {
-    const utcDate = new Date(utcString);
-    const istOffset = 5.5 * 60; // IST is UTC +5:30
-    const istDate = new Date(utcDate.getTime() + istOffset * 60000);
-    return istDate;
-  };
-  
-  const formatTime = (utcString) => {
-    const istDate = toIST(utcString);
-    return istDate.toLocaleTimeString('en-IN', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true,
-      timeZone: 'Asia/Kolkata',
-    });
-  };
-  
-  const formatDate = (utcString) => {
-    const istDate = toIST(utcString);
-    return istDate.toLocaleDateString('en-IN', {
-      weekday: 'short',
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      timeZone: 'Asia/Kolkata',
-    });
-  };
+  const formatTime = (date) => date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const formatDate = (date) => new Date(date).toLocaleDateString();
 
   return (
     <div style={styles.container}>
@@ -273,7 +248,7 @@ const SlotBooking = () => {
                 <p className="room">{slot.room}</p>
                 <p className="date">{formatDate(slot.startTime)}</p>
                 <p className="time">
-                  {formatTime(slot.startTime)} - {formatTime(slot.endTime)}
+                  {`${formatTime(slot.startTime)} - ${formatTime(slot.endTime)}`}
                 </p>
               </div>
 
@@ -298,7 +273,7 @@ const SlotBooking = () => {
               <p>
                 <strong>Room:</strong> {selectedSlot.room} <br />
                 <strong>Date:</strong> {formatDate(selectedSlot.startTime)} <br />
-                <strong>Time:</strong> {formatTime(selectedSlot.startTime)} - {formatTime(selectedSlot.endTime)}
+                <strong>Time:</strong> {`${formatTime(selectedSlot.startTime)} - ${formatTime(selectedSlot.endTime)}`}
               </p>
               <div style={styles.buttonContainer}>
                 <button
