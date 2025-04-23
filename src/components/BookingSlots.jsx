@@ -221,7 +221,7 @@ const SlotBooking = () => {
     navigate('/userdashboard/bookingform');
   };
 
-  const formatTime = (date) => date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const formatTime = (date) => new Date(date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   const formatDate = (date) => new Date(date).toLocaleDateString();
 
   return (
