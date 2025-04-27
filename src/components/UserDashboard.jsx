@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../styles/ProjectSection.css";
 import Footer from "../components/footer";
 import axios from "axios";
-import { spider, delta, ecell, max, sigma, oedc, dc, naksh, psi, rmi, graphique, td, prof, fh, db, ever,scient } from "../assets";
+import { spider, delta, ecell, max, sigma, oedc, dc, naksh, psi, rmi, graphique, td, prof, fh, db, ever,tc,scient } from "../assets";
 
 const UserDashboard = () => {
   const [club, setClub] = useState({
@@ -28,6 +28,7 @@ const UserDashboard = () => {
         NAKSHATRA: naksh,
         "DATA-BYTE": db,
         PROFNITT: prof,
+        "TECHNICAL-COUNCIL":tc,
         SCIENT: scient,
   };
 

@@ -18,6 +18,7 @@ import {
   naksh, 
   db, 
   prof, 
+  tc,
   scient 
 } from '../assets';
 
@@ -102,6 +103,7 @@ const UserHistory = () => {
     NAKSHATRA: naksh,
     "DATA-BYTE": db,
     PROFNITT: prof,
+    "TECHNICAL-COUNCIL":tc,
     SCIENT: scient,
   };
 

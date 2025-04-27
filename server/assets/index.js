@@ -19,6 +19,7 @@ module.exports = {
     naksh: "/public/logos/naksh.png",
     db: "/public/logos/db.jpeg",
     prof: "/public/logos/pf.jpeg",
+    tc:"/public/logos/tc.jpg",
     scient: "/public/logos/scient.png"
   };
   

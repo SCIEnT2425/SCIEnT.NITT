@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 // Import the club logos
 import { 
-  spider, delta, ecell, graphique, sigma, ever, oedc, td, fh, max, rmi, psi, dc, naksh, db, prof, scient 
+  spider, delta, ecell, graphique, sigma, ever, oedc, td, fh, max, rmi, psi, dc, naksh, db, prof, tc,scient 
 } from '../assets'; // Adjust the path as needed
 
 const styles = {
@@ -165,6 +165,7 @@ const clubLogos = {
   NAKSHATRA: naksh,
   "DATA-BYTE": db,
   PROFNITT: prof,
+  "TECHNICAL-COUNCIL":tc,
   SCIEnT: scient,
 };
 
