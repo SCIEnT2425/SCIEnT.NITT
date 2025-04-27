@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; // Import axios
-import { spider, delta, ecell, max, sigma, oedc, dc, naksh, psi, rmi, graphique, td, prof, fh, db, ever, scient } from "../assets";
+import { spider, delta, ecell, max, sigma, oedc, dc, naksh, psi, rmi, graphique, td, prof, fh, db, ever, tc,scient } from "../assets";
 
 // Club logos (unchanged)
 const clubLogos = {
@@ -21,6 +21,7 @@ const clubLogos = {
   "FORCE HYPERLOOP": fh,
   "DATABYTE": db,
   "EVER": ever,
+  "TECHNICAL COUNCIL":tc,
   "Scient": scient
 };
 

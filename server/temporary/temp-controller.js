@@ -1,7 +1,7 @@
 // controllers/seedController.js
 const bcrypt = require("bcrypt");
 const Club = require("../models/Club");
-const { spider, delta, ecell, max, sigma, oedc, dc, naksh, psi, rmi, graphique, td, prof, fh, db, ever, scient } = require('../assets');
+const { spider, delta, ecell, max, sigma, oedc, dc, naksh, psi, rmi, graphique, td, prof, fh, db, ever, tc,scient } = require('../assets');
 
 exports.seedClubs = async (req, res) => {
   try {
@@ -117,6 +117,13 @@ exports.seedClubs = async (req, res) => {
         username: "EVER_SCIEnT",
         credits: 14,
         password: await bcrypt.hash("ever1964", 10),
+        logo: ever,
+      },
+      {
+        name: "TECHNICAL-COUNCIL",
+        username: "TC_SCIEnT",
+        credits: 14,
+        password: await bcrypt.hash("technicalcouncil1964", 10),
         logo: ever,
       },
       {
