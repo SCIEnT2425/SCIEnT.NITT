@@ -222,8 +222,21 @@ const SlotBooking = () => {
     navigate('/userdashboard/bookingform');
   };
 
-  const formatTime = (date) => new Date(date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  const formatDate = (date) => new Date(date).toLocaleDateString();
+  const formatTime = (date) =>
+    new Date(date).toLocaleTimeString('en-IN', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+      timeZone: 'Asia/Kolkata',
+    });
+  
+  const formatDate = (date) =>
+    new Date(date).toLocaleDateString('en-IN', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      timeZone: 'Asia/Kolkata', 
+    });
 
   return (
     <div style={styles.container}>
