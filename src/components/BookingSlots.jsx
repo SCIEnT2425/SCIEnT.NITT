@@ -238,6 +238,9 @@ const SlotBooking = () => {
       timeZone: 'Asia/Kolkata', 
     });
 
+    console.log("formated time: ", formatTime);
+    console.log("formated date: ", formatDate);
+
   return (
     <div style={styles.container}>
       <div style={styles.bookingContainer}>

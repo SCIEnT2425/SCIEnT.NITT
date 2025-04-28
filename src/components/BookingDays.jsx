@@ -28,7 +28,9 @@ function BookingDays() {
                           String(selectedDate.getMonth() + 1).padStart(2, '0') + '-' +
                           String(selectedDate.getDate()).padStart(2, '0');
   
-    localStorage.setItem("selectedDate", selectedDate);
+    console.log("BookingDays_ selected=", selectedDate);
+    console.log("BookingDays_formateddate= ",formattedDate);
+    localStorage.setItem("selectedDate", formattedDate);
     // Handle response and navigation
     navigate('/userdashboard/halls');
   };
