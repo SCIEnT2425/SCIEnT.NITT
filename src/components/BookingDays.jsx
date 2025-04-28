@@ -31,7 +31,7 @@ function BookingDays() {
   
     console.log("BookingDays_ selected=", selectedDate);
     console.log("BookingDays_formateddate= ",formattedDate);
-    localStorage.setItem("selectedDate", formattedDate);
+    localStorage.setItem("selectedDate", selectedDate);
     // Handle response and navigation
     navigate('/userdashboard/halls');
   };
