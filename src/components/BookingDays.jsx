@@ -17,20 +17,21 @@ function BookingDays() {
     const selectedDate = new Date(
       currentDate.getFullYear(),
       currentDate.getMonth(),
-      currentDate.getDate() + (index - today)
+      currentDate.getDate() + (index - today),
+      currentDate.getHours(),
+      currentDate.getMinutes(),
+      currentDate.getSeconds()
     );
   
     // Set time to midnight (00:00:00) to avoid time zone issues
     //selectedDate.setHours(0, 0, 0, 0);
   
     // Format the date as YYYY-MM-DD manually to avoid UTC conversion
-    const formattedDate = selectedDate.getFullYear() + '-' +
-                          String(selectedDate.getMonth() + 1).padStart(2, '0') + '-' +
-                          String(selectedDate.getDate()).padStart(2, '0');
+    const formattedDate = selectedDate.toISOString().slice(0, 19);
   
     console.log("BookingDays_ selected=", selectedDate);
     console.log("BookingDays_formateddate= ",formattedDate);
-    localStorage.setItem("selectedDate", selectedDate);
+    localStorage.setItem("selectedDate", formattedDate);
     // Handle response and navigation
     navigate('/userdashboard/halls');
   };
