@@ -39,30 +39,37 @@ exports.getAvailableSlots = async (req, res) => {
       return res.status(400).json({ message: "Date and room are required." });
     }
 
-    const requestedDate = new Date(date);
+    // Parse the requested date from string to Date object
+    const requestedDate = new Date(date); // "Mon Apr 28 2025 13:35:50 GMT+0530 (India Standard Time)"
+    
+    // Ensure it's a valid date
     if (isNaN(requestedDate)) {
       return res.status(400).json({ message: "Invalid date format." });
     }
 
+    // Set the start and end of the requested day
     const startOfDay = new Date(requestedDate);
-    startOfDay.setHours(0, 0, 0, 0);
+    startOfDay.setHours(0, 0, 0, 0); // Start of the day at midnight
     const endOfDay = new Date(requestedDate);
-    endOfDay.setHours(23, 59, 59, 999);
+    endOfDay.setHours(23, 59, 59, 999); // End of the day at 23:59:59.999
 
-    // Calculate the current time and 3-hour threshold
+    // Calculate the current time and the 3-hour threshold
     const currentTime = new Date();
     const minimumStartTime = new Date(currentTime);
-    minimumStartTime.setHours(minimumStartTime.getHours() + 3);
+    minimumStartTime.setHours(minimumStartTime.getHours() + 3); // Add 3 hours to current time
 
+    // Prepare the initial query to fetch slots within the requested day
     let slotQuery = {
       room,
-      startTime: { $gte: startOfDay, $lte: endOfDay },
+      startTime: { $gte: startOfDay, $lte: endOfDay }, // Slots between start and end of the day
     };
 
-    // Adjust the query if the requested date is today
+    // Adjust the query if the requested date is today and the time is earlier than the 3-hour threshold
     if (requestedDate.toDateString() === currentTime.toDateString()) {
-      // Use the greater of the 3-hour threshold and start of the day
-      slotQuery.startTime.$gte = minimumStartTime;
+      if (requestedDate < minimumStartTime) {
+        // Adjust the query to start from the 3-hour threshold if the requested time is before that
+        slotQuery.startTime.$gte = minimumStartTime;
+      }
     }
 
     // Fetch available slots from the database
@@ -75,8 +82,6 @@ exports.getAvailableSlots = async (req, res) => {
     res.status(500).json({ message: "Internal server error." });
   }
 };
-
-
 
 exports.getClubsData = async (req, res) => {
   try {
