@@ -25,12 +25,7 @@ function BookingDays() {
   
     // Set time to midnight (00:00:00) to avoid time zone issues
     //selectedDate.setHours(0, 0, 0, 0);
-  
-    // Format the date as YYYY-MM-DD manually to avoid UTC conversion
-    const formattedDate = selectedDate.toISOString().slice(0, 19);
-  
-    console.log("BookingDays_ selected=", selectedDate);
-    console.log("BookingDays_formateddate= ",formattedDate);
+    selectedDate.toString();
     localStorage.setItem("selectedDate", selectedDate);
     // Handle response and navigation
     navigate('/userdashboard/halls');
