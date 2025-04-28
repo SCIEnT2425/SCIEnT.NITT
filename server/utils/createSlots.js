@@ -25,7 +25,7 @@ const createSlotsForWeek = async () => {
     startOfWeekIST.setDate(startOfWeekIST.getDate() + diffToMonday);
     startOfWeekIST.setHours(0, 0, 0, 0);
 
-    for (let day = -1; day <= 3; day++) {
+    for (let day = 0; day <= 4; day++) {
       // Base date for the day
       const date = new Date(startOfWeekIST);
       date.setDate(startOfWeekIST.getDate() + day);
