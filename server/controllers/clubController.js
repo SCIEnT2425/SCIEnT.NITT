@@ -44,29 +44,38 @@ exports.getAvailableSlots = async (req, res) => {
       return res.status(400).json({ message: "Invalid date format." });
     }
 
-    // Shift the requested date by +24 hours
-    const shiftedStart = new Date(requestedDate);
-    shiftedStart.setHours(shiftedStart.getHours() + 24);
+    const startOfDay = new Date(requestedDate);
+    startOfDay.setHours(0, 0, 0, 0);
+    const endOfDay = new Date(requestedDate);
+    endOfDay.setHours(23, 59, 59, 999);
 
-    const shiftedEnd = new Date(shiftedStart);
-    shiftedEnd.setHours(shiftedEnd.getHours() + 24); // +24 hours window
+    // Calculate the current time and 3-hour threshold
+    const currentTime = new Date();
+    const minimumStartTime = new Date(currentTime);
+    minimumStartTime.setHours(minimumStartTime.getHours() + 3);
 
-    const slotQuery = {
+    let slotQuery = {
       room,
-      startTime: {
-        $gte: shiftedStart,
-        $lt: shiftedEnd,
-      },
+      startTime: { $gte: startOfDay, $lte: endOfDay },
     };
 
+    // Adjust the query if the requested date is today
+    if (requestedDate.toDateString() === currentTime.toDateString()) {
+      // Use the greater of the 3-hour threshold and start of the day
+      slotQuery.startTime.$gte = minimumStartTime;
+    }
+
+    // Fetch available slots from the database
     const availableSlots = await Slot.find(slotQuery);
 
+    // Return the available slots
     res.status(200).json({ slots: availableSlots });
   } catch (error) {
     console.error("Error fetching slots:", error);
     res.status(500).json({ message: "Internal server error." });
   }
 };
+
 
 
 exports.getClubsData = async (req, res) => {
