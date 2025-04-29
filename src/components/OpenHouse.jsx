@@ -14,7 +14,7 @@ import Openhouse11 from "../assets/Gallery/Openhouse/OH11.JPG";
 import Openhouse12 from "../assets/Gallery/Openhouse/OH12.jpg";
 import Openhouse13 from "../assets/Gallery/Openhouse/OH13.jpg";
 import Openhouse14 from "../assets/Gallery/Openhouse/OH14.jpg";
-import Openhouse1 from "../assets/Gallery/Openhouse/OH1.png";
+import Openhouse1 from "../assets/Gallery/Openhouse/OH1.JPG";
 
 const images = [
   Openhouse1,
