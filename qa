@@ -1,0 +1,30 @@
+[33m0034394[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m image OH1 issue fixed
+[33mdf29303[m added tc details
+[33mec9c7ce[m updated openhouse page
+[33mff8d8c9[m openhouse images updated
+[33ma5d503f[m slot date adjusted
+[33m462258d[m frontend time logic2
+[33mb97ca33[m frontend time conversion logic
+[33m236713d[m utc code correct
+[33mfe35979[m utc time issue
+[33m99b0bd1[m time logic adjusted
+[33m692d5e2[m main server file changes
+[33me4983e8[m Merge branch 'main' of https://github.com/SCIEnT2425/SCIEnT.NITT
+[33m62c0bd2[m deployment changes
+[33m6f7b3d1[m updated open house page
+[33m76e789c[m final changes
+[33m3edc2ac[m Update createSlots.js
+[33m0bebdc5[m Update CarouselPage.css
+[33mdea1343[m Update Home.css
+[33m18baff3[m Update Home.jsx
+[33m1f56fa6[m feat: prod
+[33mba98c56[m added nginx file
+[33mc5490c0[m final commit with dockerfiles
+[33m5dd5eb9[m final commit with dockerfiles
+[33mc092eb7[m Merge branch 'main' of https://github.com/SCIEnT2425/SCIEnT.NITT
+[33mb4bc477[m final commit
+[33m11c7bcf[m .env modified
+[33mf18c7f7[m .env updated
+[33m85d5d7d[m contact details updated
+[33m8a6a165[m contact form modified
+[33md3dbfa3[m Room booking changes
