@@ -11,6 +11,7 @@ import Open_day from "../assets/Gallery/Openday_gallery.png";
 import Esummit from "../assets/Gallery/ES_gallery.jpeg";
 import Open_house from "../assets/Gallery/openhouse_gallery.jpeg";
 import tranfinite from "../assets/Gallery/Transfinitte/TF1.jpg";
+import annualday from "../assets/Gallery/Annualday/AD1.jpg";
 const Gallery = () => {
   const location = useLocation();
   const [clicked, setClicked] = useState(false);
@@ -81,6 +82,15 @@ const Gallery = () => {
           style={{ backgroundImage: `url(${Open_day})` }} // Replace with your image path
         >
           <div className="overlaytext">Open Day</div>
+        </Link>
+
+        <Link
+          to="/annual-day"
+          onClick={handleClick}
+          className="gallery-item"
+          style={{ backgroundImage: `url(${annualday})` }} // Replace with your image path
+        >
+          <div className="overlaytext">Annual Day</div>
         </Link>
       </div>
     </div>
