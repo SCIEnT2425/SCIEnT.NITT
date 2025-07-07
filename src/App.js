@@ -49,6 +49,7 @@ import Maximus from "./components/ProjectList/onefiles/Maximus";
 import Profnitt from "./components/ProjectList/onefiles/profnitt";
 import Naksha from "./components/ProjectList/onefiles/Naksha";
 import { NavMobile } from "./components/nav-mobile";
+import Annualday from "./pages/Annualday";
 const App = () => {
   return (
     <>
@@ -77,6 +78,7 @@ const App = () => {
         <Route path="/roombook" element={<Bookings />} />
         <Route path="/open-house" element={<OpenHouse />} />
         <Route path="/e-summit" element={<ESummit />} />
+        <Route path="/annual-day" element={<Annualday />} />
         <Route path="/transfinitte" element={<Transfinitte />} />
         <Route path="/open-day" element={<OpenDay />} />
         <Route path="/Spider2024" element={<Spider2024 />} />
