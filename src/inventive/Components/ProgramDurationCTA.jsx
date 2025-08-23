@@ -1,6 +1,10 @@
 import React from 'react';
-
+import { useNavigate } from 'react-router-dom';
 const ProgramDurationCTA = () => {
+  const navigate = useNavigate();
+        const handleClick = () => {
+            navigate("/inventiveForm"); 
+        };
   return (
     <div className="relative w-full bg-black py-16 px-4">
       <div className="max-w-4xl mx-auto text-center">
@@ -15,7 +19,7 @@ const ProgramDurationCTA = () => {
 
         {/* Register Button */}
         <div className="flex justify-center">
-          <button className="group relative px-12 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold text-xl rounded-full transform hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-400/50 focus:outline-none focus:ring-4 focus:ring-yellow-400/30">
+          <button className="group relative px-12 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold text-xl rounded-full transform hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-400/50 focus:outline-none focus:ring-4 focus:ring-yellow-400/30" onClick={handleClick} >
             <span className="relative z-10 tracking-wide">REGISTER NOW</span>
             
             {/* Hover overlay */}
