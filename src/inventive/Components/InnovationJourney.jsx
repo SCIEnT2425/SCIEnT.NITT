@@ -26,6 +26,7 @@ const InnovationJourney = () => {
             {/* Register Button */}
             <div className="flex justify-center">
               <button className="group relative px-12 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold text-xl rounded-full transform hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-400/50 focus:outline-none focus:ring-4 focus:ring-yellow-400/30">
+             
                 <span className="relative z-10 tracking-wide">REGISTER NOW</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 
