@@ -1,6 +1,13 @@
 import React from 'react';
+import {useNavigate, Link } from 'react-router-dom';
+import { useState , useEffect} from 'react';
 
 const InnovationJourney = () => {
+  const navigate = useNavigate();
+      const handleClick = () => {
+          navigate("/inventiveForm"); 
+      };
+      
   return (
     <div className="relative w-full bg-black py-16 px-4">
       <div className="max-w-6xl mx-auto">
@@ -25,13 +32,15 @@ const InnovationJourney = () => {
 
             {/* Register Button */}
             <div className="flex justify-center">
-              <button className="group relative px-12 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold text-xl rounded-full transform hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-400/50 focus:outline-none focus:ring-4 focus:ring-yellow-400/30">
+      
+              <button className="group relative px-12 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold text-xl rounded-full transform hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-400/50 focus:outline-none focus:ring-4 focus:ring-yellow-400/30" onClick={handleClick}>
                 <span className="relative z-10 tracking-wide">REGISTER NOW</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 
                 {/* Button glow effect */}
                 <div className="absolute inset-0 rounded-full bg-yellow-400/20 blur-xl group-hover:bg-yellow-400/40 transition-all duration-300"></div>
               </button>
+              
             </div>
           </div>
         </div>
