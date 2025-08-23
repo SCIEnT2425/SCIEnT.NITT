@@ -50,6 +50,7 @@ import Profnitt from "./components/ProjectList/onefiles/profnitt";
 import Naksha from "./components/ProjectList/onefiles/Naksha";
 import { NavMobile } from "./components/nav-mobile";
 import Annualday from "./pages/Annualday";
+import Inventive from "./inventive/Pages/Inventive";
 const App = () => {
   return (
     <>
@@ -73,6 +74,7 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/project" element={<ProjectSection />} />
+        <Route path="/inventive" element={<Inventive />} />
         <Route path="/inventory" element={<Inventory />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/roombook" element={<Bookings />} />
