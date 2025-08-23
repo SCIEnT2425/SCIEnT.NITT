@@ -51,7 +51,7 @@ import Naksha from "./components/ProjectList/onefiles/Naksha";
 import { NavMobile } from "./components/nav-mobile";
 import Annualday from "./pages/Annualday";
 import Inventive from "./inventive/Pages/Inventive";
-import InventiveForm from "./inventive/Pages/InventiveForm" ;
+import InventivePage from "./inventive/Pages/InventivePage" ;
 const App = () => {
   return (
     <>
@@ -76,7 +76,7 @@ const App = () => {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/project" element={<ProjectSection />} />
         <Route path="/inventive" element={<Inventive />} />
-        <Route path="/inventiveForm" element={<InventiveForm/>} />
+        <Route path="/inventiveForm" element={<InventivePage/>} />
         <Route path="/inventory" element={<Inventory />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/roombook" element={<Bookings />} />
