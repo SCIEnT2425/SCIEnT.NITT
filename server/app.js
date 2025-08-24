@@ -6,7 +6,6 @@ const cron = require("node-cron");
 const path = require("path");
 const createSlotsForWeek = require("./utils/createSlots");
 const errorHandler = require("./middleware/errorHandler");
-
 const { resetCredits, resetBookings } = require("./controllers/clubController");
 
 // Load environment variables
@@ -26,12 +25,13 @@ app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/clubs", require("./routes/clubRoutes"));
 app.use("/api/bookings", require("./routes/bookingRoutes"));
 app.use("/api/admin", require("./routes/adminRoutes"));
-app.use("/api/temp", require("./temporary/temp-route"));
+app.use("/api/temp", require("./routes/temp-route"));
+app.use("/inventiveForm", require("./inventive/inventiveFormRoutes")); // Add the new route
 
 // Error handler middleware
 app.use(errorHandler);
 
-// Schedule cron jobs (they’ll run at specific times)
+// Schedule cron jobs
 cron.schedule("59 23 * * 0", async () => {
   console.log("Creating slots for the upcoming week...");
   try {
@@ -62,7 +62,7 @@ cron.schedule("59 23 * * 6", async () => {
   }
 });
 
-// 🔗 Connect to DB, then seed slots and start server
+// Connect to DB, then seed slots and start server
 connectDB().then(async () => {
   try {
     console.log("MongoDB connected");
