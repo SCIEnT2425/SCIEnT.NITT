@@ -19,13 +19,13 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/clubs", require("./routes/clubRoutes"));
 app.use("/api/bookings", require("./routes/bookingRoutes"));
 app.use("/api/admin", require("./routes/adminRoutes"));
-app.use("/api/temp", require("./routes/temp-route"));
 app.use("/inventiveForm", require("./inventive/inventiveFormRoutes")); // Add the new route
 
 // Error handler middleware
