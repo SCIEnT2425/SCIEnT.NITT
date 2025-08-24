@@ -2,9 +2,9 @@ const express = require("express");
 const { google } = require("googleapis");
 const fs = require("fs");
 const router = express.Router();
-
+const path = require("path");
 // Load service account credentials
-const credentials = JSON.parse(fs.readFileSync("credentials.json"));
+const credentials = JSON.parse(fs.readFileSync(path.join(__dirname, "credentials.json")));
 const auth = new google.auth.GoogleAuth({
   credentials,
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
