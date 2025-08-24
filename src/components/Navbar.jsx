@@ -33,7 +33,7 @@ const Navbar = () => {
                     <Link
                         to="/about"
                         onClick={handleClick}
-                        className={`nav-link ${isActive('/about') ? 'active' : ''}`}
+                        className={`nav-link ${isActive('/about') ? 'active font-bold text-lg' : ''}`}
                     >
                         Timeline
                     </Link>
@@ -41,7 +41,7 @@ const Navbar = () => {
                     <Link
                         to="/gallery"
                         onClick={handleClick}
-                        className={`nav-link ${isActive('/gallery') ? 'active' : ''}`}
+                        className={`nav-link ${isActive('/gallery') ? 'active font-bold text-lg' : ''}`}
                     >
                         Gallery
                     </Link>
@@ -49,7 +49,7 @@ const Navbar = () => {
                     <Link
                         to="/project"
                         onClick={handleClick}
-                        className={`nav-link ${isActive('/project') ? 'active' : ''}`}
+                        className={`nav-link ${isActive('/project') ? 'active font-bold text-lg' : ''}`}
                     >
                         Projects
                     </Link>
@@ -57,18 +57,25 @@ const Navbar = () => {
                     <Link
                         to="/roombook"
                         onClick={handleClick}
-                        className={`nav-link ${isActive('/roombook') ? 'active' : ''}`}
+                        className={`nav-link ${isActive('/roombook') ? 'active font-bold text-lg' : ''}`}
                     >
                         Room Booking
                     </Link>
-
+                    <Link
+                        to="/inventive"
+                        onClick={handleClick}
+                        className={`nav-link ${isActive('/inventive') ? 'active font-bold text-lg' : ''} `}
+                    >
+                        INVENTIVE'25
+                    </Link>
                     <Link
                         to="/contact"
                         onClick={handleClick}
-                        className={`nav-link ${isActive('/contact') ? 'active' : ''}`}
+                        className={`nav-link ${isActive('/contact') ? 'active font-bold text-lg' : ''}`}
                     >
                         Contact Us
                     </Link>
+                    
                 </div>
                 <div id="mobile" onClick={handleClick}>
                      <i id="bar" className={clicked ? 'fas fa-times':'fas fa-bars'}></i>
