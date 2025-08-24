@@ -13,10 +13,15 @@ export default function ProjectForm() {
   });
 
   const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors({ ...errors, [name]: "" });
+    }
   };
 
   const validate = () => {
@@ -35,11 +40,47 @@ export default function ProjectForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validate()) {
-      alert("Form submitted successfully!");
-      console.log(formData);
+    
+    // First validate the form
+    if (!validate()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("http://localhost:6000/inventiveForm/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const message = await response.text();
+        alert(message || "Form submitted successfully!");
+        // Reset form on successful submission
+        setFormData({
+          roll: "",
+          branch: "",
+          year: "",
+          name: "",
+          age: "",
+          dob: "",
+          mobile: "",
+          description: "",
+        });
+        setErrors({});
+      } else {
+        const errorMessage = await response.text();
+        alert(`Error: ${errorMessage}`);
+      }
+    } catch (err) {
+      console.error("Submission error:", err);
+      alert("Network error. Please check if the server is running on port 3000.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -50,7 +91,7 @@ export default function ProjectForm() {
           Inventive Form
         </h1>
 
-        <form className="space-y-5" onSubmit={handleSubmit}>
+        <div className="space-y-5">
           {/* Row 1: Roll Number + Name */}
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
@@ -62,6 +103,7 @@ export default function ProjectForm() {
                 onChange={handleChange}
                 className="w-full px-4 py-2 rounded-lg bg-black border border-yellow-400 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
                 placeholder="Enter Roll Number"
+                disabled={isSubmitting}
               />
               {errors.roll && <p className="text-red-500 text-sm mt-1">{errors.roll}</p>}
             </div>
@@ -75,6 +117,7 @@ export default function ProjectForm() {
                 onChange={handleChange}
                 className="w-full px-4 py-2 rounded-lg bg-black border border-yellow-400 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
                 placeholder="Enter Name"
+                disabled={isSubmitting}
               />
               {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
             </div>
@@ -89,6 +132,7 @@ export default function ProjectForm() {
                 value={formData.branch}
                 onChange={handleChange}
                 className="w-full px-4 py-2 rounded-lg bg-black border border-yellow-400 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                disabled={isSubmitting}
               >
                 <option value="">Select Branch</option>
                 <option value="CSE">Computer Science (CSE)</option>
@@ -108,6 +152,7 @@ export default function ProjectForm() {
                 value={formData.year}
                 onChange={handleChange}
                 className="w-full px-4 py-2 rounded-lg bg-black border border-yellow-400 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                disabled={isSubmitting}
               >
                 <option value="">Select Year</option>
                 <option value="1st Year">1st Year</option>
@@ -130,6 +175,9 @@ export default function ProjectForm() {
                 onChange={handleChange}
                 className="w-full px-4 py-2 rounded-lg bg-black border border-yellow-400 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
                 placeholder="Enter Age"
+                min="1"
+                max="100"
+                disabled={isSubmitting}
               />
               {errors.age && <p className="text-red-500 text-sm mt-1">{errors.age}</p>}
             </div>
@@ -142,6 +190,7 @@ export default function ProjectForm() {
                 value={formData.dob}
                 onChange={handleChange}
                 className="w-full px-4 py-2 rounded-lg bg-black border border-yellow-400 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                disabled={isSubmitting}
               />
               {errors.dob && <p className="text-red-500 text-sm mt-1">{errors.dob}</p>}
             </div>
@@ -157,6 +206,8 @@ export default function ProjectForm() {
               onChange={handleChange}
               className="w-full px-4 py-2 rounded-lg bg-black border border-yellow-400 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
               placeholder="Enter Mobile Number"
+              maxLength="10"
+              disabled={isSubmitting}
             />
             {errors.mobile && <p className="text-red-500 text-sm mt-1">{errors.mobile}</p>}
           </div>
@@ -169,8 +220,9 @@ export default function ProjectForm() {
               name="description"
               value={formData.description}
               onChange={handleChange}
-              className="w-full px-4 py-3 rounded-lg bg-black border border-yellow-400 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              className="w-full px-4 py-3 rounded-lg bg-black border border-yellow-400 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 resize-vertical"
               placeholder="Describe your project in detail..."
+              disabled={isSubmitting}
             ></textarea>
             {errors.description && (
               <p className="text-red-500 text-sm mt-1">{errors.description}</p>
@@ -180,13 +232,19 @@ export default function ProjectForm() {
           {/* Submit Button */}
           <div className="text-center">
             <button
-              type="submit"
-              className="px-6 py-3 bg-yellow-400 text-black font-semibold rounded-xl shadow-md hover:bg-yellow-300 transition"
+              type="button"
+              onClick={handleSubmit}
+              disabled={isSubmitting}
+              className={`px-6 py-3 font-semibold rounded-xl shadow-md transition ${
+                isSubmitting
+                  ? "bg-gray-400 text-gray-700 cursor-not-allowed"
+                  : "bg-yellow-400 text-black hover:bg-yellow-300"
+              }`}
             >
-              Submit
+              {isSubmitting ? "Submitting..." : "Submit"}
             </button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );
