@@ -5,42 +5,39 @@ const WhyChooseInventive = () => {
   const features = [
     {
       id: 1,
-      icon: <Users className="w-12 h-12" />,
+      icon: (<img src="Icons\ExpertGuidanceIcon.png" alt="icon" className='size-20' />),
       title: "Expert Guidance",
       description: "Access to esteemed faculty and experienced alumni mentors"
     },
     {
       id: 2,
-      icon: <Hexagon className="w-12 h-12" />,
+      icon: (<img src="Icons\CuttingEdgeTechnology.png" alt="icon" className='size-16' />),
       title: "Cutting-Edge Technology",
       description: "State-of-the-art tools and dedicated workspace for innovation"
     },
     {
       id: 3,
-      icon: <Lightbulb className="w-12 h-12" />,
+      icon: (<img src="Icons\Colabrative_Environment.png" alt="icon" className='size-16' />),
       title: "Collaborative Environment",
       description: "Vibrant community of like-minded visionaries and creators"
     },
     {
       id: 4,
-      icon: <Brain className="w-12 h-12" />,
+      icon: (<img src="Icons\Multidicsiplinary_Support.png" alt="icon" className='size-16' />),
       title: "Multi-Disciplinary Support",
       description: "Welcoming all disciplines tech, design, social impact, sustainability"
     },
     {
       id: 5,
       icon: (
-        <div className="relative w-12 h-12">
-          <FileText className="w-10 h-10" />
-          <Plus className="w-4 h-4 absolute -bottom-1 -right-1 bg-yellow-400 text-black rounded-full p-0.5" />
-        </div>
+        <img src="icons/patent_Icon.png" alt="patentIcon" className='size-16' />
       ),
       title: "Patent Support",
       description: "Assistance with patent filing for worthy and innovative projects"
     },
     {
       id: 6,
-      icon: <Brain className="w-12 h-12" />,
+      icon: (<img src="Icons\Skill_Development.png" alt="icon" className='size-16' />),
       title: "Skill Development",
       description: "Workshops and training to sharpen skills and broaden horizons"
     }
@@ -63,7 +60,8 @@ const WhyChooseInventive = () => {
           {features.map((feature, index) => (
             <div
               key={feature.id}
-              className="group relative transform hover:scale-105 transition-all duration-300  w-1/4"
+              className="group relative transform hover:scale-105 transition-all duration-300  w-1/4 mb-6
+              "
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               {/* Card */}
@@ -73,7 +71,7 @@ const WhyChooseInventive = () => {
                 
                 {/* Icon */}
                 <div className="relative z-10 flex justify-center mb-6">
-                  <div className="text-yellow-400 transform group-hover:scale-110 transition-transform duration-300">
+                  <div className="text-yellow-400 transform group-hover:scale-110 transition-transform duration-300 relative bottom-16">
                     {feature.icon}
                   </div>
                 </div>
