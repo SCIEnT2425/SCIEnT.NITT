@@ -58,7 +58,7 @@ const ProgramTimeline = () => {
 
         {/* Timeline */}
         {phases.map((element, idx) => (
-          <TimeLine key={element.id} phase={element} isReverse={idx % 2 === 0} />
+          <TimeLine key={element.id} phase={element} isReverse={idx % 2 !== 0} />
         ))}
       </div>
     </div>
