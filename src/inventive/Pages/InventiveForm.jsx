@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function ProjectForm() {
+export default function InventiveForm() {
   const [formData, setFormData] = useState({
     roll: "",
     branch: "",
