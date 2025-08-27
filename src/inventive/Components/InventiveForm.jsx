@@ -82,7 +82,7 @@ export default function ProjectForm() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-black flex items-center justify-center p-6">
-      <div className="w-full max-w-4xl bg-zinc-950 shadow-2xl rounded-2xl p-10 border border-yellow-500/30">
+      <div className="w-full max-w-4xl bg-zinc-950 shadow-2xl rounded-2xl p-10 border border-yellow-500/30 mt-40">
         <h1 className="text-4xl font-extrabold text-yellow-400 mb-3 text-center drop-shadow-lg">
           Inventive Form
         </h1>
