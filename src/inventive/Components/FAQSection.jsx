@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-
+import { useNavigate } from 'react-router-dom';
 const FAQSection = () => {
   const [openFAQ, setOpenFAQ] = useState(null);
-
+  const navigate = useNavigate();
+  const handleClick =() =>{
+    navigate("/contact");
+  }
   const faqs = [
     {
       id: 1,
@@ -113,7 +116,7 @@ const FAQSection = () => {
           <p className="text-gray-400 mb-6">
             Still have questions? We're here to help!
           </p>
-          <button className="group relative px-8 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold text-lg rounded-full transform hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-yellow-400/30">
+          <button className="group relative px-8 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold text-lg rounded-full transform hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-yellow-400/30" onClick={handleClick}>
             <span className="relative z-10">Contact Us</span>
             <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </button>
