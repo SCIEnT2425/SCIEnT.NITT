@@ -69,7 +69,7 @@ export default function InventiveForm() {
         setErrors({});
       } else {
         const errorMessage = await response.text();
-        alert(Error: ${errorMessage});
+        // alert(Error : ${errorMessage});
       }
     } catch (err) {
       console.error("Submission error:", err);
