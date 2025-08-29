@@ -13,7 +13,7 @@ import Footer from '../../components/footer'
 
 const Inventive = () => {
   return (
-    <div>
+    <div className=' overflow-hidden'>
         <Navbar/>
         <InventiveHero/>
         <InnovationJourney/>
