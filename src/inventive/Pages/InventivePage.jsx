@@ -4,7 +4,7 @@ import Navbar from '../../components/Navbar'
 import Footer from '../../components/footer'
 const InventivePage = () => {
   return (
-    <div>
+    <div  >
         <Navbar/>
       <InventiveForm/>
       <Footer/>
