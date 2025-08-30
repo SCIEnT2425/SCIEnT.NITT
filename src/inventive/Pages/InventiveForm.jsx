@@ -74,7 +74,11 @@ export default function ProjectForm() {
         setErrors({});
       } else {
         const errorMessage = await response.text();
+<<<<<<< HEAD
+        // alert(Error : ${errorMessage});
+=======
         alert(`Error: ${errorMessage}`);
+>>>>>>> 914e350692a9f50bb637863ce3ff033bc34f9dfe
       }
     } catch (err) {
       console.error("Submission error:", err);
