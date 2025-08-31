@@ -1,92 +1,487 @@
-.inventorypage{
-    padding-top: 10vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
-.mainbox{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    transform-style: preserve-3d;
-    width: 1100px;
-
-}
-.inventorycard{
+.inventory-heading {
+    text-align: center;
+    font-size: 48px;
+    font-weight: 800;
+    color: #fff;
+    margin: 50px 0 40px 0;
+    text-transform: uppercase;
+    letter-spacing: 3px;
     position: relative;
-    height: 320px;
-    width: 320px;
-    margin: 20px;
-    transform-style: preserve-3d;
-    perspective: 1000px;
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #fff59d 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+    animation: mainTitleGlow 4s ease-in-out infinite alternate;
+    z-index: 10;
 }
-.inventorybox{
+
+/* Enhanced glow animation for main title */
+@keyframes mainTitleGlow {
+    0% { 
+        filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+        transform: scale(1);
+    }
+    50% {
+        filter: drop-shadow(0 0 30px rgba(255, 193, 7, 0.8)) drop-shadow(0 0 40px rgba(255, 235, 59, 0.6));
+        transform: scale(1.02);
+    }
+    100% { 
+        filter: drop-shadow(0 0 35px rgba(255, 241, 118, 0.9)) drop-shadow(0 0 50px rgba(255, 193, 7, 0.7));
+        transform: scale(1.05);
+    }
+}
+
+/* Add decorative elements around main title */
+.inventory-heading::before {
+    content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    transition: 2s ease;
-    -webkit-transition: 2s ease;
-    -moz-transition: 2s ease;
-    -ms-transition: 2s ease;
-    -o-transition: 2s ease;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #ffd700, transparent);
+    border-radius: 2px;
+    animation: lineGlow 3s ease-in-out infinite alternate;
 }
-.inventorybox .imagebox{
+
+.inventory-heading::after {
+    content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #ffeb3b, #fff59d, #ffeb3b, transparent);
+    border-radius: 2px;
+    animation: lineGlow 3s ease-in-out infinite alternate 1s;
 }
-.inventorycard:hover .inventorybox{
-    transform: rotateY(180deg);
+
+@keyframes lineGlow {
+    from { 
+        opacity: 0.6;
+        box-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
+    }
+    to { 
+        opacity: 1;
+        box-shadow: 0 0 20px rgba(255, 235, 59, 0.8), 0 0 30px rgba(255, 193, 7, 0.6);
+    }
 }
-.inventorybox .imagebox img{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
+
+/* Page container */
+.inventorypage {
+  padding-top: 10vh;
+  padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #1a1a1a;
 }
-.inventcontentbox{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: aqua;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transform-style: preserve-3d;
-    transform: rotateY(180deg);
+
+/* Category section */
+.category-section {
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.inventcontentbox div{
-    transform-style: preserve-3d;
+
+/* Category heading with glow effect */
+.category-title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 50px;
+  color: #ffd700;
+  text-decoration: underline;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+  from {
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  }
+  to {
+    text-shadow: 0 0 30px rgba(255, 215, 0, 0.8),
+      0 0 40px rgba(255, 193, 7, 0.6);
+  }
+}
+
+/* Cards container */
+.mainbox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 60px;
+  justify-content: center;
+}
+
+/* Individual inventory card with enhanced effects - FIXED ROTATION ISSUES */
+.inventorycard {
+  position: relative;
+  height: 320px;
+  width: 320px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  overflow: visible; /* Changed from hidden to prevent clipping */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  /* Removed perspective from individual cards to prevent conflicts */
+  z-index: 1;
+  isolation: isolate; /* Create new stacking context */
+}
+
+/* Enhanced hover effects - SIMPLIFIED TO PREVENT OVERLAP */
+.inventorycard:hover {
+  transform: translateY(-10px) scale(1.02); /* Simplified transform */
+  box-shadow: 0 20px 50px rgba(255, 193, 7, 0.3);
+  z-index: 10; /* Bring hovered card to front */
+}
+
+/* Glowing ring around card */
+.inventorycard::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(45deg, #ffd700, #ffb300, #ffc107, #ff8f00);
+  border-radius: 15px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: borderRotate 3s linear infinite;
+}
+
+.inventorycard:hover::before {
+  opacity: 1;
+}
+
+@keyframes borderRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Inner box container - FIXED TRANSFORM CONFLICTS */
+.inventorybox {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.3s ease; /* Simplified transition */
+  /* Removed transform-style: preserve-3d to prevent conflicts */
+  border-radius: 8px;
+  overflow: hidden; /* Moved overflow hidden here */
+}
+
+/* Removed additional rotation on hover to prevent overlap */
+.inventorycard:hover .inventorybox {
+  /* No additional transform */
+}
+
+/* Front image styling - IMPROVED CONTAINMENT */
+.imagebox {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  background-color: #2a2a2a; /* Dark background for loading */
+}
+
+.imagebox::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 215, 0, 0.1) 50%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.inventorycard:hover .imagebox::after {
+  opacity: 1;
+}
+
+.imagebox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.4s ease;
+  display: block; /* Ensure proper display */
+  border-radius: 8px;
+}
+
+.inventorycard:hover .imagebox img {
+  transform: scale(1.05); /* Reduced scale to prevent overflow */
+  filter: brightness(0.6) blur(1px); /* Reduced blur */
+}
+
+/* Content overlay popup - IMPROVED POSITIONING */
+.inventcontentbox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  height: 90%;
+  transform: translate(-50%, -50%) scale(0.8);
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 26, 0.95) 0%,
+    rgba(51, 51, 51, 0.92) 50%,
+    rgba(77, 77, 77, 0.95) 100%
+  );
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 215, 0, 0.4);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  box-sizing: border-box;
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 215, 0, 0.3), 
+    0 0 0 1px rgba(255, 215, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 20; /* High z-index to appear above everything */
+  overflow: hidden;
+  pointer-events: none; /* Prevent interference when hidden */
+}
+
+/* Show content on hover */
+.inventorycard:hover .inventcontentbox {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: auto; /* Enable interactions when visible */
+}
+
+/* Animated background particles for popup */
+.inventcontentbox::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(
+      circle at 25% 25%,
+      rgba(255, 215, 0, 0.15) 2px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      rgba(255, 193, 7, 0.1) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 235, 59, 0.08) 1px,
+      transparent 1px
+    );
+  background-size: 40px 40px, 25px 25px, 60px 60px;
+  animation: particleFloat 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes particleFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-10px) rotate(180deg);
+    opacity: 0.8;
+  }
+}
+
+/* Content text styling */
+.inventcontentbox h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 15px 0;
+  color: #ffd700;
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.8);
+  text-align: center;
+  line-height: 1.3;
+  animation: textGlow 2.5s ease-in-out infinite alternate;
+  position: relative;
+  z-index: 2;
+}
+
+.inventcontentbox h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 15px 0;
+  color: rgba(255, 235, 59, 0.9);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 2;
+}
+
+.inventcontentbox p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes textGlow {
+  from {
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.8);
+  }
+  to {
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.5);
+  }
+}
+
+/* Subtle pulsing effect for cards - REDUCED TO PREVENT CONFLICTS */
+.inventorycard {
+  animation: cardPulse 6s ease-in-out infinite;
+}
+
+@keyframes cardPulse {
+  0%, 100% {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 8px 32px rgba(255, 215, 0, 0.1);
+  }
+}
+
+/* Floating animation for idle state - SIMPLIFIED */
+@keyframes cardFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+/* Add entrance animation class */
+.inventorycard.animate-in {
+  animation: cardPulse 6s ease-in-out infinite,
+    cardFloat 8s ease-in-out infinite;
+}
+
+/* Ripple effect for clicks */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 215, 0, 0.4) 0%,
+    transparent 70%
+  );
+  transform: scale(0);
+  animation: ripple-animation 0.6s ease-out;
+  pointer-events: none;
+  z-index: 25;
+}
+
+@keyframes ripple-animation {
+  to {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .inventorycard {
+    height: 280px;
+    width: 280px;
+  }
+
+  .mainbox {
+    gap: 40px;
+  }
+
+  .category-title {
+    font-size: 28px;
+    margin-bottom: 40px;
+  }
+
+  .inventcontentbox {
+    width: 92%;
+    height: 92%;
     padding: 20px;
-    background: linear-gradient(45deg, rgb(57, 133, 231), rgb(1, 95, 142));
-    transform: translateZ(100px);
-}
-.inventcontentbox div h2{
-    color: white;
-    font-size: 18px;
-    /* letter-spacing: 1px; */
-    font-weight: 600;
+  }
 
-}
-.inventcontentbox div p {
-    text-align: justify;
-}
+  .inventcontentbox h2 {
+    font-size: 17px;
+    margin-bottom: 12px;
+  }
 
-.inventorycard .box .contentbox div p{
-    color: white;
+  .inventcontentbox h3 {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .inventcontentbox p {
     font-size: 13px;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 480px) {
+  .inventorycard {
+    height: 260px;
+    width: 260px;
+  }
+
+  .mainbox {
+    gap: 30px;
+  }
+
+  .category-title {
+    font-size: 24px;
+  }
+
+  .inventcontentbox h2 {
+    font-size: 15px;
+  }
+
+  .inventcontentbox h3 {
+    font-size: 13px;
+  }
+
+  .inventcontentbox p {
+    font-size: 12px;
+  }
+
+  /* Simplified mobile hover effects */
+  .inventorycard:hover {
+    transform: translateY(-5px) scale(1.01);
+  }
 }
