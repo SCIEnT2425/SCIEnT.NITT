@@ -5,7 +5,7 @@ const tools=[
     category: "3D PRINTING",
     quantity: 1,
     image: {
-      url: "https://res.cloudinary.com/demo/image/upload/v1756466206/bambu3d.png",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756466206/Test_otvfag.png",
       filename: "bambu3d",
     },
   },
@@ -15,7 +15,7 @@ const tools=[
     category: "3D PRINTING",
     quantity: 1,
     image: {
-      url: "https://res.cloudinary.com/demo/image/upload/v1756466206/flapdisc1.png",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756567105/CGW-Flap_Disc_Ceramic__14086.1615497991_znuuwp.jpg",
       filename: "flapdisc1",
     },
   },
@@ -25,7 +25,7 @@ const tools=[
     category: "3D PRINTING",
     quantity: 1,
     image: {
-      url: "https://res.cloudinary.com/demo/image/upload/v1756466206/flapdisc2.png",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756567105/CGW-Flap_Disc_Ceramic__14086.1615497991_znuuwp.jpg",
       filename: "flapdisc2",
     },
   },
@@ -35,7 +35,7 @@ const tools=[
     category: "3D PRINTING",
     quantity: 2,
     image: {
-      url: "https://res.cloudinary.com/demo/image/upload/v1756466206/screwdriver.png",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756568712/453-002_prt_mhwrl6.png",
       filename: "screwdriver",
     },
   },
@@ -45,7 +45,7 @@ const tools=[
     category: "3D PRINTING",
     quantity: 2,
     image: {
-      url: "https://res.cloudinary.com/demo/image/upload/v1756466206/plier.png",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756568672/71FSIonNe3L_ggjxyn.jpg",
       filename: "plier",
     },
   },
@@ -55,7 +55,7 @@ const tools=[
     category: "3D PRINTING",
     quantity: 1,
     image: {
-      url: "https://res.cloudinary.com/demo/image/upload/v1756466206/snips.png",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756568746/CRS_M6R_IMG_MAIN_01_rsczpe.jpg",
       filename: "snips",
     },
   },
@@ -65,7 +65,7 @@ const tools=[
     category: "3D PRINTING",
     quantity: 1,
     image: {
-      url: "https://res.cloudinary.com/demo/image/upload/v1756466206/mallet.png",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756568788/51DPyL6G4rL_cvd7kh.jpg",
       filename: "mallet",
     },
   },
@@ -75,7 +75,7 @@ const tools=[
     category: "3D PRINTING",
     quantity: 1,
     image: {
-      url: "https://res.cloudinary.com/demo/image/upload/v1756466206/gluegun.png",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756568826/1_11_ek32ba.jpg",
       filename: "gluegun",
     },
   },
@@ -85,7 +85,7 @@ const tools=[
     category: "3D PRINTING",
     quantity: 1,
     image: {
-      url: "https://res.cloudinary.com/demo/image/upload/v1756466206/jumperwires.png",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756568863/R2048241-01_p3fo4j.jpg",
       filename: "jumperwires",
     },
   },
@@ -95,7 +95,7 @@ const tools=[
     category: "3D PRINTING",
     quantity: 1, 
     image: {
-      url: "https://res.cloudinary.com/demo/image/upload/v1756466206/studytable.png",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756633754/3-1-300x300_qlbcvs.webp",
       filename: "studytable",
     },
   },
@@ -105,7 +105,7 @@ const tools=[
     category: "3D PRINTING",
     quantity: 1,
     image: {
-      url: "https://res.cloudinary.com/demo/image/upload/v1756466206/dellmonitor.png",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756568953/151511t550_fp6pmv.jpg",
       filename: "dellmonitor",
     },
   },
@@ -115,7 +115,7 @@ const tools=[
     category: "3D PRINTING",
     quantity: 1,
     image: {
-      url: "https://res.cloudinary.com/demo/image/upload/v1756466206/dellcpu.png",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756633621/optiplex-7000t-gallery-4_meuwnn.jpg",
       filename: "dellcpu",
     },
   },
@@ -125,7 +125,7 @@ const tools=[
     category: "3D PRINTING",
     quantity: 1,
     image: {
-      url: "https://res.cloudinary.com/demo/image/upload/v1756466206/aocmonitor.png",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756633551/AOC_24B2_PV_BTL-large_icnfdq.png",
       filename: "aocmonitor",
     },
   },
@@ -135,7 +135,7 @@ const tools=[
     category: "3D PRINTING",
     quantity: 1,
     image: {
-      url: "https://res.cloudinary.com/demo/image/upload/v1756466206/hpcpu.png",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756569808/51gUuM1q74L_ttjjar.jpg",
       filename: "hpcpu",
     },
   },
@@ -145,7 +145,7 @@ const tools=[
     category: "LATHE",
     quantity: 1,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=Lathe",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756569919/PhotoRoom_20220120_163241_vbu58u.jpg",
       filename: "lathe.jpg",
     },
   },
@@ -155,7 +155,7 @@ const tools=[
     category: "LATHE",
     quantity: 1,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=Vertical+Drilling+Machine",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756570011/vertical-drilling-machine_msx6sz.jpg",
       filename: "vertical-drilling.jpg",
     },
   },
@@ -165,7 +165,7 @@ const tools=[
     category: "LATHE",
     quantity: 1,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=Tool+Grinding+Machine",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756570091/5cb55f1990b78_a5157u.jpg",
       filename: "tool-grinding.jpg",
     },
   },
@@ -175,7 +175,7 @@ const tools=[
     category: "LATHE",
     quantity: 3,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=Red+Tables",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756581604/S653057_itdqch.jpg",
       filename: "red-tables.jpg",
     },
   },
@@ -185,7 +185,7 @@ const tools=[
     category: "LATHE",
     quantity: 4,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=Benchpress",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756581677/precision_bench_press__clean__yfxprn.jpg",
       filename: "benchpress.jpg",
     },
   },
@@ -195,7 +195,7 @@ const tools=[
     category: "LATHE",
     quantity: 2,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=Ball+Peen+Hammer",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756581718/Buck_Knives_Hammer__285075278861_29_pf6jpx.jpg",
       filename: "ball-peen-hammer.jpg",
     },
   },
@@ -205,7 +205,7 @@ const tools=[
     category: "SOLDERING",
     quantity: 1,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=Soldering+Machine",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756582255/0502-1-3000_dkvj0c.jpg",
       filename: "soldering-machine.jpg",
     },
   },
@@ -215,7 +215,7 @@ const tools=[
     category: "SOLDERING",
     quantity: 1,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=Soldering+Iron+250V",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756582255/0502-1-3000_dkvj0c.jpg",
       filename: "soldering-iron-250v.jpg",
     },
   },
@@ -225,7 +225,7 @@ const tools=[
     category: "SOLDERING",
     quantity: 1,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=Soldering+Iron+220-240V",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756631435/374-100_HR_0.default_jorstr.jpg",
       filename: "soldering-iron-220-240v.jpg",
     },
   },
@@ -235,7 +235,7 @@ const tools=[
     category: "SOLDERING",
     quantity: 1,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=Soldering+Paste",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756582327/Soldering-Paste-500g-Low-Temperature-Halogen-Free-Tin-Lead-No-Clean_bhd9bd.jpg",
       filename: "soldering-paste.jpg",
     },
   },
@@ -245,7 +245,7 @@ const tools=[
     category: "SOLDERING",
     quantity: 1,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=Wire+Cutter",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756582390/61ZEHHrLBbL_kmnwve.jpg",
       filename: "wire-cutter.jpg",
     },
   },
@@ -255,7 +255,7 @@ const tools=[
     category: "SOLDERING",
     quantity: 1,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=Wire+Stripper",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756582412/61bCgmjDraL_vzx5lz.jpg",
       filename: "wire-stripper.jpg",
     },
   },
@@ -265,7 +265,7 @@ const tools=[
     category: "SOLDERING",
     quantity: 2,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=Plier",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756568672/71FSIonNe3L_ggjxyn.jpg",
       filename: "plier.jpg",
     },
   },
@@ -275,7 +275,7 @@ const tools=[
     category: "SOLDERING",
     quantity: 2,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=Screwdriver",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756568712/453-002_prt_mhwrl6.png",
       filename: "screwdriver.jpg",
     },
   },
@@ -285,7 +285,7 @@ const tools=[
     category: "SOLDERING",
     quantity: 2,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=Multimeter+600V+CAT+III",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756582473/81etszoJJOL._UF894_1000_QL80__fneeo1.jpg",
       filename: "multimeter-600v.jpg",
     },
   },
@@ -295,7 +295,7 @@ const tools=[
     category: "SOLDERING",
     quantity: 7,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=Breadboard+Used",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756582499/81x7gQJI46L_wic1w1.jpg",
       filename: "breadboard-used.jpg",
     },
   },
@@ -305,7 +305,7 @@ const tools=[
     category: "SOLDERING",
     quantity: 3,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=MB102+Power+Supply",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756633405/613gZ8lJ0qL_flb2vv.jpg",
       filename: "mb102.jpg",
     },
   },
@@ -315,7 +315,7 @@ const tools=[
     category: "SOLDERING",
     quantity: 5,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=RGB+LEDs",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756582582/00105-LED_-_RGB_Clear_Common_Cathode-01_xv1mny.jpg",
       filename: "rgb-leds.jpg",
     },
   },
@@ -325,7 +325,7 @@ const tools=[
     category: "SOLDERING",
     quantity: 14,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=LED+Voltage+Regulator",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756633353/Precision-12V-450mA-5W-Power-Supply-Module-Bare-Board-LED-Voltage-Regulator-Module-AC-220V-to-12V-4_eby9jt.jpg",
       filename: "led-voltage-regulator.jpg",
     },
   },
@@ -335,7 +335,7 @@ const tools=[
     category: "SOLDERING",
     quantity: 5,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=DIP+ICs",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756633255/61ReFotlgnL_kwoccd.jpg",
       filename: "dip-ics.jpg",
     },
   },
@@ -345,7 +345,7 @@ const tools=[
     category: "SOLDERING",
     quantity: 8,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=ICs",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756582654/image_pccfun.jpg",
       filename: "ics.jpg",
     },
   },
@@ -355,7 +355,7 @@ const tools=[
     category: "SOLDERING",
     quantity: 1,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=Resistors",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756633158/eljy12liebebhzycmjou_973x700_etplbz.jpg",
       filename: "resistors-box.jpg",
     },
   },
@@ -365,7 +365,7 @@ const tools=[
     category: "SOLDERING",
     quantity: 8,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=Capacitors",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756582775/20230411120328_uwqcka.png",
       filename: "capacitors.jpg",
     },
   },
@@ -375,7 +375,7 @@ const tools=[
     category: "SOLDERING",
     quantity: 3,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=Trimmer+Potentiometer",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756633087/Trimmer_n51upy.jpg",
       filename: "trimmer-pot.jpg",
     },
   },
