@@ -384,112 +384,112 @@ const tools=[
     description: "Regulated Power Supply",
     category: "ELECTRONICS",
     quantity: 4,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756627133/dc-regulated-power-supply_gsa9zu.jpg", filename: "dc-regulated-power-supply_gsa9zu.jpg" }
   },
   {
     name: "Oscilloscope",
     description: "50 MHz",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756627343/50hz_Oscilloscope_hyi7i7.webp", filename: "50hz_Oscilloscope_hyi7i7.jpg" }
   },
   {
     name: "Oscilloscope",
     description: "100 MHz",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756627422/digital-storage-oscilloscope-100mhz_qkrgdu.jpg", filename: "digital-storage-oscilloscope-100mhz_qkrgdu.jpg" }
   },
   {
     name: "Digital Storage Oscilloscope",
     description: "—",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756627577/digital_storage_oscilloscope_ayynrs.jpg", filename: "digital_storage_oscilloscope_ayynrs.jpg" }
   },
   {
     name: "Oscilloscope Probe",
     description: "—",
     category: "ELECTRONICS",
     quantity: 4,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756627649/oscilloscope_Probe_gerjvf.jpg", filename: "oscilloscope_Probe_gerjvf.jpg" }
   },
   {
     name: "Multichannel Function Generator",
     description: "—",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756627739/multichennel_function_generator_mky4cz.jpg", filename: "multichennel_function_generator_mky4cz/jpg" }
   },
   {
     name: "Jumper Wires",
     description: "Male-Male",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756627798/Jumper_Wires_numek0.jpg", filename: "Jumper_Wires_numek0.jpg" }
   },
   {
     name: "Jumper Wires",
     description: "Female-Female",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756627914/Jumper_wires_female_to_female_qizoz4.jpg", filename: "Jumper_wires_female_to_female_qizoz4" }
   },
   {
     name: "Jumper Wires",
     description: "Male-Female",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756627976/Jumper_wires_male_female_z4tjkt.jpg", filename: "Jumper_wires_male_female_z4tjkt.jpg" }
   },
   {
     name: "Muscle Sensor",
     description: "—",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756628049/emg-muscle-sensor-module_i3wa7r.png", filename: "emg-muscle-sensor-module_i3wa7r.jpg" }
   },
   {
     name: "Octa Coupler",
     description: "—",
     category: "ELECTRONICS",
     quantity: 2,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756628201/octa_coupler_y7ufyi.jpg", filename: "octa_coupler_y7ufyi" }
   },
   {
     name: "Digital Display",
     description: "SUNRO56 CCSR-2",
     category: "ELECTRONICS",
     quantity: 2,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756628278/digital_display_lgb4d8.png", filename: "digital_display_lgb4d8.png" }
   },
   {
     name: "DIP IC",
     description: "—",
     category: "ELECTRONICS",
     quantity: 5,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756628405/sl83202ipz-dip-ic_zphfye.jpg", filename: "sl83202ipz-dip-ic_zphfye.jpg" }
   },
   {
     name: "MC34063 Converter IC DIP",
     description: "—",
     category: "ELECTRONICS",
     quantity: 2,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756628437/MC3406C_CONVERTER_IC_DIP_jvqaaf.jpg", filename: "MC3406C_CONVERTER_IC_DIP_jvqaaf" }
   },
   {
     name: "LED Voltage Regulator",
     description: "—",
     category: "ELECTRONICS",
     quantity: 14,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756628509/LED_voltage_regulator_l7dn0x.jpg", filename: "LED_voltage_regulator_l7dn0x" }
   },
   {
     name: "Real-Time Clock Module",
     description: "DS1307",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756628561/real_time_clock_module_qmsyac.jpg", filename: "real_time_clock_module_qmsyac" }
   },
   {
     name: "RTC XBEE",
@@ -517,35 +517,35 @@ const tools=[
     description: "LM393",
     category: "ELECTRONICS",
     quantity: 3,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756628972/51yo4rQnJfL_nuuyfq.jpg", filename: "51yo4rQnJfL_nuuyfq.jpg" }
   },
   {
     name: "Flow Sensor",
     description: "—",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756629027/1_9713a8db-db1e-42d0-a3e7-eebb7f66c4e9_evfctg.webp", filename: "1_9713a8db-db1e-42d0-a3e7-eebb7f66c4e9_evfctg" }
   },
   {
     name: "IR Sensor",
     description: "—",
     category: "ELECTRONICS",
     quantity: 4,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756629077/Ir_sensor_ppoowe.jpg", filename: "Ir_sensor_ppoowe.jpg" }
   },
   {
     name: "433 MHz RF Receiver Module",
     description: "—",
     category: "ELECTRONICS",
     quantity: 7,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756629160/433MHz-RF-Receiver-Module-Kl-Cw11-2_lc8mc5.jpg", filename: "433MHz-RF-Receiver-Module-Kl-Cw11-2_lc8mc5" }
   },
   {
     name: "Electrode Cables",
     description: "—",
     category: "ELECTRONICS",
     quantity: 2,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756629260/81PagDmgyrL_qsk7n4.jpg", filename: "81PagDmgyrL_qsk7n4" }
   },
   {
     name: "Armbands",
@@ -559,245 +559,245 @@ const tools=[
     description: "—",
     category: "ELECTRONICS",
     quantity: 6,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756629411/HC-SR04-Ultrasonic-Sensor-Module-Distance-Measurement-Component-Part-Front_uhczyb.webp", filename: "HC-SR04-Ultrasonic-Sensor-Module-Distance-Measurement-Component-Part-Front_uhczyb" }
   },
   {
     name: "LED Dot Matrix Display",
     description: "8*8",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756629423/31xPP2flCEL._UF1000_1000_QL80__d32ot9.jpg", filename: "31xPP2flCEL._UF1000_1000_QL80__d32ot9" }
   },
   {
     name: "Logic Level Converter",
     description: "—",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756629533/15-9_inahwr.jpg", filename: "15-9_inahwr" }
   },
   {
     name: "Electronic Power Relay",
     description: "DT-3F-S-5VDC",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756629605/PCB-RELAY-DT3F-5V_pchjw8.jpg", filename: "PCB-RELAY-DT3F-5V_pchjw8" }
   },
   {
     name: "NodeMCU ESP8266 Board",
     description: "—",
     category: "ELECTRONICS",
     quantity: 2,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756629631/images_irphis.jpg", filename: "images_irphis" }
   },
   {
     name: "LCD Display",
     description: "16*2",
     category: "ELECTRONICS",
     quantity: 6,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756629714/16x2-lcd-display_fp0qyc.jpg", filename: "16x2-lcd-display_fp0qyc" }
   },
   {
     name: "One-Way Switch",
     description: "—",
     category: "ELECTRONICS",
     quantity: 3,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756629763/images_1_woxqv4.jpg", filename: "images_1_woxqv4" }
   },
   {
     name: "Servo Motor",
     description: "230V",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756629919/mdmf302l1g6m-1-5kw-panasonic-servo-motor-500x500_1_k91vdc.webp", filename: "mdmf302l1g6m-1-5kw-panasonic-servo-motor-500x500_1_k91vdc" }
   },
   {
     name: "Arduino Wi-Fi Shield",
     description: "—",
     category: "ELECTRONICS",
     quantity: 2,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756629939/store_a000058_featured_mo2xdf.jpg", filename: "store_a000058_featured_mo2xdf" }
   },
   {
     name: "Breadboard (Used)",
     description: "—",
     category: "ELECTRONICS",
     quantity: 7,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756629944/81iJoyGCCML_g7y6im.jpg", filename: "81iJoyGCCML_g7y6im" }
   },
   {
     name: "IC",
     description: "—",
     category: "ELECTRONICS",
     quantity: 8,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756629956/microcontroller-ic-chip-500x500_ewrusu.webp", filename: "microcontroller-ic-chip-500x500_ewrusu" }
   },
   {
     name: "LDR",
     description: "—",
     category: "ELECTRONICS",
     quantity: 8,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756630128/LDR-Sensor_o5zfek.webp", filename: "LDR-Sensor_o5zfek" }
   },
   {
     name: "Push Buttons",
     description: "—",
     category: "ELECTRONICS",
     quantity: 102,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756630180/6x6x5mm-Tactile-Push-Button-Switch-4_lfblkz.jpg", filename: "6x6x5mm-Tactile-Push-Button-Switch-4_lfblkz" }
   },
   {
     name: "RGB LED",
     description: "—",
     category: "ELECTRONICS",
     quantity: 5,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756630260/61DdW9-R5wL_lntl6l.jpg", filename: "61DdW9-R5wL_lntl6l" }
   },
   {
     name: "Magnetic Hall Sensor",
     description: "—",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756630298/71jaWMvsBIL_zq4zuw.jpg", filename: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756630298/71jaWMvsBIL_zq4zuw.jpg" }
   },
   {
     name: "MB102 Breadboard Power Supply Module",
     description: "—",
     category: "ELECTRONICS",
     quantity: 3,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756630357/51ou8hen6JL_mhntbp.jpg", filename: "51ou8hen6JL_mhntbp" }
   },
   {
     name: "9V Battery",
     description: "—",
     category: "ELECTRONICS",
     quantity: 3,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756630453/61g52cx9AbL_mqduwz.jpg", filename: "61g52cx9AbL_mqduwz" }
   },
   {
     name: "Capacitor",
     description: "—",
     category: "ELECTRONICS",
     quantity: 8,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756630590/electrolytic-capacitor-1024x597_kel9we.jpg", filename: "electrolytic-capacitor-1024x597_kel9we" }
   },
   {
     name: "Transmitter",
     description: "—",
     category: "ELECTRONICS",
     quantity: 7,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756630685/images_2_s04ari.jpg", filename: "images_2_s04ari" }
   },
   {
     name: "SPMS Power Adaptor",
     description: "—",
     category: "ELECTRONICS",
     quantity: 16,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756630739/24v2-5a-adapter_tckvh0.jpg", filename: "24v2-5a-adapter_tckvh0" }
   },
   {
     name: "Rechargeable Lead Acid Battery",
     description: "—",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756630769/71joYaW_GDL_sqd2gc.jpg", filename: "71joYaW_GDL_sqd2gc" }
   },
   {
     name: "ORP Probe",
     description: "—",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756630830/images_ygwn87.png", filename: "images_ygwn87" }
   },
   {
     name: "EZO EC Module",
     description: "—",
     category: "ELECTRONICS",
     quantity: 6,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756630844/images_3_pcmgum.jpg", filename: "images_3_pcmgum" }
   },
   {
     name: "TI CC3200 Wi-Fi LaunchPad",
     description: "—",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756630918/images_4_wxje2z.jpg", filename: "images_4_wxje2z" }
   },
   {
     name: "Arduino UNO",
     description: "—",
     category: "ELECTRONICS",
     quantity: 7,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756630943/Arduino_Uno_-_R3_aheoh2.jpg", filename: "Arduino_Uno_-_R3_aheoh2" }
   },
   {
     name: "Arduino MEGA",
     description: "—",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756630968/Arduino-Mega-2560-ATmega2560-3_iucets.jpg", filename: "Arduino-Mega-2560-ATmega2560-3_iucets" }
   },
   {
     name: "Raspberry Pi",
     description: "—",
     category: "ELECTRONICS",
     quantity: 2,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756630973/Raspberry-Pi-5-5_qbdxen.jpg", filename: "Raspberry-Pi-5-5_qbdxen" }
   },
   {
     name: "GSM Modem",
     description: "—",
     category: "ELECTRONICS",
     quantity: 7,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756631093/images_5_h8kjzg.jpg", filename: "images_5_h8kjzg" }
   },
   {
     name: "USB to RS232 DB9 Adapter",
     description: "—",
     category: "ELECTRONICS",
     quantity: 2,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756631098/51E0jp9837L_ii5s4c.jpg", filename: "51E0jp9837L_ii5s4c" }
   },
   {
     name: "Micro SD Card Adapter Module",
     description: "—",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756631158/Micro-SD-Card-Reader-Module-4_zhtye0.jpg", filename: "Micro-SD-Card-Reader-Module-4_zhtye0" }
   },
   {
     name: "HDMI Cable",
     description: "1.5 m",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756631209/images_6_k5xyf6.jpg", filename: "images_6_k5xyf6" }
   },
   {
     name: "Arduino Cable",
     description: "—",
     category: "ELECTRONICS",
     quantity: 7,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756631292/58540_16995_rsgs8j.jpg", filename: "58540_16995_rsgs8j" }
   },
   {
     name: "ECG Electrodes",
     description: "—",
     category: "ELECTRONICS",
     quantity: 4,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756631381/images_7_c0ywcl.jpg", filename: "images_7_c0ywcl" }
   },
   {
     name: "LPC1768 Bootloader",
     description: "—",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756631453/cortex-m3-lpc1768-mini-development-board_pcswul.jpg", filename: "cortex-m3-lpc1768-mini-development-board_pcswul" }
   },
   {
     name: "Solar Panel",
     description: "—",
     category: "ELECTRONICS",
     quantity: 2,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756631983/images_8_tpvdyq.jpg", filename: "images_8_tpvdyq" }
   },
   //Mechanical Tools
 
