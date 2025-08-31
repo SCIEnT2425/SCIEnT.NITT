@@ -5,7 +5,7 @@ const tools=[
     category: "3D PRINTING",
     quantity: 1,
     image: {
-      url: "https://res.cloudinary.com/demo/image/upload/v1756466206/bambu3d.png",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756466206/Test_otvfag.png",
       filename: "bambu3d",
     },
   },
