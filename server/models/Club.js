@@ -8,7 +8,8 @@ const clubSchema = new mongoose.Schema({
   logo: String,
   isAdmin: { type: Boolean, default: false },
   bookingHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Booking' }],
-  password: { type: String, required: true }
+  password: { type: String, required: true },
+  projects:[{type:mongoose.Schema.Types.ObjectId,ref:"Project"}]
 });
 
 clubSchema.methods.resetCredits = function() {

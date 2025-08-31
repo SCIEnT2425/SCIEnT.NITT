@@ -27,6 +27,8 @@ app.use("/api/clubs", require("./routes/clubRoutes"));
 app.use("/api/bookings", require("./routes/bookingRoutes"));
 app.use("/api/admin", require("./routes/adminRoutes"));
 app.use("/inventiveForm", require("./inventive/inventiveFormRoutes")); // Add the new route
+app.use('/inventory', require("./routes/inventoryRoutes"));
+
 
 // Error handler middleware
 app.use(errorHandler);

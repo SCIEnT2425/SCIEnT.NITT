@@ -75,6 +75,13 @@ const Navbar = () => {
                     >
                         Contact Us
                     </Link>
+                    <Link
+                        to="/Inventory"
+                        onClick={handleClick}
+                        className={`nav-link ${isActive('/contact') ? 'active font-bold text-lg' : ''}`}
+                    >
+                        Inventory
+                    </Link>
                     
                 </div>
                 <div id="mobile" onClick={handleClick}>
