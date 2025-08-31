@@ -60,7 +60,7 @@ const InventiveHero = () => {
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-8 text-center">
         {/* INVENTIVE Title with 3D effect */}
         <div className="relative mb-4 sm:mb-12">
-          <h1 className="sm:text-4xl md:text-4xl text-5xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 drop-shadow-2xl transform hover:scale-105 transition-transform duration-300">
+          <h1 className="lg:text-12xl text-5xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 drop-shadow-2xl transform hover:scale-105 transition-transform duration-300">
             INVENTIVE
           </h1>
           {/* Curved underline */}
