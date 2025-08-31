@@ -5,7 +5,7 @@ const tools=[
     category: "3D PRINTING",
     quantity: 1,
     image: {
-      url: "https://res.cloudinary.com/demo/image/upload/v1756466206/bambu3d.png",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756466206/Test_otvfag.png",
       filename: "bambu3d",
     },
   },
@@ -215,7 +215,7 @@ const tools=[
     category: "SOLDERING",
     quantity: 1,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=Soldering+Iron+250V",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756582255/0502-1-3000_dkvj0c.jpg",
       filename: "soldering-iron-250v.jpg",
     },
   },
@@ -225,7 +225,7 @@ const tools=[
     category: "SOLDERING",
     quantity: 1,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=Soldering+Iron+220-240V",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756631435/374-100_HR_0.default_jorstr.jpg",
       filename: "soldering-iron-220-240v.jpg",
     },
   },
@@ -355,7 +355,7 @@ const tools=[
     category: "SOLDERING",
     quantity: 1,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=Resistors",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756633158/eljy12liebebhzycmjou_973x700_etplbz.jpg",
       filename: "resistors-box.jpg",
     },
   },
@@ -375,7 +375,7 @@ const tools=[
     category: "SOLDERING",
     quantity: 3,
     image: {
-      url: "https://dummyimage.com/600x400/000/fff&text=Trimmer+Potentiometer",
+      url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756633087/Trimmer_n51upy.jpg",
       filename: "trimmer-pot.jpg",
     },
   },
