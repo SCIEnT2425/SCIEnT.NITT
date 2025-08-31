@@ -1,0 +1,114 @@
+.gallery-page {
+  padding: 2rem;
+  background: #0b0d15;
+  color: #a2a5b3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  font-family: Poppins, sans-serif;
+}
+
+.gallery-page .gallery-heading {
+  color: white;
+  margin-bottom: 2rem;
+  margin-top: 3rem;
+  font-size: 5rem;
+  text-align: center;
+  font-family:fantasy;
+}
+
+.gallery-page .gallery-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.gallery-page .card {
+  margin: 0 auto;
+  padding: 1em;
+  width: 100%;
+  height:100%;
+  background: #1c1f2b;
+  text-align: center;
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem; /* space between image and text */
+  overflow: hidden;
+}
+
+.gallery-page .card img.card-image {
+  width: 100%;
+  border-radius: 8px;
+  max-height: 400px; /* Limit image height if needed */
+  object-fit: cover;
+}
+
+.gallery-page .card-text {
+  color: #ffcc00;
+  font-size: 1.6rem;
+  font-weight: 600;
+  padding: 0.5rem 0;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  margin-top: 0.5rem;
+}
+
+/* Conic border animation fix */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+
+.gallery-page .card::before {
+  filter: blur(1.5rem);
+  opacity: 0.5;
+}
+
+.gallery-page .card-wrapper {
+  position: relative;
+  padding: 4px; /* border thickness */
+  border-radius: 14px;
+  background-image: conic-gradient(
+    from var(--angle),
+    gold,
+    gold,
+    #000000,
+    #000000,
+    gold
+  );
+  animation: spin 3s linear infinite;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  border: none;
+  text-decoration: none;
+}
+
+.gallery-page .card-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: inherit;
+  filter: blur(2rem);
+  opacity: 0.4;
+  border-radius: 14px;
+}
+
+
+@keyframes spin {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
+}

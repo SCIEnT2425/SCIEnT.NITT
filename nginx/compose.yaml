@@ -1,0 +1,13 @@
+services:
+  nginx:
+    image: nginx:1.27.2
+    ports:
+      - 6600:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - scient-network
+
+networks:
+  scient-network:
+    external: true
