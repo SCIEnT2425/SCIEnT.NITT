@@ -496,21 +496,21 @@ const tools=[
     description: "Basic",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756640390/XBee_Module_1_v5laeh.png", filename: "XBee_Module_1_v5laeh" }
   },
   {
     name: "RTC XBEE",
     description: "S68",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756640448/xbee-pro-s1-wire-500x500_rvnx2v.webp", filename: "xbee-pro-s1-wire-500x500_rvnx2v" }
   },
   {
     name: "RTC XBEE",
     description: "Pro S28",
     category: "ELECTRONICS",
     quantity: 2,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756640507/SKU-2829_ef2wwt.png", filename: "SKU-2829_ef2wwt" }
   },
   {
     name: "Linear Hall Effect Sensor",
@@ -552,7 +552,7 @@ const tools=[
     description: "—",
     category: "ELECTRONICS",
     quantity: 1,
-    image: { url: "dummy.jpg", filename: "dummy" }
+    image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756640641/images_9_sozpsl.jpg", filename: "images_9_sozpsl" }
   },
   {
     name: "Ultrasonic Sensor",
