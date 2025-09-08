@@ -1,0 +1,45 @@
+@media (min-width: 1024px) {
+  .inventiveTitle  {
+    font-size: 90px;
+  }
+
+  .chooseInventiveGrid{ 
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .titleTimeline{
+    font-size: 40px;
+  }
+
+  .FAQ{
+    font-size: 18px;
+  }
+
+  .titleFAQ{
+    font-size: 40px;
+  }
+
+  .timeLines{
+    font-size: 20px;
+    left:0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .titlePhase{
+    height: 120px;
+    font-size: 45px;
+  }
+  .phaseCard{
+    margin: 0 30px;
+    padding: 20px 100px;
+  }
+  .titlePhasediv{
+    padding: 20px 100px;
+  }
+  .phaseCardContent {
+    font-size: xx-large;
+  }
+}
+
+

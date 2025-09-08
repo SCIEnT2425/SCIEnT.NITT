@@ -1,5 +1,6 @@
 import React from 'react';
 import { Users, Hexagon, Lightbulb, FileText, Plus, Brain } from 'lucide-react';
+import "../styles/Inventive.css"
 
 const WhyChooseInventive = () => {
   const features = [
@@ -54,7 +55,7 @@ const WhyChooseInventive = () => {
         </div>
 
         {/* Features Grid */}
-        <div className="grid lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-1  sm:gap-8 gap-5">
+        <div className="chooseInventiveGrid grid lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-1  sm:gap-8 gap-5 place-items-center">
           {features.map((feature, index) => (
             <div
               key={feature.id}
@@ -62,13 +63,13 @@ const WhyChooseInventive = () => {
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               {/* Card */}
-              <div className="relative bg-gray-900/80 backdrop-blur-sm border-2 border-yellow-500/40 rounded-2xl p-6 sm:p-8 hover:border-yellow-400 transition-colors duration-300 box-border h-72">
+              <div className="relative bg-gray-900/80 backdrop-blur-sm border-2 border-yellow-500/40 rounded-3xl p-6 sm:p-8 hover:border-yellow-400 transition-colors duration-300 box-border h-72 w-80" >
                 {/* Background glow effect */}
-                <div className="absolute inset-0 bg-yellow-400/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-3 bg-yellow-400/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 
                 {/* Icon */}
-                <div className=" z-10 relative bottom-10 flex justify-center mb-4 sm:mb-6">
-                  <div className="text-yellow-400 transform group-hover:scale-110 transition-transform duration-300">
+                <div className="z-10  relative bottom-12 flex justify-center mb-10 ">
+                  <div className="text-yellow-400 transform group-hover:scale-110 transition-transform duration-300 ">
                     {feature.icon}
                   </div>
                 </div>
@@ -84,10 +85,10 @@ const WhyChooseInventive = () => {
                 </p>
 
                 {/* Corner accents */}
-                <div className="absolute top-3 sm:top-4 left-3 sm:left-4 w-3 sm:w-4 h-3 sm:h-4 border-l-2 border-t-2 border-yellow-500/40 group-hover:border-yellow-400 transition-colors duration-300"></div>
-                <div className="absolute top-3 sm:top-4 right-3 sm:right-4 w-3 sm:w-4 h-3 sm:h-4 border-r-2 border-t-2 border-yellow-500/40 group-hover:border-yellow-400 transition-colors duration-300"></div>
-                <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 w-3 sm:w-4 h-3 sm:h-4 border-l-2 border-b-2 border-yellow-500/40 group-hover:border-yellow-400 transition-colors duration-300"></div>
-                <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 w-3 sm:w-4 h-3 sm:h-4 border-r-2 border-b-2 border-yellow-500/40 group-hover:border-yellow-400 transition-colors duration-300"></div>
+                <div className="absolute top-3 sm:top-4 left-3 sm:left-4 w-4 sm:w-4 h-4 sm:h-4 border-l-2 border-t-2 border-yellow-500/40 group-hover:border-yellow-400 transition-colors duration-300"></div>
+                <div className="absolute top-3 sm:top-4 right-3 sm:right-4 w-4 sm:w-4 h-4 sm:h-4 border-r-2 border-t-2 border-yellow-500/40 group-hover:border-yellow-400 transition-colors duration-300"></div>
+                <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 w-4 sm:w-4 h-4 sm:h-4 border-l-2 border-b-2 border-yellow-500/40 group-hover:border-yellow-400 transition-colors duration-300"></div>
+                <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 w-4 sm:w-4 h-4 sm:h-4 border-r-2 border-b-2 border-yellow-500/40 group-hover:border-yellow-400 transition-colors duration-300"></div>
               </div>
 
               {/* Floating particles */}
