@@ -44,15 +44,15 @@ const ProgramTimeline = () => {
   ];
 
   return (
-    <div className="w-full bg-black py-20 px-4">
-      <div className="max-w-6xl mx-auto  space-y-16 ">
+    <div className="w-full bg-black py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto space-y-8 sm:space-y-12 md:space-y-16">
         {/* Title */}
-        <div className="text-center mb-28">
-          <h2 className="text-6xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-            Program <span className="text-yellow-400 ">Timeline</span>
+        <div className="text-center mb-8 sm:mb-12 md:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 sm:mb-4">
+            Program <span className="text-yellow-400">Timeline</span>
           </h2>
           <div className="flex justify-center">
-            <div className="w-32 h-1 bg-yellow-400 rounded-full"></div>
+            <div className="w-20 sm:w-24 md:w-32 h-1 bg-yellow-400 rounded-full"></div>
           </div>
         </div>
 
