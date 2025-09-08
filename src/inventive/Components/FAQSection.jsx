@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-
+import "../styles/Inventive.css"
 const FAQSection = () => {
   const [openFAQ, setOpenFAQ] = useState(null);
   const navigate = useNavigate();
@@ -62,7 +62,7 @@ const FAQSection = () => {
       <div className="max-w-5xl mx-auto">
         {/* Title Section */}
         <div className="text-center mb-8 sm:mb-10 lg:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4">
+          <h2 className="titleFAQ text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4">
             Frequently Asked <span className="text-yellow-400">Questions</span>
           </h2>
           <div className="flex justify-center mb-3 sm:mb-4">
@@ -85,7 +85,7 @@ const FAQSection = () => {
                   onClick={() => toggleFAQ(faq.id)}
                   className="w-full flex items-center justify-between py-2 sm:py-3 text-left focus:outline-none group"
                 >
-                  <h3 className="text-sm sm:text-base md:text-lg font-semibold text-white group-hover:text-yellow-400 transition-colors duration-300 pr-3 sm:pr-4">
+                  <h3 className=" FAQ text-sm sm:text-base md:text-lg font-semibold text-white group-hover:text-yellow-400 transition-colors duration-300 pr-3 sm:pr-4">
                     {faq.question}
                   </h3>
                   <div className="flex-shrink-0 text-yellow-400">

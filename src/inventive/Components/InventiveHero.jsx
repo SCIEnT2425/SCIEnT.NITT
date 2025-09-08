@@ -1,5 +1,5 @@
 import React from 'react';
-
+import "../styles/Inventive.css"
 const InventiveHero = () => {
   return (
     <div className="relative w-full h-screen bg-black overflow-hidden flex items-center justify-center mt-8">
@@ -60,7 +60,7 @@ const InventiveHero = () => {
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-8 text-center">
         {/* INVENTIVE Title with 3D effect */}
         <div className="relative mb-4 sm:mb-12">
-          <h1 className="lg:text-12xl text-5xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 drop-shadow-2xl transform hover:scale-105 transition-transform duration-300">
+          <h1 className="inventiveTitle lg:text-12xl text-5xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 drop-shadow-2xl transform hover:scale-105 transition-transform duration-300">
             INVENTIVE
           </h1>
           {/* Curved underline */}
@@ -101,18 +101,13 @@ const InventiveHero = () => {
           </p>
         </div>
 
-        {/* Call to Action */}
-        <div className="mt-8 sm:mt-12">
-          <button className="group relative px-8 sm:px-12 py-3 sm:py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold text-base sm:text-lg rounded-full">
-            <span className="relative z-10">Start Your Journey</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-600 rounded-full opacity-0"></div>
-          </button>
+        <div className='w-auto h-px bg-yellow-400'>
         </div>
       </div>
 
       {/* Floating particles */}
       <div className="absolute inset-0 pointer-events-none">
-        {Array.from({ length: 20 }, (_, i) => (
+        {Array.from({ length: 20 }, ( _, i) => (
           <div
             key={`particle-${i}`}
             className="absolute w-1 sm:w-2 h-1 sm:h-2 bg-yellow-400 rounded-full opacity-60 animate-bounce"
