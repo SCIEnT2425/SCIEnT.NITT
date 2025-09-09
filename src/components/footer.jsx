@@ -63,7 +63,7 @@ const Footer = () => {
           <img src={logo} alt="Logo" />
         </div>
       </div>
-      <div className="custom-shape-divider-top-1725455521">
+      {/* <div className="custom-shape-divider-top-1725455521">
         <svg
           data-name="Layer 1"
           xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +75,7 @@ const Footer = () => {
             className="shape-fill"
           ></path>
         </svg>
-      </div>
+      </div> */}
     </div>
   );
 };

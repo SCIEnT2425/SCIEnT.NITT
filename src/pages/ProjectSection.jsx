@@ -4,6 +4,7 @@ import '../styles/ProjectSection.css';
 import Footer from '../components/footer';
 import Navbar from '../components/Navbar';
 import { spider, delta, ecell, max, sigma, oedc, dc, naksh, psi, rmi, graphique, td, prof, fh, db, ever } from "../assets";
+import ProjectCard from '../components/ProjectCard';
 
 const projects = [
     {
@@ -154,19 +155,9 @@ const ProjectSection = () => {
                 <h2>PROJECTS</h2>
                 <div className="projects-grid">
                     {projects.map((project, index) => {
-                        // Get the latest year’s link for each project
-                        const latestYear = project.years.length > 0 ? project.years[0].link : null;
-
-
                         return (
-                            <div 
-                                key={index} 
-                                className="project-item" 
-                                onClick={() => latestYear && handleClick(latestYear)}
-                            >
-                                <img src={project.image} alt='pics' />
-                                <div className="projectname">{project.name}</div>
-                            </div>
+                            <ProjectCard p = {project} i = {index} />
+                    
                         );
                     })}
                 </div>
