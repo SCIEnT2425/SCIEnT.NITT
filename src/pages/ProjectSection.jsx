@@ -34,14 +34,6 @@ const projects = [
         image: graphique,
     },
     {
-        name: 'SIGMA',
-        years: [
-            { year: 2023, link: '/SIGMA2023' },
-            { year: 2022, link: '/SIGMA2022' }
-        ],
-        image: sigma,
-    },
-    {
         name: 'EVER',
         years: [
             { year: 2023, link: '/EVER2023' }
@@ -59,13 +51,6 @@ const projects = [
         image: delta,
     },
     {
-        name: '180 DC',
-        years: [
-            { year: 2023, link: '/One802023' }
-        ],
-        image: oedc,
-    },
-    {
         name: '3D AERODYNAMICS',
         years: [
             { year: 2023, link: '/3D2023' }
@@ -79,22 +64,7 @@ const projects = [
         ],
         image: fh,
     },
-    {
-        name: 'MAXIMUS',
-        years: [
-            { year: 2023, link: '/MAXIMUS/2023' },
-            { year: 2022, link: '/MAXIMUS/2022' },
-            { year: 2021, link: '/MAXIMUS/2021' },
-            { year: 2020, link: '/MAXIMUS/2020' },
-        ],
-        image: max,
-    },
-    {
-        name: 'PROFNITT',
-        years: [{ year: 2023, link: '/PROFNITT/2023' }],
 
-        image: prof
-    },
     {
         name: 'RMI',
         years: [
