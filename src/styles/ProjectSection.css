@@ -22,30 +22,52 @@
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 50px; 
-  padding: 20px 0; 
+  gap: 50px;
+  padding: 20px 0;
 }
 
 .project-item {
-  position: relative; 
+  position: relative;
   background-color: #000000;
-  border: 3px #bebb00 solid;
+  border: 3px solid #bebb00;
   border-radius: 10px;
   overflow: hidden;
   width: 225px;
-  min-height: 250px; /* Changed from fixed height to minimum height */
+  min-height: 250px;
+  box-shadow: 0 8px 16px rgba(252, 3, 3, 0.15);
   text-align: center;
   padding: 10px;
   display: flex;
-  flex-direction: column; /* Flex layout for better vertical alignment */
-  justify-content: space-between; /* Ensure spacing for credits */
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.project-item img {
+  display: block;
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.project-item img:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+@keyframes rotateAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .projectname {
   font-size: 20px;
   color: ghostwhite;
   font-family: fantasy;
-  border-color: #bebb00;
   margin-top: 5px;
 }
 
@@ -56,37 +78,56 @@
   margin-top: 5px;
 }
 
-.project-item img {
-  width: 100%;
-  height: 70%; /* Adjust to allow space for project name and credits */
-  object-fit: cover;
-  border-bottom: 1px solid #000000; 
-}
-
 .project-item select {
   background-color: #242222;
   cursor: pointer;
   border: none;
   padding: 7px;
-  display: flex;
   width: 25vw;
 }
 
-.project-item:hover {
-  transform: scale(1.05); /* Slightly reduce the scaling */
-  transition: 0.3s ease;
-}
-
 .project-item select option {
-  width: 300px;
-  cursor: pointer;
   background-color: rgb(15, 14, 14);
+  cursor: pointer;
 }
 
-.project-item select:hover {
-  border: none;
+.project-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px #bebb00;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #000000;
+  padding: 20px 40px;
+}
+
+.logo img {
+  height: 40px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.separator {
+  color: #bebb00;
+  font-size: 18px;
+}
+
+/* Media Queries */
 @media only screen and (max-width: 1006px) {
   .projects-grid {
     display: grid;
@@ -94,11 +135,6 @@
     justify-items: center;
   }
   .project-item select {
-    background-color: #242222;
-    cursor: pointer;
-    border: none;
-    padding: 7px;
-    display: flex;
     width: 34vw;
   }
 }
@@ -110,46 +146,37 @@
     justify-items: center;
   }
   .project-item select {
-    background-color: #242222;
-    cursor: pointer;
-    border: none;
     padding: 12px;
-    display: flex;
     width: 70vw;
   }
 }
 
-/* Navbar container */
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #000000; /* Navbar background color */
-  padding: 20px 40px;
+/* Rotating Border (Removed conflicting circular shape) */
+.project-item::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border: 2px solid #bebb00;
+  border-radius: 10px; /* Matches the card's border-radius */
+  z-index: 0;
+  /* animation: rotateBorder 4s linear infinite; */
 }
 
-/* Logo styling */
-.logo img {
-  height: 40px; /* Adjust height to fit */
+.project-item:hover::before {
+  animation: rotateBorder 2s ease 0s 1 reverse forwards;
+  /* border: 10px; */
 }
 
-/* Navbar links container */
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
 
-/* Individual link styling */
-.nav-links a {
-  text-decoration: none;
-  color: #fff; /* Text color */
-  font-size: 16px;
-  font-weight: bold;
-}
+@keyframes rotateBorder {
+  0% {
+    transform: rotate(0deg);
+  }
 
-/* Separator styling */
-.separator {
-  color: #bebb00; /* Yellow color for the separator */
-  font-size: 18px;
+  100% {
+    transform: rotate(180deg);
+  }
 }

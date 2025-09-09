@@ -5,10 +5,11 @@
   background-color: #c8a200; 
   padding: 1rem;
   color: white;
+  margin-top: 2vh;
 }
 
 .quick-links {
-  margin-top: 20vh;
+  margin-top: 2vh;
   flex: 1;
 }
 .follow-us {
@@ -65,7 +66,10 @@
   padding-left: 6vw;
   align-items: center;
   justify-content: center;
+  position: relative;
+  left: 80px;
 }
+
 .logo-footer {
   display: flex;
   width: 250px;
@@ -113,6 +117,8 @@
   .footer-logo {
    
     padding-left: 1vw;
+    position: relative;
+    bottom: 70px;
    
 }
   .logo-footer {
@@ -144,6 +150,8 @@
     margin-top: 124px;
     padding-left: 2vw;
     align-items: center;
+    position: relative;
+    left: 0px;
   }
   .logo-footer img{
     height: 100%;
