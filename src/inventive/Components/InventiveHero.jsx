@@ -75,7 +75,7 @@ const InventiveHero = () => {
         <div className="relative z-10 w-full max-w-6xl mx-auto  sm:px-6 md:px-8 py-16 text-center flex flex-col justify-center flex-1 inventiveContent">
           {/* INVENTIVE Title */}
           <div className="relative mb-12 sm:mb-16">
-            <h1 className="inventiveTitle text-[20rem] sm:text-[8rem] font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-600 to-yellow-400 drop-shadow-lg]]]">
+            <h1 className="inventiveTitle text-[20rem] sm:text-[8rem] font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-600 to-yellow-400 drop-shadow-lg]]] hover:scale-110 hover:duration-1000">
               INVENTIVE
             </h1>
           </div>
