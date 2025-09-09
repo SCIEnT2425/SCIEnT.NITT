@@ -16,10 +16,29 @@ export default function Inventory() {
 
   // Group items by category
   const groupedItems = inventoryItems.reduce((acc, item) => {
-    if (!acc[item.category]) acc[item.category] = [];
-    acc[item.category].push(item);
-    return acc;
-  }, {});
+  if (!acc[item.category]) acc[item.category] = [];
+  acc[item.category].push(item);
+  return acc;
+}, {});
+
+// Get current category keys
+const keys = Object.keys(groupedItems);
+
+// Reorder: put index 1 and 2 first, then the rest
+let reorderedKeys = [];
+if (keys.length > 2) {
+  reorderedKeys = [keys[1], keys[2], keys[0], ...keys.slice(3)];
+} else {
+  reorderedKeys = keys; // fallback if less than 3 categories
+}
+
+// Build new ordered object
+const orderedGroupedItems = {};
+reorderedKeys.forEach(k => {
+  orderedGroupedItems[k] = groupedItems[k];
+});
+
+
 
   // Add entrance animation after items load
   useEffect(() => {
@@ -79,7 +98,7 @@ export default function Inventory() {
       <Navbar/>
       <div className="inventorypage ">
         <h1 className="inventory-heading">Inventory</h1>
-        {Object.keys(groupedItems).map((category, categoryIndex) => (
+        {Object.keys(orderedGroupedItems).map((category, categoryIndex) => (
           <div key={categoryIndex} className="category-section">
             {/* Category Heading */}
             <h1 className="category-title">{category}</h1>
