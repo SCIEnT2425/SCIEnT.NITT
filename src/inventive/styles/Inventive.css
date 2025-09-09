@@ -1,45 +1,78 @@
+/* Default (Mobile first) */
+.titlePhase {
+  font-size: 2rem;   /* ~32px */
+  font-weight: 800;
+  height: auto;
+  line-height: 1.2;
+  text-align: center;
+}
+
+/* Tablets */
+@media (min-width: 640px) {
+  .titlePhase {
+    font-size: 2.5rem; /* ~40px */
+  }
+}
+
+/* Medium Screens */
+@media (min-width: 768px) {
+  .titlePhase {
+    font-size: 3rem; /* ~48px */
+  }
+}
+
+/* Large Screens (your existing breakpoint) */
 @media (min-width: 1024px) {
   .inventiveTitle  {
-    font-size: 90px;
+    font-size: 7rem !important;
   }
 
-  .chooseInventiveGrid{ 
+  .chooseInventiveGrid { 
     grid-template-columns: 1fr 1fr 1fr;
   }
 
-  .titleTimeline{
+  .titleTimeline {
     font-size: 40px;
   }
 
-  .FAQ{
+  .FAQ {
     font-size: 18px;
   }
 
-  .titleFAQ{
+  .titleFAQ {
     font-size: 40px;
   }
 
-  .timeLines{
+  .timeLines {
     font-size: 20px;
-    left:0;
+    left: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
   }
-  .titlePhase{
+
+  .titlePhase {
     height: 120px;
-    font-size: 45px;
+    font-size: 4rem; /* ~64px on desktop */
   }
-  .phaseCard{
+
+  .phaseCard {
     margin: 0 30px;
     padding: 20px 100px;
   }
-  .titlePhasediv{
+
+  .titlePhasediv {
     padding: 20px 100px;
   }
+
   .phaseCardContent {
     font-size: xx-large;
   }
 }
 
-
+/* XL Screens */
+@media (min-width: 1280px) {
+  .titlePhase {
+    font-size: 5rem; /* ~80px */
+  }
+}
