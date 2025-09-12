@@ -49,15 +49,13 @@ const Contact = () => {
           </form>
         </div>
         <div className="contact-info">
-          <h3>CONTACT INFO</h3>
+          <h3 className="contact-info-header">CONTACT INFO</h3>
           <h4>Call us (Manager:) at:</h4>
           <p>+91 90925 59610</p>
-          <h4>Call us (Student Head:) at:</h4>
-          <p>
-            +91 99837 30340
-            <br />
-            +91 63830 19898
-          </p>
+          <h4>Call us (Student Heads:) at:</h4>
+          <p>Alan Prakash: +91 93608 45683</p>
+          <p>Arjun B K  : +91 86104 50988</p>
+          <p>Alok Verma:  +91 74080 92857</p>
           <h4>Email us at</h4>
           <p>
           scient@nitt.edu
