@@ -51,7 +51,7 @@ const Contact = () => {
         <div className="contact-info">
           <h3 className="contact-info-header">CONTACT INFO</h3>
           <h4>Call us (Manager:) at:</h4>
-          <p>+91 90925 59610</p>
+          <p>Sivenasan: +91 90925 59610</p>
           <h4>Call us (Student Heads:) at:</h4>
           <p>Alan Prakash: +91 93608 45683</p>
           <p>Arjun B K  : +91 86104 50988</p>
