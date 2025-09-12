@@ -907,6 +907,7 @@ const tools=[
     image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756632204/drill-bits-product-image-scaled_pbyzsh.jpg", filename: "drill-bits-product-image-scaled_pbyzsh" },
   },
 
+<<<<<<< HEAD
   // FURNITURE
   {
     name: "Red Tables (for Machine)",
@@ -978,6 +979,8 @@ const tools=[
     quantity: 2,
     image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756626947/white_board_mzds1t.avif", filename: "white_board_mzds1t" },
   },
+=======
+>>>>>>> e29a8560d86c756b11b7b4fec7aa4ee19eace031
 
   // COMPUTING
   {

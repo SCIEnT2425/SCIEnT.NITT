@@ -43,10 +43,35 @@
 
 /* For screens smaller than 480px (mobile) */
 @media (max-width: 480px) {
+  .headgallery {
+    font-size: 3.2vh; /* More compact heading */
+    padding-top: 6vh;
+  }
 
-  /* Further reduce arrow size on mobile */
+  .group img {
+    max-width: 100%;
+    height: auto;  /* Maintain aspect ratio */
+  }
+
+  .abc {
+    font-size: 0.9rem; /* Adjust text size */
+    line-height: 1.4;
+  }
+
+  .gallery-dots {
+    gap: 4px; /* Reduce spacing for small screens */
+    padding-top: 6px;
+  }
+
+  /* Center gallery items better on mobile */
+  .group {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Make arrows more touch-friendly */
   .gallery-arrow {
-    padding: 0.15rem;
-    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.9rem;
   }
 }

@@ -10,10 +10,22 @@ import logo from "../assets/logo_s.png";
 
 const Footer = () => {
   return (
-    <div className="footer-container">
-      <div className="links-follow">
-        <div className="quick-links">
-          <h3>QUICK LINKS</h3>
+    <footer className="footer">
+      <div className="footer-content">
+        <div className="footer-section">
+          <div className="logo-footer">
+            <img src={logo} alt="Logo" />
+            <h2>SCIEnT, NITT</h2>
+          </div>
+          <p className="tagline">
+            The Student Creativity and Innovation Centre of NIT Trichy, fostering research and prototyping
+          </p>
+        </div>
+
+        <div className="footer-section">
+          <h3>
+            <i>Quick Links</i>
+          </h3>
           <div className="footer-links">
             <ul className="column1">
               <li>
@@ -40,43 +52,61 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="follow-us">
+        <div className="footer-section">
+          <h3>Contact</h3>
+          <div className="contact-info">
+            <p>
+              <i className="fas fa-envelope"></i> <p>scient@nitt.edu</p>
+            </p>
+            <p>
+              <i className="fas fa-map-marker-alt"></i>
+              <p>National Institute of Technology
+              <br />
+              Tiruchirappalli, Tamil Nadu</p>
+            </p>
+          </div>
+        </div>
+
+        <div className="footer-section">
           <h3>Follow Us</h3>
           <div className="social-icons">
-            <a href="https://www.instagram.com/scient_nitt/?hl=en">
+            <a
+              href="https://www.instagram.com/scient_nitt/?hl=en"
+              aria-label="Instagram"
+            >
               <FaInstagram />
             </a>
-            <a href="https://www.linkedin.com/company/scientnitt/mycompany/">
+            <a
+              href="https://www.linkedin.com/company/scientnitt/mycompany/"
+              aria-label="LinkedIn"
+            >
               <FaLinkedin />
             </a>
-            <a href="/contact">
+            <a href="/contact" aria-label="Email">
               <FaEnvelope />
             </a>
-            <a href="https://www.facebook.com/ScientNITT/">
+            <a
+              href="https://www.facebook.com/ScientNITT/"
+              aria-label="Facebook"
+            >
               <FaFacebook />
             </a>
           </div>
+          <p style={{ marginTop: "20px", fontSize: "16px", color: "#888" }}>
+            Stay updated with our latest news, events, and projects!
+          </p>
         </div>
       </div>
-      <div className="footer-logo">
-        <div className="logo-footer">
-          <img src={logo} alt="Logo" />
-        </div>
+
+      <div className="footer-divider"></div>
+
+      <div className="footer-bottom">
+        <p>&copy; 2025 SCIEnT NITT. All rights reserved.</p>
+        <p>
+          Made with <span className="heart">♥</span> by SCIEnT NITT
+        </p>
       </div>
-      <div className="custom-shape-divider-top-1725455521">
-        <svg
-          data-name="Layer 1"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1200 120"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
-            className="shape-fill"
-          ></path>
-        </svg>
-      </div>
-    </div>
+    </footer>
   );
 };
 
