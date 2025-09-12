@@ -68,6 +68,16 @@
   .phaseCardContent {
     font-size: xx-large;
   }
+  .phaseWeek{
+    display: inline;
+  }
+  .spc{
+    display: hidden;
+  }
+  .phaseWeekDates{
+    display: flex;
+    gap: 15px;
+  }
 }
 
 /* XL Screens */

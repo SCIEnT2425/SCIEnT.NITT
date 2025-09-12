@@ -40,6 +40,7 @@ const ProgramTimeline = () => {
     {
       id: 5,
       phase: "PHASE 5",
+      dates: "Dec, 14 - Dec, 21",
       title: "SHOWCASE",
       week: "WEEK 12",
       description:
