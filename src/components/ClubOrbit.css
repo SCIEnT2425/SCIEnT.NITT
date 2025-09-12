@@ -162,7 +162,7 @@ html {
 }
 
 ul[class^="ring"] {
-  border: solid 2px black;
+  border: none;
   position: relative;
   padding: 0;
   border-radius: 50%;
@@ -448,4 +448,27 @@ ul[class^="ring"] li {
 .ring-3 > *:nth-of-type(4) {
   transform: rotate(360deg) translate(2.2em) rotate(-380deg);
 }
+}
+
+
+
+ul[class^="ring"],
+.ring-0, .ring-1, .ring-2, .ring-3,
+.orbit ul[class^="ring"] {
+  border: 0 !important;                 /* remove border */
+  border-color: transparent !important; /* defend against color overrides */
+  box-shadow: none !important;          /* remove any ring-like shadow */
+  background-image: none !important;    /* remove any gradient/image */
+  background: transparent !important;
+  outline: none !important;
+}
+
+/* remove pseudo-elements if used to draw the ring */
+ul[class^="ring"]::before,
+ul[class^="ring"]::after,
+.ring-0::before, .ring-0::after,
+.ring-2::before, .ring-2::after,
+.ring-3::before, .ring-3::after {
+  display: none !important;
+  content: none !important;
 }

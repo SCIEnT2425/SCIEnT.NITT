@@ -69,19 +69,20 @@ const Navbar = () => {
                         INVENTIVE'25
                     </Link>
                     <Link
-                        to="/Inventory"
-                        onClick={handleClick}
-                        className={`nav-link ${isActive('/contact') ? 'active font-bold text-lg' : ''}`}
-                    >
-                        Inventory
-                    </Link>
-                    <Link
                         to="/contact"
                         onClick={handleClick}
                         className={`nav-link ${isActive('/contact') ? 'active font-bold text-lg' : ''}`}
                     >
                         Contact Us
                     </Link>
+                    <Link
+                        to="/Inventory"
+                        onClick={handleClick}
+                        className={`nav-link ${isActive('/contact') ? 'active font-bold text-lg' : ''}`}
+                    >
+                        Inventory
+                    </Link>
+                    
                 </div>
                 <div id="mobile" onClick={handleClick}>
                      <i id="bar" className={clicked ? 'fas fa-times':'fas fa-bars'}></i>

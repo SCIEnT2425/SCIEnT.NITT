@@ -1,13 +1,11 @@
+
 FROM node:23.4.0-alpine AS build
 
 WORKDIR /app
 
 COPY package*.json ./
-COPY tailwind.config.js ./ 
+COPY tailwind.config.js ./
 COPY postcss.config.js ./
-
-# Install build dependencies
-RUN apk add --no-cache python3 make g++
 
 RUN npm install
 
@@ -20,9 +18,10 @@ ENV CI=false
 RUN npm run build
 
 FROM nginx:alpine
+
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Add nginx configuration
+# Add nginx configuration to handle React Router
 RUN echo '                                                           \
 server {                                                            \
     listen 3000;                                                    \

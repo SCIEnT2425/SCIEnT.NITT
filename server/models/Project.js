@@ -13,6 +13,10 @@ const projectSchema=new mongoose.Schema({
     image:{
         url:String,
         filename:String
+    },
+    year:{
+        type:Number,
+        required:true
     }
 });
 
