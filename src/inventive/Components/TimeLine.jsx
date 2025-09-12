@@ -12,8 +12,11 @@ const TimeLine = ({ phase, isReverse }) => {
         <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 md:mb-3">
           {phase.title}
         </h3>
-        <p className="text-yellow-400 font-semibold mb-3 md:mb-4 text-base sm:text-lg md:text-xl">
+        <p className="text-yellow-400 font-semibold mb-3 md:mb-4 text-base sm:text-lg md:text-xl inline-block">
           {phase.week}
+        </p>
+         <p className="text-gray-300  font-semibold mb-3 md:mb-4 text-base sm:text-lg md:text-xl inline-block">
+          {phase.dates}
         </p>
         <p className="text-gray-300 leading-relaxed text-sm sm:text-base md:text-lg">
           {phase.description}
