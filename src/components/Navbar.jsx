@@ -54,19 +54,26 @@ const Navbar = () => {
                         Projects
                     </Link>
 
-                    <Link
+                    {/* <Link
                         to="/roombook"
                         onClick={handleClick}
                         className={`nav-link ${isActive('/roombook') ? 'active font-bold text-lg' : ''}`}
                     >
                         Room Booking
-                    </Link>
+                    </Link> */}
                     <Link
                         to="/inventive"
                         onClick={handleClick}
                         className={`nav-link ${isActive('/inventive') ? 'active font-bold text-lg' : ''} `}
                     >
                         INVENTIVE'25
+                    </Link>
+                     <Link
+                        to="/Inventory"
+                        onClick={handleClick}
+                        className={`nav-link ${isActive('/contact') ? 'active font-bold text-lg' : ''}`}
+                    >
+                        Inventory
                     </Link>
                     <Link
                         to="/contact"
@@ -75,13 +82,7 @@ const Navbar = () => {
                     >
                         Contact Us
                     </Link>
-                    <Link
-                        to="/Inventory"
-                        onClick={handleClick}
-                        className={`nav-link ${isActive('/contact') ? 'active font-bold text-lg' : ''}`}
-                    >
-                        Inventory
-                    </Link>
+                   
                     
                 </div>
                 <div id="mobile" onClick={handleClick}>
