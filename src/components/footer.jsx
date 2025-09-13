@@ -15,16 +15,16 @@ const Footer = () => {
         <div className="footer-section">
           <div className="logo-footer">
             <img src={logo} alt="Logo" />
-            <h2>SCIEnT, NITT</h2>
+            <h2>SCIEnT, NIT Trichy</h2>
           </div>
           <p className="tagline">
-            The Student Creativity and Innovation Centre of NIT Trichy, fostering research and prototyping
+            An innovation hub for research , prototyping and bringing bold ideas to life.
           </p>
         </div>
 
         <div className="footer-section">
           <h3>
-            <i>Quick Links</i>
+            <i className="explore">QUICK LINKS</i>
           </h3>
           <div className="footer-links">
             <ul className="column1">
@@ -32,28 +32,18 @@ const Footer = () => {
                 <a href="/">Home</a>
               </li>
               <li>
-                <a href="/gallery">Gallery</a>
-              </li>
-              <li>
                 <a href="/project">Projects</a>
-              </li>
-            </ul>
-            <ul className="column2">
-              <li>
-                <a href="/Inventory">Inventory</a>
-              </li>
-              <li>
-                <a href="/roombook">Room booking</a>
               </li>
               <li>
                 <a href="/contact">Contact Us</a>
               </li>
+              
             </ul>
           </div>
         </div>
 
         <div className="footer-section">
-          <h3>Contact</h3>
+          <h3>GET IN TOUCH</h3>
           <div className="contact-info">
             <p>
               <i className="fas fa-envelope"></i> <p>scient@nitt.edu</p>
@@ -68,7 +58,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-section">
-          <h3>Follow Us</h3>
+          <h3>FOLLOW US</h3>
           <div className="social-icons">
             <a
               href="https://www.instagram.com/scient_nitt/?hl=en"
@@ -93,7 +83,7 @@ const Footer = () => {
             </a>
           </div>
           <p style={{ marginTop: "20px", fontSize: "16px", color: "#888" }}>
-            Stay updated with our latest news, events, and projects!
+            Connect with us in social media
           </p>
         </div>
       </div>
