@@ -5,7 +5,7 @@ const ProgramTimeline = () => {
   const phases = [
     {
       id: 1,
-      phase: "PHASE 1",
+      phase: "PHASE 1 - 14th to 28th Sept",
       title: "OUTREACH",
       week: "WEEK 1 - WEEK 2",
       description:
@@ -13,14 +13,14 @@ const ProgramTimeline = () => {
     },
     {
       id: 2,
-      phase: "PHASE 2",
+      phase: "PHASE 2 - 29th to 6th Oct ",
       title: "INTAKE",
       week: "WEEK 3",
       description: "Present your ideas.",
     },
     {
       id: 3,
-      phase: "PHASE 3",
+      phase: "PHASE 3 - 6th to 13th Oct",
       title: "SELECTION",
       week: "WEEK 4",
       description:
@@ -28,7 +28,7 @@ const ProgramTimeline = () => {
     },
     {
       id: 4,
-      phase: "PHASE 4",
+      phase: "PHASE 4 - 14th to 1st Dec",
       title: "INCUBATION",
       week: "WEEK 5 - WEEK 11",
       description: "Project work in progress",
