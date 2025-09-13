@@ -8,6 +8,7 @@ const ProgramTimeline = () => {
       phase: "PHASE 1 ",
       title: "OUTREACH",
       week: "WEEK 1 - WEEK 2",
+      dates: "Sept, 14 - Sept, 28",
       description:
         "Registration opens for students to apply with their ideas and solutions.",
     },
@@ -15,14 +16,16 @@ const ProgramTimeline = () => {
       id: 2,
       phase: "PHASE 2  ",
       title: "INTAKE",
-      week: "WEEK 3",
+      week: "WEEK 3 ",
+      dates: "Sept, 29 - Oct, 6",
       description: "Present your ideas.",
     },
     {
       id: 3,
       phase: "PHASE 3 ",
       title: "SELECTION",
-      week: "WEEK 4",
+      week: "WEEK 4 ",
+      dates: "Oct, 6 - Oct, 13",
       description:
         "Projects selected based on usefulness, novelty, ethics, feasibility. Assigning student mentors, facilities and alumni for guiding",
     },
@@ -30,12 +33,14 @@ const ProgramTimeline = () => {
       id: 4,
       phase: "PHASE 4 ",
       title: "INCUBATION",
-      week: "WEEK 5 - WEEK 11",
+      week: "WEEK 5 - WEEK 11 ",
+      dates: "Oct, 14 - Dec, 13",
       description: "Project work in progress",
     },
     {
       id: 5,
       phase: "PHASE 5",
+      dates: "Dec, 14 - Dec, 21",
       title: "SHOWCASE",
       week: "WEEK 12",
       description:
