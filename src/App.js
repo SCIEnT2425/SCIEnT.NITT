@@ -71,6 +71,15 @@ const App = () => {
       </Routes>
       {/*the above routes kept separately bcz they require no navbar*/}
       <Routes>
+        
+        {/* Club Projects Listing */}
+        <Route path="/clubs/:name/projects" element={<ProjectsPage />} />
+
+        {/* Individual Project Page */}
+        <Route
+          path="/clubs/:name/projects/:projectId" element={<ProjectDetailsPage />}
+        />
+
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/gallery" element={<Gallery />} />
