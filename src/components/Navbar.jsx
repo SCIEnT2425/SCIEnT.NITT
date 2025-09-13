@@ -61,6 +61,16 @@ const Navbar = () => {
                     >
                         Room Booking
                     </Link> */}
+<<<<<<< HEAD
+=======
+                     <Link
+                        to="/Inventory"
+                        onClick={handleClick}
+                        className={`nav-link ${isActive('/contact') ? 'active font-bold text-lg' : ''}`}
+                    >
+                        Inventory
+                    </Link>
+>>>>>>> a2b7479 (final changes)
                     <Link
                         to="/inventive"
                         onClick={handleClick}
