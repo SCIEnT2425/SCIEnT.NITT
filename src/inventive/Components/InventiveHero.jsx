@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/Inventive.css";
 const InventiveHero = () => {
   return (
-    <div className="relative w-full h-screen bg-black overflow-hidden flex items-center justify-center mt-8">
+    <div className="relative w-full h-screen bg-black overflow-hidden flex items-center justify-center mt-16">
       {/* Animated Background Grid */}
       <div className="absolute inset-0 opacity-30">
         <svg
@@ -70,18 +70,18 @@ const InventiveHero = () => {
         </svg>
       </div>
 
-      <section className="relative bg-black text-white min-h-screen flex flex-col ">
+      <section className="relative bg-black text-white min-h-screen flex flex-col mt-12">
         {/* Content Wrapper */}
         <div className="relative z-10 w-full max-w-6xl mx-auto  sm:px-6 md:px-8 py-16 text-center flex flex-col justify-center flex-1 inventiveContent">
           {/* INVENTIVE Title */}
           <div className="relative mb-12 sm:mb-16">
-            <h1 className="inventiveTitle text-[20rem] sm:text-[8rem] font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-600 to-yellow-400 drop-shadow-lg]]] hover:scale-110 hover:duration-1000">
+            <h1 className="inventiveTitle text-[3rem] sm:text-[8rem] font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-600 to-yellow-400 drop-shadow-lg]]] hover:scale-110 hover:duration-1000">
               INVENTIVE
             </h1>
           </div>
 
           {/* Subtitle */}
-          <div className="mb-12 sm:mb-16 space-y-6 sm:space-y-8">
+          <div className="mb-12 px-4 sm:mb-16 space-y-6 sm:space-y-8">
             <p className="text-lg sm:text-xl text-gray-200 leading-relaxed max-w-3xl sm:max-w-4xl mx-auto font-light">
               Got an innovative idea bubbling in your mind? We’ll give you the
               stage, the spotlight, and the chance to shine like never before.
@@ -89,7 +89,7 @@ const InventiveHero = () => {
           </div>
 
           {/* Main Description */}
-          <div className="mb-12 sm:mb-16 space-y-6 sm:space-y-8">
+          <div className="mb-12 px-4 sm:mb-16 space-y-6 sm:space-y-8">
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-3xl sm:max-w-4xl mx-auto">
               <span className="text-yellow-400 font-semibold">INVENTIVE</span>{" "}
               is SCIEnT's groundbreaking initiative, designed to fuel the spark

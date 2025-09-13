@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const tools = require("./allTools.js");
 const Tool = require("../models/Tool.js");
-const MONGO_URL = "mongodb://127.0.0.1:27017/mybooking";
+const MONGO_URL = "mongodb://localhost:27017/mybooking";
 
 async function main() {
   await mongoose.connect(MONGO_URL);

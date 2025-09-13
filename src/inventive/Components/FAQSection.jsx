@@ -121,7 +121,7 @@ const FAQSection = () => {
           </p>
           <button
             onClick={handleClick}
-            className="group relative px-4 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold text-sm sm:text-base md:text-lg rounded-full transform hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-yellow-400/30"
+            className="group relative px-4 mx-auto sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold text-sm sm:text-base md:text-lg rounded-full transform hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-yellow-400/30"
           >
             <span className="relative z-10">Contact Us</span>
             <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
