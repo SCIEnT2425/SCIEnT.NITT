@@ -8,13 +8,15 @@ const TimeLine = ({ phase, isReverse }) => {
     >
       {/* Content: Title + Week + Description */}
       <div className="phaseCardContent w-full md:w-1/2 flex wrap flex-col">
-        
+
         <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 md:mb-3">
           {phase.title}
         </h3>
-        <p className="text-yellow-400 font-semibold mb-3 md:mb-4 text-base sm:text-lg md:text-xl">
-          {phase.week}
+        <p className="phaseWeekDates text-base sm:text-lg md:text-xl">
+          <span className="text-yellow-400 font-semibold block phaseWeek">{phase.week}</span>{" "}
+          <span className="text-gray-300 italic text-sm ">( {phase.dates} )</span>
         </p>
+
         <p className="text-gray-300 leading-relaxed text-sm sm:text-base md:text-lg">
           {phase.description}
         </p>
