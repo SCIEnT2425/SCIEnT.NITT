@@ -24,6 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/clubs", require("./routes/clubRoutes"));
+app.use("/api/clubs", require("./routes/projectRoutes"));
 app.use("/api/bookings", require("./routes/bookingRoutes"));
 app.use("/api/admin", require("./routes/adminRoutes"));
 app.use("/api/inventiveForm", require("./inventive/inventiveFormRoutes")); // Add the new route
