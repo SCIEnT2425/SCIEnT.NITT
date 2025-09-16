@@ -4,7 +4,9 @@ const fs = require("fs");
 const router = express.Router();
 const path = require("path");
 // Load service account credentials
-const credentials = JSON.parse(fs.readFileSync(path.join(__dirname, "credentials.json")));
+const credentials = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "credentials.json"))
+);
 const auth = new google.auth.GoogleAuth({
   credentials,
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
@@ -18,20 +20,63 @@ router.post("/submit", async (req, res) => {
     const client = await auth.getClient();
     const sheets = google.sheets({ version: "v4", auth: client });
 
-    const { roll, branch, year, name, age, dob, mobile, description } = req.body;
+    const {
+      roll,
+      branch,
+      year,
+      name,
+      age,
+      dob,
+      mobile,
+      source,
+      otherSource,
+      projectDescription,
+      teamSize,
+    } = req.body;
 
     // Validate required fields
-    if (!roll || !branch || !year || !name || !age || !dob || !mobile || !description) {
+    if (
+      !roll ||
+      !branch ||
+      !year ||
+      !name ||
+      !age ||
+      !dob ||
+      !mobile ||
+      !projectDescription ||
+      !teamSize
+    ) {
       return res.status(400).send("All fields are required");
+    }
+    if (!source) {
+      return res.status(400).send("Source is required");
+    }
+    if (source === "Other" && !otherSource) {
+      return res.status(400).send("Please specify other source");
     }
 
     // Append row with all eight fields
+    const finalSource = source === "Other" ? otherSource : source;
+
     await sheets.spreadsheets.values.append({
       spreadsheetId: SPREADSHEET_ID,
-      range: "Sheet1!A:H",
+      range: "Sheet1!A:K",
       valueInputOption: "RAW",
       requestBody: {
-        values: [[roll, branch, year, name, age, dob, mobile, description]],
+        values: [
+          [
+            roll,
+            branch,
+            year,
+            name,
+            age,
+            dob,
+            mobile,
+            finalSource,
+            projectDescription,
+            teamSize,
+          ],
+        ],
       },
     });
 
