@@ -76,6 +76,13 @@ const Navbar = () => {
                         Inventory
                     </Link>
                     <Link
+                        to="/members"
+                        onClick={handleClick}
+                        className={`nav-link ${isActive('/members') ? 'active font-bold text-lg' : ''}`}
+                    >
+                        Team
+                    </Link>
+                    <Link
                         to="/contact"
                         onClick={handleClick}
                         className={`nav-link ${isActive('/contact') ? 'active font-bold text-lg' : ''}`}
