@@ -5,7 +5,7 @@ import Footer from '../components/footer';
 import Navbar from '../components/Navbar';
 //import { spider, delta, ecell, max, sigma, oedc, dc, naksh, psi, rmi, graphique, td, prof, fh, db, ever } from "../assets";
 import ProjectCard from '../components/ProjectCard';
-import React, { useEffect, useState, useRef } from "react";
+import  { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 

@@ -1,7 +1,7 @@
 const Club = require('../models/Club');
 const Project = require('../models/Project');
 
-exports.getProject() = async (req, res) => {
+exports.getProject = async (req, res) => {
      try {
     const club = await Club.findOne({
       name: { $regex: new RegExp(`^${req.params.name}$`, "i") },

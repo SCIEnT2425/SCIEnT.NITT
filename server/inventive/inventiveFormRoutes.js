@@ -12,10 +12,7 @@ const credentials = JSON.parse(
 );
 
 const auth = new google.auth.GoogleAuth({
-  credentials: {
-    client_email: process.env.CLIENT_EMAIL,
-    private_key: process.env.PRIVATE_KEY.replace(/\\n/g, '\n'),
-  },
+  credentials,
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
 
