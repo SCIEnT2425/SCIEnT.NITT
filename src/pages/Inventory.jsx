@@ -8,7 +8,7 @@ export default function Inventory() {
   const cardRefs = useRef([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/inventory")
+    fetch("/api/inventory")
       .then((res) => res.json())
       .then((data) => setInventoryItems(data))
       .catch((err) => console.error(err));

@@ -96,6 +96,7 @@ export default function ProjectForm() {
     setIsSubmitting(true);
 
     try {
+
       const response = await fetch(
         "http://localhost:5000/inventiveForm/submit",
         {
@@ -104,6 +105,7 @@ export default function ProjectForm() {
           body: JSON.stringify(formData),
         }
       );
+
 
       if (response.ok) {
         const message = await response.text();
