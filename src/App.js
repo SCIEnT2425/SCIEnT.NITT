@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Gallery from "./pages/Gallery";
-//import ProjectSection from "./pages/ProjectSection";
+// import ProjectSection from "./pages/ProjectSection";
 import Contact from "./pages/Contacts";
 import Bookings from "./pages/RoomBooking";
 import Dashboard_booking from "./pages/Dashboard_booking";
@@ -92,7 +92,6 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/gallery" element={<Gallery />} />
-        <Route path="/project" element={<ProjectSection />} />
         <Route path="/inventive" element={<Inventive />} />
         <Route path="/inventiveForm" element={<InventivePage/>} />
         <Route path="/inventory" element={<Inventory />} />
