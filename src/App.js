@@ -16,7 +16,7 @@ import Profile from "./pages/Profile";
 import Halls from "./pages/Halls";
 import Slots from "./pages/Slots";
 import Days from "./pages/Days";
-import Members from "./pages/Members";
+import Members from "./Members/pages/Members";
 import OpenHouse from "./pages/OpenHouse";
 import Inventory from "./pages/Inventory";
 import ESummit from "./pages/ESummit";
@@ -96,6 +96,7 @@ const App = () => {
         <Route path="/inventive" element={<Inventive />} />
         <Route path="/inventiveForm" element={<InventivePage/>} />
         <Route path="/inventory" element={<Inventory />} />
+        <Route path="/members" element={<Members/>} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/roombook" element={<Bookings />} />
         <Route path="/open-house" element={<OpenHouse />} />
