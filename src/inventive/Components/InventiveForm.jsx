@@ -96,6 +96,8 @@ export default function ProjectForm() {
     setIsSubmitting(true);
 
     try {
+<<<<<<< HEAD
+
       const response = await fetch(
         "http://localhost:5000/inventiveForm/submit",
         {
@@ -104,6 +106,14 @@ export default function ProjectForm() {
           body: JSON.stringify(formData),
         }
       );
+
+=======
+      const response = await fetch("/api/inventiveForm/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+>>>>>>> 7ba90b764b66f9d5e46485615e1a2180f2242018
 
       if (response.ok) {
         const message = await response.text();
@@ -365,6 +375,45 @@ export default function ProjectForm() {
                 </p>
               )}
             </div>
+            {/* OR Separator */}
+<div className="text-center my-4 text-gray-400 font-semibold">OR</div>
+
+{/* Dropdown for Problem Statements */}
+<div>
+    <label className="block text-white mb-2">
+      Choose a Problem Statement
+    </label>
+    <select
+      onChange={(e) =>
+        setFormData({ ...formData, projectDescription: e.target.value })
+      }
+      value={formData.projectDescription}
+      className="w-full px-4 py-2 rounded-lg bg-black border border-yellow-400/70 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+    >
+      <option value="">Select a problem statement</option>
+      <option value="Pick and Place using VLA for Collaborative Robot (COBOT)">
+        Pick and Place using VLA for Collaborative Robot (COBOT)
+      </option>
+      <option value="Aggressive maneuver Stabilization for a Minidrone">
+        Aggressive maneuver Stabilization for a Minidrone
+      </option>
+      <option value="Portable Charging System for Electric Vehicles">
+        Portable Charging System for Electric Vehicles
+      </option>
+      <option value="Autonomous Vehicle Localization Using Onboard Sensors and HD Geolocated Maps">
+        Autonomous Vehicle Localization Using Onboard Sensors and HD Geolocated Maps
+      </option>
+      <option value="Automated Testing of All Electrical Accessories in QC Station of an Automobile Factory">
+        Automated Testing of All Electrical Accessories in QC Station of an Automobile Factory
+      </option>
+      <option value="Vehicle Borne Edge AI for Electric Vehicle Driver Safety Assistance">
+        Vehicle Borne Edge AI for Electric Vehicle Driver Safety Assistance
+      </option>
+      <option value="AI enabled object reorientation system for industrial production lines">
+        AI enabled object reorientation system for industrial production lines
+      </option>
+    </select>
+  </div>
             {/* Team Size */}
             <div className="mb-4">
               <label className="block text-white mb-2">Team Size</label>
@@ -502,14 +551,23 @@ export default function ProjectForm() {
           </div>
 
           {/* Submit Button */}
-          <div className="text-center">
-            <button
-              type="submit"
-              className="px-8 py-3 bg-yellow-400 text-black font-bold rounded-xl shadow-lg hover:bg-yellow-300 hover:scale-105 transform transition duration-300"
-            >
-              Submit
-            </button>
-          </div>
+          <div className="text-center flex justify-center gap-4">
+  <button
+    type="submit"
+    className="px-6 py-3 bg-yellow-500 hover:bg-yellow-600 text-black font-bold rounded-lg shadow-md"
+  >
+    Submit
+  </button>
+
+  <a
+    href="https://drive.google.com/drive/folders/1GzsNa_-kcYYm3NOpQnc5DPT0M3Q7CBLz?usp=sharing"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg shadow-md"
+  >
+    View Description of Problem Statements
+  </a>
+</div>
         </form>
       </div>
     </div>

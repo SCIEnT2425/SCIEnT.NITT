@@ -1,4 +1,9 @@
-const tools=[
+const Tools = require("../models/Tool.js");
+
+exports.seedTools = async (req, res) => {
+  try {
+    // Sample clubs data to seed
+    const ToolsData =[
      {
     name: "Bambu Lab 3D Printer",
     description: "Bambu Lab 3D Printer - equipment/tool.",
@@ -907,7 +912,6 @@ const tools=[
     image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756632204/drill-bits-product-image-scaled_pbyzsh.jpg", filename: "drill-bits-product-image-scaled_pbyzsh" },
   },
 
-<<<<<<< HEAD
   // FURNITURE
   {
     name: "Red Tables (for Machine)",
@@ -979,8 +983,6 @@ const tools=[
     quantity: 2,
     image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756626947/white_board_mzds1t.avif", filename: "white_board_mzds1t" },
   },
-=======
->>>>>>> e29a8560d86c756b11b7b4fec7aa4ee19eace031
 
   // COMPUTING
   {
@@ -1041,6 +1043,17 @@ const tools=[
     quantity: 3,
     image: { url: "https://res.cloudinary.com/dsppzymyc/image/upload/v1756625547/air_conditioner_carrier_a2yyv3.jpg", filename: "air_conditioner_carrier_a2yyv3" },
   },
-]
+];
 
-module.exports = tools;
+    // Delete existing clubs (optional)
+    await Tools.deleteMany({}); // Remove all clubs for a clean slate
+
+    // Insert the clubs into the database
+    await Tools.insertMany(ToolsData);
+
+    res.status(201).send({ message: "Tools seeded successfully!" });
+  } catch (error) {
+    console.error("Seeding error:", error);
+    res.status(500).send({ message: "Error seeding tools" });
+  }
+};
