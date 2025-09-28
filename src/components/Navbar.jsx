@@ -61,8 +61,6 @@ const Navbar = () => {
                     >
                         Room Booking
                     </Link> */}
-<<<<<<< HEAD
-=======
                      <Link
                         to="/Inventory"
                         onClick={handleClick}
@@ -70,7 +68,6 @@ const Navbar = () => {
                     >
                         Inventory
                     </Link>
->>>>>>> a2b7479 (final changes)
                     <Link
                         to="/inventive"
                         onClick={handleClick}

@@ -98,7 +98,7 @@ export default function ProjectForm() {
     try {
 
       const response = await fetch(
-        "http://localhost:5000/inventiveForm/submit",
+        "http://localhost:5000/api/inventiveForm/submit",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
