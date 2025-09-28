@@ -1674,19 +1674,10 @@
   dependencies:
     "@swc/helpers" "^0.5.0"
 
-<<<<<<< HEAD
 "@remix-run/router@1.21.0":
   version "1.21.0"
   resolved "https://registry.npmjs.org/@remix-run/router/-/router-1.21.0.tgz"
   integrity sha512-xfSkCAchbdG5PnbrKqFWwia4Bi61nH+wm8wLEqfHDyp7Y3dZzgqS2itV8i4gAq9pC2HsTpwyBC6Ds8VHZ96JlA==
-=======
-
-"@remix-run/router@1.23.0":
-  version "1.23.0"
-  resolved "https://registry.npmjs.org/@remix-run/router/-/router-1.23.0.tgz"
-  integrity sha512-O3rHJzAQKamUz1fvE0Qaw0xSFqsA/yafi2iqeE0pvdFtCO1viYx8QL6f3Ln/aCCTLxs68SLf0KPM9eSeM8yBnA==
-
->>>>>>> 778a19bcd66b38949e2477d492dbe3cc80637c49
 
 "@restart/hooks@^0.4.9":
   version "0.4.16"
@@ -5468,23 +5459,15 @@ fs@^0.0.1-security:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
-=======
-
->>>>>>> 778a19bcd66b38949e2477d492dbe3cc80637c49
 fsevents@^2.3.2, fsevents@~2.3.2:
   version "2.3.3"
   resolved "https://registry.npmjs.org/fsevents/-/fsevents-2.3.3.tgz"
   integrity sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==
 
-<<<<<<< HEAD
 >>>>>>> e29a8560d86c756b11b7b4fec7aa4ee19eace031
 =======
 >>>>>>> f2835276b60a29ee14a5d89ff6b97bdeb130d560
-=======
-
->>>>>>> 778a19bcd66b38949e2477d492dbe3cc80637c49
 function-bind@^1.1.2:
   version "1.1.2"
   resolved "https://registry.npmjs.org/function-bind/-/function-bind-1.1.2.tgz"
