@@ -19,6 +19,7 @@ export default function ProjectForm() {
     source: "",
     otherSource: "",
     projectDescription: "",
+    problemStatement: "",
     teamSize: 1,
     members: [],
   });
@@ -65,9 +66,9 @@ export default function ProjectForm() {
     if (!formData.source) newErrors.source = "Please select an option";
     if (formData.source === "Other" && !formData.otherSource)
       newErrors.otherSource = "Please specify other source";
-
-    if (!formData.projectDescription)
-      newErrors.projectDescription = "Project description is required";
+    if (!formData.projectDescription && !formData.problemStatement) {
+      newErrors.projectDescription = "Enter a description or select a problem statement";
+    }
     if (!formData.teamSize) newErrors.teamSize = "Please enter team size";
 
     formData.members.forEach((member, i) => {
@@ -84,6 +85,11 @@ export default function ProjectForm() {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+
+  const payload = {
+  ...formData,
+  projectDescription: formData.projectDescription || formData.problemStatement,
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -107,6 +113,7 @@ export default function ProjectForm() {
       );
 
 
+
       if (response.ok) {
         const message = await response.text();
         alert(message || "Form submitted successfully!");
@@ -122,6 +129,7 @@ export default function ProjectForm() {
           source: "",
           otherSource: "",
           projectDescription: "",
+          problemStatement: "",
           teamSize: 1,
           members: [],
         });
@@ -377,9 +385,9 @@ export default function ProjectForm() {
     </label>
     <select
       onChange={(e) =>
-        setFormData({ ...formData, projectDescription: e.target.value })
+        setFormData({ ...formData,problemStatement: e.target.value })
       }
-      value={formData.projectDescription}
+      value={formData.problemStatement}
       className="w-full px-4 py-2 rounded-lg bg-black border border-yellow-400/70 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
     >
       <option value="">Select a problem statement</option>
