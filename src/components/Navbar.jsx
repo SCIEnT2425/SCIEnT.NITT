@@ -76,9 +76,9 @@ const Navbar = () => {
                         Inventory
                     </Link>
                     <Link
-                        to="/members"
+                        to="/Team"
                         onClick={handleClick}
-                        className={`nav-link ${isActive('/members') ? 'active font-bold text-lg' : ''}`}
+                        className={`nav-link ${isActive('/Team') ? 'active font-bold text-lg' : ''}`}
                     >
                         Team
                     </Link>
