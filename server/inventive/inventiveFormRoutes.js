@@ -9,10 +9,7 @@ dotenv.config();
 //const credentials = JSON.parse(process.env.GOOGLE_CREDS);
 //console.log(process.env.CLIENT_EMAIL);
 const auth = new google.auth.GoogleAuth({
-  credentials: {
-    client_email: process.env.CLIENT_EMAIL,
-    private_key: process.env.PRIVATE_KEY.replace(/\\n/g, '\n'),
-  },
+  credentials,
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
 
