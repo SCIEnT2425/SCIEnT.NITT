@@ -47,7 +47,7 @@ const Navbar = () => {
                     </Link>
 
                     <Link
-                        to="/club"
+                        to="/project"
                         onClick={handleClick}
                         className={`nav-link ${isActive('/project') ? 'active font-bold text-lg' : ''}`}
                     >
