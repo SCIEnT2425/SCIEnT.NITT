@@ -62,13 +62,6 @@ const Navbar = () => {
                         Room Booking
                     </Link> */}
 
-                     <Link
-                        to="/Inventory"
-                        onClick={handleClick}
-                        className={`nav-link ${isActive('/contact') ? 'active font-bold text-lg' : ''}`}
-                    >
-                        Inventory
-                    </Link>
 
                     <Link
                         to="/inventive"
@@ -92,13 +85,6 @@ const Navbar = () => {
                         className={`nav-link ${isActive('/Team') ? 'active font-bold text-lg' : ''}`}
                     >
                         Team
-                    </Link>
-                    <Link
-                        to="/inventive"
-                        onClick={handleClick}
-                        className={`nav-link ${isActive('/inventive') ? 'active font-bold text-lg' : ''} `}
-                    >
-                        INVENTIVE'25
                     </Link>
                     <Link
                         to="/contact"
