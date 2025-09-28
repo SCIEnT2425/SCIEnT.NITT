@@ -62,6 +62,7 @@ const Navbar = () => {
                         Room Booking
                     </Link> */}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                      <Link
                         to="/Inventory"
@@ -80,10 +81,21 @@ const Navbar = () => {
                     </Link>
                     <Link
                         to="/members"
+=======
+                     <Link
+                        to="/Inventory"
+>>>>>>> 7ba90b764b66f9d5e46485615e1a2180f2242018
                         onClick={handleClick}
                         className={`nav-link ${isActive('/members') ? 'active font-bold text-lg' : ''}`}
                     >
                         Team
+                    </Link>
+                    <Link
+                        to="/inventive"
+                        onClick={handleClick}
+                        className={`nav-link ${isActive('/inventive') ? 'active font-bold text-lg' : ''} `}
+                    >
+                        INVENTIVE'25
                     </Link>
                     <Link
                         to="/contact"
