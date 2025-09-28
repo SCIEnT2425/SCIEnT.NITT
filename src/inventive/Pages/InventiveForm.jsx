@@ -51,7 +51,7 @@ export default function ProjectForm() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("http://localhost:3001/inventiveForm/submit", {
+      const response = await fetch("/api/inventiveForm/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -60,6 +60,7 @@ export default function ProjectForm() {
       if (response.ok) {
         const message = await response.text();
         alert(message || "Form submitted successfully!");
+        console.log(message);
         // Reset form on successful submission
         setFormData({
           roll: "",
