@@ -6,20 +6,12 @@ const path = require("path");
 const dotenv = require("dotenv");
 dotenv.config();
 // Load service account credentials
-<<<<<<< HEAD
 //const credentials = JSON.parse(process.env.GOOGLE_CREDS);
 //console.log(process.env.CLIENT_EMAIL);
-=======
-
-const credentials = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "credentials.json"))
-);
-
->>>>>>> d968ed8532360a85d9ff4977f3aaafc21f400c49
 const auth = new google.auth.GoogleAuth({
   credentials: {
     client_email: process.env.CLIENT_EMAIL,
-    private_key: process.env.PRIVATE_KEY.replace(/\\n/g, '\n'),
+    private_key: process.env.PRIVATE_KEY?.replace(/\\n/g, '\n'),
   },
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
