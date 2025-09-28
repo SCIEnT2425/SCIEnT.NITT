@@ -3,9 +3,13 @@ import "../styles/Inventive.css";
 
 const InventiveHero = () => {
   return (
+<<<<<<< HEAD
 
     <div className="relative w-full h-screen bg-black overflow-hidden flex items-center justify-center mt-16">
 
+=======
+    <div className="relative w-full min-h-screen bg-black overflow-hidden flex items-center justify-center">
+>>>>>>> 7ba90b764b66f9d5e46485615e1a2180f2242018
       {/* Animated Background Grid */}
       <div className="absolute inset-0 opacity-30">
         <svg
@@ -61,6 +65,7 @@ const InventiveHero = () => {
         </svg>
       </div>
 
+<<<<<<< HEAD
 
       <section className="relative bg-black text-white min-h-screen flex flex-col mt-12">
 
@@ -76,21 +81,35 @@ const InventiveHero = () => {
               bg-gradient-to-r from-yellow-400 via-yellow-600 to-yellow-400 
               drop-shadow-lg transition-transform duration-700 hover:scale-105">
 
+=======
+      <section className="relative bg-black text-white min-h-screen flex flex-col">
+        {/* Content Wrapper */}
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-16 text-center flex flex-col justify-center flex-1 inventiveContent">
+          {/* INVENTIVE Title */}
+          <div className="relative mb-12 sm:mb-16">
+            <h1 className="inventiveTitle text-[3rem] sm:text-[8rem] font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-600 to-yellow-400 drop-shadow-lg]]] hover:scale-110 hover:duration-1000">
+>>>>>>> 7ba90b764b66f9d5e46485615e1a2180f2242018
               INVENTIVE
             </h1>
           </div>
 
           {/* Subtitle */}
+<<<<<<< HEAD
 
           <div className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
             <p className="text-base sm:text-lg md:text-xl text-gray-200 leading-relaxed max-w-2xl sm:max-w-3xl mx-auto font-light">
 
+=======
+          <div className="mb-12 px-4 sm:mb-16 space-y-6 sm:space-y-8">
+            <p className="text-lg sm:text-xl text-gray-200 leading-relaxed max-w-3xl sm:max-w-4xl mx-auto font-light">
+>>>>>>> 7ba90b764b66f9d5e46485615e1a2180f2242018
               Got an innovative idea bubbling in your mind? We’ll give you the
               stage, the spotlight, and the chance to shine like never before.
             </p>
           </div>
 
           {/* Main Description */}
+<<<<<<< HEAD
 
           <div className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
             <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl sm:max-w-3xl mx-auto">
@@ -99,6 +118,15 @@ const InventiveHero = () => {
               in aspiring minds. Whether you’re a dreamer, thinker, or builder,
               this is your chance to bring your ideas to life.
 
+=======
+          <div className="mb-12 px-4 sm:mb-16 space-y-6 sm:space-y-8">
+            <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-3xl sm:max-w-4xl mx-auto">
+              <span className="text-yellow-400 font-semibold">INVENTIVE</span>{" "}
+              is SCIEnT's groundbreaking initiative, designed to fuel the spark
+              of innovation in aspiring minds. Whether you’re a dreamer,
+              thinker, or builder, this is your chance to bring your ideas to
+              life.
+>>>>>>> 7ba90b764b66f9d5e46485615e1a2180f2242018
             </p>
             <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl sm:max-w-3xl mx-auto">
               This program offers you a unique opportunity to transform your raw
