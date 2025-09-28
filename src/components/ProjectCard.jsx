@@ -1,24 +1,35 @@
-import React from 'react'
-import { spider, delta, ecell, max, sigma, oedc, dc, naksh, psi, rmi, graphique, td, prof, fh, db, ever } from "../assets";
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { Link, useParams } from "react-router-dom";
 
-const ProjectCard = ({p , i}) => {
-    const navigate = useNavigate();
-    const handleClick = (latestLink) => {
-        navigate(latestLink);
-    };
-     const latestYear = p.years.length > 0 ? p.years[0].link : null;
+export default function ProjectCard({ project }) {
+  const { name } = useParams(); // current club name from URL
+
   return (
-    <div className='project-item'
-     key={i}  
-     onClick={() => latestYear && handleClick(latestYear)}>
-        <img src={p.image} alt="ClubLogo"/>
-      <div className='projectname'>
-      {p.name}
-      </div>
-      
-    </div>
-  )
-}
+    <div className="bg-gray-900 p-4 rounded-2xl shadow-lg w-72 flex-shrink-0">
+      {/* Project Image */}
+      <img
+        src={project.image?.url || project.image}
+        alt={project.name}
+        className="w-full h-40 object-cover rounded-lg mb-3"
+      />
 
-export default ProjectCard
+      {/* Title */}
+      <h3 className="font-bold text-lg">{project.name}</h3>
+
+      {/* Short Description */}
+      <p className="text-sm text-gray-300 mt-2 line-clamp-3">
+        {project.description}
+      </p>
+
+      {/* Footer */}
+      <div className="flex justify-end mt-4">
+        <Link
+          to={`/clubs/${name}/projects/${project._id}`}
+          className="px-4 py-1 rounded-full bg-yellow-400 text-black text-sm font-medium hover:bg-yellow-500 transition-colors"
+        >
+          Details
+        </Link>
+      </div>
+    </div>
+  );
+}

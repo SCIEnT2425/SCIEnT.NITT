@@ -1,8 +1,15 @@
 import React from "react";
 import "../styles/Inventive.css";
+
 const InventiveHero = () => {
   return (
+<<<<<<< HEAD
+
     <div className="relative w-full h-screen bg-black overflow-hidden flex items-center justify-center mt-16">
+
+=======
+    <div className="relative w-full min-h-screen bg-black overflow-hidden flex items-center justify-center">
+>>>>>>> 7ba90b764b66f9d5e46485615e1a2180f2242018
       {/* Animated Background Grid */}
       <div className="absolute inset-0 opacity-30">
         <svg
@@ -11,24 +18,12 @@ const InventiveHero = () => {
           preserveAspectRatio="xMidYMid slice"
         >
           <defs>
-            <linearGradient
-              id="gridGradient"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="100%"
-            >
+            <linearGradient id="gridGradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#FFD700" stopOpacity="0.8" />
               <stop offset="50%" stopColor="#FFA500" stopOpacity="0.6" />
               <stop offset="100%" stopColor="#FF8C00" stopOpacity="0.4" />
             </linearGradient>
-            <linearGradient
-              id="blueGradient"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="100%"
-            >
+            <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#1E90FF" stopOpacity="0.6" />
               <stop offset="100%" stopColor="#0066CC" stopOpacity="0.3" />
             </linearGradient>
@@ -57,7 +52,7 @@ const InventiveHero = () => {
             stroke="url(#blueGradient)"
             strokeWidth="2"
             fill="none"
-            className="animate-pulse sm:animate-pulse"
+            className="animate-pulse"
           />
           <path
             d="M-100 600 Q400 400 800 600 T1400 500"
@@ -65,30 +60,65 @@ const InventiveHero = () => {
             strokeWidth="3"
             fill="none"
             opacity="0.8"
-            className="animate-pulse sm:animate-pulse"
+            className="animate-pulse"
           />
         </svg>
       </div>
 
+<<<<<<< HEAD
+
       <section className="relative bg-black text-white min-h-screen flex flex-col mt-12">
+
         {/* Content Wrapper */}
-        <div className="relative z-10 w-full max-w-6xl mx-auto  sm:px-6 md:px-8 py-16 text-center flex flex-col justify-center flex-1 inventiveContent">
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-16 text-center flex flex-col justify-center flex-1 inventiveContent">
+          {/* INVENTIVE Title */}
+
+          <div className="relative mb-8 sm:mb-12">
+            <h1 className="inventiveTitle 
+              text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] 
+              font-black tracking-wider 
+              text-transparent bg-clip-text 
+              bg-gradient-to-r from-yellow-400 via-yellow-600 to-yellow-400 
+              drop-shadow-lg transition-transform duration-700 hover:scale-105">
+
+=======
+      <section className="relative bg-black text-white min-h-screen flex flex-col">
+        {/* Content Wrapper */}
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-16 text-center flex flex-col justify-center flex-1 inventiveContent">
           {/* INVENTIVE Title */}
           <div className="relative mb-12 sm:mb-16">
             <h1 className="inventiveTitle text-[3rem] sm:text-[8rem] font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-600 to-yellow-400 drop-shadow-lg]]] hover:scale-110 hover:duration-1000">
+>>>>>>> 7ba90b764b66f9d5e46485615e1a2180f2242018
               INVENTIVE
             </h1>
           </div>
 
           {/* Subtitle */}
+<<<<<<< HEAD
+
+          <div className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
+            <p className="text-base sm:text-lg md:text-xl text-gray-200 leading-relaxed max-w-2xl sm:max-w-3xl mx-auto font-light">
+
+=======
           <div className="mb-12 px-4 sm:mb-16 space-y-6 sm:space-y-8">
             <p className="text-lg sm:text-xl text-gray-200 leading-relaxed max-w-3xl sm:max-w-4xl mx-auto font-light">
+>>>>>>> 7ba90b764b66f9d5e46485615e1a2180f2242018
               Got an innovative idea bubbling in your mind? We’ll give you the
               stage, the spotlight, and the chance to shine like never before.
             </p>
           </div>
 
           {/* Main Description */}
+<<<<<<< HEAD
+
+          <div className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
+            <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl sm:max-w-3xl mx-auto">
+              <span className="text-yellow-400 font-semibold">INVENTIVE</span> is SCIEnT's
+              groundbreaking initiative, designed to fuel the spark of innovation
+              in aspiring minds. Whether you’re a dreamer, thinker, or builder,
+              this is your chance to bring your ideas to life.
+
+=======
           <div className="mb-12 px-4 sm:mb-16 space-y-6 sm:space-y-8">
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-3xl sm:max-w-4xl mx-auto">
               <span className="text-yellow-400 font-semibold">INVENTIVE</span>{" "}
@@ -96,8 +126,9 @@ const InventiveHero = () => {
               of innovation in aspiring minds. Whether you’re a dreamer,
               thinker, or builder, this is your chance to bring your ideas to
               life.
+>>>>>>> 7ba90b764b66f9d5e46485615e1a2180f2242018
             </p>
-            <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-3xl sm:max-w-4xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl sm:max-w-3xl mx-auto">
               This program offers you a unique opportunity to transform your raw
               concepts into impactful solutions, with the support of mentors,
               resources, and a platform to showcase your brilliance.
@@ -105,7 +136,7 @@ const InventiveHero = () => {
           </div>
 
           {/* Bottom Line */}
-          <div className="w-auto h-px bg-yellow-400 mt-20 sm:mt-28"></div>
+          <div className="w-full h-px bg-yellow-400 mt-12 sm:mt-20"></div>
         </div>
       </section>
 

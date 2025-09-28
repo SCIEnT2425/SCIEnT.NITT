@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Gallery from "./pages/Gallery";
-import ProjectSection from "./pages/ProjectSection";
+// import ProjectSection from "./pages/ProjectSection";
 import Contact from "./pages/Contacts";
 import Bookings from "./pages/RoomBooking";
 import Dashboard_booking from "./pages/Dashboard_booking";
@@ -50,6 +50,11 @@ import Profnitt from "./components/ProjectList/onefiles/profnitt";
 import Naksha from "./components/ProjectList/onefiles/Naksha";
 import { NavMobile } from "./components/nav-mobile";
 import Annualday from "./pages/Annualday";
+
+import ClubsPage from "./pages/ClubsPage";
+import ProjectsPage from "./pages/ProjectsPage";
+import ProjectDetailsPage from "./pages/ProjectDetailsPage";
+
 import Inventive from "./inventive/Pages/Inventive";
 import InventivePage from "./inventive/Pages/InventivePage" ;
 import Members from "./pages/Members"
@@ -72,10 +77,21 @@ const App = () => {
       </Routes>
       {/*the above routes kept separately bcz they require no navbar*/}
       <Routes>
+        
+        {/* Club Listing */}
+        <Route path="/clubs" element={<ClubsPage />} />
+
+        {/* Club Projects Listing */}
+        <Route path="/clubs/:name/projects" element={<ProjectsPage />} />
+
+        {/* Individual Project Page */}
+        <Route
+          path="/clubs/:name/projects/:projectId" element={<ProjectDetailsPage />}
+        />
+
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/gallery" element={<Gallery />} />
-        <Route path="/project" element={<ProjectSection />} />
         <Route path="/inventive" element={<Inventive />} />
         <Route path="/inventiveForm" element={<InventivePage/>} />
         <Route path="/inventory" element={<Inventory />} />
