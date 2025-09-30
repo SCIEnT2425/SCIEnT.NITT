@@ -1,7 +1,5 @@
 // import spider from '../../assets/spider.png'
 import arjun from '../../assets/p.jpg'
-import sanskar from '../../assets/san.jpg'
-import san from '../../assets/my.png'
 
 
 const data = {
@@ -21,7 +19,7 @@ const data = {
         role: "Club Facilitator",
         department: "Department of Technology",
         email: "john.doe@university.edu",
-        image: sanskar,
+        image: null ,
         bio: "Supporting and mentoring student-led technical projects"
       }
     ],
