@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Mail, Linkedin, Github, Zap, Sparkles, Rocket, Star } from 'lucide-react';
 import MemberCard from './MemberCard';
 import data from '../assets/data';
+import '../styles/ScientMembers.css';
 
 const SCIentMembers = () => {
   const [activeSection, setActiveSection] = useState('all');
@@ -38,10 +39,10 @@ const SCIentMembers = () => {
           THE SQUAD
         </h1>
         <p className="text-xl text-[#facc15]/80 max-w-2xl mx-auto">
-          Meet the awesome humans behind <span className="text-[#facc15] font-bold">SCIent</span>
+          Meet the awesome humans behind <span className="text-[#facc15] font-bold">SCIEnT</span>
         </p>
         <p className="text-sm text-[#facc15]/60 mt-2">
-          Student Centre for Innovation, Engineering & Technology
+          Student Centre for Innovation in Engineering and Technology
         </p>
       </div>
 
@@ -53,12 +54,12 @@ const SCIentMembers = () => {
             { id: 'FacultyAdvisor', label: '🏆 Faculty Advisor', icon: Sparkles },
             { id: 'core', label: '🚀 Core Members', icon: Rocket },
             { id: 'team', label: '⚡ Team Members', icon: Zap },
-            { id: 'pastCoreMembers', label: '⚡ pastCoreMembers', icon: Zap }
+            { id: 'pastCoreMembers', label: '⚡ Past Core Members', icon: Zap }
           ].map((filter) => (
             <button
               key={filter.id}
               onClick={() => setActiveSection(filter.id)}
-              className={`px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 ${
+              className={`px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 tabs ${
                 activeSection === filter.id
                   ? 'bg-[#facc15] text-black scale-105'
                   : 'bg-black/80 text-[#facc15]/80 border border-[#facc15]/50 hover:bg-[#facc15]/20 hover:scale-105'
@@ -72,33 +73,13 @@ const SCIentMembers = () => {
 
       {/* Members Grid */}
       <div className="relative max-w-7xl mx-auto px-4 pb-20">
-        <div className="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center">
-          {getFilteredMembers().map((member, idx) => (
-            <MemberCard key={idx} member={member} index={idx} />
-          ))}
-        </div>
-        
-        <div className="text-center mt-16">
-          <p className="text-[#facc15]/60 text-sm">
-            💡 Click on any card to flip it and see more info!
-          </p>
-        </div>
-      </div>
+  <div className="membersGrid">
+    {getFilteredMembers().map((member, idx) => (
+      <MemberCard key={idx} member={member} index={idx} />
+    ))}
+  </div>
+</div>
 
-      <style>{`
-        .perspective {
-          perspective: 1000px;
-        }
-        .transform-style-3d {
-          transform-style: preserve-3d;
-        }
-        .backface-hidden {
-          backface-visibility: hidden;
-        }
-        .rotate-y-180 {
-          transform: rotateY(180deg);
-        }
-      `}</style>
     </div>
   );
 };

@@ -1,0 +1,53 @@
+/* ScientMembers.css */
+
+/* 3D Flip Helpers */
+.perspective {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Members Grid Responsive Layout */
+.membersGrid {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.tabs{
+  width: 14rem;
+}
+
+/* Tablets */
+@media (min-width: 768px) {
+  .membersGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Laptops / small desktops */
+@media (min-width: 1024px) {
+  .membersGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .tabs{
+    width: auto;
+  }
+}
+
+/* Larger screens */
+@media (min-width: 1280px) {
+  .membersGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+

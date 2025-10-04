@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, Linkedin, Github, Zap, Sparkles } from 'lucide-react';
 import scient from '../../assets/scient.png'
+import '../styles/MembersCard.css'
 
 const MemberCard = ({ member, index }) => {
     const [isFlipped, setIsFlipped] = useState(false);
@@ -18,7 +19,7 @@ const MemberCard = ({ member, index }) => {
     
     return (
         <div 
-            className="relative w-96 h-80 cursor-pointer group perspective mx-2" // Adjusted width to w-72 (288px) and added mx-2 for spacing
+            className=" card relative w-80 cursor-pointer group perspective " 
             onClick={() => setIsFlipped(!isFlipped)}
         >
             <div className={`relative w-full h-full transition-transform duration-700 transform-style-3d ${isFlipped ? 'rotate-y-180' : ''}`}>

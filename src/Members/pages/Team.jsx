@@ -3,7 +3,7 @@ import Navbar from '../../components/Navbar'
 import Footer from '../../components/footer'
 import { useState } from 'react'
 import { useAccordionButton } from 'react-bootstrap'
-import SCIentMembers from '../components/SCIentMembers'
+import ScientMembers from '../components/ScientMembers'
 
 const Team = () => {
     
@@ -11,7 +11,7 @@ const Team = () => {
     <div className='w-screen flex flex-col '>
         <Navbar/>
         <div id='team' className='mt-12'>
-          <SCIentMembers/>
+          <ScientMembers/>
         </div>
         <Footer/>
     </div>
