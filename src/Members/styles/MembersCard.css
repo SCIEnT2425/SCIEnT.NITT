@@ -1,0 +1,26 @@
+.card {
+  width: 18rem;  /* default 256px */
+  height: 24rem;
+}
+
+@media (min-width: 640px) { /* sm breakpoint */
+  .card {
+    width: 18rem; /* 288px */
+    height: 24rem;
+  }
+}
+
+@media (min-width: 768px) { /* md breakpoint */
+  .card {
+    width: 20rem; /* 320px */
+    height: 20rem;
+  }
+}
+
+@media (min-width: 1024px) { /* lg breakpoint */
+  .card {
+    width: 24rem; /* 384px */
+    height: 24rem;
+    
+  }
+}
