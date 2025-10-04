@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Linkedin, Github, Zap, Sparkles } from 'lucide-react';
+import { Mail, Linkedin, Github, Zap, Sparkles, Instagram } from 'lucide-react';
 import scient from '../../assets/scient.png'
 import '../styles/MembersCard.css'
 
@@ -19,18 +19,24 @@ const MemberCard = ({ member, index }) => {
     
     return (
         <div 
-            className=" card relative w-80 cursor-pointer group perspective " 
+            className="card relative w-80 cursor-pointer group perspective" 
             onClick={() => setIsFlipped(!isFlipped)}
         >
-            <div className={`relative w-full h-full transition-transform duration-700 transform-style-3d ${isFlipped ? 'rotate-y-180' : ''}`}>
+            <div className={`relative w-full h-full transition-transform duration-700 transform-style-3d ${isFlipped ? 'rotate-y-180'  : 'rotate-x-20'}`}>
                 {/* Front */}
                 <div className="absolute w-full h-full backface-hidden">
                     <div className={`relative h-full rounded-3xl bg-gradient-to-br ${gradient} p-1 overflow-hidden`}>
-                        <div className="absolute inset-0 bg-black/20"></div>
-                        <div className="relative h-full rounded-3xl bg-gray-900 overflow-hidden">
+                        <div className="absolute inset-0 bg-black/20 "></div>
+                        <div className="relative h-full rounded-3xl bg-gray-950 overflow-hidden ">
                             <div className="absolute inset-0 flex items-center justify-center">
                                 {member.image ? (
-                                    <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                                    <div className="relative w-full h-full image-container">
+                                        <img 
+                                            src={member.image} 
+                                            alt={member.name} 
+                                            className="w-full h-full object-cover image-blend"
+                                        />
+                                    </div>
                                 ) : (
                                     <div className={`w-32 h-32 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center`}>
                                         <Zap className="w-16 h-16 text-white" />
@@ -53,8 +59,8 @@ const MemberCard = ({ member, index }) => {
                 
                 {/* Back */}
                 <div className="absolute w-full h-full backface-hidden rotate-y-180">
-                    <div className={`relative h-full rounded-3xl bg-gradient-to-br ${gradient} p-1`}>
-                        <div className="h-full rounded-3xl bg-gray-900 p-6 flex flex-col justify-between">
+                    <div className={`relative h-full rounded-3xl bg-gradient-to-br ${gradient} p-1 overflow-hidden`}>
+                        <div className="h-full rounded-3xl bg-gray-950 p-6 flex flex-col justify-between">
                             <div>
                                 <h3 className="text-xl font-bold text-white mb-2">{member.name}</h3>
                                 <p className="text-sm text-gray-300 mb-3">{member.department}</p>
@@ -92,6 +98,17 @@ const MemberCard = ({ member, index }) => {
                                         className={`w-12 h-12 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center hover:scale-110 transition-transform`}
                                     >
                                         <Github className="w-6 h-6 text-white" />
+                                    </a>
+                                )}
+                                {member.instagram && (
+                                    <a 
+                                        href={member.instagram}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        onClick={(e) => e.stopPropagation()}
+                                        className={`w-12 h-12 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center hover:scale-110 transition-transform`}
+                                    >
+                                        <Instagram className="w-6 h-6 text-white" />
                                     </a>
                                 )}
                             </div>

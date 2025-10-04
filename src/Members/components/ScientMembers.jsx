@@ -8,17 +8,31 @@ const SCIentMembers = () => {
   const [activeSection, setActiveSection] = useState('all');
 
   const allMembers = [
-    ...data.coreMembers,
-    ...data.teamMembers,
-    ...data.pastCoreMembers
+    ...data.cores,
+    ...data.Managers,
+    ...data.DeputyManagers,
+    ...data.ExManagers,
+    ...data.ExCores,
+
+  ];
+
+  const teamMembers = [
+    ...data.cores,
+    ...data.Managers,
+    ...data.DeputyManagers,
+  ];
+
+  const pastMembers = [
+    ...data.ExManagers,
+    ...data.ExCores,
   ];
 
   const getFilteredMembers = () => {
     if (activeSection === 'all') return allMembers;
-    if (activeSection === 'core') return [...data.coreMembers];
-    if (activeSection === 'team') return data.teamMembers;
+    if (activeSection === 'core') return [...data.cores];
+    if (activeSection === 'team') return teamMembers;
     if (activeSection === 'FacultyAdvisor') return data.facultyAdvisor;
-    if (activeSection === 'pastCoreMembers') return data.pastCoreMembers;
+    if (activeSection === 'pastMembers') return pastMembers
   };
 
   return (
@@ -39,7 +53,7 @@ const SCIentMembers = () => {
           THE SQUAD
         </h1>
         <p className="text-xl text-[#facc15]/80 max-w-2xl mx-auto">
-          Meet the awesome humans behind <span className="text-[#facc15] font-bold">SCIEnT</span>
+          Meet the awesome Team behind <span className="text-[#facc15] font-bold">SCIEnT</span>
         </p>
         <p className="text-sm text-[#facc15]/60 mt-2">
           Student Centre for Innovation in Engineering and Technology
@@ -50,11 +64,11 @@ const SCIentMembers = () => {
       <div className="relative px-4 mb-12">
         <div className="flex flex-wrap gap-3 justify-center max-w-5xl mx-auto">
           {[
-            { id: 'all', label: '✨ Everyone', icon: Star },
-            { id: 'FacultyAdvisor', label: '🏆 Faculty Advisor', icon: Sparkles },
-            { id: 'core', label: '🚀 Core Members', icon: Rocket },
-            { id: 'team', label: '⚡ Team Members', icon: Zap },
-            { id: 'pastCoreMembers', label: '⚡ Past Core Members', icon: Zap }
+            { id: 'all', label: 'Everyone', icon: Star },
+            { id: 'FacultyAdvisor', label: 'Faculty Advisor', icon: Sparkles },
+            { id: 'core', label: 'Core Members', icon: Rocket },
+            { id: 'team', label: 'Team Members', icon: Zap },
+            { id: 'pastMembers', label: 'Past Members', icon: Zap }
           ].map((filter) => (
             <button
               key={filter.id}
