@@ -1,13 +1,68 @@
-import arjun from '../../assets/p.jpg'
-import divyansh from '../../assets/Team/Divyansh.png'
+// facultyAdvisor
+import Dr_Baktha from './Team/Dr_A_K_Bakthavatsalam.png'
+//Deputy Managers
+import Chebrolu_Bhuvan from './Team/Chebrolu_Bhuvan.jpg'
+import Sanskar_Sharma from './Team/Sanskar_Sharma.jpg'
+import M_Rithwik_Sundar from './Team/M_Rithwik_Sundar.jpg'
+import Aryan_Nagle from './Team/Aryan_Nagle.jpg'
+import Bhuvan_prakash from './Team/Bhuvan_prakash.jpg'
+import Swathi_Chokalingam from './Team/Swathi_Chokalingam.jpg'
+import Jatin_S_S from './Team/Jatin_S_S.jpg'
+import Lakshana_S from './Team/Lakshana.jpg'
+import Nandhana_V from './Team/Nandhana_V.jpg'
+import Vishal_Durai from './Team/Vishal.jpg'
+import Hasini_Thakkallapelly from './Team/Hasini_Thakkallapelly.jpg'
+import Kamalakannan_Ravichandran from './Team/Kamalakannan_R.jpg'    
+import S_Nayan_Vamsi from './Team/Nayan_Vamsi.jpg'
+import Bhuvaneswaran_B_R from './Team/Bhuvaneswaran_B_R.jpg'
+import Muhesh_Alagappan_Thiyagarajan from './Team/Muhesh.jpg'
+import Jayasri_R from './Team/Jayasri_R.jpg'
+import Monashri_S from './Team/Monashri_S.jpg'
+import Pavithra from './Team/Pavithra_M_A.jpg'
+import harshita from './Team/Harshitha_R.jpg'
+import samarth from './Team/Samarth.jpg'
+import Vaidya_Nilay_Vivek from './Team/Vaidya_Nilay_Vivek.jpg'
+import S_janani from './Team/S_Janani_Krithika.jpg'
+// import Priyanshu_Mahajan from './Team/Priyanshu_Mahajan.jpg'
+// import Krishvinraam_Mohan from './Team/Krishvinraam_Mohan.jpg'
+import Poluru_Saketh_Koundinya from './Team/Saketh.jpg'
+
+import Muhammad_Yousuf from './Team/Muhammad_Yousuf.jpg'
+
+
+//Managers
+import Advaith_S from './Team/Advaith _S.jpg'
+import Dendukuri_Soumya from './Team/Dendukuri_Soumya.jpg'
+import Drishya_Anil from './Team/Drishya_Anil.jpg'
+import Gargi_Gupta from './Team/Gargi_Gupta.jpg'
+import Indhumathi_V from './Team/Indhumathi_V.jpg'
+import Thejashvee from './Team/Thejashvee.jpg'
+import Divyansh_Kumar_Agrawal_Manager from './Team/Divyansh_Kumar_Agrawal.jpg'
+import Kakularam_Saiprakash_Reddy from './Team/Kakularam_Saiprakash_Reddy.png'
+import Mona_M_S from './Team/Mona_M_S.jpg'
+import Pranesh_S_K from './Team/Pranesh_S_K.jpg'
+import Shivam_Mishra from './Team/Shivam_Mishra.jpg'
+import Tanisha_Narasimman from './Team/Tanisha_Narasimman.jpg'
+import Vedavarshini from './Team/Vedavarshini.jpg'
+
+
+
+//Cores
+import Arjun_B_K from './Team/Arjun_B_K.png'
+import Alok_Verma from './Team/Alok_Verma.png'
+import Alan_Prakash from './Team/Alan_Prakash.jpg'
+import Mahalakshmi_R from './Team/Mahalakshmi_R.png'
+
+
+
 const data = {
     facultyAdvisor: [
       {
-        name: "Dr. Jane Smith",
+        name: "Dr. A. K. Bakthavatsalam",
         role: "Faculty Advisor",
-        department: "Department of Engineering",
-        email: "jane.smith@university.edu",
-        image: null,
+        department: "Energy and Environment Engineering",
+        email: "baktha@nitt.edu",
+        image: Dr_Baktha,
         bio: "Guiding innovation and research initiatives in engineering and technology"
       }
     ],
@@ -20,7 +75,7 @@ const data = {
         email: "arjunbharathikumar@gmail.com",
         linkedin: null,
         instagram: null,
-        image: null,
+        image: Arjun_B_K,
         bio: "Leading key initiatives in the student team"
       },
       {
@@ -31,7 +86,7 @@ const data = {
         email: "alokverma4237@gmail.com",
         linkedin: null,
         instagram: null,
-        image: null,
+        image: Alok_Verma,
         bio: "Contributing to team leadership and projects"
       },
       {
@@ -42,7 +97,7 @@ const data = {
         email: "alanprakash55@gmail.com",
         linkedin: null,
         instagram: null,
-        image: null,
+        image: Alan_Prakash,
         bio: "Driving technical and organizational efforts"
       },
       {
@@ -53,7 +108,7 @@ const data = {
         email: "mahalakshmi0ramesh@gmail.com",
         linkedin: null,
         instagram: null,
-        image: null,
+        image:  Mahalakshmi_R,
         bio: "Coordinating team activities and outreach"
       }
     ],
@@ -67,7 +122,7 @@ const data = {
         email: "advaith.t20@gmail.com",
         linkedin: "https://www.linkedin.com/in/advaith-s-35692a2ab/",
         instagram: "https://www.instagram.com/advaith.fyi/",
-        image: null,
+        image: Advaith_S,
         bio: "Leading DevOps initiatives and technical projects"
       },
       {
@@ -78,7 +133,7 @@ const data = {
         email: "soumya95507@gmail.com",
         linkedin: null,
         instagram: null,
-        image: null,
+        image: Dendukuri_Soumya,
         bio: "Coordinating corporate communications and outreach"
       },
       {
@@ -89,7 +144,7 @@ const data = {
         email: "divyanshkumaragrawal80@gmail.com",
         linkedin: "https://www.linkedin.com/in/divyansh-agrawal-4a806a2b1",
         instagram: "https://www.instagram.com/divyansh_agr_80",
-        image: divyansh,
+        image: Divyansh_Kumar_Agrawal_Manager,
         bio: "Driving DevOps solutions and technical development"
       },
       {
@@ -100,7 +155,7 @@ const data = {
         email: "drishyaanil265@gmail.com",
         linkedin: null,
         instagram: null,
-        image: null,
+        image: Drishya_Anil,
         bio: "Creating engaging visual content for the team"
       },
       {
@@ -111,7 +166,7 @@ const data = {
         email: "gargi.gupta0601@gmail.com",
         linkedin: null,
         instagram: null,
-        image: null,
+        image: Gargi_Gupta,
         bio: "Managing corporate communications and events"
       },
       {
@@ -122,7 +177,7 @@ const data = {
         email: "indhu23.v@gmail.com",
         linkedin: null,
         instagram: null,
-        image: null,
+        image: Indhumathi_V,
         bio: "Enhancing team outreach through communications"
       },
       {
@@ -133,7 +188,7 @@ const data = {
         email: "kakularamsaiprakashreddy9@gmail.com",
         linkedin: "https://www.linkedin.com/in/sai-prakash-reddy-kakularam-323273280/",
         instagram: "https://www.instagram.com/saiprakashreddy.k/",
-        image: null,
+        image: Kakularam_Saiprakash_Reddy,
         bio: "Contributing to DevOps and technical innovation"
       },
       {
@@ -144,7 +199,7 @@ const data = {
         email: "mona.shivakkumar@gmail.com",
         linkedin: "https://www.linkedin.com/in/mona-m-s-10228b300",
         instagram: "https://www.instagram.com/_.mona._.01._/",
-        image: null,
+        image: Mona_M_S,
         bio: "Leading corporate communication strategies"
       },
       {
@@ -155,7 +210,7 @@ const data = {
         email: "pranesh26erd@gmail.com",
         linkedin: null,
         instagram: null,
-        image: null,
+        image: Pranesh_S_K,
         bio: "Coordinating team communications and events"
       },
       {
@@ -166,7 +221,7 @@ const data = {
         email: "realshivam2606@gmail.com",
         linkedin: null,
         instagram: null,
-        image: null,
+        image: Shivam_Mishra,
         bio: "Supporting DevOps projects and technical tasks"
       },
       {
@@ -177,19 +232,8 @@ const data = {
         email: "tanishanarasimman777@gmail.com",
         linkedin: null,
         instagram: null,
-        image: null,
+        image: Tanisha_Narasimman,
         bio: "Promoting team initiatives through communications"
-      },
-      {
-        name: "Thejashvee",
-        role: "Manager",
-        department: "Media and Communications",
-        year: "3rd Year",
-        email: "thejubabu1@gmail.com",
-        linkedin: null,
-        instagram: null,
-        image: null,
-        bio: "Enhancing team visibility through communications"
       },
       {
         name: "Vedavarshini",
@@ -199,12 +243,46 @@ const data = {
         email: "vedavarshiniv2@gmail.com",
         linkedin: null,
         instagram: null,
-        image: null,
+        image: Vedavarshini,
         bio: "Crafting creative visuals for team projects"
+      },
+       {
+        name: "Thejashvee",
+        role: "Manager",
+        department: "Media and Communications",
+        year: "3rd Year",
+        email: "thejubabu1@gmail.com",
+        linkedin: null,
+        instagram: null,
+        image: Thejashvee,
+        bio: "Enhancing team visibility through communications"
       }
     ],
     DeputyManagers: [
       {
+        name: "Sanskar Sharma",
+        role: "Deputy Manager",
+        department: "Computer Science",
+        year: "2nd Year",
+        email: "sharmasanskar7201@gmail.com",
+        linkedin: "https://www.linkedin.com/in/sanskar-sharma-0515a9319",
+        instagram: "https://www.instagram.com/_sekhar_sharma/",
+        image: Sanskar_Sharma,
+        bio: "Contributing to DevOps and technical tasks"
+      },
+       {
+        name: "Hasini Thakkallapelly",
+        role: "Deputy Manager",
+        department: "Media and Communications",
+        year: "2nd Year",
+        email: "hasini.thakkallapelly34@gmail.com",
+        linkedin: "https://www.linkedin.com/in/hasinithakkallapelly/",
+        instagram: "https://www.instagram.com/hasini_rufg/",
+        image: Hasini_Thakkallapelly,
+        bio: "Assisting in corporate communications"
+      },
+      {
+        
         name: "S. Nayan Vamsi",
         role: "Deputy Manager",
         department: "Computer Science",
@@ -212,7 +290,7 @@ const data = {
         email: "nayanvamsi@gmail.com",
         linkedin: "https://www.linkedin.com/in/nayan-vamsi-sunkarapalli-b2a93536b/",
         instagram: "https://www.instagram.com/___nayan__007/",
-        image: null,
+        image: S_Nayan_Vamsi,
         bio: "Contributing to DevOps and technical development"
       },
       {
@@ -223,7 +301,7 @@ const data = {
         email: "kamalakannanravichandran@gmail.com",
         linkedin: "https://www.linkedin.com/in/kamalakannan-ravichandran-843b662a5",
         instagram: "https://www.instagram.com/kamalakannanravichandran11",
-        image: null,
+        image: Kamalakannan_Ravichandran,
         bio: "Supporting corporate communications efforts"
       },
       {
@@ -234,7 +312,7 @@ const data = {
         email: "bhuvanchebrolu@gmail.com",
         linkedin: "https://www.linkedin.com/in/bhuvan-chebrolu-5835641b2/",
         instagram: "https://www.instagram.com/bhuvaneshwar2966/",
-        image: null,
+        image: Chebrolu_Bhuvan,
         bio: "Assisting in DevOps projects and technical tasks"
       },
       {
@@ -245,7 +323,7 @@ const data = {
         email: "jananikrithika9@gmail.com",
         linkedin: "https://www.linkedin.com/in/janani-krithika-26b019334",
         instagram: "https://www.instagram.com/janani.krithika/",
-        image: null,
+        image: S_janani,
         bio: "Contributing to team outreach and communications"
       },
       {
@@ -256,7 +334,7 @@ const data = {
         email: "bhuvanprakash06@gmail.com",
         linkedin: "https://www.linkedin.com/in/bhuvan-prakash-b20a7a379",
         instagram: "https://www.instagram.com/bhuvan._prakash/",
-        image: null,
+        image: Bhuvan_prakash,
         bio: "Supporting DevOps initiatives and technical projects"
       },
       {
@@ -267,7 +345,7 @@ const data = {
         email: "pavithra55ma@gmail.com",
         linkedin: "https://www.linkedin.com/in/pavithra-m-a-b52476324",
         instagram: "https://www.instagram.com/pavithra_m_a",
-        image: null,
+        image: Pavithra,
         bio: "Designing creative content for team initiatives"
       },
       {
@@ -278,7 +356,7 @@ const data = {
         email: "aryannagle362@gmail.com",
         linkedin: "https://www.linkedin.com/in/aryan-nagle-a22840343",
         instagram: "https://www.instagram.com/a_ryann06/",
-        image: null,
+        image: Aryan_Nagle,
         bio: "Assisting in corporate communications and events"
       },
       {
@@ -289,7 +367,7 @@ const data = {
         email: "bhuvaneswaranbr@gmail.com",
         linkedin: "https://www.linkedin.com/in/bhuvaneswaran-b-r-7b5725322",
         instagram: "https://www.instagram.com/i__am_bhuvi02",
-        image: null,
+        image: Bhuvaneswaran_B_R,
         bio: "Creating visuals for team projects and events"
       },
       {
@@ -300,7 +378,7 @@ const data = {
         email: "nandhanav2006@gmail.com",
         linkedin: "https://www.linkedin.com/in/nandhana-v-312a81379/",
         instagram: "https://www.instagram.com/_nandhana_v/",
-        image: null,
+        image: Nandhana_V,
         bio: "Supporting team communication strategies"
       },
       {
@@ -311,30 +389,8 @@ const data = {
         email: "vishaldurai06@gmail.com",
         linkedin: "https://www.linkedin.com/in/vishal-d-7ab937312",
         instagram: "https://www.instagram.com/_._vizhal_._",
-        image: null,
+        image: Vishal_Durai,
         bio: "Contributing to team outreach efforts"
-      },
-      {
-        name: "Hasini Thakkallapelly",
-        role: "Deputy Manager",
-        department: "Media and Communications",
-        year: "2nd Year",
-        email: "hasini.thakkallapelly34@gmail.com",
-        linkedin: "https://www.linkedin.com/in/hasinithakkallapelly/",
-        instagram: "https://www.instagram.com/hasini_rufg/",
-        image: null,
-        bio: "Assisting in corporate communications"
-      },
-      {
-        name: "Sanskar Sharma",
-        role: "Deputy Manager",
-        department: "Computer Science",
-        year: "2nd Year",
-        email: "sharmasanskar7201@gmail.com",
-        linkedin: "https://www.linkedin.com/in/sanskar-sharma-0515a9319",
-        instagram: "https://www.instagram.com/_sekhar_sharma/",
-        image: null,
-        bio: "Contributing to DevOps and technical tasks"
       },
       {
         name: "Vaidya Nilay Vivek",
@@ -344,7 +400,7 @@ const data = {
         email: "nilayvaidya2005@gmail.com",
         linkedin: "https://www.linkedin.com/in/nilay-vaidya-051993333",
         instagram: "https://www.instagram.com/nilay0341",
-        image: null,
+        image: Vaidya_Nilay_Vivek,
         bio: "Supporting team outreach and communications"
       },
       {
@@ -355,7 +411,7 @@ const data = {
         email: "muheshat416@gmail.com",
         linkedin: "https://www.linkedin.com/in/muhesh-a-t-39b0aa354/",
         instagram: "https://www.instagram.com/mu.he.sh/",
-        image: null,
+        image: Muhesh_Alagappan_Thiyagarajan,
         bio: "Crafting creative designs for team initiatives"
       },
       {
@@ -366,7 +422,7 @@ const data = {
         email: "lakshana4486@gmail.com",
         linkedin: "https://www.linkedin.com/in/lakshana-s-aa437a326/",
         instagram: "https://www.instagram.com/lakshana2848",
-        image: null,
+        image: Lakshana_S,
         bio: "Assisting in team communication efforts"
       },
       {
@@ -388,7 +444,7 @@ const data = {
         email: "jatinsuresh5647@gmail.com",
         linkedin: "https://www.linkedin.com/in/jatin-suresh-a732bb309",
         instagram: null,
-        image: null,
+        image: Jatin_S_S,
         bio: "Designing visuals for team projects"
       },
       {
@@ -399,7 +455,7 @@ const data = {
         email: "polurusaketh@gmail.com",
         linkedin: "https://www.linkedin.com/in/saketh-poluru-515b91315",
         instagram: "https://www.instagram.com/granger__47",
-        image: null,
+        image: Poluru_Saketh_Koundinya,
         bio: "Supporting DevOps and technical development"
       },
       {
@@ -410,7 +466,7 @@ const data = {
         email: "samarthbpattewar@gmail.com",
         linkedin: "https://www.linkedin.com/in/samarth-pattewar-64191034a",
         instagram: "https://www.instagram.com/psam_arth",
-        image: null,
+        image: samarth,
         bio: "Assisting in team outreach and communications"
       },
       {
@@ -421,7 +477,7 @@ const data = {
         email: "muhammadyousuf5winners@gmail.com",
         linkedin: null,
         instagram: "https://www.instagram.com/__you._.suf",
-        image: null,
+        image: Muhammad_Yousuf,
         bio: "Creating engaging visual content"
       },
       {
@@ -432,7 +488,7 @@ const data = {
         email: "srinivasreddykaripireddy566@gmail.com",
         linkedin: "https://www.linkedin.com/in/meeduri-rithwik-002172329",
         instagram: null,
-        image: null,
+        image: M_Rithwik_Sundar,
         bio: "Contributing to creative design projects"
       },
       {
@@ -443,7 +499,7 @@ const data = {
         email: "jayasrijha2006@gmail.com",
         linkedin: "https://in.linkedin.com/in/jayasri-rajasundaram-143a4a291",
         instagram: "https://www.instagram.com/jayasri_jerry22",
-        image: null,
+        image: Jayasri_R,
         bio: "Supporting corporate communications"
       },
       {
@@ -454,7 +510,7 @@ const data = {
         email: "harshitharaman123@gmail.com",
         linkedin: null,
         instagram: "https://www.instagram.com/harshey238",
-        image: null,
+        image: harshita,
         bio: "Assisting in team communication efforts"
       },
       {
@@ -476,7 +532,7 @@ const data = {
         email: "mshrismail@gmail.com",
         linkedin: "https://www.linkedin.com/in/monashri-s-1b900b37a",
         instagram: "https://www.instagram.com/monashri_._",
-        image: null,
+        image: Monashri_S,
         bio: "Crafting creative visuals for the team"
       },
       {
@@ -487,7 +543,7 @@ const data = {
         email: "swathinit2028@gmail.com",
         linkedin: "https://www.linkedin.com/in/swathi-chokalingam-590b39379",
         instagram: "https://www.instagram.com/swathi_chok",
-        image: null,
+        image: Swathi_Chokalingam,
         bio: "Supporting team outreach and communications"
       }
     ],
