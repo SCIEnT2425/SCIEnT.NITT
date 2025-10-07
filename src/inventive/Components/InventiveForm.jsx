@@ -19,6 +19,7 @@ export default function ProjectForm() {
     source: "",
     otherSource: "",
     projectDescription: "",
+    problemStatement: "",
     teamSize: 1,
     members: [],
   });
@@ -65,9 +66,9 @@ export default function ProjectForm() {
     if (!formData.source) newErrors.source = "Please select an option";
     if (formData.source === "Other" && !formData.otherSource)
       newErrors.otherSource = "Please specify other source";
-
-    if (!formData.projectDescription)
-      newErrors.projectDescription = "Project description is required";
+    if (!formData.projectDescription && !formData.problemStatement) {
+      newErrors.projectDescription = "Enter a description or select a problem statement";
+    }
     if (!formData.teamSize) newErrors.teamSize = "Please enter team size";
 
     formData.members.forEach((member, i) => {
@@ -84,6 +85,11 @@ export default function ProjectForm() {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+
+  const payload = {
+  ...formData,
+  projectDescription: formData.projectDescription || formData.problemStatement,
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -117,6 +123,7 @@ export default function ProjectForm() {
           source: "",
           otherSource: "",
           projectDescription: "",
+          problemStatement: "",
           teamSize: 1,
           members: [],
         });
@@ -362,6 +369,45 @@ export default function ProjectForm() {
                 </p>
               )}
             </div>
+            {/* OR Separator */}
+<div className="text-center my-4 text-gray-400 font-semibold">OR</div>
+
+{/* Dropdown for Problem Statements */}
+<div>
+    <label className="block text-white mb-2">
+      Choose a Problem Statement
+    </label>
+    <select
+      onChange={(e) =>
+        setFormData({ ...formData,problemStatement: e.target.value })
+      }
+      value={formData.problemStatement}
+      className="w-full px-4 py-2 rounded-lg bg-black border border-yellow-400/70 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+    >
+      <option value="">Select a problem statement</option>
+      <option value="Pick and Place using VLA for Collaborative Robot (COBOT)">
+        Pick and Place using VLA for Collaborative Robot (COBOT)
+      </option>
+      <option value="Aggressive maneuver Stabilization for a Minidrone">
+        Aggressive maneuver Stabilization for a Minidrone
+      </option>
+      <option value="Portable Charging System for Electric Vehicles">
+        Portable Charging System for Electric Vehicles
+      </option>
+      <option value="Autonomous Vehicle Localization Using Onboard Sensors and HD Geolocated Maps">
+        Autonomous Vehicle Localization Using Onboard Sensors and HD Geolocated Maps
+      </option>
+      <option value="Automated Testing of All Electrical Accessories in QC Station of an Automobile Factory">
+        Automated Testing of All Electrical Accessories in QC Station of an Automobile Factory
+      </option>
+      <option value="Vehicle Borne Edge AI for Electric Vehicle Driver Safety Assistance">
+        Vehicle Borne Edge AI for Electric Vehicle Driver Safety Assistance
+      </option>
+      <option value="AI enabled object reorientation system for industrial production lines">
+        AI enabled object reorientation system for industrial production lines
+      </option>
+    </select>
+  </div>
             {/* Team Size */}
             <div className="mb-4">
               <label className="block text-white mb-2">Team Size</label>
