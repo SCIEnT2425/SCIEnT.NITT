@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { FaPlusCircle, FaMinusCircle } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
-import "./faqs.css"
 
 function FAQComponent() {
   const [activeQuestion, setActiveQuestion] = useState(null);
@@ -30,22 +29,22 @@ function FAQComponent() {
   ];
 
   return (
-    <div id="faq" className="faqs py-5  bg-[#000000] flex-box">
+    <div id="faq" className="faqs py-5 flex-box">
       
-      <div className="bg-[#0c0d08] p-8 rounded-lg shadow-md  max-w-[1000px] m-auto right-box question-box">
-        <h2 className="text-4xl font-bold text-yellow-400 mb-9 headfaq">Frequently Asked Questions</h2>
+      <div className="p-8 rounded-lg max-w-[1000px] m-auto right-box text-lg">
+        <h2 className="text-5xl font-bold text-yellow-400 mb-9">Frequently Asked Questions</h2>
 
         {questions.map((q) => (
           <div key={q.id} className="mb-7 last:mb-5">
             <button
-              className="flex items-center justify-between w-full p-3 font-semibold text-left text-white shadow-md text-m faq-question focus:outline-none question"
+              className="flex rounded-md bg-gray-950 border-l-8 border-l-yellow-500 items-center justify-between w-full p-3 font-semibold text-left text-white shadow-md text-xl faq-question focus:outline-none"
               onClick={() => setActiveQuestion(activeQuestion === q.id ? null : q.id)}
             >
               {q.question}
               {activeQuestion === q.id ? (
-                <FaMinusCircle className="text-2xl text-primary" />
+                <FaMinusCircle className="text-2xl text-yellow-500" />
               ) : (
-                <FaPlusCircle className="text-2xl text-primary" />
+                <FaPlusCircle className="text-2xl text-yellow-500" />
               )}
             </button>
             <AnimatePresence>
@@ -54,7 +53,7 @@ function FAQComponent() {
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
-                  className="mt-2 ml-4 text-2xl font-semibold text-white"
+                  className="p-4 text-lg font-semibold text-gray-300 rounded-b-md"
                 >
                   <p>{q.answer}</p>
                 </motion.div>
