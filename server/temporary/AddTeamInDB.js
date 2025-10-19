@@ -62,8 +62,8 @@ const teamData = [
       },
       {
         name: "Arjun B K",
-        role: "Core Member",
-        subteam: "Technical Executive",
+        role: "Technical Executive",
+        subteam: null,
         Department: null,
         photoUrl: "/Team/Arjun_B_K.png",
         year: "4th Year",
@@ -75,8 +75,8 @@ const teamData = [
       },
       {
         name: "Alok Verma",
-        role: "Core Member",
-        subteam: "Facility Executive",
+        role: "Facility Executive",
+        subteam: null,
         Department: null,
         photoUrl: "/Team/Alok_Verma.png",
         year: "4th Year",
@@ -88,8 +88,8 @@ const teamData = [
       },
       {
         name: "Alan Prakash",
-        role: "Core Member",
-        subteam: "External Affairs Executive",
+        role: "External Affairs Executive",
+        subteam: null,
         Department: null,
         photoUrl: "/Team/Alan_Prakash.jpg",
         year: "4th Year",
@@ -101,8 +101,8 @@ const teamData = [
       },
       {
         name: "Mahalakshmi R",
-        role: "Core Member",
-        subteam: "Internal Affairs Executive",
+        role: "Internal Affairs Executive",
+        subteam: null,
         Department: null,
         photoUrl: "/Team/Mahalakshmi_R.png",
         year: "4th Year",
@@ -206,7 +206,7 @@ const teamData = [
       {
         name: "Pranesh S K",
         role: "Manager",
-        subteam: "Corporate Communications",
+        subteam: "Creatives",
         Department: null,
         photoUrl: "/Team/Pranesh_S_K.jpg",
         year: "3rd Year",
@@ -708,7 +708,8 @@ const seedDB = async () => {
     await TeamMember.deleteMany({});
     console.log("🧹 Old data cleared");
 
-    await TeamMember.insertMany(teamData);
+    const inserted = await TeamMember.insertMany(teamData); // Re-assign to capture
+console.log("Inserted roles:", inserted.map(m => m.role));
     console.log("🌱 Team data seeded successfully!");
 
     mongoose.connection.close();

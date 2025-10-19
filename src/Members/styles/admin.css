@@ -1,0 +1,191 @@
+/* Mobile Responsiveness Media Queries for FacultyAdvisorCard */
+
+/* Mobile-first: Default styles for small screens (up to 767px) */
+@media (max-width: 767px) {
+  /* Layout: Stack vertically on mobile - full width photo on top, info below */
+  .grid-cols-2 {
+    grid-template-columns: 1fr; /* Stack single column */
+  }
+  
+  /* Photo Section - Full width on mobile */
+  .min-h-\[400px\] { /* Adjust min-height for mobile */
+    min-height: 400px;
+  }
+  
+  /* Info Section - Full width on mobile, adjusted padding and text sizes */
+  .p-8 {
+    padding: 1.5rem; /* Slightly reduced padding on mobile */
+  }
+  
+  .text-3xl {
+    font-size: 1.5rem; /* Smaller name on mobile */
+    line-height: 2rem;
+  }
+  
+  .text-lg {
+    font-size: 1rem; /* Smaller role text */
+    line-height: 1.5rem;
+  }
+  
+  .text-base {
+    font-size: 0.875rem; /* Smaller department text */
+    line-height: 1.25rem;
+  }
+  
+  .text-sm {
+    font-size: 0.75rem; /* Smaller labels */
+    line-height: 1rem;
+  }
+  
+  .leading-relaxed {
+    line-height: 1.5; /* Adjusted for mobile */
+  }
+  
+  .w-14 {
+    width: 2.75rem; /* Slightly smaller icons on mobile */
+  }
+  
+  .h-14 {
+    height: 2.75rem;
+  }
+  
+  .w-7 {
+    width: 1.5rem;
+  }
+  
+  .h-7 {
+    height: 1.5rem;
+  }
+  
+  .text-xs {
+    font-size: 0.6875rem; /* Smaller hint text */
+  }
+  
+  /* Back side adjustments for mobile */
+  .min-h-\[400px\] {
+    min-height: 400px;
+  }
+  
+  .p-8 {
+    padding: 1.5rem;
+  }
+  
+  .text-3xl {
+    font-size: 1.5rem;
+  }
+  
+  .text-lg {
+    font-size: 1rem;
+  }
+  
+  .w-16 {
+    width: 3.25rem; /* Slightly smaller buttons */
+  }
+  
+  .h-16 {
+    height: 3.25rem;
+  }
+  
+  .w-8 {
+    width: 2rem;
+  }
+  
+  .h-8 {
+    height: 2rem;
+  }
+
+  .mb-16 {
+    margin-bottom: 16rem;
+  }
+}
+
+/* Tablet and up (768px and above) - Equivalent to md: breakpoints */
+@media (min-width: 768px) {
+  .px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  
+  .px-12 {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+  
+  /* Layout: Side-by-side on tablet+ */
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .w-1\/2 {
+    width: 50%;
+  }
+  
+  .min-h-\[500px\] {
+    min-height: 500px;
+  }
+  
+  .text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+  
+  .text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+  
+  .text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+  
+  .p-12 {
+    padding: 3rem;
+  }
+  
+  .p-8 {
+    padding: 2rem;
+  }
+
+  .tab {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10rem;
+  }
+
+}
+
+/* Desktop (1024px and above) - Equivalent to lg: breakpoints */
+@media (min-width: 1024px) {
+  .px-12 {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+  
+  .text-5xl {
+    font-size: 3rem;
+    line-height: 1;
+  }
+  .desktop {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+}
+
+/* Additional hover and transition styles (apply globally but enhance on larger screens) */
+@media (hover: hover) {
+  .hover\:scale-110:hover {
+    transform: scale(1.1);
+  }
+}
+
+/* Ensure text gradients and clips work across browsers */
+@supports (-webkit-background-clip: text) {
+  .bg-clip-text {
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}

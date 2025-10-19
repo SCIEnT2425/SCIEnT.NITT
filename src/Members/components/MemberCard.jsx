@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Linkedin, Github, Zap, Sparkles, Instagram } from 'lucide-react';
+import { Mail, Linkedin, Zap, Sparkles, Instagram } from 'lucide-react';
 import scient from '../../assets/scient.png'
 import '../styles/MembersCard.css'
 
@@ -29,10 +29,10 @@ const MemberCard = ({ member, index }) => {
                         <div className="absolute inset-0 bg-black/20 "></div>
                         <div className="relative h-full rounded-3xl bg-gray-950 overflow-hidden ">
                             <div className="absolute inset-0 flex items-center justify-center">
-                                {member.image ? (
+                                {member.photoUrl ? (
                                     <div className="relative w-full h-full image-container">
                                         <img 
-                                            src={member.image} 
+                                            src={member.photoUrl} 
                                             alt={member.name} 
                                             className="w-full h-full object-cover image-blend"
                                         />
@@ -63,9 +63,9 @@ const MemberCard = ({ member, index }) => {
                         <div className="h-full rounded-3xl bg-gray-950 p-6 flex flex-col justify-between">
                             <div>
                                 <h3 className="text-xl font-bold text-white mb-2">{member.name}</h3>
-                                <p className="text-sm text-gray-300 mb-3">{member.department}</p>
-                                {member.bio && (
-                                    <p className="text-sm text-gray-400 leading-relaxed">{member.bio}</p>
+                                <p className="text-sm text-gray-300 mb-3">{member.Department}</p>
+                                {member.description && (
+                                    <p className="text-sm text-gray-400 leading-relaxed">{member.description}</p>
                                 )}
                             </div>
                             <div className="flex gap-3 justify-center">
@@ -87,17 +87,6 @@ const MemberCard = ({ member, index }) => {
                                         className={`w-12 h-12 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center hover:scale-110 transition-transform`}
                                     >
                                         <Linkedin className="w-6 h-6 text-white" />
-                                    </a>
-                                )}
-                                {member.github && (
-                                    <a 
-                                        href={member.github}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        onClick={(e) => e.stopPropagation()}
-                                        className={`w-12 h-12 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center hover:scale-110 transition-transform`}
-                                    >
-                                        <Github className="w-6 h-6 text-white" />
                                     </a>
                                 )}
                                 {member.instagram && (
