@@ -1,39 +1,167 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Mail, Linkedin, Github, Zap, Sparkles, Rocket, Star } from 'lucide-react';
 import MemberCard from './MemberCard';
-import data from '../assets/data';
 import '../styles/ScientMembers.css';
 
 const SCIentMembers = () => {
-  const [activeSection, setActiveSection] = useState('all');
+  const [activeSection, setActiveSection] = useState('team');
+  const [membersData, setMembersData] = useState({
+    team: [],
+    cores: [],
+    corporate: [],
+    devops: [],
+    creative: []
+  });
+  const [loading, setLoading] = useState(true);
 
-  const allMembers = [
-    ...data.cores,
-    ...data.Managers,
-    ...data.DeputyManagers,
-    ...data.ExManagers,
-    ...data.ExCores,
+  const API_BASE = 'http://localhost:2000/api/team'; // Adjust base URL as needed
 
-  ];
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        setLoading(true);
+        const [teamRes, coresRes, corpRes, devRes, creaRes] = await Promise.all([
+          axios.get(`${API_BASE}/all`),
+          axios.get(`${API_BASE}/cores`),
+          axios.get(`${API_BASE}/cc`),
+          axios.get(`${API_BASE}/devops`),
+          axios.get(`${API_BASE}/creatives`),
+        ]);
 
-  const teamMembers = [
-    ...data.cores,
-    ...data.Managers,
-    ...data.DeputyManagers,
-  ];
+        setMembersData({
+          team: teamRes.data.data || [],
+          cores: coresRes.data.data || [],
+          corporate: corpRes.data.data || [],
+          devops: devRes.data.data || [],
+          creative: creaRes.data.data || [],
+        });
+      } catch (err) {
+        console.error('Error fetching members:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const pastMembers = [
-    ...data.ExManagers,
-    ...data.ExCores,
-  ];
+    fetchMembers();
+  }, []);
 
-  const getFilteredMembers = () => {
-    if (activeSection === 'all') return allMembers;
-    if (activeSection === 'core') return [...data.cores];
-    if (activeSection === 'team') return teamMembers;
-    if (activeSection === 'FacultyAdvisor') return data.facultyAdvisor;
-    if (activeSection === 'pastMembers') return pastMembers
+  const renderTeamSections = () => {
+    const all = membersData.team;
+    // const facultyAdvisors = all.filter(m => m.role === 'Faculty Advisor');
+    const cores = all.filter(m => m.role === 'Core Member');
+    const managers = all.filter(m => m.role === 'Manager');
+    const deputyManagers = all.filter(m => m.role === 'Deputy Manager');
+    const exManagers = all.filter(m => m.role === 'Ex-Manager');
+
+    return (
+      <div>
+        {/* {facultyAdvisors.length > 0 && (
+          <div>
+            <h2 className="text-2xl font-bold text-[#facc15] mb-4">Faculty Advisors</h2>
+            <div className="membersGrid">
+              {facultyAdvisors.map((member, idx) => (
+                <MemberCard key={member._id || idx} member={member} index={idx} />
+              ))}
+            </div>
+          </div>
+        )} */}
+        {cores.length > 0 && (
+          <div className="mt-12">
+            <h2 className="text-2xl font-bold text-[#facc15] mb-4">Core Members</h2>
+            <div className="membersGrid">
+              {cores.map((member, idx) => (
+                <MemberCard key={member._id || idx} member={member} index={idx} />
+              ))}
+            </div>
+          </div>
+        )}
+        {managers.length > 0 && (
+          <div className="mt-12">
+            <h2 className="text-2xl font-bold text-[#facc15] mb-4">Managers</h2>
+            <div className="membersGrid">
+              {managers.map((member, idx) => (
+                <MemberCard key={member._id || idx} member={member} index={idx} />
+              ))}
+            </div>
+          </div>
+        )}
+        {deputyManagers.length > 0 && (
+          <div className="mt-12">
+            <h2 className="text-2xl font-bold text-[#facc15] mb-4">Deputy Managers</h2>
+            <div className="membersGrid">
+              {deputyManagers.map((member, idx) => (
+                <MemberCard key={member._id || idx} member={member} index={idx} />
+              ))}
+            </div>
+          </div>
+        )}
+        {exManagers.length > 0 && (
+          <div className="mt-12">
+            <h2 className="text-2xl font-bold text-[#facc15] mb-4">Ex-Managers</h2>
+            <div className="membersGrid">
+              {exManagers.map((member, idx) => (
+                <MemberCard key={member._id || idx} member={member} index={idx} />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    );
   };
+
+  const renderCores = () => {
+    const cores = membersData.cores;
+    return (
+      <div>
+        <h2 className="text-2xl font-bold text-[#facc15] mb-4">Core Members</h2>
+        <div className="membersGrid">
+          {cores.map((member, idx) => (
+            <MemberCard key={member._id || idx} member={member} index={idx} />
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  const renderSubteam = (key, subteamName) => {
+    const allMembers = membersData[key];
+    const managers = allMembers.filter(m => m.role === 'Manager');
+    const deputyManagers = allMembers.filter(m => m.role === 'Deputy Manager');
+
+    return (
+      <div>
+        {managers.length > 0 && (
+          <div>
+            <h2 className="text-2xl font-bold text-[#facc15] mb-4">Managers - {subteamName}</h2>
+            <div className="membersGrid">
+              {managers.map((member, idx) => (
+                <MemberCard key={member._id || idx} member={member} index={idx} />
+              ))}
+            </div>
+          </div>
+        )}
+        {deputyManagers.length > 0 && (
+          <div className="mt-12">
+            <h2 className="text-2xl font-bold text-[#facc15] mb-4">Deputy Managers - {subteamName}</h2>
+            <div className="membersGrid">
+              {deputyManagers.map((member, idx) => (
+                <MemberCard key={member._id || idx} member={member} index={idx} />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-[#facc15] text-xl">Loading team members...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-black">
@@ -64,11 +192,11 @@ const SCIentMembers = () => {
       <div className="relative px-4 mb-12">
         <div className="flex flex-wrap gap-3 justify-center max-w-5xl mx-auto">
           {[
-            { id: 'all', label: 'Everyone', icon: Star },
-            { id: 'FacultyAdvisor', label: 'Faculty Advisor', icon: Sparkles },
-            { id: 'core', label: 'Core Members', icon: Rocket },
-            { id: 'team', label: 'Team Members', icon: Zap },
-            { id: 'pastMembers', label: 'Past Members', icon: Zap }
+            { id: 'team', label: 'Team', icon: Zap },
+            { id: 'cores', label: 'Cores', icon: Rocket },
+            { id: 'corporate', label: 'Corporate Communication', icon: Mail },
+            { id: 'devops', label: 'DevOps', icon: Zap },
+            { id: 'creative', label: 'Creative', icon: Sparkles }
           ].map((filter) => (
             <button
               key={filter.id}
@@ -85,15 +213,14 @@ const SCIentMembers = () => {
         </div>
       </div>
 
-      {/* Members Grid */}
+      {/* Members Sections */}
       <div className="relative max-w-7xl mx-auto px-4 pb-20">
-  <div className="membersGrid">
-    {getFilteredMembers().map((member, idx) => (
-      <MemberCard key={idx} member={member} index={idx} />
-    ))}
-  </div>
-</div>
-
+        {activeSection === 'team' && renderTeamSections()}
+        {activeSection === 'cores' && renderCores()}
+        {activeSection === 'corporate' && renderSubteam('corporate', 'Corporate Communications')}
+        {activeSection === 'devops' && renderSubteam('devops', 'DevOps')}
+        {activeSection === 'creative' && renderSubteam('creative', 'Creatives')}
+      </div>
     </div>
   );
 };
