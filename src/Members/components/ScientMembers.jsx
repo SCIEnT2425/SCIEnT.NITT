@@ -48,24 +48,15 @@ const SCIentMembers = () => {
 
   const renderTeamSections = () => {
     const all = membersData.team;
-    // const facultyAdvisors = all.filter(m => m.role === 'Faculty Advisor');
-    const cores = all.filter(m => m.role === 'Core Member');
+    const cores = all.filter(m => 
+      ['Technical Executive', 'Facility Executive', 'External Affairs Executive', 'Internal Affairs Executive'].includes(m.role)
+    );
     const managers = all.filter(m => m.role === 'Manager');
     const deputyManagers = all.filter(m => m.role === 'Deputy Manager');
     const exManagers = all.filter(m => m.role === 'Ex-Manager');
 
     return (
       <div>
-        {/* {facultyAdvisors.length > 0 && (
-          <div>
-            <h2 className="text-2xl font-bold text-[#facc15] mb-4">Faculty Advisors</h2>
-            <div className="membersGrid">
-              {facultyAdvisors.map((member, idx) => (
-                <MemberCard key={member._id || idx} member={member} index={idx} />
-              ))}
-            </div>
-          </div>
-        )} */}
         {cores.length > 0 && (
           <div className="mt-12">
             <h2 className="text-2xl font-bold text-[#facc15] mb-4">Core Members</h2>
@@ -111,7 +102,10 @@ const SCIentMembers = () => {
   };
 
   const renderCores = () => {
-    const cores = membersData.cores;
+     const all = membersData.team;
+    const cores = all.filter(m => 
+      ['Technical Executive', 'Facility Executive', 'External Affairs Executive', 'Internal Affairs Executive'].includes(m.role)
+    );
     return (
       <div>
         <h2 className="text-2xl font-bold text-[#facc15] mb-4">Core Members</h2>

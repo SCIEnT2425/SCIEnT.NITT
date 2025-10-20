@@ -17,9 +17,6 @@ router.get('/managers', teamController.getManagersMembers);
 // GET /api/team/deputy-managers - Get Deputy Managers team members
 router.get('/deputy-managers', teamController.getDeputyManagersMembers);
 
-// GET /api/team/design - Get Design team members
-router.get('/design', teamController.getDesignMembers);
-
 // GET /api/team/creatives - Get Creatives team members
 router.get('/creatives', teamController.getCreativesMembers);
 
@@ -32,8 +29,8 @@ router.get('/devops', teamController.getDevopsMembers);
 // GET /api/team/ex-managers - Get Ex-Managers team members
 router.get('/ex-managers', teamController.getExManagersMembers);
 
-// GET /api/team/excores - Get Excores team members
-router.get('/excores', teamController.getExcoresMembers);
+// GET /api/team/excores - Get Excores team members (alias for cores)
+router.get('/excores', teamController.getCoresMembers);
 
 // GET /api/team/technical-executive - Get Technical Executive team members
 router.get('/technical-executive', teamController.getTechnicalExecutive);
@@ -53,4 +50,4 @@ router.get('/all', teamController.getAllTeamMembers);
 // GET /api/team/:id - Get single team member by ID
 router.get('/:id', teamController.getTeamMemberById);
 
-module.exports = router;    
+module.exports = router;
