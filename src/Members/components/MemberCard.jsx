@@ -49,6 +49,9 @@ const MemberCard = ({ member, index }) => {
                                     {member.role}
                                 </p>
                                 {member.year && <p className="text-xs text-gray-300 mt-1">{member.year}</p>}
+                                {member.Department && (
+                                    <p className="text-xs text-gray-400 mt-1">{member.Department}</p>
+                                )}
                             </div>
                             <div className="absolute top-4 right-4 size-12">
                                 <img src={scient} alt="" />

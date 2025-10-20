@@ -1,6 +1,6 @@
 const TeamMember = require('../models/TeamMember'); // Adjust path as needed
 
-// Get all team members
+// Get all team members (excludes Faculty Advisor and Facility Admin)
 const getAllTeamMembers = async (req, res) => {
   try {
     const teamMembers = await TeamMember.find({ role: { $nin: ['Faculty Advisor', 'Facility Admin'] } })
@@ -19,35 +19,6 @@ const getAllTeamMembers = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Failed to fetch team members",
-      error: process.env.NODE_ENV === 'development' ? error.message : undefined
-    });
-  }
-};
-
-// Get single team member by ID
-const getTeamMemberById = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const teamMember = await TeamMember.findById(id);
-
-    if (!teamMember) {
-      return res.status(404).json({
-        success: false,
-        message: "Team member not found"
-      });
-    }
-
-    res.status(200).json({
-      success: true,
-      message: "Team member fetched successfully",
-      data: teamMember
-    });
-
-  } catch (error) {
-    console.error("Error in getTeamMemberById:", error);
-    res.status(500).json({
-      success: false,
-      message: "Failed to fetch team member",
       error: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
@@ -76,7 +47,8 @@ const getFacultyAdvisors = async (req, res) => {
           email: 1,
           year: 1,
           description: 1,
-          order: 1
+          order: 1,
+          createdAt: 0
         }
       }
     ]);
@@ -121,7 +93,8 @@ const getFacilityAdmins = async (req, res) => {
           email: 1,
           year: 1,
           description: 1,
-          order: 1
+          order: 1,
+          createdAt: 0
         }
       }
     ]);
@@ -143,7 +116,7 @@ const getFacilityAdmins = async (req, res) => {
   }
 };
 
-// Get Cores team members
+// Get Cores team members (Executives)
 const getCoresMembers = async (req, res) => {
   try {
     const members = await TeamMember.aggregate([
@@ -151,10 +124,10 @@ const getCoresMembers = async (req, res) => {
         $match: {
           role: {
             $in: [
-              "Facility Executive",
-              "Internal Affairs Executive",
               "Technical Executive",
-              "External Affairs Executive"
+              "Facility Executive",
+              "External Affairs Executive",
+              "Internal Affairs Executive"
             ]
           }
         }
@@ -175,7 +148,8 @@ const getCoresMembers = async (req, res) => {
           email: 1,
           year: 1,
           description: 1,
-          order: 1
+          order: 1,
+          createdAt: 0
         }
       }
     ]);
@@ -196,7 +170,6 @@ const getCoresMembers = async (req, res) => {
     });
   }
 };
-
 // Get Managers team members
 const getManagersMembers = async (req, res) => {
   try {
@@ -220,7 +193,8 @@ const getManagersMembers = async (req, res) => {
           email: 1,
           year: 1,
           description: 1,
-          order: 1
+          order: 1,
+          createdAt: 0
         }
       }
     ]);
@@ -265,7 +239,8 @@ const getDeputyManagersMembers = async (req, res) => {
           email: 1,
           year: 1,
           description: 1,
-          order: 1
+          order: 1,
+          createdAt: 0
         }
       }
     ]);
@@ -282,51 +257,6 @@ const getDeputyManagersMembers = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Failed to fetch Deputy Managers team members",
-      error: process.env.NODE_ENV === 'development' ? error.message : undefined
-    });
-  }
-};
-
-// Get Design team members
-const getDesignMembers = async (req, res) => {
-  try {
-    const members = await TeamMember.aggregate([
-      {
-        $match: { subteam: "Creatives" }
-      },
-      {
-        $sort: { order: 1, name: 1 }
-      },
-      {
-        $project: {
-          _id: 1,
-          name: 1,
-          role: 1,
-          subteam: 1,
-          Department: 1,
-          photoUrl: 1,
-          linkedin: 1,
-          instagram: 1,
-          email: 1,
-          year: 1,
-          description: 1,
-          order: 1
-        }
-      }
-    ]);
-
-    res.status(200).json({
-      success: true,
-      message: "Design team members fetched successfully",
-      data: members,
-      count: members.length
-    });
-
-  } catch (error) {
-    console.error("Error in getDesignMembers:", error);
-    res.status(500).json({
-      success: false,
-      message: "Failed to fetch Design team members",
       error: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
@@ -355,7 +285,8 @@ const getCreativesMembers = async (req, res) => {
           email: 1,
           year: 1,
           description: 1,
-          order: 1
+          order: 1,
+          createdAt: 0
         }
       }
     ]);
@@ -400,7 +331,8 @@ const getCorporateCommunicationMembers = async (req, res) => {
           email: 1,
           year: 1,
           description: 1,
-          order: 1
+          order: 1,
+          createdAt: 0
         }
       }
     ]);
@@ -445,7 +377,8 @@ const getDevopsMembers = async (req, res) => {
           email: 1,
           year: 1,
           description: 1,
-          order: 1
+          order: 1,
+          createdAt: 0
         }
       }
     ]);
@@ -490,7 +423,8 @@ const getTechnicalExecutive = async (req, res) => {
           email: 1,
           year: 1,
           description: 1,
-          order: 1
+          order: 1,
+          createdAt: 0
         }
       }
     ]);
@@ -535,7 +469,8 @@ const getFacilityExecutive = async (req, res) => {
           email: 1,
           year: 1,
           description: 1,
-          order: 1
+          order: 1,
+          createdAt: 0
         }
       }
     ]);
@@ -580,7 +515,8 @@ const getExternalAffairsExecutive = async (req, res) => {
           email: 1,
           year: 1,
           description: 1,
-          order: 1
+          order: 1,
+          createdAt: 0
         }
       }
     ]);
@@ -625,7 +561,8 @@ const getInternalAffairsExecutive = async (req, res) => {
           email: 1,
           year: 1,
           description: 1,
-          order: 1
+          order: 1,
+          createdAt: 0
         }
       }
     ]);
@@ -642,60 +579,6 @@ const getInternalAffairsExecutive = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Failed to fetch Internal Affairs Executive team members",
-      error: process.env.NODE_ENV === 'development' ? error.message : undefined
-    });
-  }
-};
-
-// Get Excores team members (all executives combined)
-const getExcoresMembers = async (req, res) => {
-  try {
-    const members = await TeamMember.aggregate([
-      {
-        $match: {
-          role: {
-            $in: [
-              "Facility Executive",
-              "Internal Affairs Executive",
-              "Technical Executive",
-              "External Affairs Executive"
-            ]
-          }
-        }
-      },
-      {
-        $sort: { order: 1, name: 1 }
-      },
-      {
-        $project: {
-          _id: 1,
-          name: 1,
-          role: 1,
-          subteam: 1,
-          Department: 1,
-          photoUrl: 1,
-          linkedin: 1,
-          instagram: 1,
-          email: 1,
-          year: 1,
-          description: 1,
-          order: 1
-        }
-      }
-    ]);
-
-    res.status(200).json({
-      success: true,
-      message: "Excores team members fetched successfully",
-      data: members,
-      count: members.length
-    });
-
-  } catch (error) {
-    console.error("Error in getExcoresMembers:", error);
-    res.status(500).json({
-      success: false,
-      message: "Failed to fetch Excores team members",
       error: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
@@ -724,7 +607,8 @@ const getExManagersMembers = async (req, res) => {
           email: 1,
           year: 1,
           description: 1,
-          order: 1
+          order: 1,
+          createdAt: 0
         }
       }
     ]);
@@ -746,6 +630,35 @@ const getExManagersMembers = async (req, res) => {
   }
 };
 
+// Get single team member by ID
+const getTeamMemberById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const teamMember = await TeamMember.findById(id).select('-createdAt');
+
+    if (!teamMember) {
+      return res.status(404).json({
+        success: false,
+        message: "Team member not found"
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Team member fetched successfully",
+      data: teamMember
+    });
+
+  } catch (error) {
+    console.error("Error in getTeamMemberById:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch team member",
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
+  }
+};
+
 module.exports = {
   getAllTeamMembers,
   getTeamMemberById,
@@ -754,7 +667,6 @@ module.exports = {
   getCoresMembers,
   getManagersMembers,
   getDeputyManagersMembers,
-  getDesignMembers,
   getCreativesMembers,
   getCorporateCommunicationMembers,
   getDevopsMembers,
@@ -763,5 +675,4 @@ module.exports = {
   getExternalAffairsExecutive,
   getInternalAffairsExecutive,
   getExManagersMembers,
-  getExcoresMembers  // Add this line
 };
