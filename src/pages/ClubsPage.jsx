@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/footer";
 import ClubCard from "../components/ClubCard";
+import "./ClubsPage.css";
 
 export default function ClubsPage() {
   const navigate = useNavigate();
@@ -18,9 +19,10 @@ export default function ClubsPage() {
   return (
     <>
       <Navbar />
-      <div className="p-6 bg-black min-h-screen text-white">
-        <h1 className="text-4xl font-bold text-center mb-10">CLUBS</h1>
-        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="clubs-page">
+        <h1 className="clubs-title">CLUBS</h1>
+
+        <div className="clubs-grid">
           {clubs.map((club) => (
             <ClubCard
               key={club._id}
