@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const teamController = require('./teamController');
+const teamController = require('../controllers/teamController');
 
 // GET /api/team/faculty-advisors - Get Faculty Advisors
 router.get('/faculty-advisors', teamController.getFacultyAdvisors);
