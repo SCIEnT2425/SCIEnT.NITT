@@ -18,13 +18,14 @@ const Footer = () => {
             <h2>SCIEnT, NIT Trichy</h2>
           </div>
           <p className="tagline">
-            An innovation hub for research , prototyping and bringing bold ideas to life.
+            An innovation hub for research , prototyping and bringing bold ideas
+            to life.
           </p>
         </div>
 
         <div className="footer-section">
           <h3>
-            <i className="explore">QUICK LINKS</i>
+            QUICK LINKS
           </h3>
           <div className="footer-links">
             <ul className="column1">
@@ -37,7 +38,6 @@ const Footer = () => {
               <li>
                 <a href="/contact">Contact Us</a>
               </li>
-              
             </ul>
           </div>
         </div>
@@ -46,13 +46,18 @@ const Footer = () => {
           <h3>GET IN TOUCH</h3>
           <div className="contact-info">
             <p>
-              <i className="fas fa-envelope"></i> <p>scient@nitt.edu</p>
+              <i className="fas fa-envelope"></i>
+              <span>scient@nitt.edu</span>
             </p>
-            <p>
+            <p className="collegeName">
               <i className="fas fa-map-marker-alt"></i>
-              <p>National Institute of Technology
-              <br />
-              Tiruchirappalli, Tamil Nadu</p>
+              <span>
+                National Institute of 
+                <br/>
+                Technology
+                <br />
+                Tiruchirappalli, Tamil Nadu
+              </span>
             </p>
           </div>
         </div>
@@ -82,7 +87,7 @@ const Footer = () => {
               <FaFacebook />
             </a>
           </div>
-          <p style={{ marginTop: "20px", fontSize: "16px", color: "#888" }}>
+          <p >
             Connect with us in social media
           </p>
         </div>
