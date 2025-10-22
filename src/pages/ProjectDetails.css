@@ -2,7 +2,7 @@
   background-color: #000;
   color: #fff;
   min-height: 100vh;
-  padding: 100px 40px;
+  padding: 150px 40px;
   font-family: "Poppins", sans-serif;
 }
 
@@ -11,23 +11,20 @@
   font-size: 0.95rem;
   margin-bottom: 30px;
 }
-
 .breadcrumb-link {
   color: #facc15;
   text-decoration: none;
 }
-
 .breadcrumb-separator {
   margin: 0 6px;
   color: #aaa;
 }
-
 .breadcrumb-active {
   color: #facc15;
   font-weight: 600;
 }
 
-/* Header Section */
+/* Project Header */
 .project-header {
   background-color: #0a0a0a;
   border-radius: 20px;
@@ -35,40 +32,29 @@
   justify-content: space-between;
   align-items: flex-start;
   padding: 40px;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
   margin-bottom: 60px;
   flex-wrap: wrap;
 }
-
-.header-left {
-  flex: 1;
-  min-width: 280px;
-}
-
 .header-left h1 {
   font-size: 2.4rem;
   font-weight: 700;
   margin-bottom: 10px;
 }
-
 .section-title {
   color: #facc15;
   font-weight: 600;
   margin-bottom: 10px;
 }
-
 .description {
   color: #ddd;
   line-height: 1.6;
   max-width: 600px;
 }
-
 .header-right {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 .year-badge {
   background-color: #facc15;
   color: #000;
@@ -78,23 +64,20 @@
   font-size: 0.9rem;
   margin-bottom: 15px;
 }
-
 .header-right img {
   width: 280px;
   border-radius: 12px;
 }
 
-/* Other Projects Section */
+/* Other Projects */
 .other-projects h2 {
   color: #10b981;
   font-size: 1.8rem;
   margin-bottom: 20px;
 }
-
 .scroll-container {
   position: relative;
 }
-
 .projects-row {
   display: flex;
   gap: 20px;
@@ -103,12 +86,9 @@
   scrollbar-width: none;
   padding: 10px 50px;
 }
-
 .projects-row::-webkit-scrollbar {
   display: none;
 }
-
-/* Project Card */
 .project-card {
   flex: 0 0 230px;
   background-color: #1a1a1a;
@@ -118,12 +98,10 @@
   padding: 15px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
 .project-card:hover {
   transform: scale(1.05);
   box-shadow: 0 0 10px rgba(250, 204, 21, 0.5);
 }
-
 .project-card img {
   width: 100%;
   height: 130px;
@@ -131,20 +109,17 @@
   border-radius: 10px;
   margin-bottom: 10px;
 }
-
 .project-card h3 {
   font-size: 1rem;
   font-weight: 600;
-  color: #fff;
+  color: #facc15;
   margin-bottom: 8px;
 }
-
 .project-card p {
   font-size: 0.8rem;
   color: #bbb;
   margin-bottom: 12px;
 }
-
 .details-btn {
   background-color: #10b981;
   color: #000;
@@ -153,11 +128,17 @@
   padding: 6px 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
 }
-
 .details-btn:hover {
   background-color: #34d399;
+}
+
+/* No Projects Message */
+.no-projects {
+  color: #10b981;
+  text-align: center;
+  margin-top: 20px;
+  font-style: italic;
 }
 
 /* Scroll Buttons */
@@ -174,67 +155,39 @@
   transition: all 0.2s;
   z-index: 5;
 }
-
 .scroll-btn:hover {
   background-color: #10b981;
   color: #000;
 }
-
 .scroll-btn.left {
   left: 0;
 }
-
 .scroll-btn.right {
   right: 0;
 }
 
 /* Loading */
-.loading-text {
-  text-align: center;
-  padding-top: 100px;
-  color: #bbb;
+.loading-container {
+  background-color: #000;
+  color: #facc15;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-size: 1.2rem;
 }
 
-/* 📱 Responsive Design */
+/* Responsive */
 @media (max-width: 768px) {
   .project-page {
     padding: 80px 20px;
   }
-
   .project-header {
     flex-direction: column;
-    align-items: center;
     text-align: center;
-    padding: 25px;
+    align-items: center;
   }
-
-  .header-left h1 {
-    font-size: 1.8rem;
-  }
-
-  .description {
-    font-size: 0.95rem;
-  }
-
-  .header-right img {
-    width: 220px;
-  }
-
   .scroll-btn {
     display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .project-card {
-    flex: 0 0 180px;
-  }
-
-  .project-card img {
-    height: 110px;
-  }
-
-  .project-page {
-    padding: 60px 10px;
   }
 }
