@@ -103,7 +103,7 @@ const getFacilityAdmins = async (req, res) => {
   try {
     const members = await TeamMember.aggregate([
       {
-        $match: { role: "Facility Admin" }
+        $match: { role: "Admin Executive" }
       },
       {
         $sort: { order: 1, name: 1 }

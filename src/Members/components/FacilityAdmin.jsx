@@ -41,7 +41,7 @@ const FacilityAdminCard = ({ admin }) => {
                                             />
                                         ) : (
                                             <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-400 via-cyan-500 to-teal-500 flex items-center justify-center">
-                                                <Building2 className="w-32 h-32 text-white" />
+                                               
                                             </div>
                                         )}
                                     </div>
@@ -50,7 +50,7 @@ const FacilityAdminCard = ({ admin }) => {
                                     <div className="flex flex-col justify-center space-y-6 p-8 md:p-12 w-full md:w-1/2">
                                         <div>
                                             <div className="flex items-center gap-3 mb-2">
-                                                <Shield className="w-8 h-8 text-blue-400" />
+                                                
                                                 <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
                                                     {admin.name}
                                                 </h3>

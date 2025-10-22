@@ -15,7 +15,7 @@ const teamMemberSchema = new mongoose.Schema({
       "Manager",
       "Deputy Manager",
       "Ex-Manager",
-      "Facility Admin",
+      "Admin Executive" ,
       "Technical Executive",
       "Facility Executive",
       "External Affairs Executive",
