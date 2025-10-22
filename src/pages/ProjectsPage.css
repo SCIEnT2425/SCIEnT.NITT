@@ -1,0 +1,140 @@
+/* Entire page styling */
+.projects-page {
+  background-color: #000;
+  color: white;
+  min-height: 100vh;
+  padding: 8rem 2rem 3rem; /* Top padding so content is below navbar */
+}
+
+/* Club Info Section */
+.club-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.club-text {
+  max-width: 60%;
+}
+
+.club-name {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #ffd700;
+  text-shadow: 0 0 8px #ffd700, 0 0 20px #ffcc00;
+  letter-spacing: 1px;
+}
+
+.club-desc-title {
+  color: #ffd700;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.club-desc {
+  color: #ccc;
+  margin-top: 0.5rem;
+  line-height: 1.6;
+}
+
+.club-logo {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+/* Year Filter */
+.year-filter {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.year-btn {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.year-btn:hover {
+  background-color: #555;
+}
+
+.year-btn.active {
+  background-color: #ffd700;
+  color: black;
+  font-weight: bold;
+}
+
+/* Year Section */
+.year-section {
+  margin-bottom: 4rem;
+}
+
+.year-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #ffd700;
+  text-shadow: 0 0 6px #ffcc00;
+}
+
+/* Scroll Buttons and Project Row */
+.project-scroll-container {
+  position: relative;
+}
+
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.scroll-btn:hover {
+  background-color: #ffd700;
+  color: black;
+}
+
+.scroll-btn.left {
+  left: 0;
+}
+
+.scroll-btn.right {
+  right: 0;
+}
+
+.project-row {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 0 3rem;
+}
+
+.project-row::-webkit-scrollbar {
+  display: none;
+}
+
+/* No Projects Found */
+.no-projects {
+  color: #888;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 2rem;
+}
