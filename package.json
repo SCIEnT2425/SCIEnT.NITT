@@ -17,7 +17,7 @@
     "fs": "^0.0.1-security",
     "googleapis": "^157.0.0",
     "hamburger-react": "^2.5.1",
-    "lucide-react": "^0.541.0",
+    "lucide-react": "^0.546.0",
     "mongoose": "^8.18.1",
     "multer-storage-cloudinary": "^4.0.0",
     "nodemon": "^3.1.4",
