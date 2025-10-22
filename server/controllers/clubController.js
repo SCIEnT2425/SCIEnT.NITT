@@ -107,3 +107,12 @@ exports.getClub = async (req,res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+exports.getAllClubs = async (req, res) => {
+  try {
+    const clubs = await Club.find({}, "name logo description");
+    res.json(clubs);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
