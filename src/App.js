@@ -6,6 +6,7 @@ import About from "./pages/About";
 import Gallery from "./pages/Gallery";
 import ProjectSection from "./pages/ProjectSection";
 import Contact from "./pages/Contacts";
+import Team from "./Members/pages/Team"
 import Bookings from "./pages/RoomBooking";
 import Dashboard_booking from "./pages/Dashboard_booking";
 import UserDashboard_booking from "./pages/UserDashboard_booking";
@@ -81,6 +82,7 @@ const App = () => {
         <Route path="/inventory" element={<Inventory />} />
         <Route path="/Team" element={<Team/>} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/Team" element={<Team />} />
         <Route path="/roombook" element={<Bookings />} />
         <Route path="/open-house" element={<OpenHouse />} />
         <Route path="/e-summit" element={<ESummit />} />
