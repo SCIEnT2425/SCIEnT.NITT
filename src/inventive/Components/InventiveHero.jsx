@@ -4,7 +4,7 @@ import "../styles/Inventive.css";
 const InventiveHero = () => {
   return (
 
-    <div className="relative w-full h-screen bg-black overflow-hidden flex items-center justify-center mt-16">
+    <div className="relative w-full min-h-screen bg-black overflow-hidden flex items-center justify-center">
 
       {/* Animated Background Grid */}
       <div className="absolute inset-0 opacity-30">
@@ -82,8 +82,8 @@ const InventiveHero = () => {
 
           {/* Subtitle */}
 
-          <div className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
-            <p className="text-base sm:text-lg md:text-xl text-gray-200 leading-relaxed max-w-2xl sm:max-w-3xl mx-auto font-light">
+          <div className="mb-12 px-4 sm:mb-16 space-y-6 sm:space-y-8">
+            <p className="text-lg sm:text-xl text-gray-200 leading-relaxed max-w-3xl sm:max-w-4xl mx-auto font-light">
 
               Got an innovative idea bubbling in your mind? We’ll give you the
               stage, the spotlight, and the chance to shine like never before.
@@ -92,12 +92,13 @@ const InventiveHero = () => {
 
           {/* Main Description */}
 
-          <div className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
-            <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl sm:max-w-3xl mx-auto">
-              <span className="text-yellow-400 font-semibold">INVENTIVE</span> is SCIEnT's
-              groundbreaking initiative, designed to fuel the spark of innovation
-              in aspiring minds. Whether you’re a dreamer, thinker, or builder,
-              this is your chance to bring your ideas to life.
+          <div className="mb-12 px-4 sm:mb-16 space-y-6 sm:space-y-8">
+            <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-3xl sm:max-w-4xl mx-auto">
+              <span className="text-yellow-400 font-semibold">INVENTIVE</span>{" "}
+              is SCIEnT's groundbreaking initiative, designed to fuel the spark
+              of innovation in aspiring minds. Whether you’re a dreamer,
+              thinker, or builder, this is your chance to bring your ideas to
+              life.
 
             </p>
             <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl sm:max-w-3xl mx-auto">
