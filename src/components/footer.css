@@ -1,189 +1,226 @@
+/* Footer Styles */
 .footer {
-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #1a1a1a;
-  color: #ffffff;
-  padding: 50px 0 20px 0;
-  width: 100%;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    padding: 48px 24px;
 }
 
 .footer-content {
-  max-width: 1400px;
-  margin: 0 auto;
-  /* padding: 0 20px; */
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 40px;
-  align-items: start;
-}
-.logo-footer {
-  display: flex;
-  align-items: center;   /* vertical centering */
-  gap: 15px;             /* spacing between logo and text */
+    max-width: 1280px;
+    margin: 0 auto;
+    /* Adjusted grid: First column is wider (1.2fr), the rest are equal (1fr) */
+    display: grid;
+    grid-template-columns: 1.2fr 0.7fr 1fr 1fr; 
+    gap: 40px;
+    align-items: start;
 }
 
-.logo-footer img {
-  width: 85px;
-  height: auto;
-  display: block;
+.footer-section {
+    display: flex;
+    flex-direction: column;
 }
 
-.logo-footer h2 {
-  margin: 0;             /* removes browser default margin */
-  line-height: 1;        /* keeps text aligned tightly */
-  font-size: 24px;
-  font-weight: 700;
-  color: #ffd700;
+/* Logo and Tagline Section */
+.footer-section .logo-footer {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    align-items: center;
 }
 
+.footer-section .logo-footer img {
+    width: 48px;
+    height: 40px;
+    object-fit: contain;
+}
 
+.footer-section .logo-footer h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #fcd34d;
+    margin: 0;
+}
+
+.footer-section .tagline {
+    color: #d1d5db;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    
+}
+
+/* Section Headings */
 .footer-section h3 {
-  font-size: 24px;
-  font-weight: 600;
-  margin-top: 19px;
-  margin-bottom: 26px;
-  color: #ffd700;
-  font-style: italic;
+    color: #fcd34d;
+    font-weight: bold;
+    font-size: 21px;
+    margin: 3px 0 16px 0; 
+    text-transform: uppercase;
+    flex-shrink: 0;
 }
 
-.tagline {
-  font-size: 16px;
-  color: #cccccc;
-  line-height: 1.4;
-  margin-top: 10px;
+.footer-section h3 .explore {
+    font-style: italic;
 }
 
-.footer-links {
-  display:center;
-  
-}
-
+/* Quick Links */
 .footer-links ul {
-  list-style: none;
-
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .footer-links li {
-  margin-bottom: 12px;
-}
-.explore{
-  margin-left: 3rem;
+    margin-bottom: 8px;
 }
 
 .footer-links a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 18px;
-  transition: color 0.3s ease;
-  margin-left:5rem ;
+    color: #d1d5db;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
 }
 
 .footer-links a:hover {
-  color: #ffd700;
+    color: #fcd34d;
 }
 
+/* Contact Info (GET IN TOUCH) */
 .contact-info {
-  background: none !important;
-   padding: 0 !important;        
-  width: auto !important;
-  color: #cccccc;
-  font-size: 28px;
-  line-height: 1.4;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background-color: transparent !important; 
+    flex-grow: 1; 
+    padding: 0 !important;
+    margin :0 !important;
+}
+
+.contact-info > p {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 0;
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 1.6;
+    background-color: transparent !important; 
 }
 
 .contact-info i {
-  color: #ffd700;
-  margin-right: 18px;
-  width: 18px;
-  font-size: 25px;
-  
-  
+    color: #fcd34d;
+    font-size: 18px;
+    margin-top: 2px;
+    flex-shrink: 0;
 }
 
-.contact-info p {
-  margin-bottom: 10px;
-  display: flex;
-  align-items: flex-start;
-  font-size: 28px;
+.contact-info svg {
+    color: #fcd34d;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    flex-shrink: 0;
 }
-.contact-info p p{
-    font-size: 18px;
+
+.contact-info p span {
+    margin: 0;
+    display: inline;
+    color: #ffffff;
+    background-color: transparent !important; 
 }
+
+.contact-info .fas {
+    color: #fcd34d;
+}
+
+/* Social Icons (FOLLOW US) */
 .social-icons {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
 }
 
 .social-icons a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  color: #cccccc;
-  border-radius: 8px;
-  text-decoration: none;
-  font-size: 30px;
-  transition: all 0.3s ease;
+    color: #d1d5db;
+    font-size: 24px;
+    transition: color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .social-icons a:hover {
-  background-color: #ffd700;
-  color: #1a1a1a;
-  transform: translateY(-2px);
+    color: #fcd34d;
 }
 
+.social-icons svg {
+    width: 24px;
+    height: 24px;
+}
+
+.footer-section > p {
+    color: #9ca3af;
+    font-size: 16px;
+    margin: 0;
+}
+
+/* Footer Divider */
 .footer-divider {
-  max-width: 1300px;
-  margin: 40px auto 20px auto;
-  padding: 0 20px;
-  border-top: 1px solid #ffd700;
+    max-width: 1280px;
+    margin: 32px auto;
+    border-top: 1px solid #fcd34d;
 }
 
+/* Footer Bottom */
 .footer-bottom {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  text-align: center;
-  color: #888888;
-  font-size: 17px;
+    text-align: center;
+    color: #9ca3af;
+    font-size: 15px;
+    max-width: 1280px;
+    margin: 0 auto;
 }
 
 .footer-bottom p {
-  margin-bottom: 5px;
+    margin: 4px 0;
 }
 
-.heart {
-  color: #ffd700;
-  font-size: 20px;
+.footer-bottom .heart {
+    color: #fcd34d;
+    font-size:1.2rem;
 }
 
+/* Tablet Styles */
+@media (max-width: 1024px) {
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 32px;
+    }
+}
+
+/* Mobile Styles */
 @media (max-width: 768px) {
-  .footer-content {
-    grid-template-columns: 1fr;
-    gap: 30px;
-    text-align: center;
-  }
+    .footer {
+        padding: 32px 16px;
+    }
 
-  .footer-links {
-    justify-content: center;
-  }
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
 
-  .social-icons {
-    justify-content: center;
-  }
-}
+    .footer-section .logo-footer h2 {
+        font-size: 18px;
+    }
 
-@media (max-width: 480px) {
-  .footer-content {
-    padding: 0 15px;
-  }
+    .footer-divider {
+        margin: 24px auto;
+    }
 
-  .footer-section h2 {
-    font-size: 20px;
-  }
+    .contact-info > p {
+        font-size: 15px;
+    }
 
-  .footer-section h3 {
-    font-size: 16px;
-  }
+    .footer-links a {
+        font-size: 14px;
+    }
 }

@@ -1,7 +1,6 @@
 import React from 'react'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/footer'
-import CoreCard from '../components/CoreCard'
 const Team = () => {
   return (
     <div className='w-screen m-0 p-0 '>
