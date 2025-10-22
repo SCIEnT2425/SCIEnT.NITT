@@ -17,7 +17,7 @@ import Profile from "./pages/Profile";
 import Halls from "./pages/Halls";
 import Slots from "./pages/Slots";
 import Days from "./pages/Days";
-import Members from "./pages/Members";
+import Team from "./Members/pages/Team";
 import OpenHouse from "./pages/OpenHouse";
 import Inventory from "./pages/Inventory";
 import ESummit from "./pages/ESummit";
@@ -53,6 +53,7 @@ import { NavMobile } from "./components/nav-mobile";
 import Annualday from "./pages/Annualday";
 import Inventive from "./inventive/Pages/Inventive";
 import InventivePage from "./inventive/Pages/InventivePage" ;
+import Members from "./pages/Members"
 const App = () => {
   return (
     <>
@@ -79,6 +80,7 @@ const App = () => {
         <Route path="/inventive" element={<Inventive />} />
         <Route path="/inventiveForm" element={<InventivePage/>} />
         <Route path="/inventory" element={<Inventory />} />
+        <Route path="/Team" element={<Team/>} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/Team" element={<Team />} />
         <Route path="/roombook" element={<Bookings />} />
