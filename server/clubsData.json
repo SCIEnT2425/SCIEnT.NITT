@@ -12,6 +12,20 @@
         "name": "Smart IoT Monitoring",
         "description": "A sensor-based system to monitor and manage energy usage efficiently.",
         "year": 2024
+      },
+       {
+        "name": "Smart IoT ",
+        "description": "A sensor-based system to monitor and manage energy usage efficiently.",
+        "year": 2024
+      },
+       {
+        "name": "Smart Monitoring",
+        "description": "A sensor-based system to monitor and manage energy usage efficiently.",
+        "year": 2024
+      }, {
+        "name": " IoT Monitoring",
+        "description": "A sensor-based system to monitor and manage energy usage efficiently.",
+        "year": 2024
       }
     ]
   },
