@@ -41,7 +41,7 @@ const FacultyAdvisorCard = ({ advisor }) => {
                                             />
                                         ) : (
                                             <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 flex items-center justify-center">
-                                                <GraduationCap className="w-32 h-32 text-white" />
+                                                
                                             </div>
                                         )}
                                     </div>
@@ -50,7 +50,6 @@ const FacultyAdvisorCard = ({ advisor }) => {
                                     <div className="flex flex-col justify-center space-y-6 p-8 md:p-12 w-full md:w-1/2">
                                         <div>
                                             <div className="flex items-center gap-3 mb-2">
-                                                <Award className="w-8 h-8 text-yellow-400" />
                                                 <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
                                                     {advisor.name}
                                                 </h3>
