@@ -111,6 +111,7 @@ exports.getClub = async (req,res) => {
 exports.getAllClubs = async (req, res) => {
   try {
     const clubs = await Club.find({}, "name logo description");
+    console.log("Sending all cubs");
     res.json(clubs);
   } catch (err) {
     res.status(500).json({ error: err.message });
