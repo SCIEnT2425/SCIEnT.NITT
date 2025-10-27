@@ -17,8 +17,6 @@ router.get('/managers', teamController.getManagersMembers);
 // GET /api/team/deputy-managers - Get Deputy Managers team members
 router.get('/deputy-managers', teamController.getDeputyManagersMembers);
 
-// GET /api/team/design - Get Design team members
-router.get('/design', teamController.getDesignMembers);
 
 // GET /api/team/creatives - Get Creatives team members
 router.get('/creatives', teamController.getCreativesMembers);
