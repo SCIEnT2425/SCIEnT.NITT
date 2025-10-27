@@ -20,6 +20,7 @@ const teamMemberSchema = new mongoose.Schema({
       "Facility Executive",
       "External Affairs Executive",
       "Internal Affairs Executive",
+      "Project Management Head",
     ]
   },
 

@@ -280,50 +280,7 @@ const getDeputyManagersMembers = async (req, res) => {
   }
 };
 
-// Get Design team members
-const getDesignMembers = async (req, res) => {
-  try {
-    const members = await TeamMember.aggregate([
-      {
-        $match: { subteam: "Creatives" }
-      },
-      {
-        $sort: { order: 1, name: 1 }
-      },
-      {
-        $project: {
-          _id: 1,
-          name: 1,
-          role: 1,
-          subteam: 1,
-          Department: 1,
-          photoUrl: 1,
-          linkedin: 1,
-          instagram: 1,
-          email: 1,
-          year: 1,
-          description: 1,
-          order: 1
-        }
-      }
-    ]);
 
-    res.status(200).json({
-      success: true,
-      message: "Design team members fetched successfully",
-      data: members,
-      count: members.length
-    });
-
-  } catch (error) {
-    console.error("Error in getDesignMembers:", error);
-    res.status(500).json({
-      success: false,
-      message: "Failed to fetch Design team members",
-      error: process.env.NODE_ENV === 'development' ? error.message : undefined
-    });
-  }
-};
 
 // Get Creatives team members
 const getCreativesMembers = async (req, res) => {
@@ -738,7 +695,6 @@ module.exports = {
   getCoresMembers,
   getManagersMembers,
   getDeputyManagersMembers,
-  getDesignMembers,
   getCreativesMembers,
   getCorporateCommunicationMembers,
   getDevopsMembers,

@@ -19,7 +19,7 @@ const MemberCard = ({ member, index }) => {
     
     return (
         <div 
-            className="card relative w-80 cursor-pointer group perspective" 
+            className="card relative cursor-pointer group perspective" 
             onClick={() => setIsFlipped(!isFlipped)}
         >
             <div className={`relative w-full h-full transition-transform duration-700 transform-style-3d ${isFlipped ? 'rotate-y-180'  : 'rotate-x-20'}`}>
@@ -46,7 +46,7 @@ const MemberCard = ({ member, index }) => {
                             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6">
                                 <h3 className="text-2xl font-bold text-white mb-1">{member.name}</h3>
                                 <p className={`text-sm font-semibold bg-gradient-to-r ${gradient} bg-clip-text text-transparent`}>
-                                    {member.role}
+                                    {member.subteam} || {member.role}
                                 </p>
                                 {member.year && <p className="text-xs text-gray-300 mt-1">{member.year}</p>}
                                 {member.Department && (
@@ -67,9 +67,7 @@ const MemberCard = ({ member, index }) => {
                             <div>
                                 <h3 className="text-xl font-bold text-white mb-2">{member.name}</h3>
                                 <p className="text-sm text-gray-300 mb-3">{member.Department}</p>
-                                {member.description && (
-                                    <p className="text-sm text-gray-400 leading-relaxed">{member.description}</p>
-                                )}
+                                
                             </div>
                             <div className="flex gap-3 justify-center">
                                 {member.email && (
