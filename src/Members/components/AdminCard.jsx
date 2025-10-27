@@ -74,14 +74,14 @@ const AdminCard = ({ admin, type = 'facility' }) => {
 
                                 {/* Social Media Icons */}
                                 <div className="admin-social-icons">
-                                    {admin.email && (
+                                    {/* {admin.email && (
                                         <a
                                             href={`mailto:${admin.email}`}
                                             className="admin-social-link"
                                         >
                                             <Mail className="admin-social-icon" />
                                         </a>
-                                    )}
+                                    )} */}
                                     {admin.linkedin && (
                                         <a
                                             href={admin.linkedin}
