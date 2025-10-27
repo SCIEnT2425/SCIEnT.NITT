@@ -250,7 +250,7 @@
     flex-direction: column ;
   }
   .admin-subtitle {
-    font-size: 0.875rem;
+    font-size: 1rem;
   }
 
   .admin-photo-section {
@@ -327,7 +327,7 @@
     
   }
   .admin-card-wrapper{
-    width: 45vw; /* Increased from 40vw */
+    width: 58vw; /* Increased from 40vw */
     /* transform: scale(0.95); */
   }
   .admin-container {
