@@ -8,7 +8,7 @@ const AdminCard = ({ admin, type = 'facility' }) => {
 
     return (
         <div className="admin-container">
-            {/* Section Title */}
+            {/* Section Title
             <div className="admin-section-title">
                 <div className="admin-title-wrapper">
 
@@ -17,12 +17,8 @@ const AdminCard = ({ admin, type = 'facility' }) => {
                     </h2>
 
                 </div>
-                <p className="admin-subtitle">
-                    {type === 'faculty'
-                        ? 'Guiding our academic excellence'
-                        : 'Managing our facilities with excellence'}
-                </p>
-            </div>
+
+            </div> */}
 
             {/* Card */}
             <div className="admin-card-wrapper">
@@ -57,12 +53,11 @@ const AdminCard = ({ admin, type = 'facility' }) => {
                                     </p>
                                 </div>
 
-                                {/* Bio */}
-                                {admin.bio && (
-                                    <p className="admin-bio">
-                                        {admin.bio}
-                                    </p>
-                                )}
+                                <p className="admin-subtitle">
+                                    {type === 'faculty'
+                                        ? 'Guiding our Team to excellence'
+                                        : 'Managing our facilities with excellence'}
+                                </p>
 
                                 {/* Email */}
                                 {admin.email && (
