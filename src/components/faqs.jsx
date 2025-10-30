@@ -32,12 +32,12 @@ function FAQComponent() {
     <div id="faq" className="faqs py-5 flex-box">
       
       <div className="p-8 rounded-lg max-w-[1000px] m-auto right-box text-lg">
-        <h2 className="text-5xl font-bold text-yellow-400 mb-9">Frequently Asked Questions</h2>
+        <h2 className="text-2xl desktop:text-4xl font-bold text-yellow-400 mb-9">Frequently Asked Questions</h2>
 
         {questions.map((q) => (
-          <div key={q.id} className="mb-7 last:mb-5">
+          <div key={q.id} className="mb-3 last:mb-2">
             <button
-              className="flex rounded-md bg-gray-950 border-l-8 border-l-yellow-500 items-center justify-between w-full p-3 font-semibold text-left text-white shadow-md text-xl faq-question focus:outline-none"
+              className="flex rounded-md bg-gray-950 border-l-8 border-l-yellow-500 items-center justify-between w-full p-3 font-semibold text-left text-white shadow-md text:md laptop:text-lg faq-question focus:outline-none"
               onClick={() => setActiveQuestion(activeQuestion === q.id ? null : q.id)}
             >
               {q.question}
