@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const TeamMember = require("../models/TeamMember");
 
-const MONGO_URI = "mongodb://localhost:27017/TeamDB"; // change if needed
+const MONGO_URI = "mongodb+srv://sanskar:%23sanskar@cluster0.db0hhre.mongodb.net/TeamDB?appName=Cluster0"; // change if needed
 
 const teamData = [
   // ================= Faculty Advisor =================
@@ -16,7 +16,7 @@ const teamData = [
     order: 1
   },
   {
-    name: "Sivanesan",
+    name: "Mr. Sivanesan S",
     role: "Admin Executive",
     subteam: null,
     Department: null,
@@ -52,17 +52,17 @@ const teamData = [
     order: 4
   },
   {
-    name: "Coming Soon...",
-    role: "Project Management Head",
+    name: "Srinath Nagarajan",
+    role: "Project Operations Executive",
     subteam: null,
-    Department: "-----------------",
-    photoUrl: null,
+    Department: "Instrumentation and Control Engineering",
+    photoUrl: "/Team/Srinath_N.png",
     year: "Final Year",
-    email: "scient@nitt.edu",
-    linkedin: "https://www.linkedin.com/company/scientnitt/",
-    instagram: "https://www.instagram.com/scient_nitt/",
-    description: "Contributing to team leadership and projects",
-    order: 7
+    email: "nsrinath2401@gmail.com",
+    linkedin: "https://www.linkedin.com/in/srinath-nagarajan",
+    instagram: "https://www.instagram.com/wtfsrinath/",
+    description: "Overseeing project operations and execution",
+    order: 54
   },
   {
     name: "Alan Prakash",
@@ -589,7 +589,7 @@ const teamData = [
     role: "Project Manager",
     subteam: "Project Management",
     Department: "Mechanical Engineering",
-    photoUrl: null,
+    photoUrl: "/Team/Sriya_Ghosh.jpeg",
     year: "PreFinal Year",
     email: "sriyaghosh444@gmail.com",
     linkedin: "https://www.linkedin.com/in/sriya-ghosh-0a93792a3",
@@ -615,7 +615,7 @@ const teamData = [
     role: "Project Manager",
     subteam: "Project Management",
     Department: "Mechanical Engineering",
-    photoUrl: null,
+    photoUrl: "/Team/A_DURGESH.jpg",
     year: "PreFinal Year",
     email: "adurgesh192@gmail.com",
     linkedin: "https://www.linkedin.com/in/a-durgesh",
@@ -641,7 +641,7 @@ const teamData = [
     role: "Project Manager",
     subteam: "Project Management",
     Department: "Production Engineering",
-    photoUrl: null,
+    photoUrl: "/Team/Hem.jpg",
     year: "PreFinal Year",
     email: "meh.hem2508@gmail.com",
     linkedin: "https://www.linkedin.com/in/hem77/",
@@ -667,7 +667,7 @@ const teamData = [
     role: "Project Manager",
     subteam: "Project Management",
     Department: "Mechanical Engineering",
-    photoUrl: null,
+    photoUrl: "/Team/am_yafea.jpg",
     year: "PreFinal Year",
     email: "amyafeanazz.dc@gmail.com",
     linkedin: "https://www.linkedin.com/in/a-m-yafea-nazz-990586378",
@@ -680,7 +680,7 @@ const teamData = [
     role: "Project Manager",
     subteam: "Project Management",
     Department: "Computer Science and Engineering",
-    photoUrl: null,
+    photoUrl: "/Team/ananda_swaroop.png",
     year: "PreFinal Year",
     email: "anandaswaroop153@gmail.com",
     linkedin: "https://www.linkedin.com/in/ananda-swaroop-0abbba312/",
@@ -688,25 +688,13 @@ const teamData = [
     description: "Supporting project management and technical coordination",
     order: 53
   },
-  {
-    name: "Srinath Nagarajan",
-    role: "Project Operations Executive",
-    subteam: "Project Management",
-    Department: "Instrumentation and Control Engineering",
-    photoUrl: null,
-    year: "Final Year",
-    email: "nsrinath2401@gmail.com",
-    linkedin: "https://www.linkedin.com/in/srinath-nagarajan",
-    instagram: "https://www.instagram.com/wtfsrinath/",
-    description: "Overseeing project operations and execution",
-    order: 54
-  },
+ 
   {
     name: "Fariza Jabeen Z",
     role: "Project Manager",
     subteam: "Project Management",
     Department: "Mechanical Engineering",
-    photoUrl: null,
+    photoUrl: "/Team/Star_Shiner.jpg",
     year: "PreFinal Year",
     email: "starshiner11roblox@gmail.com",
     linkedin: "https://www.linkedin.com/me?trk=p_mwlite_feed-secondary_nav",
@@ -719,7 +707,7 @@ const teamData = [
     role: "Project Manager",
     subteam: "Project Management",
     Department: "Metallurgical and Materials Engineering",
-    photoUrl: null,
+    photoUrl: "/Team/Elizabeth_Bennet.png",
     year: "PreFinal Year",
     email: "lizzyben1410@gmail.com",
     linkedin: "https://in.linkedin.com/in/swasthika-manoharan-392b0831b",
@@ -732,7 +720,7 @@ const teamData = [
     role: "Project Manager",
     subteam: "Project Management",
     Department: "Instrumentation and Control Engineering",
-    photoUrl: null,
+    photoUrl: "/Team/shakthi_ganesh_elavarasan.jpeg",
     year: "PreFinal Year",
     email: "kawaskininja575@gmail.com",
     linkedin: "https://www.linkedin.com/in/shakthi-ganesh-elavarasan-80b451353",
@@ -763,3 +751,5 @@ const seedDB = async () => {
 };
 
 seedDB();
+
+// KWzVFeT3ZrFknqsI
