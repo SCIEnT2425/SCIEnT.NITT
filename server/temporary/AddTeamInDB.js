@@ -583,6 +583,162 @@ const teamData = [
     instagram: "https://www.instagram.com/swathi_chok",
     description: "Supporting team outreach and communications",
     order: 44
+  },
+  {
+    name: "Sriya Ghosh",
+    role: "Project Manager",
+    subteam: "Project Management",
+    Department: "Mechanical Engineering",
+    photoUrl: null,
+    year: "PreFinal Year",
+    email: "sriyaghosh444@gmail.com",
+    linkedin: "https://www.linkedin.com/in/sriya-ghosh-0a93792a3",
+    instagram: "https://www.linkedin.com/company/scientnitt/",
+    description: "Leading project management initiatives",
+    order: 46
+  },
+  {
+    name: "D Sai Sri Mouriya",
+    role: "Project Manager",
+    subteam: "Project Management",
+    Department: "Electrical and Electronics Engineering",
+    photoUrl: null,
+    year: "PreFinal Year",
+    email: "saisrimouriyadhava.06@gmail.com",
+    linkedin: "https://www.linkedin.com/in/d-sai-sri-mouriya-1041792a7",
+    instagram: "https://www.linkedin.com/company/scientnitt/",
+    description: "Coordinating project management efforts",
+    order: 47
+  },
+  {
+    name: "A Durgesh",
+    role: "Project Manager",
+    subteam: "Project Management",
+    Department: "Mechanical Engineering",
+    photoUrl: null,
+    year: "PreFinal Year",
+    email: "adurgesh192@gmail.com",
+    linkedin: "https://www.linkedin.com/in/a-durgesh",
+    instagram: "https://www.instagram.com/dark_radar.8816",
+    description: "Driving project management and team coordination",
+    order: 48
+  },
+  {
+    name: "Aysha Nawreen M",
+    role: "Project Manager",
+    subteam: "Project Management",
+    Department: "Chemical Engineering",
+    photoUrl: null,
+    year: "PreFinal Year",
+    email: "ayshareen005@gmail.com",
+    linkedin: "https://www.linkedin.com/in/aysha-nawreen",
+    instagram: "https://www.instagram.com/aysha.nawreen_",
+    description: "Overseeing project planning and execution",
+    order: 49
+  },
+  {
+    name: "Hem Sai",
+    role: "Project Manager",
+    subteam: "Project Management",
+    Department: "Production Engineering",
+    photoUrl: null,
+    year: "PreFinal Year",
+    email: "meh.hem2508@gmail.com",
+    linkedin: "https://www.linkedin.com/in/hem77/",
+    instagram: "https://www.instagram.com/meh_._hem/",
+    description: "Managing project workflows and deliverables",
+    order: 50
+  },
+  {
+    name: "S Sundar Palaniappan",
+    role: "Project Manager",
+    subteam: "Project Management",
+    Department: "Instrumentation and Control Engineering",
+    photoUrl: null,
+    year: "PreFinal Year",
+    email: "sundarpalaniappan30@gmail.com",
+    linkedin: "https://www.linkedin.com/in/sundar-palaniappan-s",
+    instagram: "https://www.instagram.com/s_sundar13",
+    description: "Leading project management strategies",
+    order: 51
+  },
+  {
+    name: "A M Yafea Nazz",
+    role: "Project Manager",
+    subteam: "Project Management",
+    Department: "Mechanical Engineering",
+    photoUrl: null,
+    year: "PreFinal Year",
+    email: "amyafeanazz.dc@gmail.com",
+    linkedin: "https://www.linkedin.com/in/a-m-yafea-nazz-990586378",
+    instagram: "https://www.instagram.com/yafeanazz.11",
+    description: "Coordinating project initiatives and timelines",
+    order: 52
+  },
+  {
+    name: "Ragipalyam Ananda Swaroop",
+    role: "Project Manager",
+    subteam: "Project Management",
+    Department: "Computer Science and Engineering",
+    photoUrl: null,
+    year: "PreFinal Year",
+    email: "anandaswaroop153@gmail.com",
+    linkedin: "https://www.linkedin.com/in/ananda-swaroop-0abbba312/",
+    instagram: "https://www.linkedin.com/company/scientnitt/",
+    description: "Supporting project management and technical coordination",
+    order: 53
+  },
+  {
+    name: "Srinath Nagarajan",
+    role: "Project Operations Executive",
+    subteam: "Project Management",
+    Department: "Instrumentation and Control Engineering",
+    photoUrl: null,
+    year: "Final Year",
+    email: "nsrinath2401@gmail.com",
+    linkedin: "https://www.linkedin.com/in/srinath-nagarajan",
+    instagram: "https://www.instagram.com/wtfsrinath/",
+    description: "Overseeing project operations and execution",
+    order: 54
+  },
+  {
+    name: "Fariza Jabeen Z",
+    role: "Project Manager",
+    subteam: "Project Management",
+    Department: "Mechanical Engineering",
+    photoUrl: null,
+    year: "PreFinal Year",
+    email: "starshiner11roblox@gmail.com",
+    linkedin: "https://www.linkedin.com/me?trk=p_mwlite_feed-secondary_nav",
+    instagram: "https://www.instagram.com/fariza_jabeen/",
+    description: "Managing project planning and team coordination",
+    order: 55
+  },
+  {
+    name: "Swasthika M",
+    role: "Project Manager",
+    subteam: "Project Management",
+    Department: "Metallurgical and Materials Engineering",
+    photoUrl: null,
+    year: "PreFinal Year",
+    email: "lizzyben1410@gmail.com",
+    linkedin: "https://in.linkedin.com/in/swasthika-manoharan-392b0831b",
+    instagram: "https://www.instagram.com/butter_14_scotch",
+    description: "Leading project management efforts",
+    order: 56
+  },
+  {
+    name: "E Shakthi Ganesh",
+    role: "Project Manager",
+    subteam: "Project Management",
+    Department: "Instrumentation and Control Engineering",
+    photoUrl: null,
+    year: "PreFinal Year",
+    email: "kawaskininja575@gmail.com",
+    linkedin: "https://www.linkedin.com/in/shakthi-ganesh-elavarasan-80b451353",
+    instagram: "https://www.instagram.com/meesg02",
+    description: "Coordinating project execution and deliverables",
+    order: 57
   }
 ];
 
@@ -603,6 +759,7 @@ const seedDB = async () => {
     console.error("❌ Error seeding database:", err);
     mongoose.connection.close();
   }
+  
 };
 
 seedDB();
