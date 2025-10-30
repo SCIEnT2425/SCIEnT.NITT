@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Mail, Linkedin, Zap, Sparkles, Instagram } from 'lucide-react';
 import scient from '../../assets/scient.png'
 import '../styles/MembersCard.css'
 
 const MemberCard = ({ member, index }) => {
     const [isFlipped, setIsFlipped] = useState(false);
+    const timeoutRef = useRef(null);
     
     const gradients = [
         'from-pink-500 via-red-500 to-yellow-500',
@@ -16,11 +17,29 @@ const MemberCard = ({ member, index }) => {
     ];
     
     const gradient = gradients[index % gradients.length];
+
+    const handleMouseEnter = () => {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
+        timeoutRef.current = setTimeout(() => {
+            setIsFlipped(true);
+        }, 1000);
+    };
+
+    const handleMouseLeave = () => {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+            timeoutRef.current = null;
+        }
+        setIsFlipped(false);
+    };
     
     return (
         <div 
-            className="card relative cursor-pointer group perspective" 
-            onClick={() => setIsFlipped(!isFlipped)}
+            className="card relative group perspective" 
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
         >
             <div className={`relative w-full h-full transition-transform duration-700 transform-style-3d ${isFlipped ? 'rotate-y-180'  : 'rotate-x-20'}`}>
                 {/* Front */}
@@ -46,11 +65,11 @@ const MemberCard = ({ member, index }) => {
                             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6">
                                 <h3 className="text-2xl font-bold text-white mb-1">{member.name}</h3>
                                 <p className={`text-sm font-semibold bg-gradient-to-r ${gradient} bg-clip-text text-transparent`}>
-                                    {member.subteam} || {member.role}
+                                    {member.subteam || member.role}
                                 </p>
                                 {member.year && <p className="text-xs text-gray-300 mt-1">{member.year}</p>}
                                 {member.Department && (
-                                    <p className="text-xs text-gray-400 mt-1">{member.Department}</p>
+                                    <p className="text-s text-gray-400 mt-1">{member.Department}</p>
                                 )}
                             </div>
                             <div className="absolute top-4 right-4 size-12">
@@ -64,7 +83,7 @@ const MemberCard = ({ member, index }) => {
                 <div className="absolute w-full h-full backface-hidden rotate-y-180">
                     <div className={`relative h-full rounded-3xl bg-gradient-to-br ${gradient} p-1 overflow-hidden`}>
                         <div className="h-full rounded-3xl bg-gray-950 p-6 flex flex-col justify-between">
-                            <div>
+                            <div className='p-5'>
                                 <h3 className="text-xl font-bold text-white mb-2">{member.name}</h3>
                                 <p className="text-sm text-gray-300 mb-3">{member.Department}</p>
                                 

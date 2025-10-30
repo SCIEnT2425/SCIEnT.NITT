@@ -42,11 +42,17 @@
   .tabs{
     width: auto;
   }
+  .Admins{
+    box-sizing: border-box;
+    display: flex;
+    padding: auto auto;
+    justify-content: space-around;
+  }
 }
 
 /* Larger screens */
 @media (min-width: 1280px) {
   .membersGrid {
-    grid-template-columns: repeat(4, minmax(0, 1fr)); /* Further increase for very large screens */
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* Further increase for very large screens */
   }
 }

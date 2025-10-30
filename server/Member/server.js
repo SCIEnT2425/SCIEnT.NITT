@@ -4,7 +4,7 @@ const fs = require("fs");
 const cors = require("cors"); // Add CORS package
 const app = express();
 const path = require("path");
-const teamRoutes = require('./team');
+const teamRoutes = require('../routes/team.js');
 const { default: mongoose } = require("mongoose");
 
 
@@ -13,8 +13,8 @@ app.use(bodyParser.json());
 app.use(cors()); // Enable CORS
 
 app.use('/api/team', teamRoutes);
-
-mongoose.connect('mongodb://localhost:27017/TeamDB', {
+const MONGO_URI = "mongodb+srv://sanskar:%23sanskar@cluster0.db0hhre.mongodb.net/TeamDB?appName=Cluster0";
+mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(async () => {

@@ -15,6 +15,10 @@ const Team = () => {
         <div id='team' className='mt-12'>
           <ScientMembers/>
         </div>
+        <div>
+          {/*  just for fun */}
+          <h1 className='text-2xl font-mono justify-center flex laptop:justify-start'>Sanskar Sharma</h1>
+        </div>
         <Footer/>
     </div>
   )
