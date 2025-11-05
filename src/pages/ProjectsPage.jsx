@@ -95,36 +95,38 @@ export default function ProjectsPage() {
 
         {/* Projects by Year */}
         {Object.keys(groupedProjects)
-          .filter((year) => selectedYear === "ALL" || selectedYear === parseInt(year)) // 👈 Show only selected year
+          .sort((a, b) => b - a)
+          .filter((year) => selectedYear === "ALL" || Number(year) === selectedYear)
           .map((year) => (
-            <div key={year} className="year-section">
-              <h2 className="year-title">{year}</h2>
-              <div className="project-scroll-container">
-                <button
-                  onClick={() => scroll(year, "left")}
-                  className="scroll-btn left"
-                >
-                  <ChevronLeft />
-                </button>
+    <div key={year} className="year-section">
+      <h2 className="year-title">{year}</h2>
+      <div className="project-scroll-container">
+        <button
+          onClick={() => scroll(year, "left")}
+          className="scroll-btn left"
+        >
+          <ChevronLeft />
+        </button>
 
-                <div
-                  ref={(el) => (scrollRefs.current[year] = el)}
-                  className="project-row"
-                >
-                  {groupedProjects[year].map((project) => (
-                    <ProjectCard key={project._id} project={project} />
-                  ))}
-                </div>
-
-                <button
-                  onClick={() => scroll(year, "right")}
-                  className="scroll-btn right"
-                >
-                  <ChevronRight />
-                </button>
-              </div>
-            </div>
+        <div
+          ref={(el) => (scrollRefs.current[year] = el)}
+          className="project-row"
+        >
+          {groupedProjects[year].map((project) => (
+            <ProjectCard key={project._id} project={project} />
           ))}
+        </div>
+
+        <button
+          onClick={() => scroll(year, "right")}
+          className="scroll-btn right"
+        >
+          <ChevronRight />
+        </button>
+      </div>
+    </div>
+  ))}
+
 
         {projects.length === 0 && (
           <p className="no-projects">No projects found for this club.</p>
