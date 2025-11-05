@@ -1,26 +1,40 @@
 .card {
-  width: 18rem;  /* default 256px */
-  height: 24rem;
+  width: 16rem;  /* Smaller base for mobile (256px) */
+  height: 22rem; /* Adjusted for mobile */
 }
-
+.Admins{
+    flex-direction: column ;
+  }
 @media (min-width: 640px) { /* sm breakpoint */
   .card {
-    width: 18rem; /* 288px */
+    width: 18rem; /* 288px - slight increase */
     height: 24rem;
   }
+  
 }
 
 @media (min-width: 768px) { /* md breakpoint */
   .card {
-    width: 16rem; /* 320px */
-    height: 20rem;
+    width: 20rem; /* 320px - progressive increase for tablet */
+    height: 26rem;
   }
+  .Admins{
+    flex-direction: row ;
+  }
+ 
 }
 
 @media (min-width: 1024px) { /* lg breakpoint */
   .card {
-    width: 20rem; /* 384px */
-    height: 24rem;
+    width: 24rem; /* 384px */
+    height: 30rem;
+  }
+  .Admins{
+    flex-direction: row ;
+    transform: scale(0.8);
+    position: relative;
+    right: 14rem;
+    top:5rem
   }
 }
   
