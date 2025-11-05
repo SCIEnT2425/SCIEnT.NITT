@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const TeamMember = require("../models/TeamMember");
 
 const teamData = [
@@ -728,7 +727,7 @@ const teamData = [
   }
 ];
 
-exports.seedTeams = async () => {
+exports.seedTeams = async (req,res) => {
     try {
       await TeamMember.deleteMany({}); // Remove all clubs for a clean slate
     
