@@ -20,7 +20,7 @@ export default function FacilityAdminSection() {
     const fetchAdmin = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('http://localhost:2000/api/team/facility-admins');
+        const response = await axios.get('/api/team/facility-admins');
         
         if (response.data && response.data.data && response.data.data.length > 0) {
           setAdmin(response.data.data[0]);

@@ -18,7 +18,7 @@ const SCIentMembers = () => {
   const [loading, setLoading] = useState(true);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
-  const API_BASE = 'http://localhost:2000/api/team'; // Adjust base URL as needed
+  const API_BASE = '/api/team'; // Adjust base URL as needed
 
   useEffect(() => {
     const fetchMembers = async () => {
