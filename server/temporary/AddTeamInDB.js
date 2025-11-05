@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const TeamMember = require("../models/TeamMember");
 
-const MONGO_URI = "mongodb+srv://sanskar:%23sanskar@cluster0.db0hhre.mongodb.net/TeamDB?appName=Cluster0"; // change if needed
-
 const teamData = [
   // ================= Faculty Advisor =================
   {
@@ -730,26 +728,20 @@ const teamData = [
   }
 ];
 
-const seedDB = async () => {
-  try {
-    await mongoose.connect(MONGO_URI);
-    console.log("✅ MongoDB connected");
-
-    await TeamMember.deleteMany({});
-    console.log("🧹 Old data cleared");
-
-    const inserted = await TeamMember.insertMany(teamData); // Re-assign to capture
-    console.log("Inserted roles:", inserted.map(m => m.role));
-    console.log("🌱 Team data seeded successfully!");
-
-    mongoose.connection.close();
-  } catch (err) {
-    console.error("❌ Error seeding database:", err);
-    mongoose.connection.close();
-  }
-  
+exports.seedTeams = async () => {
+    try {
+      await TeamMember.deleteMany({}); // Remove all clubs for a clean slate
+    
+        // Insert the clubs into the database
+        await TeamMember.insertMany(teamData);
+    
+        res.status(201).send({ message: "Team details seeded successfully!" });
+      } catch (error) {
+        console.error("Seeding error:", error);
+        res.status(500).send({ message: "Error seeding clubs" });
+    }
 };
 
-seedDB();
+//seedDB();
 
 // KWzVFeT3ZrFknqsI

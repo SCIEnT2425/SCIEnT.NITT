@@ -20,7 +20,7 @@ export default function FacultyAdvisorSection() {
     const fetchAdmin = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('http://localhost:2000/api/team/faculty-advisors');
+        const response = await axios.get('/api/team/faculty-advisors');
         
         if (response.data && response.data.data && response.data.data.length > 0) {
           setAdmin(response.data.data[0]);
