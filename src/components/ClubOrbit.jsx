@@ -3,6 +3,12 @@ import React from 'react'
 import "./ClubOrbit.css";
 import ecell from "../assets/ecell.png";
 import prof from "../assets/prof.png"
+import orbitclub from '../assets/orbit.jpg'
+import ever from '../assets/ever.jpg'
+import forceHyperloop from '../assets/force_hyperloop.jpg'
+import databyte from '../assets/databyte.jpg'
+import catalyst from '../assets/catalyst.jpg'
+
 import thirdD from "../assets/3d.png"
 import spider from "../assets/spider.png"
 import rmi from "../assets/rmi.png"
@@ -14,6 +20,7 @@ import DC180 from "../assets/180.png"
 import nak from "../assets/nak.png"
 import psi from "../assets/psi.png"
 import sigma from "../assets/sigma.png"
+import { data } from 'autoprefixer';
 // import logo from "../assets/logo.svg";
 const ClubOrbit = () => {
     return (
@@ -59,26 +66,8 @@ const ClubOrbit = () => {
                                 </a>
                             </li>
                             <li>
-                                <a href="https://sigma.nitt.edu/" target="_blank">
-                                    <img className="orbit-icon" src={sigma} alt="Sigma Club" />
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="https://www.180dc.org/branches/NIT-Trichy"
-                                    target="_blank"
-                                >
-                                    <img className="orbit-icon" src={DC180} alt="DC180 Club" />
-                                </a>
-                            </li>
-                            <li>
                                 <a href="https://nakshatra.nitt.edu/#home" target="_blank">
                                     <img className="orbit-icon" src={nak} alt="Nakshatra Club" />
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://delta.nitt.edu/" target="_blank">
-                                    <img className="orbit-icon" src={delta} alt="Delta Club" />
                                 </a>
                             </li>
                             <li>
@@ -87,11 +76,23 @@ const ClubOrbit = () => {
                                 </a>
                             </li>
                             <li>
-                                <a
-                                    href="https://www.linkedin.com/company/graphiquenitt/"
-                                    target="_blank"
-                                >
-                                    <img className="orbit-icon" src={graphi} alt="Graphi Club" />
+                                <a href="https://www.linkedin.com/company/orbitnitt" target="_blank">
+                                    <img className="orbit-icon dc" src={orbitclub} alt="Orbit Club" />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/company/force-hyperloop/" target="_blank">
+                                    <img className="orbit-icon dc" src={forceHyperloop} alt="Force Hyperloop Club" />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/catalyst.nitt/" target="_blank">
+                                    <img className="orbit-icon dc" src={catalyst} alt="Catalyst Club" />
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://databytenitt.github.io/home.html" target="_blank">
+                                    <img className="orbit-icon dc" src={databyte} alt="Databyte Club" />
                                 </a>
                             </li>
                         </ul>
@@ -104,22 +105,18 @@ const ClubOrbit = () => {
                                 </a>
                             </li>
                             <li>
+                                <a href="https://www.linkedin.com/company/ever-nitt" target="_blank">
+                                    <img className="orbit-icon dc" src={ever} alt="Ever Club" />
+                                </a>
+                            </li>
+                            <li>
                                 <a href="https://www.linkedin.com/in/dcnitt/" target="_blank">
                                     <img className="orbit-icon dc" src={dc} alt="DC Club" />
                                 </a>
                             </li>
                             <li>
                                 <a href="https://ecell-nitt.org/" target="_blank">
-                                    <img
-                                        className="orbit-icon ecell"
-                                        src={ecell}
-                                        alt="E-Cell Club"
-                                    />
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://profnitt.com/" target="_blank">
-                                    <img className="orbit-icon prof" src={prof} alt="Prof Club" />
+                                    <img className="orbit-icon ecell" src={ecell} alt="E-Cell Club" />
                                 </a>
                             </li>
                         </ul>
