@@ -1,83 +1,83 @@
-import React, { useEffect, useState } from "react";
-import "./Contact.css";
-import { useForm } from "@formspree/react";
+import React from 'react'
+
 
 const Contact = () => {
-  const [state, handleSubmit] = useForm("movqgara");
-  const [isSubmitted, setIsSubmitted] = useState(false); // Local state to track submission
-
-  useEffect(() => {
-    if (state.succeeded && !isSubmitted) {
-      alert("Message submitted successfully!");
-      document.getElementById("contact-form").reset(); // for Clearing the form
-      setIsSubmitted(true); // Prevent duplicate alerts
-    }
-  }, [state.succeeded, isSubmitted]);
-
-  const handleNewSubmission = () => {
-    setIsSubmitted(false); // for Allowing new submission
-  };
-
   return (
-    <div className="contact-container">
-      <div className="headercontact">
-        <h1>CONTACT US</h1>
-        <p>Reach out for a new project or just say hello</p>
-      </div>
-      <div className="contact-content">
-        <div className="contact-form">
-          <h3>SEND US A MESSAGE</h3>
-          <form
-            id="contact-form"
-            onSubmit={(e) => {
-              handleNewSubmission(); // Reset submission state
-              handleSubmit(e); // Submit the form
-            }}
-          >
-            <input type="text" name="name" placeholder="Your name" required />
-            <input
-              type="email"
-              name="email"
-              placeholder="Your email"
-              required
-            />
-            <input type="text" name="subject" placeholder="Subject" required />
-            <textarea name="message" placeholder="Message" required></textarea>
-            <button className="submit" type="submit" disabled={state.submitting}>
-              SUBMIT
-            </button>
-          </form>
-        </div>
-        <div className="contact-info">
-          <h3 className="contact-info-header">CONTACT INFO</h3>
-          <h4>Call us (Manager:) at:</h4>
-          <p>Sivenasan: +91 90925 59610</p>
-          <h4>Call us (Student Heads:) at:</h4>
-          <p>Alan Prakash: +91 93608 45683</p>
-          <p>Arjun B K  : +91 86104 50988</p>
-          <p>Alok Verma:  +91 74080 92857</p>
-          <h4>Email us at</h4>
-          <p>
-          scient@nitt.edu
-            <br />
-          </p>
-          <h4>Where to find us</h4>
-          <p>NIT Trichy</p>
-          <div className="map">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.701761855082!2d78.8138688748695!3d10.757452689390144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baa8d3d71d1d26b%3A0xfb1eb8b4045b0de!2sSCIEnT%20Lab!5e0!3m2!1sen!2sin!4v1723030553957!5m2!1sen!2sin"
-              width="250"
-              height="180"
-              style={{ border: 0 }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+    <div className='text-white mt-44 tablet:mt-60 laptop:mt-36 w-screen flex flex-col items-center gap-20'>
+      <div className='min-h-[75vh] w-[80vw] grid grid-cols-9 '>
+        <div className="
+        col-span-full
+        laptop:col-span-5 laptop:col-start-1
+        border-2 border-yellow-500
+        shadow-[0_0_10px_2px_rgba(234,179,8,0.6)]
+        rounded-t-[15%] laptop:rounded-tr-none laptop:rounded-l-[15%]
+        flex flex-col justify-center p-5 gap-5">
+          <h1 className='text-7xl font-extrabold bg-gradient-to-r from-yellow-500 to-yellow-700 bg-clip-text text-transparent'>CONTACT US</h1>
+          <p className='ml-3 text-gray-300 text-xl font-medium'>Tell us about your vision, challenges you're facing or a new project idea, or just say hi. We would love to hear you out!</p>
+          <div className='ml-3 flex flex-col gap-2'>
+            <div className='flex gap-2'>
+            <p className='text-gray-300 text-md font-medium'>For admin related info, contact </p>
+            <p className='text-yellow-600 font-semibold'>Sivanesan: 412509129502</p>
           </div>
+          <div className='flex gap-2'>
+            <p className='text-gray-300 text-md font-medium'>For technical info, contact </p>
+            <p className='text-yellow-600 font-semibold'>Arjun B K: 412509129502</p>
+          </div>
+          <div className='flex gap-2'>
+            <p className='text-gray-300 text-md font-medium'>For facility related info, contact </p>
+            <p className='text-yellow-600 font-semibold'>Alan Prakash: 412509129502</p>
+          </div>
+
+          <div className="pt-5 flex items-center gap-5 w-1/2"> <a href="" target="_blank" rel="noopener noreferrer"> <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="gray" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-linkedin-icon lucide-linkedin"> <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/> <rect width="4" height="12" x="2" y="9"/> <circle cx="4" cy="4" r="2"/> </svg> </a> <a href="" target="_blank" rel="noopener noreferrer"> <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="gray" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-instagram-icon lucide-instagram"> <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/> <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/> <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/> </svg> </a> <a href="" target="_blank" rel="noopener noreferrer" className='flex gap-2 items-center'> <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="gray" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-map-pin-icon lucide-map-pin"> <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/> <circle cx="12" cy="10" r="3"/> </svg> <p className='text-[#808181] whitespace-nowrap' style={{fontWeight: 700}}>SCIEnT, NIT Trichy</p> </a> </div>
+          </div>
+        </div>  
+        <div
+          className="
+            col-span-full
+            laptop:col-span-4 laptop:col-start-6
+            border-2 laptop:border-l-transparent border-yellow-500
+            shadow-[0_0_10px_2px_rgba(234,179,8,0.6)]
+            bg-[#0E121E]
+            rounded-b-[15%] laptop:rounded-b-none laptop:rounded-r-[15%]
+            flex flex-col justify-center p-5 gap-4
+          "
+        >
+          <div className='flex flex-col gap-2'>
+            <h2 className='text-3xl text-yellow-500'>What's your name?</h2>
+            <input
+              className="bg-transparent border-b-2 border-b-gray-500 placeholder:font-mono placeholder-gray-500 placeholder:text-md placeholder:font-medium focus:border-b-yellow-500 outline-none delay-150 transition-colors"
+              placeholder="Alan Prakash"
+            />
+          </div>
+          <div className='flex flex-col gap-2'>
+            <h2 className='text-3xl text-yellow-500'>What's your email?</h2>
+            <input
+              className="bg-transparent border-b-2 border-b-gray-500 placeholder:font-mono placeholder-gray-500 placeholder:text-md placeholder:font-medium focus:border-b-yellow-500 outline-none delay-150 transition-colors"
+              placeholder="Alan_Prakash@gmail.com"
+            />
+          </div>
+          <div className='flex flex-col gap-2'>
+            <h2 className='text-3xl text-yellow-500'>Subject</h2>
+            <input
+              className="bg-transparent border-b-2 border-b-gray-500 placeholder:font-mono placeholder-gray-500 placeholder:text-md placeholder:font-medium focus:border-b-yellow-500 outline-none delay-150 transition-colors"
+              placeholder="Idea to transform..."
+            />
+          </div>
+          <div className='flex flex-col gap-2'>
+            <h2 className='text-3xl text-yellow-500'>What do you want to tell us?</h2>
+            <textarea
+              className="bg-transparent border-2 border-gray-500 rounded-lg placeholder:font-mono placeholder-gray-500 placeholder:text-md placeholder:font-medium focus:border-yellow-500 outline-none delay-150 transition-colors p-3"
+              placeholder="Hey! I'd love to ask you about..."
+            ></textarea>
+          </div>
+          <div className='w-full flex justify-center'>
+            <button className='rounded-full w-1/2 bg-yellow-500 text-gray-500'>Submit</button>
+          </div>
+          
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Contact;
+export default Contact

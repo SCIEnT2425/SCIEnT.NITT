@@ -13,8 +13,8 @@ function CarouselPage() {
   return (
     <div>
       <div className="headingcarousel">
-        <h2>SCIEnT</h2>
-        <p className="desc">
+        <p className='text-yellow-500' style={{fontSize: 175, fontWeight: 800, WebkitTextStroke: "3px black"}}>SCIEnT</p>
+        <p className="text-3xl text-white whitespace-nowrap mb-4">
           Student Centre for Innovation in Engineering and Technology
         </p>
         <p className="typewriter">
