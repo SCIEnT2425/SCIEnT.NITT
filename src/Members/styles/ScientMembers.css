@@ -30,24 +30,29 @@
 /* Tablets */
 @media (min-width: 768px) {
   .membersGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr)) ;
   }
 }
 
 /* Laptops / small desktops */
 @media (min-width: 1024px) {
   .membersGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* Increased to 3 columns earlier for better desktop utilization */
   }
   .tabs{
     width: auto;
+  }
+  .Admins{
+    box-sizing: border-box;
+    display: flex;
+    padding: auto auto;
+    justify-content: space-around;
   }
 }
 
 /* Larger screens */
 @media (min-width: 1280px) {
   .membersGrid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* Further increase for very large screens */
   }
 }
-
