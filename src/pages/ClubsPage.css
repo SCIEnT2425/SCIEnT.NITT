@@ -1,0 +1,68 @@
+
+.clubs-page {
+  background-color: #000;
+  color: white;
+  min-height: 100vh;
+  padding: 10rem 2rem 2rem; /* ⬅ top padding added for navbar space */
+}
+
+/* Glowing golden title */
+.clubs-title {
+  font-size: 3rem;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  color: #ffd700; /* gold */
+  letter-spacing: 2px;
+}
+
+/* Soft glowing pulse effect */
+/* @keyframes glowPulse {
+  from {
+    text-shadow: 
+      0 0 5px #ffd700,
+      0 0 10px #ffea00,
+      0 0 20px #ffea00,
+      0 0 30px #ffcc00;
+  }
+  to {
+    text-shadow: 
+      0 0 15px #ffea00,
+      0 0 25px #ffea00,
+      0 0 40px #ffd700,
+      0 0 60px #ffaa00;
+  }
+} */
+
+.clubs-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* centers all rows including last */
+  gap: 2rem;
+  padding: 0 2rem;
+}
+
+/* Each club card width — adjust as needed */
+.clubs-grid > * {
+  flex: 1 1 calc(20% - 2rem); /* ✅ 5 cards per row (100% / 5 = 20%) */
+  max-width: 220px;
+  min-width: 180px;
+}
+
+/* Medium screens (like tablets): 3 cards per row */
+@media (max-width: 1024px) {
+  .clubs-grid > * {
+    flex: 1 1 calc(33.33% - 2rem);
+  }
+}
+
+/* Small screens (phones): 1 card per row */
+@media (max-width: 600px) {
+  .clubs-grid > * {
+    flex: 1 1 100%;
+    max-width: 300px; /* optional: to keep it neat */
+  }
+}
+
+
+

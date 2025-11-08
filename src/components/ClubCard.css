@@ -1,0 +1,60 @@
+.club-card {
+  position: relative;
+  background-color: #000;
+  border: 2px solid #ffd700;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 220px;
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.club-card-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 1rem;
+}
+
+.club-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+
+/* Reset h2 style for club names */
+.club-card h2,
+.club-name {
+  all: unset; /* resets inherited glow or text-shadow */
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-top: 0.3rem;
+  transition: color 0.3s ease;
+  text-align: center;
+}
+
+/* Hover Effects */
+.club-card:hover {
+  transform: scale(1.05);
+  border-color: #ffea00;
+}
+
+.club-card:hover .club-logo {
+  transform: scale(1.08);
+}
+
+.club-card:hover .club-name,
+.club-card:hover h2 {
+  color: #ffd700;
+}
