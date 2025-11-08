@@ -13,11 +13,12 @@ function CarouselPage() {
   return (
     <div>
       <div className="headingcarousel">
-        <h2>SCIEnT</h2>
-        <p className="desc">
+        <p className='text-yellow-500 scient-title'>SCIEnT</p>
+        <p className="text-xs mobile:text-lg
+         laptop:text-3xl text-white whitespace-nowrap mb-4">
           Student Centre for Innovation in Engineering and Technology
         </p>
-        <p className="typewriter">
+        <p className="text-sm mobile:text-lg laptop:text-3xl text-[#79d9ff] font-semibold">
           <Typewriter
             words={['Walk in with an Idea, Walk out with a Prototype.']}
             loop={false}

@@ -7,14 +7,14 @@ import Carousel from '../components/CarouselPage'
 import Navbar from '../components/Navbar'
 const Home = () => {
   return (
-    <>
+    <div className='bg-black'>
     <Navbar/>
     <Carousel/>
       <HomeTop />
       <ClubOrbit />
       <FAQComponent /> 
       <Footer />
-    </>
+    </div>
   )
 }
 

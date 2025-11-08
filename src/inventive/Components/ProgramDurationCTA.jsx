@@ -45,7 +45,7 @@ const ProgramDurationCTA = () => {
           <p className="mb-3">Here are few resources,Check out</p>
           <div className="flex justify-center">
             <button
-              className="group relative px-8 py-3 border border-yellow-400 bg-black text-yellow-400 text-lg: font-semibold text-base rounded-lg
+              className="group relative px-8 py-3 border border-yellow-400 bg-black text-yellow-400 text-lg font-semibold text-base rounded-lg
                transition-all duration-300 hover:bg-gradient-to-r from-yellow-600 to-yellow-400 hover:text-black hover:shadow-lg hover:shadow-yellow-400/40
                focus:outline-none focus:ring-2 focus:ring-yellow-300/50"
               onClick={handleResourceClick}
