@@ -3,15 +3,12 @@ import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
   const navigate = useNavigate();
-  const handleClick = () => {
-    navigate("/contriveForm");
-  };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4">
-        <div className="max-w-5xl mx-auto animate-[slideUp_1s_ease-out]">
+        <div className="max-w-5xl mx-auto animate-[slideUp_1s_ease-out] mt-32">
           {/* Main Title */}
           <h1 className="text-7xl md:text-8xl lg:text-9xl font-black mb-12 tracking-tight text-center relative">
             {"CONTRIVE'25".split("").map((char, index) => (
@@ -25,7 +22,7 @@ const Hero = () => {
           </h1>
 
           {/* About Section */}
-          <div className="relative rounded-3xl p-8 md:p-12 mb-12 backdrop-blur-sm bg-gradient-to-br from-yellow-500/10 via-black/50 to-yellow-600/10 border-2 border-yellow-500/30 shadow-[0_0_50px_rgba(234,179,8,0.3)] animate-[fadeIn_1.2s_ease-out_0.5s_both] hover:border-yellow-400/50 hover:shadow-[0_0_80px_rgba(234,179,8,0.5)] transition-all duration-500 group">
+          <div className="relative flex flex-col rounded-3xl p-8 md:p-12 mb-12 backdrop-blur-sm bg-gradient-to-br from-yellow-500/10 via-black/50 to-yellow-600/10 border-2 border-yellow-500/30 shadow-[0_0_50px_rgba(234,179,8,0.3)] animate-[fadeIn_1.2s_ease-out_0.5s_both] hover:border-yellow-400/50 hover:shadow-[0_0_80px_rgba(234,179,8,0.5)] transition-all duration-500 group">
             {/* Corner accents */}
             <div className="absolute top-0 left-0 w-20 h-20 border-t-4 border-l-4 border-yellow-400/60 rounded-tl-3xl group-hover:border-yellow-300 transition-colors"></div>
             <div className="absolute top-0 right-0 w-20 h-20 border-t-4 border-r-4 border-yellow-400/60 rounded-tr-3xl group-hover:border-yellow-300 transition-colors"></div>
@@ -63,22 +60,23 @@ const Hero = () => {
           </div>
 
           {/* Register Button */}
-          <div className="flex justify-center">
-            <button
-              className="group relative px-12 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold text-xl rounded-full transform hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-400/50 focus:outline-none focus:ring-4 focus:ring-yellow-400/30"
-              onClick={handleClick}
-            >
-              <span className="relative z-10 tracking-wide">REGISTER NOW</span>
+          <div className="flex justify-center mb-4">
+            <a href="https://forms.gle/omeZfjCgPYJzbgxC8" target="_blank">
+              <button
+                className="group relative px-12 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold text-xl rounded-full transform hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-yellow-400/50 focus:outline-none focus:ring-4 focus:ring-yellow-400/30"
+              >
+                <span className="relative z-10 tracking-wide">REGISTER NOW</span>
 
-              {/* Hover overlay */}
-              <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-              {/* Button glow effect */}
-              <div className="absolute inset-0 rounded-full bg-yellow-400/20 blur-xl group-hover:bg-yellow-400/40 transition-all duration-300 -z-10"></div>
+                {/* Button glow effect */}
+                <div className="absolute inset-0 rounded-full bg-yellow-400/20 blur-xl group-hover:bg-yellow-400/40 transition-all duration-300 -z-10"></div>
 
-              {/* Pulse ring */}
-              <div className="absolute inset-0 rounded-full border-2 border-yellow-400 opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-300"></div>
-            </button>
+                {/* Pulse ring */}
+                <div className="absolute inset-0 rounded-full border-2 border-yellow-400 opacity-0 group-hover:opacity-100 animate-ping transition-opacity duration-300"></div>
+              </button>
+            </a>
           </div>
         </div>
       </div>
