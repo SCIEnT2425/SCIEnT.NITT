@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Gallery from "./pages/Gallery";
-// import ProjectSection from "./pages/ProjectSection";
+import ProjectSection from "./pages/ProjectSection";
 import Contact from "./pages/Contacts";
 import Bookings from "./pages/RoomBooking";
 import Dashboard_booking from "./pages/Dashboard_booking";
@@ -58,6 +58,8 @@ import Annualday from "./pages/Annualday";
 import Inventive from "./inventive/Pages/Inventive";
 import InventivePage from "./inventive/Pages/InventivePage" ;
 import Members from "./pages/Members"
+import Contrive from "./contrive/Pages/Contrive";
+import ContrivePage from "./contrive/Pages/ContrivePage";
 const App = () => {
   return (
     <>
@@ -90,11 +92,15 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/gallery" element={<Gallery />} />
+        <Route path="/project" element={<ProjectSection />} />
         <Route path="/inventive" element={<Inventive />} />
         <Route path="/inventiveForm" element={<InventivePage/>} />
         <Route path="/inventory" element={<Inventory />} />
+        <Route path="/contrive" element={<Contrive/>}/>
+        <Route path="/contriveForm" element={<ContrivePage/>}/>
         <Route path="/Team" element={<Team/>} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/Team" element={<Team />} />
         <Route path="/roombook" element={<Bookings />} />
         <Route path="/open-house" element={<OpenHouse />} />
         <Route path="/e-summit" element={<ESummit />} />

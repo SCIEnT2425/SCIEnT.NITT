@@ -3,9 +3,7 @@ import "../styles/Inventive.css";
 
 const InventiveHero = () => {
   return (
-
     <div className="relative w-full min-h-screen bg-black overflow-hidden flex items-center justify-center">
-
       {/* Animated Background Grid */}
       <div className="absolute inset-0 opacity-30">
         <svg
@@ -91,7 +89,6 @@ const InventiveHero = () => {
           </div>
 
           {/* Main Description */}
-
           <div className="mb-12 px-4 sm:mb-16 space-y-6 sm:space-y-8">
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-3xl sm:max-w-4xl mx-auto">
               <span className="text-yellow-400 font-semibold">INVENTIVE</span>{" "}
@@ -99,7 +96,6 @@ const InventiveHero = () => {
               of innovation in aspiring minds. Whether you’re a dreamer,
               thinker, or builder, this is your chance to bring your ideas to
               life.
-
             </p>
             <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl sm:max-w-3xl mx-auto">
               This program offers you a unique opportunity to transform your raw
