@@ -38,13 +38,13 @@ const Navbar = () => {
                         Timeline
                     </Link>
 
-                    <Link
+                    {/* <Link
                         to="/gallery"
                         onClick={handleClick}
                         className={`nav-link ${isActive('/gallery') ? 'active font-bold text-lg' : ''}`}
                     >
                         Gallery
-                    </Link>
+                    </Link> */}
 
                     <Link
                         to="/clubs"
@@ -61,13 +61,14 @@ const Navbar = () => {
                     >
                         Room Booking
                     </Link> */}
-                     <Link
-                        to="/Inventory"
+                    <Link
+                        to="/contrive"
                         onClick={handleClick}
-                        className={`nav-link ${isActive('/contact') ? 'active font-bold text-lg' : ''}`}
+                        className={`nav-link ${isActive('/contrive') ? 'active font-bold text-lg' : ''} `}
                     >
-                        Inventory
+                        CONTRIVE'25
                     </Link>
+                   
                     <Link
                         to="/inventive"
                         onClick={handleClick}
@@ -79,7 +80,7 @@ const Navbar = () => {
                     <Link
                         to="/Team"
                         onClick={handleClick}
-                        className={`nav-link ${isActive('/Team') ? 'active font-bold text-lg' : ''}`}
+                        className={`nav-link ${isActive('/Team') ? 'active font-bold text-lg' : ''} `}
                     >
                         Team
                     </Link>

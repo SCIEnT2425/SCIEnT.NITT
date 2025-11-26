@@ -7,7 +7,7 @@ const path = require("path");
 const createSlotsForWeek = require("./utils/createSlots");
 const errorHandler = require("./middleware/errorHandler");
 const { resetCredits, resetBookings } = require("./controllers/clubController");
-
+const teamRoutes = require('./routes/team');
 // Load environment variables
 dotenv.config();
 
@@ -22,13 +22,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
+app.use('/api/team', teamRoutes);
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/clubs", require("./routes/clubRoutes"));
-app.use("/api/clubs", require("./routes/projectRoutes"));
 app.use("/api/bookings", require("./routes/bookingRoutes"));
 app.use("/api/admin", require("./routes/adminRoutes"));
 app.use("/api/inventiveForm", require("./inventive/inventiveFormRoutes")); // Add the new route
-app.use("/api/inventory", require("./routes/inventoryRoutes"));
+app.use("/api/inventory", require("./routes/inventoryRoutes.js"));
 app.use("/api/temp", require("./temporary/temp-route"));
 
 

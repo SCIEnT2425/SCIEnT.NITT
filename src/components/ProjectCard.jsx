@@ -1,8 +1,9 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-export default function ProjectCard({ project }) {
+const ProjectCard = ({ project }) => {
   const { name } = useParams();
+  const navigate = useNavigate();
 
   // Handle undefined project prop
   if (!project) {
@@ -16,8 +17,15 @@ export default function ProjectCard({ project }) {
   const imageSrc =
     project?.image?.url || project?.image || "https://picsum.photos/400/300?random";
 
+  const handleClick = () => {
+    navigate(`/clubs/${name}/projects/${project._id}`);
+  };
+
   return (
-    <div className="bg-gray-900 p-4 rounded-2xl shadow-lg w-72 flex-shrink-0 hover:scale-105 transition-transform duration-200">
+    <div
+      onClick={handleClick}
+      className="bg-gray-900 p-4 rounded-2xl shadow-lg w-72 flex-shrink-0 hover:scale-105 transition-transform duration-200 cursor-pointer"
+    >
       {/* Project Image */}
       <img
         src={imageSrc}
@@ -48,4 +56,6 @@ export default function ProjectCard({ project }) {
       )}
     </div>
   );
-}
+};
+
+export default ProjectCard;

@@ -102,17 +102,11 @@ export default function ProjectForm() {
     setIsSubmitting(true);
 
     try {
-
-      const response = await fetch(
-        "http://localhost:5000/api/inventiveForm/submit",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        }
-      );
-
-
+      const response = await fetch("/api/inventiveForm/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
       if (response.ok) {
         const message = await response.text();
@@ -551,23 +545,14 @@ export default function ProjectForm() {
           </div>
 
           {/* Submit Button */}
-          <div className="text-center flex justify-center gap-4">
-  <button
-    type="submit"
-    className="px-6 py-3 bg-yellow-500 hover:bg-yellow-600 text-black font-bold rounded-lg shadow-md"
-  >
-    Submit
-  </button>
-
-  <a
-    href="https://drive.google.com/drive/folders/1GzsNa_-kcYYm3NOpQnc5DPT0M3Q7CBLz?usp=sharing"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg shadow-md"
-  >
-    View Description of Problem Statements
-  </a>
-</div>
+          <div className="text-center">
+            <button
+              type="submit"
+              className="px-8 py-3 bg-yellow-400 text-black font-bold rounded-xl shadow-lg hover:bg-yellow-300 hover:scale-105 transform transition duration-300"
+            >
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     </div>
