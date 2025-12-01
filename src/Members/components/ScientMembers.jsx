@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Mail, Linkedin, Github, Zap, Sparkles, Rocket, Star, ChevronDown } from 'lucide-react';
 import MemberCard from './MemberCard';
+import  AdminCard from './AdminCard.jsx';
+import FacultyAdvisorCard from './FacultyAdvisor.jsx';
+import FacilityAdminCard from './FacilityAdmin.jsx';
 import '../styles/ScientMembers.css';
-import FacultyAdvisorSection from '../components/FacultyAdvisor';
-import FacilityAdminSection from '../components/FacilityAdmin';
 
 const SCIentMembers = () => {
   const [activeSection, setActiveSection] = useState('team');
@@ -17,27 +18,23 @@ const SCIentMembers = () => {
   });
   const [loading, setLoading] = useState(true);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-
-  const API_BASE = '/api/team'; // Adjust base URL as needed
+  const MODE = process.env.NODE_ENV || 'development';
+  const API_BASE = MODE==="development"? 'http://localhost:2000/api/team' : "/api/team"; // Adjust base URL as needed
 
   useEffect(() => {
     const fetchMembers = async () => {
       try {
         setLoading(true);
-        const [teamRes, coresRes, corpRes, devRes, creaRes] = await Promise.all([
+        const [teamRes] = await Promise.all([
           axios.get(`${API_BASE}/all`),
-          axios.get(`${API_BASE}/cores`),
-          axios.get(`${API_BASE}/cc`),
-          axios.get(`${API_BASE}/devops`),
-          axios.get(`${API_BASE}/creatives`),
         ]);
 
         setMembersData({
           team: teamRes.data.data || [],
-          cores: coresRes.data.data || [],
-          corporate: corpRes.data.data || [],
-          devops: devRes.data.data || [],
-          creative: creaRes.data.data || [],
+          cores: teamRes.data.data.filter(m => m.subteam === 'Cores') || [],
+          corporate: teamRes.data.data.filter(m => m.subteam === 'Corporate Communications') || [],
+          devops: teamRes.data.data.filter(m => m.subteam === 'DevOps') || [],
+          creative: teamRes.data.data.filter(m => m.subteam === 'Creatives') || [],
         });
       } catch (err) {
         console.error('Error fetching members:', err);
@@ -49,6 +46,8 @@ const SCIentMembers = () => {
     fetchMembers();
   }, []);
 
+
+
   const renderTeamSections = () => {
     const all = membersData.team;
     const cores = all.filter(m => 
@@ -56,6 +55,7 @@ const SCIentMembers = () => {
     );
     const managers = all.filter(m => ['Manager' , 'Project Manager'].includes(m.role));
     const deputyManagers = all.filter(m => m.role === 'Deputy Manager');
+    
 
     return (
       <div>
@@ -190,6 +190,26 @@ const renderProjectManagementTeam = () => {
   ];
 
   const currentFilter = filterOptions.find(opt => opt.id === activeSection);
+  const dummyAdmin = {
+      name: "John Smith",
+      role: "Facility Admin",
+      Department: "Facility Management",
+      photoUrl: "/Team/facility_admin.png",
+      email: "FacultyAdvsor@gamil.com",
+      bio: "Ensuring smooth operations and maintenance of all facilities",
+      linkedin: "https://linkedin.com/in/example"
+    };
+    const dummyAdvisor = {
+      name: "Dr. Jane Doe",
+      role: "Faculty Advisor",
+      Department: "Computer Science",
+      photoUrl: "/Team/faculty_advisor.png",
+      email: "FacilityAdmin@gamil.com",
+      bio: "Guiding and mentoring the team towards excellence",
+      linkedin: "https://linkedin.com/in/example"
+    };
+    const FacultyAdvisor = membersData.team.find(m => m.role === 'Faculty Advisor') || dummyAdvisor;
+    const FacilityAdmin = membersData.team.find(m => m.role === 'Admin Executive') || dummyAdmin;
 
   return (
     <div className="min-h-screen bg-black">
@@ -222,8 +242,8 @@ const renderProjectManagementTeam = () => {
             </h1>
         </div>
         <div className='Admins flex w-screen align-center laptop:px-16 justify-center'>
-        <FacultyAdvisorSection/>
-        <FacilityAdminSection/>
+            <FacilityAdminCard  adminData={FacilityAdmin}/>
+            <FacultyAdvisorCard  AdvisorData={FacultyAdvisor}/>
         </div>
       </div>
       <div className='mb-12'>
