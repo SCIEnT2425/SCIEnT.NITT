@@ -7,7 +7,6 @@ const path = require("path");
 const teamRoutes = require('../routes/team.js');
 const { default: mongoose } = require("mongoose");
 
-
 app.use(express.static(path.join(__dirname, ".")));
 app.use(bodyParser.json());
 app.use(cors()); // Enable CORS
@@ -20,7 +19,6 @@ mongoose.connect(MONGO_URI, {
 }).then(async () => {
   try {
     console.log("MongoDB connected");
-
     // Start the server after successful DB connection
     const PORT = 2000;
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
