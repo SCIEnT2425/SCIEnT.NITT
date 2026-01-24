@@ -6,16 +6,7 @@ import About from "./pages/About";
 import Gallery from "./pages/Gallery";
 import ProjectSection from "./pages/ProjectSection";
 import Contact from "./pages/Contacts";
-import Bookings from "./pages/RoomBooking";
-import Dashboard_booking from "./pages/Dashboard_booking";
-import UserDashboard_booking from "./pages/UserDashboard_booking";
-import History from "./pages/History";
-import UserHistoryPage from "./pages/UserHistoryPage";
-import Requests from "./pages/Requests";
-import Profile from "./pages/Profile";
-import Halls from "./pages/Halls";
-import Slots from "./pages/Slots";
-import Days from "./pages/Days";
+
 import Team from "./Members/pages/Team";
 import OpenHouse from "./pages/OpenHouse";
 import Inventory from "./pages/Inventory";
@@ -57,27 +48,11 @@ import Annualday from "./pages/Annualday";
 
 import Inventive from "./inventive/Pages/Inventive";
 import InventivePage from "./inventive/Pages/InventivePage" ;
-import Members from "./pages/Members"
 import Contrive from "./contrive/Pages/Contrive";
 import ContrivePage from "./contrive/Pages/ContrivePage";
 const App = () => {
   return (
     <>
-      <Routes>
-        {/* The below given routes belong to admin*/}
-        <Route path="/admindashboard" element={<Dashboard_booking />} />
-        <Route path="/admindashboard/requests" element={<Requests />} />
-        <Route path="/admindashboard/history" element={<History />} />
-        <Route path="/admindashboard/profile" element={<Profile />} />
-        {/* The below given routes belong to user*/}
-        <Route path="/userdashboard" element={<UserDashboard_booking />}/>
-        <Route path="/userdashboard/history" element={<UserHistoryPage/>}/>
-        <Route path="/userdashboard/halls" element={<Halls/>} />
-        <Route path="/userdashboard/slots" element={<Slots/>} />
-        <Route path="/userdashboard/days" element={<Days/>} />
-        <Route path="/userdashboard/bookingform" element={<Members/>}/>
-      </Routes>
-      {/*the above routes kept separately bcz they require no navbar*/}
       <Routes>
         
         {/* Club Listing  */}
@@ -101,7 +76,7 @@ const App = () => {
         <Route path="/Team" element={<Team/>} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/Team" element={<Team />} />
-        <Route path="/roombook" element={<Bookings />} />
+   
         <Route path="/open-house" element={<OpenHouse />} />
         <Route path="/e-summit" element={<ESummit />} />
         <Route path="/annual-day" element={<Annualday />} />
