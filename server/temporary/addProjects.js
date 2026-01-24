@@ -4,7 +4,7 @@ const {rmiProjects,dcProjects,everProjects,ecellProjects,spiderProjects,psiProje
 const Project = require("../models/Project.js");
 const Club = require("../models/Club.js");
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/mybooking";
+//const MONGO_URL = "mongodb://127.0.0.1:27017/mybooking";
 
 
 const clubName =["E-Cell","SPIDER","FORCE HYPERLOOP", "DESIGNERS CONSORTIUM","RMI","PSI","EVER","3D AERODYNAMICS","DATABYTE","ORBIT"];
@@ -20,16 +20,7 @@ const clubMap={
   8:dataByteProjects,
   9:orbitProjects
 }
-async function main() {
-  console.log("MONGO_URL:", MONGO_URL);
-  await mongoose.connect(MONGO_URL);
-  console.log("Connection has been established");
-  for(let i=0;i<10;i++){
-    await initDB(clubName[i],i);
-  }
-  
-  return;
-}
+
 const initDB = async (club,i) => {
   let currClub = await Club.findOne({ name: club});
   if (!currClub) {
