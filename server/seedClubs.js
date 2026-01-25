@@ -10,13 +10,17 @@ dotenv.config();
 // Load clubs data manually
 const __dirname = path.resolve();
 const clubsData = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "clubsData.json"), "utf-8")
+  fs.readFileSync(path.join(__dirname, "server/clubsData.json"), "utf-8")
 );
 
 const DEFAULT_IMAGE = "https://picsum.photos/400/300?random"; // 🖼️ default project image
 const DEFAULT_PASSWORD = "12345"; // default password for seeding
 
+<<<<<<< Updated upstream
 const seedClubsAndProjects = async () => {
+=======
+export const seedClubs = async (req, res) => {
+>>>>>>> Stashed changes
   try {
     await mongoose.connect(process.env.MONGO_URI);
     console.log("✅ MongoDB Connected");

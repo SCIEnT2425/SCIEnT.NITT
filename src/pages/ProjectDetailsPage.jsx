@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
+import axios from "axios";
 import Navbar from "../components/Navbar";
 import Footer from "../components/footer";
 import ProjectCard from "../components/ProjectCard";
@@ -14,18 +15,28 @@ export default function ProjectDetailsPage() {
   const scrollRef = useRef(null);
 
   useEffect(() => {
-    fetch(`/api/clubs/${name}/projects/${projectId}`)
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchProjectDetails = async () => {
+      try {
+        const MODE = process.env.NODE_ENV || 'development';
+        const API_BASE = MODE==="development"? 'http://localhost:5000/api/clubs' : "/api/clubs";
+        
+        const res = await axios.get(
+          `${API_BASE}/${name}/projects/${projectId}`
+        );
+
+        const data = res.data;
+
         setProject(data.project || null);
         setOtherProjects(data.otherProjects || []);
         setMessage(data.message || "");
-      })
-      .catch((err) => {
+      } catch (err) {
         console.error("Error fetching project details:", err);
         setProject(null);
         setOtherProjects([]);
-      });
+      }
+    };
+
+    fetchProjectDetails();
   }, [name, projectId]);
 
   const scroll = (direction) => {
