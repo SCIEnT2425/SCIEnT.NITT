@@ -5,10 +5,7 @@ const cors = require("cors");
 const path = require("path");
 const errorHandler = require("./middleware/errorHandler");
 const teamRoutes = require('./routes/team');
-<<<<<<< Updated upstream
-=======
 const clubRoutes = require('./routes/clubRoutes');
->>>>>>> Stashed changes
 // Load environment variables
 dotenv.config();
 
@@ -25,14 +22,11 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use('/api/team', teamRoutes);
 app.use("/api/inventiveForm", require("./inventive/inventiveFormRoutes")); // Add the new route
-<<<<<<< Updated upstream
-app.use("/api/inventory", require("./routes/inventoryRoutes.js"));
-app.use("/api/temp", require("./temporary/temp-route"));
-=======
 app.use("/api/inventory", require("./routes/inventoryRoutes"));
 app.use('/api/clubs', clubRoutes);
 // app.use("/api/temp", require("./temporary/temp-route"));
->>>>>>> Stashed changes
+// app.use("/api/temp", require("./temporary/temp-route"));
+
 
 
 // Error handler middleware
