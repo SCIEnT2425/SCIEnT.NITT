@@ -1,53 +1,102 @@
 require("dotenv").config();
-const mongoose = require("mongoose");
-const {rmiProjects,dcProjects,everProjects,ecellProjects,spiderProjects,psiProjects,forceHyperloopProject,dataByteProjects,threeDProjects,orbitProjects} = require("./allProjects.js");
-const Project = require("../models/Project.js");
-const Club = require("../models/Club.js");
+const Project = require("../models/Project");
+const Club = require("../models/Club");
 
-//const MONGO_URL = "mongodb://127.0.0.1:27017/mybooking";
+const {
+  rmiProjects,
+  dcProjects,
+  everProjects,
+  ecellProjects,
+  spiderProjects,
+  psiProjects,
+  forceHyperloopProject,
+  dataByteProjects,
+  threeDProjects,
+  orbitProjects
+} = require("./allProjects");
 
+const clubNames = [
+  "E-Cell",
+  "SPIDER",
+  "FORCE HYPERLOOP",
+  "DESIGNERS CONSORTIUM",
+  "RMI",
+  "PSI",
+  "EVER",
+  "3D AERODYNAMICS",
+  "DATABYTE",
+  "ORBIT"
+];
 
-const clubName =["E-Cell","SPIDER","FORCE HYPERLOOP", "DESIGNERS CONSORTIUM","RMI","PSI","EVER","3D AERODYNAMICS","DATABYTE","ORBIT"];
-const clubMap={
-  0:ecellProjects,
-  1:spiderProjects,
-  2:forceHyperloopProject,
-  3:dcProjects,
-  4:rmiProjects,
-  5:psiProjects,
-  6:everProjects,
-  7:threeDProjects,
-  8:dataByteProjects,
-  9:orbitProjects
-}
-
-const initDB = async (club,i) => {
-  let currClub = await Club.findOne({ name: club});
-  if (!currClub) {
-    console.error(`Club "${clubName}" not found`);
-    return;
-  }
-
-  const deleted = await Project.deleteMany({ club: currClub._id });
-
-  console.log(
-    `Deleted ${deleted.deletedCount} existing projects for "${clubName}"`
-  );
-  const projectsToInsert = clubMap[i].map((proj) => ({
-    name: proj.name,
-    description: proj.description,
-    year: proj.year,
-    image: proj.image || {},
-    club: currClub._id,
-  }));
-
-  const inserted = await Project.insertMany(projectsToInsert);
-  console.log(`Inserted ${inserted.length} projects for club "${clubName}"`);
-
-  // Update club's projects array with new project IDs
-  currClub.projects = inserted.map(p => p._id);
-  await currClub.save();
-  console.log(`Updated "${club}" club document with project references`);
-  return;
+const clubMap = {
+  0: ecellProjects,
+  1: spiderProjects,
+  2: forceHyperloopProject,
+  3: dcProjects,
+  4: rmiProjects,
+  5: psiProjects,
+  6: everProjects,
+  7: threeDProjects,
+  8: dataByteProjects,
+  9: orbitProjects
 };
-main();
+
+/**
+ * @desc Seed projects for a single club
+ * @route POST /api/seed/projects/:index
+ * @access Admin / Dev
+ */
+const seedProjects = async (req, res) => {
+  try {
+    const index = Number(req.params.index);
+
+    if (isNaN(index) || !clubMap[index]) {
+      return res.status(400).json({ message: "Invalid club index" });
+    }
+
+    const clubName = clubNames[index];
+    const projectsData = clubMap[index];
+
+    const currClub = await Club.findOne({ name: clubName });
+
+    if (!currClub) {
+      return res.status(404).json({
+        message: `Club "${clubName}" not found`
+      });
+    }
+
+    // Delete old projects
+    const deleted = await Project.deleteMany({ club: currClub._id });
+
+    // Prepare new projects
+    const projectsToInsert = projectsData.map(proj => ({
+      name: proj.name,
+      description: proj.description,
+      year: proj.year,
+      image: proj.image || {},
+      club: currClub._id
+    }));
+
+    const inserted = await Project.insertMany(projectsToInsert);
+
+    // Update club reference
+    currClub.projects = inserted.map(p => p._id);
+    await currClub.save();
+
+    res.status(201).json({
+      message: `Projects seeded successfully for ${clubName}`,
+      deletedCount: deleted.deletedCount,
+      insertedCount: inserted.length
+    });
+  } catch (error) {
+    console.error("Project seeding error:", error);
+    res.status(500).json({
+      message: "Error seeding projects",
+      error: error.message
+    });
+  }
+};
+
+module.exports = {
+  seedProjects
+};
