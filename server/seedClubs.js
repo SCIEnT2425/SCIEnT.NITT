@@ -1,16 +1,14 @@
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-import Club from "./models/Club.js";
-import Project from "./models/Project.js";
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const fs = require("fs");
+const path = require("path");
+
+const Club = require("./models/Club.js");
+const Project = require("./models/Project.js");
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
+// ✅ __dirname works natively in CommonJS
 const clubsDataPath = path.join(__dirname, "clubsData.json");
 
 const clubsData = JSON.parse(
@@ -20,7 +18,7 @@ const clubsData = JSON.parse(
 const DEFAULT_IMAGE = "https://picsum.photos/400/300?random";
 const DEFAULT_PASSWORD = "12345";
 
-export const seedClubs = async (req, res) => {
+const seedClubs = async (req, res) => {
   try {
     let addedClubs = 0;
     let skippedClubs = 0;
@@ -83,6 +81,12 @@ export const seedClubs = async (req, res) => {
     });
   } catch (error) {
     console.error("❌ Seeding error:", error);
-    return res.status(500).json({ message: "Error seeding clubs and projects" });
+    return res.status(500).json({
+      message: "Error seeding clubs and projects",
+    });
   }
+};
+
+module.exports = {
+  seedClubs,
 };
