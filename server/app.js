@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/team', teamRoutes);
 app.use("/api/inventiveForm", require("./inventive/inventiveFormRoutes")); // Add the new route
 app.use("/api/inventory", require("./routes/inventoryRoutes.js"));
-app.use("/api/temp", require("./temporary/temp-route"));
+// app.use("/api/temp", require("./temporary/temp-route"));
 
 
 // Error handler middleware

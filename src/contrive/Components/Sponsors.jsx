@@ -2,6 +2,7 @@ import React from "react";
 import solidworksLogo from "../assets/solidworks-logo.png";
 import ansysLogo from "../assets/ansys-logo.png";
 import mathworksLogo from "../assets/images.jpg";
+import pixelBotixLogo from "../assets/pixelBotix-logo.jpeg";
 import "./Sponsors.css";
 
 const sponsors = [
@@ -20,6 +21,11 @@ const sponsors = [
     role: "System Modelling Partner",
     logo: mathworksLogo,
   },
+  {
+    name:"PixelBotix Technologies",
+    role:"Prototyping Partner",
+    logo:pixelBotixLogo
+  }
 ];
 
 const Sponsors = () => {
