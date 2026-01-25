@@ -2,19 +2,23 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
 import Club from "./models/Club.js";
 import Project from "./models/Project.js";
 
 dotenv.config();
 
-// Load clubs data manually
-const __dirname = path.resolve();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const clubsDataPath = path.join(__dirname, "clubsData.json");
+
 const clubsData = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "server/clubsData.json"), "utf-8")
+  fs.readFileSync(clubsDataPath, "utf-8")
 );
 
-const DEFAULT_IMAGE = "https://picsum.photos/400/300?random"; // 🖼️ default project image
-const DEFAULT_PASSWORD = "12345"; // default password for seeding
+const DEFAULT_IMAGE = "https://picsum.photos/400/300?random";
+const DEFAULT_PASSWORD = "12345";
 
 export const seedClubs = async (req, res) => {
   try {
@@ -23,43 +27,38 @@ export const seedClubs = async (req, res) => {
     let addedProjects = 0;
 
     for (const clubData of clubsData) {
-      // 🔍 Case-insensitive club check
       let club = await Club.findOne({
         name: { $regex: new RegExp(`^${clubData.name}$`, "i") },
       });
 
-      if (club) {
-        skippedClubs++;
-      } else {
+      if (!club) {
         const defaultUsername =
           clubData.username ||
           clubData.name.toLowerCase().replace(/\s+/g, "");
-
-        const defaultPassword =
-          clubData.password || DEFAULT_PASSWORD;
 
         club = await Club.create({
           name: clubData.name,
           logo: clubData.logo,
           description: clubData.description || "",
           username: defaultUsername,
-          password: defaultPassword,
+          password: clubData.password || DEFAULT_PASSWORD,
           projects: [],
         });
 
         addedClubs++;
+      } else {
+        skippedClubs++;
       }
 
-      // 🧩 Seed projects
-      if (clubData.projects?.length > 0) {
+      if (clubData.projects?.length) {
         for (const projectData of clubData.projects) {
-          const existingProject = await Project.findOne({
+          const exists = await Project.findOne({
             name: { $regex: new RegExp(`^${projectData.name}$`, "i") },
             year: projectData.year,
             club: club._id,
           });
 
-          if (existingProject) continue;
+          if (exists) continue;
 
           const project = await Project.create({
             name: projectData.name,
@@ -80,16 +79,10 @@ export const seedClubs = async (req, res) => {
 
     return res.status(201).json({
       message: "Clubs and projects seeded successfully!",
-      stats: {
-        addedClubs,
-        skippedClubs,
-        addedProjects,
-      },
+      stats: { addedClubs, skippedClubs, addedProjects },
     });
   } catch (error) {
     console.error("❌ Seeding error:", error);
-    return res.status(500).json({
-      message: "Error seeding clubs and projects",
-    });
+    return res.status(500).json({ message: "Error seeding clubs and projects" });
   }
 };
