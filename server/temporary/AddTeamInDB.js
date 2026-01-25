@@ -1,8 +1,5 @@
-import fs from 'fs';
-import TeamMember from "../models/TeamMember.js"
-
-
-export const teamData = [
+const TeamMember = require("../models/TeamMember.js");
+const teamData = [
   // ================= Faculty Advisor =================
   {
     name: "Dr. A. K. Bakthavatsalam",
@@ -729,17 +726,21 @@ export const teamData = [
 ];
 
 
-export const seedTeams = async (req,res) => {
-    try {
-      await TeamMember.deleteMany({}); 
-    
-        await TeamMember.insertMany(teamData);
-    
-        res.status(201).send({ message: "Team details seeded successfully!" });
-      } catch (error) {
-        console.error("Seeding error:", error);
-        res.status(500).send({ message: "Error seeding clubs" });
-    }
+const seedTeams = async (req, res) => {
+  try {
+    await TeamMember.deleteMany({});
+    await TeamMember.insertMany(teamData);
+
+    res.status(201).send({ message: "Team details seeded successfully!" });
+  } catch (error) {
+    console.error("Seeding error:", error);
+    res.status(500).send({ message: "Error seeding clubs" });
+  }
+};
+
+module.exports = {
+  teamData,
+  seedTeams,
 };
 
 
