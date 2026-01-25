@@ -1,14 +1,14 @@
-
-FROM node:23.4.0-alpine
+FROM node:18-alpine
 
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+# Install only production dependencies
+RUN npm install --omit=dev
 
 COPY . .
 
-EXPOSE 5000
+EXPOSE 3001
 
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "start"]
