@@ -1,7 +1,5 @@
 services:
   frontend:
-    ports:
-      - "3000:3000"
     build:
       context: ./ # Assuming this is your frontend directory
     environment:
@@ -16,7 +14,7 @@ services:
       context: ./server # Adjust this path to your backend directory
     environment:
       - PORT=3001
-      - MONGO_URI=mongodb+srv://scientdevops_db_user:watdNqu8l7PD7qIA@cluster0.ijwazzo.mongodb.net/?appName=Cluster0
+      - MONGO_URI=mongodb://admin:password@db:27017/scient?authSource=admin
       - JWT_SECRET=scient_scient1964
       - EMAIL_USER=teamscient.nitt@gmail.com
       - EMAIL_PASS=adasbiriscsr
