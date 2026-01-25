@@ -10,13 +10,13 @@ dotenv.config();
 // Load clubs data manually
 const __dirname = path.resolve();
 const clubsData = JSON.parse(
-  fs.readFileSync(path.join(__dirname, "clubsData.json"), "utf-8")
+  fs.readFileSync(path.join(__dirname, "server/clubsData.json"), "utf-8")
 );
 
 const DEFAULT_IMAGE = "https://picsum.photos/400/300?random"; // 🖼️ default project image
 const DEFAULT_PASSWORD = "12345"; // default password for seeding
 
-export const seedClubsAndProjects = async (req, res) => {
+export const seedClubs = async (req, res) => {
   try {
     let addedClubs = 0;
     let skippedClubs = 0;
