@@ -5,8 +5,9 @@ const cors = require("cors");
 const path = require("path");
 const errorHandler = require("./middleware/errorHandler");
 const teamRoutes = require('./routes/team');
+
 // Load environment variables
-dotenv.config();
+dotenv.config({ path: __dirname + "/.env" });
 
 const app = express();
 
@@ -22,7 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/team', teamRoutes);
 app.use("/api/inventiveForm", require("./inventive/inventiveFormRoutes")); // Add the new route
 app.use("/api/inventory", require("./routes/inventoryRoutes.js"));
-app.use("/api/temp", require("./temporary/temp-route"));
+// app.use("/api/temp", require("./temporary/temp-route"));
 
 
 // Error handler middleware
@@ -33,7 +34,7 @@ connectDB().then(async () => {
   try {
     console.log("MongoDB connected");
 
-    const PORT = process.env.PORT || 6000;
+    const PORT = process.env.PORT || 5000;
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   } catch (err) {
     console.error("Error during server startup:", err);

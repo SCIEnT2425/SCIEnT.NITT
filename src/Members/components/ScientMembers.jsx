@@ -19,7 +19,7 @@ const SCIentMembers = () => {
   const [loading, setLoading] = useState(true);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const MODE = process.env.NODE_ENV || 'development';
-  const API_BASE = MODE==="development"? 'http://localhost:2000/api/team' : "/api/team"; // Adjust base URL as needed
+  const API_BASE = MODE==="development"? 'http://localhost:5000/api/team' : "/api/team"; // Adjust base URL as needed
 
   useEffect(() => {
     const fetchMembers = async () => {
