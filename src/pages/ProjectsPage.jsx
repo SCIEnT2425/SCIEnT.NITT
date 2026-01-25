@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 import Navbar from "../components/Navbar";
 import Footer from "../components/footer";
 import ProjectCard from "../components/ProjectCard";
@@ -13,13 +14,19 @@ export default function ProjectsPage() {
   const [selectedYear, setSelectedYear] = useState("ALL");
 
   useEffect(() => {
-    fetch(`/api/clubs/${name}/projects`)
-      .then((res) => res.json())
-      .then((data) => {
-        setClub(data.club);
-        setProjects(data.projects || []);
-      })
-      .catch((err) => console.error(err));
+    const fetchProjects = async () => {
+      try {
+        const MODE = process.env.NODE_ENV || 'development';
+        const API_BASE = MODE==="development"? 'http://localhost:5000/api/clubs' : "/api/clubs";
+        const res = await axios.get(`${API_BASE}/${name}/projects`);
+        setClub(res.data.club || null);
+        setProjects(res.data.projects || []);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchProjects();
   }, [name]);
 
   const years = [...new Set(projects.map((p) => p.year).filter(Boolean))].sort(
@@ -47,6 +54,7 @@ export default function ProjectsPage() {
       });
     }
   };
+
 
   return (
     <>

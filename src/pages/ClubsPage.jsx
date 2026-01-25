@@ -1,19 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import Navbar from "../components/Navbar";
 import Footer from "../components/footer";
 import ClubCard from "../components/ClubCard";
 import "./ClubsPage.css";
+
 
 export default function ClubsPage() {
   const navigate = useNavigate();
   const [clubs, setClubs] = useState([]);
 
   useEffect(() => {
-    fetch("/api/clubs")
-      .then((res) => res.json())
-      .then((data) => setClubs(data || []))
-      .catch((err) => console.error(err));
+    const fetchClubs = async () => {
+      try {
+        const MODE = process.env.NODE_ENV || 'development';
+        const API_BASE = MODE==="development"? 'http://localhost:5000/api/clubs' : "/api/clubs";
+        const res = await axios.get(API_BASE);
+        setClubs(res.data || []);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchClubs();
   }, []);
 
   return (
