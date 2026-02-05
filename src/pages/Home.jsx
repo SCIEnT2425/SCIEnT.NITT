@@ -4,6 +4,7 @@ import FAQComponent from '../components/faqs'
 import Footer from '../components/footer'
 import ClubOrbit from '../components/ClubOrbit'
 import Carousel from '../components/CarouselPage'
+import Contact from '../components/Contact'
 import Navbar from '../components/Navbar'
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <HomeTop />
       <ClubOrbit />
       <FAQComponent /> 
+      <Contact />
       <Footer />
     </div>
   )

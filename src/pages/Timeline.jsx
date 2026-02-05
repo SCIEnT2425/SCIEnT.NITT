@@ -58,7 +58,7 @@ const SimpleTimeLine = ({ timelineData }) => {
 };
 
 // About page component
-const     About = () => {
+const Timeline = () => {
     const timelineData = [
         {
             text: "At their Silver Jubilee, the 1990’s batch of REC, came up with a vision to further support and nurture the development of technology and innovation at NITT. SCIEnT was founded as a means for alumni to contribute to their alma mater. On the 24th of December of 2015, the SCIEnT Facility was inaugurated by Mr. Uma Maheswaran, Mission Director, GSLV, ISRO in the presence of Dr. Sundarrajan, then Director of NIT, Trichy.",
@@ -274,4 +274,4 @@ const     About = () => {
   );
 };
 
-export default About;
+export default Timeline;
