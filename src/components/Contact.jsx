@@ -14,7 +14,7 @@ const Contact = () => {
 
   if(screenWidth <= 690){
     return (
-    <div className='text-white mt-44 tablet:mt-60 laptop:mt-36 w-screen flex flex-col items-center gap-16'>
+    <div className='text-white mb-60 flex flex-col items-center gap-16'>
       <div className='min-h-[75vh] w-[100vw] grid grid-cols-9 '>
         <div className="
         col-span-full
@@ -27,7 +27,7 @@ const Contact = () => {
           <div className='ml-1 flex flex-col gap-2'>
             <div className='flex gap-2'>
             <p className='text-gray-300 text-xs mobile:text-sm laptop:text-md font-medium whitespace-nowrap'>For admin related info, contact </p>
-            <p className='text-yellow-600 text-xs mobile:text-sm laptop:text-md  = font-semibold whitespace-nowrap'>Sivanesan: 1234567890</p>
+            <p className='text-yellow-600 text-xs mobile:text-sm laptop:text-md  = font-semibold whitespace-nowrap'>Sivanesan: 9092559610</p>
           </div>
           <div className='flex gap-2'>
             <p className='text-gray-300 text-xs mobile:text-sm laptop:text-md font-medium whitespace-nowrap'>For technical info, contact </p>
@@ -93,7 +93,7 @@ const Contact = () => {
     )
   } else {
   return (
-    <div className='text-white mt-44 tablet:mt-60 laptop:mt-36 w-screen flex flex-col items-center gap-20'>
+    <div className='text-white mt-44 tablet:mt-60 laptop:mt-36 mb-60 w-screen flex flex-col items-center gap-20'>
       <div className='min-h-[75vh] w-[80vw] grid grid-cols-9 '>
         <div className="
         col-span-full
@@ -107,7 +107,7 @@ const Contact = () => {
           <div className='ml-3 flex flex-col gap-2'>
             <div className='flex gap-2'>
             <p className='text-gray-300 text-sm laptop:text-md font-medium whitespace-nowrap'>For admin related info, contact </p>
-            <p className='text-yellow-600 text-sm laptop:text-md  = font-semibold whitespace-nowrap'>Sivanesan: 412509129502</p>
+            <p className='text-yellow-600 text-sm laptop:text-md  = font-semibold whitespace-nowrap'>Sivanesan: 9092559610</p>
           </div>
           <div className='flex gap-2'>
             <p className='text-gray-300 text-sm laptop:text-md font-medium whietspace-nowrap'>For technical info, contact </p>

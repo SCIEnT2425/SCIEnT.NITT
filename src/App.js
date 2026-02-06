@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./pages/Home";
-import About from "./pages/About";
+import Timeline from "./pages/Timeline";
 import Gallery from "./pages/Gallery";
 import ProjectSection from "./pages/ProjectSection";
 import Contact from "./pages/Contacts";
@@ -65,7 +65,7 @@ const App = () => {
         <Route path="/clubs/:name/projects/:projectId" element={<ProjectDetailsPage />} />
 
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/timeline" element={<Timeline />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/project" element={<ProjectSection />} />
         <Route path="/inventive" element={<Inventive />} />
