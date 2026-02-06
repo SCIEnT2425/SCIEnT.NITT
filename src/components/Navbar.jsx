@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import "./Navbar.css";
 import logo from "../assets/logo_s.png";
 import search from "../assets/search.svg";
+import {ChevronDown} from "lucide-react";
 
 const Navbar = () => { 
     const location = useLocation();
@@ -22,20 +23,19 @@ const Navbar = () => {
 
     return (
         <div>
-            <nav className="nav">
-                <Link to="/" 
+            <nav className="nav py-2 relative">
+                <Link to="/"  className="mr-10"
                     onClick={handleClick2}>
                     <img  className="logo" src={logo} alt="Logo" />
-                    
                 </Link>
 
-                <div className={`links ${!clicked ? 'active1' : ''}`}>
+                <div className={`links ${!clicked ? 'active1 text-2xl' : ''}`}>
                     <Link
-                        to="/about"
+                        to="/"
                         onClick={handleClick}
-                        className={`nav-link ${isActive('/about') ? 'active font-bold text-lg' : ''}`}
+                        className={`nav-link ${isActive('/') ? 'active font-bold text-2xl' : ''}`}
                     >
-                        Timeline
+                        Home
                     </Link>
 
                     {/* <Link
@@ -47,9 +47,17 @@ const Navbar = () => {
                     </Link> */}
 
                     <Link
-                        to="/clubs"
+                        to="/inventory"
                         onClick={handleClick}
-                        className={`nav-link ${isActive('/project') ? 'active font-bold text-lg' : ''}`}
+                        className={`nav-link ${isActive('/inventory') ? 'active font-bold text-2xl' : ''}`}
+                    >
+                        Inventory
+                    </Link>
+
+                    <Link
+                        to="/project"
+                        onClick={handleClick}
+                        className={`nav-link ${isActive('/project') ? 'active font-bold text-2xl' : ''}`}
                     >
                         Projects
                     </Link>
@@ -61,38 +69,74 @@ const Navbar = () => {
                     >
                         Room Booking
                     </Link> */}
-                    <Link
-                        to="/contrive"
-                        onClick={handleClick}
-                        className={`nav-link ${isActive('/contrive') ? 'active font-bold text-lg' : ''} `}
-                    >
-                        CONTRIVE'25
-                    </Link>
+
+                    <div className="relative inline-block group">
+                        <div className="cursor-pointer rounded-md px-4 py-2 flex items-center">
+                            <div className="mr-2">Initiatives</div>
+                            <ChevronDown />
+                        </div>
+
+                        <div className="absolute left-0 hidden w-150 rounded-lg bg-black shadow group-hover:block text-center border">
+                            <div className="cursor-pointer px-4 py-2 hover:bg-gray-500 whitespace-nowrap">
+                                <Link to="/inventive"
+                                      onClick={handleClick}
+                                      className={`nav-link ${isActive('/inventive') ? 'active font-bold text-2xl' : ''} `}
+                                >
+                                    Inventive '25
+                                </Link>
+                            </div>
+                            <div className="cursor-pointer px-4 py-2 hover:bg-gray-500 whitespace-nowrap">
+                                <Link to="/contrive"
+                                      onClick={handleClick}
+                                      className={`nav-link ${isActive('/contrive') ? 'active font-bold text-2xl' : ''} `}
+                                >
+                                    Contrive '25
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
                    
                     <Link
-                        to="/inventive"
+                        to="/faculty-connect-dummy-url"
                         onClick={handleClick}
-                        className={`nav-link ${isActive('/inventive') ? 'active font-bold text-lg' : ''} `}
+                        className={`nav-link ${isActive('/faculty-connect-dummy-url') ? 'active font-bold text-2xl' : ''} `}
                     >
-                        INVENTIVE'25
+                        Faculty Connect
                     </Link>
                    
-                    <Link
-                        to="/Team"
-                        onClick={handleClick}
-                        className={`nav-link ${isActive('/Team') ? 'active font-bold text-lg' : ''} `}
-                    >
-                        Team
-                    </Link>
-                    <Link
-                        to="/contact"
-                        onClick={handleClick}
-                        className={`nav-link ${isActive('/contact') ? 'active font-bold text-lg' : ''}`}
-                    >
-                        Contact Us
-                    </Link>
-                   
-                    
+                    <div className="relative inline-block group">
+                        <div className="cursor-pointer rounded-md px-4 py-2 flex items-center">
+                            <div className="mr-2">About Us</div>
+                            <ChevronDown />
+                        </div>
+
+                        <div className="absolute left-0 hidden w-100 rounded-lg bg-black shadow group-hover:block">
+                            <div className="cursor-pointer px-4 py-2 hover:bg-gray-500">
+                                <Link to="/timeline"
+                                      onClick={handleClick}
+                                      className={`nav-link ${isActive('/timeline') ? 'active font-bold text-2xl' : ''} `}
+                                >
+                                    Timeline
+                                </Link>
+                            </div>
+                            <div className="cursor-pointer px-4 py-2 hover:bg-gray-500">
+                                <Link to="/team"
+                                      onClick={handleClick}
+                                      className={`nav-link ${isActive('/team') ? 'active font-bold text-2xl' : ''} `}
+                                >
+                                    Team
+                                </Link>
+                            </div>
+                            <div className="cursor-pointer px-4 py-2 hover:bg-gray-500">
+                                <Link to="/gallery"
+                                      onClick={handleClick}
+                                      className={`nav-link ${isActive('/gallery') ? 'active font-bold text-2xl' : ''} `}
+                                >
+                                    Gallery
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div id="mobile" onClick={handleClick}>
                      <i id="bar" className={clicked ? 'fas fa-times':'fas fa-bars'}></i>
