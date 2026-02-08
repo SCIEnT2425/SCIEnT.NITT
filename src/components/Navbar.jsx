@@ -104,9 +104,9 @@ const Navbar = () => {
                     </div>
                    
                     <Link
-                        to="/faculty-connect-dummy-url"
+                        to="/faculty-connect"
                         onClick={handleClick}
-                        className={`nav-link ${isActive('/faculty-connect-dummy-url') ? 'active font-bold text-2xl' : ''} `}
+                        className={`nav-link ${isActive('/faculty-connect') ? 'active font-bold text-2xl' : ''} `}
                     >
                         Faculty Connect
                     </Link>
