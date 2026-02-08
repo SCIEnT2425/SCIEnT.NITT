@@ -53,6 +53,13 @@ const Navbar = () => {
                     >
                         Inventory
                     </Link>
+                         <Link
+                        to="/openhouse"
+                        onClick={handleClick}
+                        className={`nav-link ${isActive('/openhouse') ? 'active font-bold text-2xl' : ''}`}
+                    >
+                        OpenHouse
+                    </Link>
 
                     <Link
                         to="/project"
