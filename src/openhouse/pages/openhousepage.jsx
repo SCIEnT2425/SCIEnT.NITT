@@ -7,10 +7,12 @@ import PreviousEditions from './previousedition'
 import Footer from './footer'
 import SponsorsSection from './sponsor'
 import "./openhouse.css"
+import Navbar from '../../components/Navbar'
 
 function OpenhousePage(){
   return(
     <>
+     <Navbar/>
     
       <HeroSection/>
       <About/>
