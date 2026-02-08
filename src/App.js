@@ -50,7 +50,6 @@ import Inventive from "./inventive/Pages/Inventive";
 import InventivePage from "./inventive/Pages/InventivePage" ;
 import Contrive from "./contrive/Pages/Contrive";
 import ContrivePage from "./contrive/Pages/ContrivePage";
-import OpenhousePage from "./openhouse/pages/openhousepage";
 const App = () => {
   return (
     <>
@@ -74,7 +73,6 @@ const App = () => {
         <Route path="/inventory" element={<Inventory />} />
         <Route path="/contrive" element={<Contrive/>}/>
         <Route path="/contriveForm" element={<ContrivePage/>}/>
-        <Route path="/openhouse" element={<OpenhousePage/>}/>
         <Route path="/Team" element={<Team/>} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/Team" element={<Team />} />
