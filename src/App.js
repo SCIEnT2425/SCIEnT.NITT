@@ -51,6 +51,7 @@ import InventivePage from "./inventive/Pages/InventivePage" ;
 import Contrive from "./contrive/Pages/Contrive";
 import ContrivePage from "./contrive/Pages/ContrivePage";
 import OpenhousePage from "./openhouse/pages/openhousepage";
+import FC_coming_soon from "./FacultyConnect/ComingSoon"
 const App = () => {
   return (
     <>
@@ -78,7 +79,7 @@ const App = () => {
         <Route path="/Team" element={<Team/>} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/Team" element={<Team />} />
-   
+        <Route path="/faculty-connect" element={<FC_coming_soon />} />
         <Route path="/open-house" element={<OpenHouse />} />
         <Route path="/e-summit" element={<ESummit />} />
         <Route path="/annual-day" element={<Annualday />} />
