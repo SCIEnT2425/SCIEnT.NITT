@@ -53,13 +53,13 @@ export const years = [
   {
     imageurl: defaultImg,
     batch: "2025",
-    projects: "150+",
+    projects: "50+",
     visitors: "5000+",
   },
   {
     imageurl: defaultImg,
     batch: "2024",
-    projects: "150+",
+    projects: "50+",
     visitors: "5000+",
   },
 ];
@@ -69,9 +69,9 @@ export const years = [
 // =====================
 
 export const sponsors = [
-  { name: "Boeing", logo: boeing },
-  { name: "Campus Fund", logo: campusFund },
-  { name: "IN4 Capital", logo: in44 },
+  { name: "Boeing", logo: boeing }
+  // { name: "Campus Fund", logo: campusFund },
+  // { name: "IN4 Capital", logo: in44 },
 ];
 
 // =====================
