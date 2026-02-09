@@ -44,7 +44,7 @@
 
 /* Each club card width — adjust as needed */
 .clubs-grid > * {
-  flex: 1 1 calc(20% - 2rem); /* ✅ 5 cards per row (100% / 5 = 20%) */
+  flex:  calc(20% - 2rem); /* ✅ 5 cards per row (100% / 5 = 20%) */
   max-width: 220px;
   min-width: 180px;
 }
