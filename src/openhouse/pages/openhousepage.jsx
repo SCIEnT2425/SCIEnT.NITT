@@ -3,7 +3,7 @@ import About from './about'
 import Projects from './projects'
 import HeroSection from './HeroSection'
 import AttendeesSection from './AttendeesSection'
-import PreviousEditions from './previousedition'
+import PreviousEditions from './PreviousEditions'
 import Footer from './footer'
 import SponsorsSection from './sponsor'
 import "./openhouse.css"

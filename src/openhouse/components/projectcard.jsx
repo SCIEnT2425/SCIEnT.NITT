@@ -1,11 +1,11 @@
 function ProjectCard({ imageurl, domain, name, description }) {
   return (
-    <div className="w-full rounded-none border border-yellow-500/30 bg-gray-900 hover:opacity-80 transition-opacity duration-300">
+    <div className="w-full min-h-[28rem]  desktop:min-h-[29rem] rounded-xl border border-yellow-500/30 bg-gray-900 hover:opacity-80 transition-opacity duration-300">
       {/* IMAGE */}
       <img
         src={imageurl}
         alt={name}
-        className="w-full h-96 md:h-40 lg:h-48 object-cover"
+        className="w-full h-60 laptop:h-48 desktop:h-64 object-cover rounded-t-xl"
       />
 
       {/* CONTENT */}
