@@ -10,7 +10,7 @@ const Footer = () => {
     >
       <div className="max-w-6xl mx-auto px-4 py-12 md:py-16">
         <div className="grid md:grid-cols-3 gap-8 md:gap-12">
-          
+
           {/* Brand */}
           <div>
             <h3 className="text-2xl font-bold mb-4">
@@ -66,28 +66,40 @@ const Footer = () => {
             >
               Contact Us
             </h4>
-            <ul
-              className="space-y-2 text-sm"
-              style={{ color: "hsl(0, 0%, 65%)" }}
-            >
-              <li>NIT Tiruchirappalli</li>
-              <li>Tamil Nadu, India – 620015</li>
-              <li>
-                <a
-                  href="mailto:openhouse@nitt.edu"
-                  className="transition-colors"
-                  style={{ color: "hsl(0, 0%, 65%)" }}
-                  onMouseEnter={(e) =>
-                    (e.target.style.color = "hsl(50, 100%, 50%)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.target.style.color = "hsl(0, 0%, 65%)")
-                  }
-                >
-                  openhouse@nitt.edu
-                </a>
-              </li>
-            </ul>
+            <div className="flex flex-row gap-4 justify-between">
+
+
+              <ul
+                className="space-y-2 text-sm"
+                style={{ color: "hsl(0, 0%, 65%)" }}
+              >
+                <li>Arjun B K</li>
+                <li>Technical Executive,</li>
+                <li>Student Center for Innovation in Engineering and Technology ( SCIEnT )</li>
+                <li>National Institute of Technology, Tiruchirappalli</li>
+                <li>Tamil Nadu , India - 620015</li>
+              </ul>
+              <ul className="space-y-2 text-sm"
+                style={{ color: "hsl(0, 0%, 65%)" }}>
+
+                <li>Phone: +91 8610450988</li>
+                <li>Email:&nbsp;
+                  <a
+                    href="mailto:openhouse@nitt.edu"
+                    className="transition-colors"
+                    style={{ color: "hsl(0, 0%, 65%)" }}
+                    onMouseEnter={(e) =>
+                      (e.target.style.color = "hsl(50, 100%, 50%)")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.target.style.color = "hsl(0, 0%, 65%)")
+                    }
+                  >
+                    scient@nitt.edu
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -97,18 +109,21 @@ const Footer = () => {
           style={{ borderTop: "1px solid hsl(0, 0%, 20%)" }}
         >
           <p className="text-sm" style={{ color: "hsl(0, 0%, 65%)" }}>
-            © 2026 OpenHouse. All rights reserved.
+            © 2026 SCIEnT. All rights reserved.
           </p>
           <div className="flex items-center gap-2">
             <span className="text-sm" style={{ color: "hsl(0, 0%, 65%)" }}>
-              Part of
+              In Association with
             </span>
             <span style={{ color: "hsl(50, 100%, 50%)", fontWeight: 700 }}>
-              Pragyan&apos;26
+              <a href="https://pragyan.org" target="_blank" rel="noopener noreferrer" className="no-underline " >
+                Pragyan&apos;26
+              </a>
+
             </span>
           </div>
         </div>
-       
+
       </div>
     </footer>
   );

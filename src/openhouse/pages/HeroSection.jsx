@@ -38,7 +38,11 @@ const HeroSection = () => {
                     Student Centre for Innovation in Engineering and Technology
                 </p>
                 <p className="text-center text-white text-lg mobile:text-xl laptop:text-2xl max-w-2xl">
-                    In Association with <span className="text-yellow-500 font-bold">Pragyan'26</span> | February 20–21, 2026
+                    In Association with <span className="text-yellow-500 font-bold">
+                        <a href="https://pragyan.org" target="_blank" rel="noopener noreferrer"  className="no-underline " >
+                        Pragyan'26
+                        </a>
+                        </span> | February 20–21, 2026
                 </p>
             </div>
         </div>

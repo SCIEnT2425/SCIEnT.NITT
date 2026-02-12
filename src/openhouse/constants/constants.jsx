@@ -3,7 +3,11 @@
 // =====================
 
 // sponsors
-import boeing from "../../assets/boeing.jpg";
+import boeing from "../../assets/Sponsors/boeing.jpeg";
+import bpcl from "../../assets/Sponsors/BPCL.jpeg"  ;
+import cisco from "../../assets/Sponsors/CISCO.jpeg";
+import isro from "../../assets/Sponsors/ISRO.jpeg";
+import ge from "../../assets/Sponsors/GEHealthCare.jpeg";
 import campusFund from "../../assets/campusfund.jpeg";
 import in44 from "../../assets/in44.jpeg";
 
@@ -45,22 +49,47 @@ import batteryfin from "../../assets/projects/batteryfin.jpg";
 import heatpipe from "../../assets/projects/heatpipe.jpg";
 import hvac from "../../assets/projects/hvac.jpg";
 
+// Previous edition images
+import img1 from "../../assets/previous_editions/IMG_9802.JPG";
+import img2 from "../../assets/previous_editions/IMG_9806.JPG";
+import img3 from "../../assets/previous_editions/IMG_9807.JPG";
+import img4 from "../../assets/previous_editions/IMG_9809.JPG";
+import img5 from "../../assets/previous_editions/IMG_9821.JPG";
+import img6 from "../../assets/previous_editions/IMG_9823.JPG";
+import img7 from "../../assets/previous_editions/IMG_9707.JPG";
+import img8 from "../../assets/previous_editions/IMG_9725.JPG";
+import img9 from "../../assets/previous_editions/IMG_9727.JPG";
+import img10 from "../../assets/previous_editions/IMG_9742.JPG";
+import img11 from "../../assets/previous_editions/IMG_9743.JPG";
+import img12 from "../../assets/previous_editions/IMG_9826.JPG";
+import img13 from "../../assets/previous_editions/IMG_9855.JPG";
+import img14 from "../../assets/previous_editions/IMG_9864.JPG";
+import img15 from "../../assets/previous_editions/IMG_9879.JPG";
+import img16 from "../../assets/previous_editions/IMG_9907.JPG";
+import img17 from "../../assets/previous_editions/IMG_9779.JPG";
+import img18 from "../../assets/previous_editions/IMG_9774.JPG";
+import img19 from "../../assets/previous_editions/IMG_9834.JPG";
+import img20 from "../../assets/previous_editions/IMG_9754.JPG";
+
+
+
+
 // =====================
 // YEARS
 // =====================
 
 export const years = [
   {
-    imageurl: defaultImg,
+    imageurl: [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10],
     batch: "2025",
     projects: "50+",
-    visitors: "5000+",
+    visitors: "9000+",
   },
   {
-    imageurl: defaultImg,
+    imageurl: [img11, img12, img13, img14, img15, img16, img17, img18, img19, img20],
     batch: "2024",
-    projects: "50+",
-    visitors: "5000+",
+    projects: "30+",
+    visitors: "6000+",
   },
 ];
 
@@ -69,11 +98,23 @@ export const years = [
 // =====================
 
 export const sponsors = [
-  { name: "Boeing", logo: boeing }
+  { name: "Boeing", logo: boeing },
   // { name: "Campus Fund", logo: campusFund },
   // { name: "IN4 Capital", logo: in44 },
+  {name: "BPCL", logo: bpcl },
+  {name: "CISCO", logo: cisco },
+  {name: "ISRO", logo: isro },
+  {name: "GE Healthcare", logo: ge },
+  {name: "VC firms", logo: null },
 ];
 
+// =====================
+// PREVIOUS EDITION IMAGES
+// =====================
+
+const previos_edition_images = [
+
+]
 // =====================
 // PROJECTS
 // =====================

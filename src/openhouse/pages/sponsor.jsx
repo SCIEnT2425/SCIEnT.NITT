@@ -17,7 +17,7 @@ const SponsorsSection = () => {
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
             <span style={{ color: "hsl(0, 0%, 98%)" }}>PAST</span>{" "}
-            <span style={{ color: "hsl(50, 100%, 50%)" }}>VC VISITS</span>
+            <span style={{ color: "hsl(50, 100%, 50%)" }}>VISITORS</span>
           </h2>
           <div
             className="w-24 h-1 mx-auto"

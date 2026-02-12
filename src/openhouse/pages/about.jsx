@@ -1,7 +1,7 @@
 function About() {
   const stats = [
-    { number: "50+", label: "Projects" },
-    { number: "6000+", label: "Visitors" },
+    { number: "70+", label: "Projects" },
+    { number: "9000+", label: "Visitors" },
     { number: "10+", label: "Domains" },
     { number: "2", label: "Days" },
   ];
@@ -45,13 +45,17 @@ function About() {
               National Institute of Technology, Tiruchirappalli
             </span>
             , is a platform for students to showcase their technical projects
-            across aerospace, robotics, AI, and sustainable energy.
+            across Aerospace, Robotics, AI, and Sustainable energy.
           </p>
 
           <p>
-            This year, the exhibition will be held as part of{" "}
+            The exhibition will be held in association with{" "}
             <span style={{ color: "hsl(50, 100%, 50%)", fontWeight: 600 }}>
+              {/* remove underline */}
+              <a href="https://pragyan.org" target="_blank" rel="noopener noreferrer"  className="no-underline " >
               Pragyan&apos;26
+
+              </a>
             </span>
             , the ISO-certified annual technical festival of the National
             Institute of Technology, Tiruchirappalli, from{" "}
