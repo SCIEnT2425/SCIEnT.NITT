@@ -99,13 +99,13 @@ export const years = [
 
 export const sponsors = [
   { name: "Boeing", logo: boeing },
-  // { name: "Campus Fund", logo: campusFund },
-  // { name: "IN4 Capital", logo: in44 },
   {name: "BPCL", logo: bpcl },
   {name: "CISCO", logo: cisco },
   {name: "ISRO", logo: isro },
   {name: "GE Healthcare", logo: ge },
-  {name: "VC firms", logo: null },
+  { name: "Campus Fund", logo: campusFund },
+  { name: "IN4 Capital", logo: in44 },
+
 ];
 
 // =====================
