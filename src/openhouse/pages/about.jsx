@@ -27,7 +27,7 @@ function About() {
 
         {/* Description */}
         <div
-          className="space-y-6 text-center md:text-lg leading-relaxed"
+          className="space-y-6 text-center md:text-lg text-lg leading-relaxed"
           style={{ color: "hsl(0, 0%, 65%)" }}
         >
           <p>
@@ -39,32 +39,77 @@ function About() {
             <span style={{ color: "hsl(0, 0%, 98%)", fontWeight: 500 }}>
               SCIEnT
             </span>{" "}
-            — Student Centre for Innovation in Engineering and Technology of
-            the{" "}
+            — Student Centre for Innovation in Engineering and Technology,{" "}
             <span style={{ color: "hsl(0, 0%, 98%)", fontWeight: 500 }}>
               National Institute of Technology, Tiruchirappalli
             </span>
-            , is a platform for students to showcase their technical projects
-            across Aerospace, Robotics, AI, and Sustainable energy.
+            , is a premier platform that celebrates student-driven innovation and applied
+            research. The exhibition brings together some of the most promising technical
+            projects developed by students across diverse domains including Aerospace,
+            Robotics, Artificial Intelligence, Sustainable Energy, Advanced Manufacturing,
+            and Emerging Technologies.
+          </p>
+
+          <p>
+            <span style={{ color: "hsl(0, 0%, 98%)", fontWeight: 500 }}>
+              Open House
+            </span>{" "}
+            is designed not just as a display of projects, but as an{" "}
+            <span style={{ color: "hsl(0, 0%, 98%)", fontWeight: 500 }}>
+              interactive innovation ecosystem
+            </span>{" "}
+            where ideas are demonstrated through{" "}
+            <span style={{ color: "hsl(0, 0%, 98%)", fontWeight: 500 }}>
+              working prototypes
+            </span>
+            ,{" "}
+            <span style={{ color: "hsl(0, 0%, 98%)", fontWeight: 500 }}>
+              research models
+            </span>
+            , and{" "}
+            <span style={{ color: "hsl(0, 0%, 98%)", fontWeight: 500 }}>
+              real-world applications
+            </span>
+            . It provides students with an opportunity to present their work to{" "}
+            <span style={{ color: "hsl(0, 0%, 98%)", fontWeight: 500 }}>
+              peers, faculty, industry leaders, venture capitalists, alumni, and school
+              students
+            </span>{" "}
+            — fostering{" "}
+            <span style={{ color: "hsl(0, 0%, 98%)", fontWeight: 500 }}>
+              collaboration, mentorship, and entrepreneurial exploration
+            </span>
+            .
           </p>
 
           <p>
             The exhibition will be held in association with{" "}
             <span style={{ color: "hsl(50, 100%, 50%)", fontWeight: 600 }}>
-              {/* remove underline */}
-              <a href="https://pragyan.org" target="_blank" rel="noopener noreferrer"  className="no-underline " >
-              Pragyan&apos;26
-
+              <a
+                href="https://pragyan.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="no-underline "
+              >
+                Pragyan&apos;26
               </a>
             </span>
-            , the ISO-certified annual technical festival of the National
-            Institute of Technology, Tiruchirappalli, from{" "}
+            , the ISO-certified annual technical festival of the{" "}
+            <span style={{ color: "hsl(0, 0%, 98%)", fontWeight: 500 }}>
+              National Institute of Technology, Tiruchirappalli
+            </span>
+            , from{" "}
             <span style={{ color: "hsl(0, 0%, 98%)", fontWeight: 500 }}>
               February 20–21, 2026
             </span>
-            .
+            . As part of one of the institute’s flagship technical gatherings, Open House
+            aims to strengthen the bridge between academia, industry, and society while
+            promoting a culture of innovation, research excellence, and technological
+            impact.
           </p>
         </div>
+
+
 
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
