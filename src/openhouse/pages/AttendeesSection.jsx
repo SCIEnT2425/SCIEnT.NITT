@@ -5,21 +5,21 @@ const attendees = [
     number: 1,
     title: "STUDENT COMMUNITY",
     description:
-      "6000+ NIT students attending different stalls and inspiring innovation amongst them.",
+      "The Open House Exhibition will witness participation from over 6000 NIT Trichy students, along with students from nearby government and private schools. The event provides a dynamic platform for young minds to explore innovative projects, interact with student teams, and experience real-world applications of science and technology. It aims to inspire curiosity, encourage interdisciplinary learning, and foster a culture of innovation across all age groups.",
     icon: Users,
   },
   {
     number: 2,
     title: "VCs & INVESTORS",
     description:
-      "VCs and investors specialised in different domains of tech will be visiting.",
+      "Venture capitalists, angel investors, and startup ecosystem representatives will be present to evaluate high-potential projects across various technology domains. Their engagement brings industry perspective to the exhibition, opening opportunities for mentorship, strategic guidance, funding, and potential commercialization of promising ideas.",
     icon: Briefcase,
   },
   {
     number: 3,
     title: "ALUMNI",
     description:
-      "Various alumni and government research organisation representatives would be arriving.",
+      "NIT Trichy alumni, industry professionals, and representatives from research organizations will attend to review projects and share expert insights. Their presence strengthens institute–industry connections, provides valuable feedback to student innovators, and encourages meaningful collaborations beyond the exhibition.",
     icon: GraduationCap,
   },
 ];
@@ -144,7 +144,7 @@ const AttendeesSection = () => {
                   </div>
 
                   {/* Description */}
-                  <p className="text-gray-400 text-sm md:text-base leading-relaxed">
+                  <p className="text-white text-lg md:text-lg leading-relaxed">
                     {attendee.description}
                   </p>
 
