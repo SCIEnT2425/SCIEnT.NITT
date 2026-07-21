@@ -2,7 +2,7 @@ const express = require('express');
 // const { protect } = require('../middleware/auth');
 const { getClubsData, getClub, getAllClubs } = require('../controllers/clubController');
 const { seedProjects } = require("../controllers/seedController");
-const { seedClubs } = require("../seedClubs");
+const { seedClubs } = require("../scripts/seedClubs");
 const {getProject} = require("../controllers/projectController")
 const router = express.Router();
 

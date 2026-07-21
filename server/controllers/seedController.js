@@ -10,7 +10,7 @@ const {
   dataByteProjects,
   threeDProjects,
   orbitProjects,
-} = require("../temporary/allProjects.js");
+} = require("../scripts/allProjects.js");
 
 const Project = require("../models/Project.js");
 const Club = require("../models/Club.js");
