@@ -7,7 +7,7 @@ import Gallery from "./pages/Gallery";
 import ProjectSection from "./pages/ProjectSection";
 import Contact from "./pages/Contacts";
 
-import Team from "./Members/pages/Team";
+import Team from "./features/members/pages/Team";
 import OpenHouse from "./pages/OpenHouse";
 import Inventory from "./pages/Inventory";
 import ESummit from "./pages/ESummit";
@@ -46,12 +46,12 @@ import Annualday from "./pages/Annualday";
  import ProjectsPage from "./pages/ProjectsPage";
  import ProjectDetailsPage from "./pages/ProjectDetailsPage";
 
-import Inventive from "./inventive/Pages/Inventive";
-import InventivePage from "./inventive/Pages/InventivePage" ;
-import Contrive from "./contrive/Pages/Contrive";
-import ContrivePage from "./contrive/Pages/ContrivePage";
-import OpenhousePage from "./openhouse/pages/openhousepage";
-import FC_coming_soon from "./FacultyConnect/ComingSoon"
+import Inventive from "./features/inventive/pages/Inventive";
+import InventivePage from "./features/inventive/pages/InventivePage" ;
+import Contrive from "./features/contrive/pages/Contrive";
+import ContrivePage from "./features/contrive/pages/ContrivePage";
+import OpenhousePage from "./features/openhouse/pages/openhousepage";
+import FC_coming_soon from "./features/faculty-connect/ComingSoon";
 const App = () => {
   return (
     <>

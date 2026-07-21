@@ -4,8 +4,12 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const path = require("path");
 const errorHandler = require("./middleware/errorHandler");
-const teamRoutes = require('./routes/team');
+const teamRoutes = require('./routes/teamRoutes');
 const clubRoutes = require('./routes/clubRoutes');
+const inventoryRoutes = require('./routes/inventoryRoutes');
+const inventiveRoutes = require('./routes/inventiveRoutes');
+const contriveRoutes = require('./routes/contriveRoutes');
+
 // Load environment variables
 dotenv.config({ path: __dirname + "/.env" });
 
@@ -21,11 +25,10 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/api/team', teamRoutes);
-app.use("/api/inventiveForm", require("./inventive/inventiveFormRoutes")); // Add the new route
-app.use("/api/inventory", require("./routes/inventoryRoutes"));
 app.use('/api/clubs', clubRoutes);
-// app.use("/api/temp", require("./temporary/temp-route"));
-// app.use("/api/temp", require("./temporary/temp-route"));
+app.use('/api/inventory', inventoryRoutes);
+app.use('/api/inventiveForm', inventiveRoutes);
+app.use('/api/contriveForm', contriveRoutes);
 
 
 

@@ -1,7 +1,23 @@
+# Dependencies
 node_modules/
-server/node_modules
+server/node_modules/
 
+# Build and Production
+build/
+dist/
+*.log
+
+# Environment and Secrets
+.env
+.env.*
+!.env.example
 server/.env
 server/env
-server/inventive/credentials.json
-.env/
+credentials.json
+
+# IDE & OS Files
+.idea/
+.vscode/
+.DS_Store
+*.swp
+*.swo
