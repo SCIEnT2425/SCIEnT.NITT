@@ -3,12 +3,12 @@ const dotenv = require("dotenv");
 const fs = require("fs");
 const path = require("path");
 
-const Club = require("./models/Club");
+const Club = require("../models/Club");
 
 dotenv.config();
 
 // Load JSON
-const clubsDataPath = path.join(__dirname, "clubsData.json");
+const clubsDataPath = path.join(__dirname, "../clubsData.json");
 const clubsData = JSON.parse(fs.readFileSync(clubsDataPath, "utf-8"));
 
 const seedClubs = async (req, res) => {
