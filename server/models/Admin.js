@@ -18,6 +18,22 @@ const adminSchema = new mongoose.Schema({
     type: String,
     default: 'admin',
   },
+  email: {
+    type: String,
+    trim: true,
+    lowercase: true,
+    default: function() {
+      return process.env.EMAIL_USER || 'teamscient.nitt@gmail.com';
+    }
+  },
+  resetOtp: {
+    type: String,
+    default: null,
+  },
+  resetOtpExpires: {
+    type: Date,
+    default: null,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
