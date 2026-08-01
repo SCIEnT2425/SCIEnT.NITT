@@ -83,7 +83,7 @@
   cursor: pointer;
   border: none;
   padding: 7px;
-  width: 25vw;
+  width: 100%;
 }
 
 .project-item select option {
@@ -135,7 +135,7 @@
     justify-items: center;
   }
   .project-item select {
-    width: 34vw;
+    width: 100%;
   }
 }
 
@@ -147,7 +147,10 @@
   }
   .project-item select {
     padding: 12px;
-    width: 70vw;
+    width: 100%;
+  }
+  .project-section {
+    padding: 40px 16px 20px 16px;
   }
 }
 

@@ -34,7 +34,7 @@ export default function GalleryPage({ heading, images }) {
     <>
       <div className="text-white headgallery">{heading}</div>
       <div 
-        className='max-w-[1000px] h-[550px] w-full m-auto py-4 px-4 relative group'
+        className='max-w-[1000px] aspect-[16/9] min-h-[300px] max-h-[550px] w-full m-auto py-4 px-4 relative group'
         onMouseEnter={() => setAutoSlide(false)}  // Stop sliding on hover
         onMouseLeave={() => setAutoSlide(true)}   // Resume sliding on mouse leave
       >
@@ -43,19 +43,37 @@ export default function GalleryPage({ heading, images }) {
           className='w-full h-full duration-500 bg-center bg-cover rounded-2xl'
         ></div>
         {/* Left Arrow */}
-        <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
-          <BsChevronCompactLeft onClick={prevSlide} size={30} />
+        <div 
+          className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-white'
+          onClick={prevSlide}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); prevSlide(); } }}
+          aria-label="Previous image"
+        >
+          <BsChevronCompactLeft size={30} />
         </div>
         {/* Right Arrow */}
-        <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
-          <BsChevronCompactRight onClick={nextSlide} size={30} />
+        <div 
+          className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-white'
+          onClick={nextSlide}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); nextSlide(); } }}
+          aria-label="Next image"
+        >
+          <BsChevronCompactRight size={30} />
         </div>
         <div className='flex justify-center py-2 top-4 galleryImage'>
           {images.map((_, slideIndex) => (
             <div
               key={slideIndex}
               onClick={() => goToSlide(slideIndex)}
-              className='text-2xl cursor-pointer abc'
+              className='text-2xl cursor-pointer abc focus:outline-none focus:ring-2 focus:ring-white rounded-full'
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goToSlide(slideIndex); } }}
+              aria-label={`Go to slide ${slideIndex + 1}`}
             >
               <RxDotFilled />
             </div>

@@ -85,9 +85,10 @@ export default function ProjectDetailsPage() {
             <div className="pd-year-pill">{project.year || ""}</div>
             <div className="pd-image-wrap">
               <img
-                src={project.image?.url || project.image }
+                src={project.image?.url || project.image || "https://via.placeholder.com/300x190?text=No+Image"}
                 alt={project.name}
                 className="pd-image"
+                onError={(e) => { e.target.src = "https://via.placeholder.com/300x190?text=No+Image"; }}
               />
             </div>
           </div>

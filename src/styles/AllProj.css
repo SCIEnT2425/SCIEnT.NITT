@@ -164,11 +164,11 @@
   }
 
   .slider-button-left {
-    left: -20px;
+    left: 5px;
   }
 
   .slider-button-right {
-    right: -20px;
+    right: 5px;
   }
 }
 

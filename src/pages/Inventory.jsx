@@ -60,6 +60,7 @@ reorderedKeys.forEach(k => {
 
   // Handle card interactions
   const handleCardMouseMove = (e, cardElement) => {
+    if (!window.matchMedia('(hover: hover)').matches) return;
     const rect = cardElement.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
@@ -118,6 +119,14 @@ reorderedKeys.forEach(k => {
                     onMouseMove={(e) => handleCardMouseMove(e, cardRefs.current[globalIndex])}
                     onMouseLeave={() => handleCardMouseLeave(cardRefs.current[globalIndex])}
                     onClick={(e) => handleCardClick(e, cardRefs.current[globalIndex])}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleCardClick(e, cardRefs.current[globalIndex]);
+                      }
+                    }}
+                    role="button"
+                    tabIndex={0}
                     style={{
                       transition: 'opacity 0.6s ease, transform 0.3s ease'
                     }}

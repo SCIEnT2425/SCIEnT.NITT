@@ -1,5 +1,7 @@
 // frontend/Dashboard.js
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import "../styles/ProjectSection.css";
 import Footer from '../components/footer';
 
@@ -26,6 +28,7 @@ import {
 
 const Dashboard = () => {
   const [clubs, setClubs] = useState([]);
+  const navigate = useNavigate();
 
   // Fetch clubs data from backend
   useEffect(() => {
@@ -52,13 +55,13 @@ const Dashboard = () => {
   
     // Check if club has enough credits
     if (club.credits === 0) {
-      alert("You don't have enough credits to proceed.");
+      toast.error("You don't have enough credits to proceed.");
       return; // Prevent navigation if credits are insufficient
     }
   
     // If the club is SCIENT, navigate to the next page
     if (club.name.toUpperCase() === "SCIENT") {
-      window.location.assign("/userdashboard/days");
+      navigate("/userdashboard/days");
     }
   };
 

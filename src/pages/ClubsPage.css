@@ -1,9 +1,13 @@
 
+:root {
+  --navbar-height: 5rem;
+}
+
 .clubs-page {
   background-color: #000;
   color: white;
   min-height: 100vh;
-  padding: 10rem 2rem 2rem; /* ⬅ top padding added for navbar space */
+  padding: calc(var(--navbar-height) + 5rem) 2rem 2rem; /* navbar clearance + spacing */
 }
 
 /* Glowing golden title */

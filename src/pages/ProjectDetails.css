@@ -178,6 +178,7 @@
 }
 
 @media (max-width: 480px) {
+  .pd-page { padding-top: 80px; }
   .pd-title { font-size: 26px; }
   .pd-description { font-size: 14px; line-height: 1.6; }
   .pd-image { height: 200px; }
