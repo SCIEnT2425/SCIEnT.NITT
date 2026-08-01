@@ -29,14 +29,15 @@ const TeamMemberForm = () => {
   });
 
   const roles = [
-    'Faculty Advisor', 'Manager', 'Deputy Manager', 'Ex-Manager', 
+    'Faculty Advisor', 'Core', 'Ex-Core', 'Senior Manager', 'Manager', 'Deputy Manager', 
+    'Senior Project Manager', 'Project Manager',
     'Admin Executive', 'Technical Executive', 'Facility Executive', 
     'External Affairs Executive', 'Internal Affairs Executive', 
-    'Project Operations Executive', 'Project Manager'
+    'Project Operations Executive'
   ];
 
   const subteams = [
-    'Project Management', 'DevOps', 'Corporate Communications', 'Creatives'
+    'Cores', 'Ex-Cores', 'Project Management', 'DevOps', 'Corporate Communications', 'Creatives'
   ];
 
   useEffect(() => {

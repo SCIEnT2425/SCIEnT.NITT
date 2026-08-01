@@ -28,7 +28,8 @@ const ProjectForm = () => {
     const fetchClubs = async () => {
       try {
         const response = await axios.get(`${API_BASE}/api/clubs`);
-        setClubs(response.data.data || response.data || []);
+        const cData = Array.isArray(response.data) ? response.data : (response.data?.data || []);
+        setClubs(cData);
       } catch (error) {
         toast.error('Failed to fetch clubs');
         console.error(error);
@@ -170,7 +171,7 @@ const ProjectForm = () => {
                 >
                   <option value="">Select a club...</option>
                   {clubs.map(club => (
-                    <option key={club._id} value={club._id}>
+                    <option key={club._id || club.id} value={club._id || club.id}>
                       {club.name}
                     </option>
                   ))}
