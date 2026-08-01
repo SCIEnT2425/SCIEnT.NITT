@@ -52,10 +52,20 @@ import Contrive from "./features/contrive/pages/Contrive";
 import ContrivePage from "./features/contrive/pages/ContrivePage";
 import OpenhousePage from "./features/openhouse/pages/openhousepage";
 import FC_coming_soon from "./features/faculty-connect/ComingSoon";
+
+import { AuthProvider } from './features/admin/context/AuthContext';
+import ProtectedRoute from './features/admin/components/ProtectedRoute';
+import AdminLogin from './features/admin/pages/AdminLogin';
+import TeamDashboard from './features/admin/pages/TeamDashboard';
+import TeamMemberForm from './features/admin/pages/TeamMemberForm';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const App = () => {
   return (
-    <>
-      <Routes>
+    <AuthProvider>
+      <>
+        <ToastContainer theme="dark" />
+        <Routes>
         
         {/* Club Listing  */}
         <Route path="/clubs"  element={<ClubsPage />} />
@@ -78,7 +88,6 @@ const App = () => {
         <Route path="/openhouse" element={<OpenhousePage/>}/>
         <Route path="/Team" element={<Team/>} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/Team" element={<Team />} />
         <Route path="/faculty-connect" element={<FC_coming_soon />} />
         <Route path="/open-house" element={<OpenHouse />} />
         <Route path="/e-summit" element={<ESummit />} />
@@ -122,9 +131,14 @@ const App = () => {
          < Profnitt/>
         }/>
 
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/team" element={<ProtectedRoute><TeamDashboard /></ProtectedRoute>} />
+        <Route path="/admin/team/new" element={<ProtectedRoute><TeamMemberForm /></ProtectedRoute>} />
+        <Route path="/admin/team/edit/:id" element={<ProtectedRoute><TeamMemberForm /></ProtectedRoute>} />
 
       </Routes>
     </>
+    </AuthProvider>
   );
 };
 
