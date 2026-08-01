@@ -56,6 +56,7 @@ import FC_coming_soon from "./features/faculty-connect/ComingSoon";
 import { AuthProvider } from './features/admin/context/AuthContext';
 import ProtectedRoute from './features/admin/components/ProtectedRoute';
 import AdminLogin from './features/admin/pages/AdminLogin';
+import ForgotPassword from './features/admin/pages/ForgotPassword';
 import TeamDashboard from './features/admin/pages/TeamDashboard';
 import TeamMemberForm from './features/admin/pages/TeamMemberForm';
 import ProjectDashboard from './features/admin/pages/ProjectDashboard';
@@ -134,6 +135,7 @@ const App = () => {
         }/>
 
         <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/forgot-password" element={<ForgotPassword />} />
         <Route path="/admin/team" element={<ProtectedRoute><TeamDashboard /></ProtectedRoute>} />
         <Route path="/admin/team/new" element={<ProtectedRoute><TeamMemberForm /></ProtectedRoute>} />
         <Route path="/admin/team/edit/:id" element={<ProtectedRoute><TeamMemberForm /></ProtectedRoute>} />

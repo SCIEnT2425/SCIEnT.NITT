@@ -21,3 +21,8 @@ credentials.json
 .DS_Store
 *.swp
 *.swo
+
+# Seed Files & Scripts
+server/scripts/
+server/clubsData.json
+
