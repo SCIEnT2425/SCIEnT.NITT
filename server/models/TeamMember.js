@@ -12,26 +12,33 @@ const teamMemberSchema = new mongoose.Schema({
     required: true,
     enum: [
       "Faculty Advisor",
+      "Core",
+      "Ex-Core",
+      "Senior Manager",
       "Manager",
       "Deputy Manager",
       "Ex-Manager",
-      "Admin Executive" ,
+      "Senior Project Manager",
+      "Project Manager",
+      "Admin Executive",
       "Technical Executive",
       "Facility Executive",
       "External Affairs Executive",
       "Internal Affairs Executive",
-      "Project Operations Executive",
-      "Project Manager"
+      "Project Operations Executive"
     ]
   },
 
   subteam: {
     type: String,
     enum: [
+      "Cores",
+      "Ex-Cores",
       "Project Management",
       "DevOps",
       "Corporate Communications",
       "Creatives",
+      null
     ],
     default: null
   },

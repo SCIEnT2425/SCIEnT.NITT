@@ -29,12 +29,15 @@ const SCIentMembers = () => {
           axios.get(`${API_BASE}/all`),
         ]);
 
+        const allMembers = teamRes.data.data || [];
         setMembersData({
-          team: teamRes.data.data || [],
-          cores: teamRes.data.data.filter(m => m.subteam === 'Cores') || [],
-          corporate: teamRes.data.data.filter(m => m.subteam === 'Corporate Communications') || [],
-          devops: teamRes.data.data.filter(m => m.subteam === 'DevOps') || [],
-          creative: teamRes.data.data.filter(m => m.subteam === 'Creatives') || [],
+          team: allMembers,
+          cores: allMembers.filter(m => m.role === 'Core' || m.subteam === 'Cores') || [],
+          excores: allMembers.filter(m => m.role === 'Ex-Core' || m.subteam === 'Ex-Cores') || [],
+          corporate: allMembers.filter(m => m.subteam === 'Corporate Communications') || [],
+          devops: allMembers.filter(m => m.subteam === 'DevOps') || [],
+          creative: allMembers.filter(m => m.subteam === 'Creatives') || [],
+          projectManagement: allMembers.filter(m => m.subteam === 'Project Management') || [],
         });
       } catch (err) {
         console.error('Error fetching members:', err);
@@ -46,16 +49,13 @@ const SCIentMembers = () => {
     fetchMembers();
   }, []);
 
-
-
   const renderTeamSections = () => {
-    const all = membersData.team;
-    const cores = all.filter(m => 
-      ['Technical Executive', 'Facility Executive', 'External Affairs Executive', 'Internal Affairs Executive' , 'Project Operations Executive'].includes(m.role)
-    );
-    const managers = all.filter(m => ['Manager' , 'Project Manager'].includes(m.role));
+    const all = membersData.team || [];
+    const cores = all.filter(m => m.role === 'Core' || m.subteam === 'Cores');
+    const exCores = all.filter(m => m.role === 'Ex-Core' || m.subteam === 'Ex-Cores' || ['Technical Executive', 'Facility Executive', 'External Affairs Executive', 'Internal Affairs Executive', 'Project Operations Executive'].includes(m.role));
+    const seniorManagers = all.filter(m => ['Senior Manager', 'Senior Project Manager'].includes(m.role));
+    const managers = all.filter(m => ['Manager', 'Project Manager'].includes(m.role));
     const deputyManagers = all.filter(m => m.role === 'Deputy Manager');
-    
 
     return (
       <div>
@@ -64,6 +64,26 @@ const SCIentMembers = () => {
             <h2 className="text-4xl font-bold text-[#facc15] mb-4 flex justify-center">Core Members</h2>
             <div className="membersGrid">
               {cores.map((member, idx) => (
+                <MemberCard key={member._id || idx} member={member} index={idx} />
+              ))}
+            </div>
+          </div>
+        )}
+        {exCores.length > 0 && (
+          <div className="mt-12">
+            <h2 className="text-4xl font-bold text-[#facc15] mb-4 flex justify-center">Ex-Core Members</h2>
+            <div className="membersGrid">
+              {exCores.map((member, idx) => (
+                <MemberCard key={member._id || idx} member={member} index={idx} />
+              ))}
+            </div>
+          </div>
+        )}
+        {seniorManagers.length > 0 && (
+          <div className="mt-12">
+            <h2 className="text-4xl font-bold text-[#facc15] mb-4 flex justify-center">Senior Managers</h2>
+            <div className="membersGrid">
+              {seniorManagers.map((member, idx) => (
                 <MemberCard key={member._id || idx} member={member} index={idx} />
               ))}
             </div>
@@ -94,13 +114,11 @@ const SCIentMembers = () => {
   };
 
   const renderCores = () => {
-     const all = membersData.team;
-    const cores = all.filter(m => 
-      ['Technical Executive', 'Facility Executive', 'External Affairs Executive', 'Internal Affairs Executive','Project Operations Executive'].includes(m.role)
-    );
+    const all = membersData.team || [];
+    const cores = all.filter(m => m.role === 'Core' || m.subteam === 'Cores');
     return (
       <div>
-        <h2 className="text-4xl font-bold text-[#facc15] flex justify-center">Core</h2>
+        <h2 className="text-4xl font-bold text-[#facc15] mb-4 flex justify-center">Core</h2>
         <div className="membersGrid">
           {cores.map((member, idx) => (
             <MemberCard key={member._id || idx} member={member} index={idx} />
@@ -110,44 +128,81 @@ const SCIentMembers = () => {
     );
   };
 
-const renderProjectManagementTeam = () => {
-  const all = membersData.team;
-  const head = all.filter(m => m.role === 'Project Management Head');
-  const managers = all.filter(m => m.role === 'Project Manager');
+  const renderExCores = () => {
+    const all = membersData.team || [];
+    const exCores = all.filter(m => m.role === 'Ex-Core' || m.subteam === 'Ex-Cores' || ['Technical Executive', 'Facility Executive', 'External Affairs Executive', 'Internal Affairs Executive', 'Project Operations Executive'].includes(m.role));
+    return (
+      <div>
+        <h2 className="text-4xl font-bold text-[#facc15] mb-4 flex justify-center">Ex-Core</h2>
+        <div className="membersGrid">
+          {exCores.map((member, idx) => (
+            <MemberCard key={member._id || idx} member={member} index={idx} />
+          ))}
+        </div>
+      </div>
+    );
+  };
 
-  return (
-    <div>
-      {head.length > 0 && (
-        <div className="mt-12">
-          <h2 className="text-4xl font-bold text-[#facc15] mb-4 flex justify-center">Head</h2>
-          <div className="membersGrid">
-            {head.map((member, idx) => (
-              <MemberCard key={member._id || idx} member={member} index={idx} />
-            ))}
+  const renderProjectManagementTeam = () => {
+    const all = membersData.team || [];
+    const head = all.filter(m => m.role === 'Project Management Head');
+    const seniorManagers = all.filter(m => m.role === 'Senior Project Manager' || (m.subteam === 'Project Management' && m.role === 'Senior Manager'));
+    const managers = all.filter(m => m.role === 'Project Manager' || (m.subteam === 'Project Management' && m.role === 'Manager'));
+
+    return (
+      <div>
+        {head.length > 0 && (
+          <div className="mt-12">
+            <h2 className="text-4xl font-bold text-[#facc15] mb-4 flex justify-center">Head</h2>
+            <div className="membersGrid">
+              {head.map((member, idx) => (
+                <MemberCard key={member._id || idx} member={member} index={idx} />
+              ))}
+            </div>
           </div>
-        </div>
-      )}
-      {managers.length > 0 && (
-        <div className="mt-12">
-          <h2 className="text-4xl font-bold text-[#facc15] mb-4 flex justify-center">Managers</h2>
-          <div className="membersGrid">
-            {managers.map((member, idx) => (
-              <MemberCard key={member._id || idx} member={member} index={idx} />
-            ))}
+        )}
+        {seniorManagers.length > 0 && (
+          <div className="mt-12">
+            <h2 className="text-4xl font-bold text-[#facc15] mb-4 flex justify-center">Senior Project Managers</h2>
+            <div className="membersGrid">
+              {seniorManagers.map((member, idx) => (
+                <MemberCard key={member._id || idx} member={member} index={idx} />
+              ))}
+            </div>
           </div>
-        </div>
-      )}
-    </div>
-  );
-};
+        )}
+        {managers.length > 0 && (
+          <div className="mt-12">
+            <h2 className="text-4xl font-bold text-[#facc15] mb-4 flex justify-center">Project Managers</h2>
+            <div className="membersGrid">
+              {managers.map((member, idx) => (
+                <MemberCard key={member._id || idx} member={member} index={idx} />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
 
   const renderSubteam = (key, subteamName) => {
-    const allMembers = membersData[key];
+    const allMembers = membersData[key] || [];
+    const seniorManagers = allMembers.filter(m => m.role === 'Senior Manager');
     const managers = allMembers.filter(m => m.role === 'Manager');
     const deputyManagers = allMembers.filter(m => m.role === 'Deputy Manager');
 
     return (
       <div>
+        {seniorManagers.length > 0 && (
+          <div className="mt-12">
+            <h2 className="text-4xl font-bold text-[#facc15] mb-4 flex justify-center">Senior Managers</h2>
+            <div className="membersGrid">
+              {seniorManagers.map((member, idx) => (
+                <MemberCard key={member._id || idx} member={member} index={idx} />
+              ))}
+            </div>
+          </div>
+        )}
         {managers.length > 0 && (
           <div className="mt-12">
             <h2 className="text-4xl font-bold text-[#facc15] mb-4 flex justify-center">Managers</h2>
@@ -160,7 +215,7 @@ const renderProjectManagementTeam = () => {
         )}
         {deputyManagers.length > 0 && (
           <div className="mt-12">
-            <h2 className="text-4xl font-bold text-[#facc15] mb-4 flex justify-center">Deputy Managers </h2>
+            <h2 className="text-4xl font-bold text-[#facc15] mb-4 flex justify-center">Deputy Managers</h2>
             <div className="membersGrid">
               {deputyManagers.map((member, idx) => (
                 <MemberCard key={member._id || idx} member={member} index={idx} />
@@ -182,11 +237,12 @@ const renderProjectManagementTeam = () => {
 
   const filterOptions = [
     { id: 'team', label: 'Team' },
-    { id: 'cores', label: 'Core'},
-    { id: 'corporate', label: 'Corporate Communication'},
-    { id: 'devops', label: 'DevOps'},
-    { id: 'creative', label: 'Creative'},
-    { id: 'projectManagement', label: 'Project Management'}
+    { id: 'cores', label: 'Core' },
+    { id: 'excores', label: 'Ex-Core' },
+    { id: 'corporate', label: 'Corporate Communication' },
+    { id: 'devops', label: 'DevOps' },
+    { id: 'creative', label: 'Creative' },
+    { id: 'projectManagement', label: 'Project Management' }
   ];
 
   const currentFilter = filterOptions.find(opt => opt.id === activeSection);
@@ -328,6 +384,7 @@ const renderProjectManagementTeam = () => {
       <div className="relative w-screen mx-auto px-36 pb-20">
         {activeSection === 'team' && renderTeamSections()}
         {activeSection === 'cores' && renderCores()}
+        {activeSection === 'excores' && renderExCores()}
         {activeSection === 'projectManagement' && renderProjectManagementTeam()}
         {activeSection === 'corporate' && renderSubteam('corporate', 'Corporate Communications')}
         {activeSection === 'devops' && renderSubteam('devops', 'DevOps')}
