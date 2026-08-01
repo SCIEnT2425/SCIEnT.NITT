@@ -1,17 +1,4 @@
 const mongoose = require("mongoose");
-const {
-  rmiProjects,
-  dcProjects,
-  everProjects,
-  ecellProjects,
-  spiderProjects,
-  psiProjects,
-  forceHyperloopProject,
-  dataByteProjects,
-  threeDProjects,
-  orbitProjects,
-} = require("../temporary/allProjects.js");
-
 const Project = require("../models/Project.js");
 const Club = require("../models/Club.js");
 
@@ -28,21 +15,41 @@ const clubNames = [
   "ORBIT",
 ];
 
-const clubMap = {
-  0: ecellProjects,
-  1: spiderProjects,
-  2: forceHyperloopProject,
-  3: dcProjects,
-  4: rmiProjects,
-  5: psiProjects,
-  6: everProjects,
-  7: threeDProjects,
-  8: dataByteProjects,
-  9: orbitProjects,
-};
-
 const seedProjects = async (req, res) => {
   try {
+    let allProjectsData;
+    try {
+      allProjectsData = require("../scripts/allProjects.js");
+    } catch (e) {
+      return res.status(404).json({ message: "Seed data not available in this environment" });
+    }
+
+    const {
+      rmiProjects,
+      dcProjects,
+      everProjects,
+      ecellProjects,
+      spiderProjects,
+      psiProjects,
+      forceHyperloopProject,
+      dataByteProjects,
+      threeDProjects,
+      orbitProjects,
+    } = allProjectsData;
+
+    const clubMap = {
+      0: ecellProjects,
+      1: spiderProjects,
+      2: forceHyperloopProject,
+      3: dcProjects,
+      4: rmiProjects,
+      5: psiProjects,
+      6: everProjects,
+      7: threeDProjects,
+      8: dataByteProjects,
+      9: orbitProjects,
+    };
+
     let totalInserted = 0;
 
     for (let i = 0; i < clubNames.length; i++) {
@@ -54,10 +61,8 @@ const seedProjects = async (req, res) => {
         continue;
       }
 
-      // ❌ Delete existing projects of this club
       await Project.deleteMany({ club: currClub._id });
 
-      // ✅ Prepare new projects
       const projectsToInsert = clubMap[i].map((proj) => ({
         name: proj.name,
         description: proj.description,
@@ -66,11 +71,9 @@ const seedProjects = async (req, res) => {
         club: currClub._id,
       }));
 
-      // ✅ Insert projects
       const inserted = await Project.insertMany(projectsToInsert);
       totalInserted += inserted.length;
 
-      // 🔗 Update club references
       currClub.projects = inserted.map((p) => p._id);
       await currClub.save();
 

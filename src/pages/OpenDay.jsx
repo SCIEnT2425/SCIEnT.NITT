@@ -3,7 +3,7 @@ import OpenDey from '../components/OpenDay'
 import Footer from '../components/footer'
 export default function OpenDay() {
   return (
-    <div className='h-screen'>
+    <div className='min-h-screen'>
       
       <OpenDey/>
       <Footer />

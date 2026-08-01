@@ -7,7 +7,7 @@ import Gallery from "./pages/Gallery";
 import ProjectSection from "./pages/ProjectSection";
 import Contact from "./pages/Contacts";
 
-import Team from "./Members/pages/Team";
+import Team from "./features/members/pages/Team";
 import OpenHouse from "./pages/OpenHouse";
 import Inventory from "./pages/Inventory";
 import ESummit from "./pages/ESummit";
@@ -46,16 +46,29 @@ import Annualday from "./pages/Annualday";
  import ProjectsPage from "./pages/ProjectsPage";
  import ProjectDetailsPage from "./pages/ProjectDetailsPage";
 
-import Inventive from "./inventive/Pages/Inventive";
-import InventivePage from "./inventive/Pages/InventivePage" ;
-import Contrive from "./contrive/Pages/Contrive";
-import ContrivePage from "./contrive/Pages/ContrivePage";
-import OpenhousePage from "./openhouse/pages/openhousepage";
-import FC_coming_soon from "./FacultyConnect/ComingSoon"
+import Inventive from "./features/inventive/pages/Inventive";
+import InventivePage from "./features/inventive/pages/InventivePage" ;
+import Contrive from "./features/contrive/pages/Contrive";
+import ContrivePage from "./features/contrive/pages/ContrivePage";
+import OpenhousePage from "./features/openhouse/pages/openhousepage";
+import FC_coming_soon from "./features/faculty-connect/ComingSoon";
+
+import { AuthProvider } from './features/admin/context/AuthContext';
+import ProtectedRoute from './features/admin/components/ProtectedRoute';
+import AdminLogin from './features/admin/pages/AdminLogin';
+import ForgotPassword from './features/admin/pages/ForgotPassword';
+import TeamDashboard from './features/admin/pages/TeamDashboard';
+import TeamMemberForm from './features/admin/pages/TeamMemberForm';
+import ProjectDashboard from './features/admin/pages/ProjectDashboard';
+import ProjectForm from './features/admin/pages/ProjectForm';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const App = () => {
   return (
-    <>
-      <Routes>
+    <AuthProvider>
+      <>
+        <ToastContainer theme="dark" />
+        <Routes>
         
         {/* Club Listing  */}
         <Route path="/clubs"  element={<ClubsPage />} />
@@ -78,7 +91,6 @@ const App = () => {
         <Route path="/openhouse" element={<OpenhousePage/>}/>
         <Route path="/Team" element={<Team/>} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/Team" element={<Team />} />
         <Route path="/faculty-connect" element={<FC_coming_soon />} />
         <Route path="/open-house" element={<OpenHouse />} />
         <Route path="/e-summit" element={<ESummit />} />
@@ -122,9 +134,18 @@ const App = () => {
          < Profnitt/>
         }/>
 
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/forgot-password" element={<ForgotPassword />} />
+        <Route path="/admin/team" element={<ProtectedRoute><TeamDashboard /></ProtectedRoute>} />
+        <Route path="/admin/team/new" element={<ProtectedRoute><TeamMemberForm /></ProtectedRoute>} />
+        <Route path="/admin/team/edit/:id" element={<ProtectedRoute><TeamMemberForm /></ProtectedRoute>} />
+        <Route path="/admin/projects" element={<ProtectedRoute><ProjectDashboard /></ProtectedRoute>} />
+        <Route path="/admin/projects/new" element={<ProtectedRoute><ProjectForm /></ProtectedRoute>} />
+        <Route path="/admin/projects/edit/:id" element={<ProtectedRoute><ProjectForm /></ProtectedRoute>} />
 
       </Routes>
     </>
+    </AuthProvider>
   );
 };
 

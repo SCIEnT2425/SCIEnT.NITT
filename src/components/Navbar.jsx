@@ -14,7 +14,7 @@ const Navbar = () => {
         console.log(clicked)
     };
     const handleClick2 = () => {
-        setClicked(clicked => false);
+        setClicked(false);
 
     };
 
@@ -147,7 +147,7 @@ const Navbar = () => {
                         </div>
                     </div>
                 </div>
-                <div id="mobile" onClick={handleClick}>
+                <div id="mobile" onClick={handleClick} aria-expanded={clicked} aria-label="Toggle navigation menu">
                     <i id="bar" className={clicked ? 'fas fa-times' : 'fas fa-bars'}></i>
                 </div>
             </nav>
