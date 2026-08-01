@@ -171,7 +171,7 @@ const ProjectForm = () => {
                 >
                   <option value="">Select a club...</option>
                   {clubs.map(club => (
-                    <option key={club._id} value={club._id}>
+                    <option key={club._id || club.id} value={club._id || club.id}>
                       {club.name}
                     </option>
                   ))}
