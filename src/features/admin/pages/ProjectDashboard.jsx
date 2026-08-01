@@ -2,31 +2,36 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
-import { Plus, Edit, Trash2, Search, LogOut, Users, Loader2 } from 'lucide-react';
+import { Plus, Edit, Trash2, Search, LogOut, FolderOpen, Loader2 } from 'lucide-react';
 import { toast } from 'react-toastify';
 
-const TeamDashboard = () => {
-  const [members, setMembers] = useState([]);
+const ProjectDashboard = () => {
+  const [projects, setProjects] = useState([]);
+  const [clubs, setClubs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
-  const [roleFilter, setRoleFilter] = useState('');
-  const [subteamFilter, setSubteamFilter] = useState('');
+  const [clubFilter, setClubFilter] = useState('');
+  const [yearFilter, setYearFilter] = useState('');
   
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [memberToDelete, setMemberToDelete] = useState(null);
+  const [projectToDelete, setProjectToDelete] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
   const { token, logout, API_BASE } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const fetchMembers = async () => {
+  const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_BASE}/api/team/all`);
-      setMembers(response.data.data || []);
+      const [projectsRes, clubsRes] = await Promise.all([
+        axios.get(`${API_BASE}/api/projects`),
+        axios.get(`${API_BASE}/api/clubs`)
+      ]);
+      setProjects(projectsRes.data.data || projectsRes.data || []);
+      setClubs(clubsRes.data.data || clubsRes.data || []);
     } catch (error) {
-      toast.error('Failed to fetch team members');
+      toast.error('Failed to fetch data');
       console.error(error);
     } finally {
       setLoading(false);
@@ -34,7 +39,7 @@ const TeamDashboard = () => {
   };
 
   useEffect(() => {
-    fetchMembers();
+    fetchData();
   }, []);
 
   const handleLogout = () => {
@@ -43,60 +48,51 @@ const TeamDashboard = () => {
   };
 
   const confirmDelete = async () => {
-    if (!memberToDelete) return;
+    if (!projectToDelete) return;
     
     setIsDeleting(true);
     try {
-      await axios.delete(`${API_BASE}/api/team/${memberToDelete._id || memberToDelete.id}`, {
+      await axios.delete(`${API_BASE}/api/projects/${projectToDelete._id || projectToDelete.id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      toast.success('Member deleted successfully');
+      toast.success('Project deleted successfully');
       setShowDeleteModal(false);
-      setMemberToDelete(null);
-      fetchMembers();
+      setProjectToDelete(null);
+      fetchData();
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Failed to delete member');
+      toast.error(error.response?.data?.message || 'Failed to delete project');
     } finally {
       setIsDeleting(false);
     }
   };
 
-  const roles = [
-    'Faculty Advisor', 'Manager', 'Deputy Manager', 'Ex-Manager', 
-    'Admin Executive', 'Technical Executive', 'Facility Executive', 
-    'External Affairs Executive', 'Internal Affairs Executive', 
-    'Project Operations Executive', 'Project Manager'
-  ];
+  const years = [...new Set(projects.map(p => p.year))].filter(Boolean).sort((a, b) => b - a);
 
-  const subteams = [
-    'Project Management', 'DevOps', 'Corporate Communications', 'Creatives'
-  ];
-
-  const filteredMembers = members.filter(member => {
-    const matchesSearch = member.name.toLowerCase().includes(search.toLowerCase());
-    const matchesRole = roleFilter ? member.role === roleFilter : true;
-    const matchesSubteam = subteamFilter ? member.subteam === subteamFilter : true;
-    return matchesSearch && matchesRole && matchesSubteam;
+  const filteredProjects = projects.filter(project => {
+    const matchesSearch = project.name.toLowerCase().includes(search.toLowerCase());
+    const matchesClub = clubFilter ? (project.club?._id === clubFilter || project.club === clubFilter) : true;
+    const matchesYear = yearFilter ? project.year.toString() === yearFilter.toString() : true;
+    return matchesSearch && matchesClub && matchesYear;
   });
 
   return (
     <div className="min-h-screen bg-black text-white p-4 md:p-8">
       {/* Header */}
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-3">
-            <Users className="text-yellow-400 w-8 h-8" />
-            Team <span className="text-yellow-400">Management</span>
+            <FolderOpen className="text-yellow-400 w-8 h-8" />
+            Project <span className="text-yellow-400">Management</span>
           </h1>
-          <p className="text-zinc-400 mt-1">Manage team members and roles</p>
+          <p className="text-zinc-400 mt-1">Manage projects and clubs</p>
         </div>
         <div className="flex items-center gap-3">
           <Link 
-            to="/admin/team/new" 
+            to="/admin/projects/new" 
             className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-black px-4 py-2 rounded-lg font-semibold transition-colors"
           >
             <Plus className="w-5 h-5" />
-            Add Member
+            Add Project
           </Link>
           <button 
             onClick={handleLogout}
@@ -146,20 +142,20 @@ const TeamDashboard = () => {
             />
           </div>
           <select 
-            value={roleFilter} 
-            onChange={(e) => setRoleFilter(e.target.value)}
+            value={clubFilter} 
+            onChange={(e) => setClubFilter(e.target.value)}
             className="w-full md:w-48 px-4 py-2 bg-zinc-950 border border-zinc-700 rounded-lg focus:outline-none focus:border-yellow-400 text-white"
           >
-            <option value="">All Roles</option>
-            {roles.map(r => <option key={r} value={r}>{r}</option>)}
+            <option value="">All Clubs</option>
+            {clubs.map(c => <option key={c._id} value={c._id}>{c.name}</option>)}
           </select>
           <select 
-            value={subteamFilter} 
-            onChange={(e) => setSubteamFilter(e.target.value)}
+            value={yearFilter} 
+            onChange={(e) => setYearFilter(e.target.value)}
             className="w-full md:w-48 px-4 py-2 bg-zinc-950 border border-zinc-700 rounded-lg focus:outline-none focus:border-yellow-400 text-white"
           >
-            <option value="">All Subteams</option>
-            {subteams.map(s => <option key={s} value={s}>{s}</option>)}
+            <option value="">All Years</option>
+            {years.map(y => <option key={y} value={y}>{y}</option>)}
           </select>
         </div>
 
@@ -168,38 +164,38 @@ const TeamDashboard = () => {
           <div className="flex justify-center items-center py-20">
             <Loader2 className="w-10 h-10 text-yellow-400 animate-spin" />
           </div>
-        ) : filteredMembers.length === 0 ? (
+        ) : filteredProjects.length === 0 ? (
           <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-12 text-center">
-            <Users className="w-16 h-16 text-zinc-700 mx-auto mb-4" />
-            <h3 className="text-xl font-medium text-white mb-2">No members found</h3>
-            <p className="text-zinc-400">Adjust your search filters or add a new team member.</p>
+            <FolderOpen className="w-16 h-16 text-zinc-700 mx-auto mb-4" />
+            <h3 className="text-xl font-medium text-white mb-2">No projects found</h3>
+            <p className="text-zinc-400">Adjust your search filters or add a new project.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredMembers.map((member) => (
-              <div key={member._id || member.id} className="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden flex flex-col group hover:border-yellow-400/50 transition-colors">
+            {filteredProjects.map((project) => (
+              <div key={project._id || project.id} className="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden flex flex-col group hover:border-yellow-400/50 transition-colors">
                 <div className="h-48 overflow-hidden bg-zinc-950 flex items-center justify-center relative">
-                  {member.photoUrl ? (
+                  {project.image?.url ? (
                     <img 
-                      src={member.photoUrl} 
-                      alt={member.name} 
+                      src={project.image.url} 
+                      alt={project.name} 
                       className="w-full h-full object-cover"
                       onError={(e) => { e.target.src = 'https://via.placeholder.com/400x400?text=No+Image'; }}
                     />
                   ) : (
-                    <Users className="w-16 h-16 text-zinc-800" />
+                    <FolderOpen className="w-16 h-16 text-zinc-800" />
                   )}
                   {/* Action Overlay */}
                   <div className="absolute top-0 right-0 p-3 flex gap-2 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-bl from-black/80 to-transparent w-full justify-end">
                     <Link 
-                      to={`/admin/team/edit/${member._id || member.id}`}
+                      to={`/admin/projects/edit/${project._id || project.id}`}
                       className="p-2 bg-zinc-800/80 hover:bg-zinc-700 text-white rounded-lg backdrop-blur-sm"
                     >
                       <Edit className="w-4 h-4" />
                     </Link>
                     <button 
                       onClick={() => {
-                        setMemberToDelete(member);
+                        setProjectToDelete(project);
                         setShowDeleteModal(true);
                       }}
                       className="p-2 bg-red-500/80 hover:bg-red-600 text-white rounded-lg backdrop-blur-sm"
@@ -210,18 +206,18 @@ const TeamDashboard = () => {
                 </div>
                 
                 <div className="p-4 flex-1 flex flex-col">
-                  <h3 className="text-lg font-bold text-white mb-1">{member.name}</h3>
+                  <h3 className="text-lg font-bold text-white mb-1">{project.name}</h3>
                   <div className="flex flex-wrap gap-2 mb-3">
                     <span className="px-2 py-1 bg-yellow-400/10 text-yellow-400 text-xs rounded-md border border-yellow-400/20 font-medium">
-                      {member.role}
+                      {project.club?.name || 'Club'}
                     </span>
-                    {member.subteam && (
-                      <span className="px-2 py-1 bg-zinc-800 text-zinc-300 text-xs rounded-md border border-zinc-700">
-                        {member.subteam}
-                      </span>
-                    )}
+                    <span className="px-2 py-1 bg-zinc-800 text-zinc-300 text-xs rounded-md border border-zinc-700">
+                      {project.year}
+                    </span>
                   </div>
-                  {member.email && <p className="text-zinc-500 text-sm mt-auto truncate">{member.email}</p>}
+                  {project.description && (
+                    <p className="text-zinc-500 text-sm mt-auto line-clamp-2">{project.description}</p>
+                  )}
                 </div>
               </div>
             ))}
@@ -233,9 +229,9 @@ const TeamDashboard = () => {
       {showDeleteModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
           <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 max-w-md w-full shadow-2xl">
-            <h3 className="text-xl font-bold text-white mb-2">Delete Member</h3>
+            <h3 className="text-xl font-bold text-white mb-2">Delete Project</h3>
             <p className="text-zinc-400 mb-6">
-              Are you sure you want to delete <span className="text-white font-semibold">{memberToDelete?.name}</span>? This action cannot be undone.
+              Are you sure you want to delete <span className="text-white font-semibold">{projectToDelete?.name}</span>? This action cannot be undone.
             </p>
             <div className="flex gap-3 justify-end">
               <button 
@@ -261,4 +257,4 @@ const TeamDashboard = () => {
   );
 };
 
-export default TeamDashboard;
+export default ProjectDashboard;

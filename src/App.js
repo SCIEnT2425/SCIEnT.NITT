@@ -58,6 +58,8 @@ import ProtectedRoute from './features/admin/components/ProtectedRoute';
 import AdminLogin from './features/admin/pages/AdminLogin';
 import TeamDashboard from './features/admin/pages/TeamDashboard';
 import TeamMemberForm from './features/admin/pages/TeamMemberForm';
+import ProjectDashboard from './features/admin/pages/ProjectDashboard';
+import ProjectForm from './features/admin/pages/ProjectForm';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const App = () => {
@@ -135,6 +137,9 @@ const App = () => {
         <Route path="/admin/team" element={<ProtectedRoute><TeamDashboard /></ProtectedRoute>} />
         <Route path="/admin/team/new" element={<ProtectedRoute><TeamMemberForm /></ProtectedRoute>} />
         <Route path="/admin/team/edit/:id" element={<ProtectedRoute><TeamMemberForm /></ProtectedRoute>} />
+        <Route path="/admin/projects" element={<ProtectedRoute><ProjectDashboard /></ProtectedRoute>} />
+        <Route path="/admin/projects/new" element={<ProtectedRoute><ProjectForm /></ProtectedRoute>} />
+        <Route path="/admin/projects/edit/:id" element={<ProtectedRoute><ProjectForm /></ProtectedRoute>} />
 
       </Routes>
     </>
