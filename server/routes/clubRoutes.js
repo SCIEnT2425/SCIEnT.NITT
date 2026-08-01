@@ -1,15 +1,20 @@
 const express = require('express');
-// const { protect } = require('../middleware/auth');
 const { getClubsData, getClub, getAllClubs } = require('../controllers/clubController');
 const { seedProjects } = require("../controllers/seedController");
-const { seedClubs } = require("../scripts/seedClubs");
-const {getProject} = require("../controllers/projectController")
+const { getProject } = require("../controllers/projectController");
 const router = express.Router();
 
-router.get('/clubdata',getClubsData);
-router.get('/:name/projects',getClub);
-router.get('/:name/projects/:projectId',getProject);
-router.get('/',getAllClubs);
+let seedClubs;
+try {
+  seedClubs = require("../scripts/seedClubs").seedClubs;
+} catch (e) {
+  seedClubs = (req, res) => res.status(404).json({ message: "Seed module not available in this environment" });
+}
+
+router.get('/clubdata', getClubsData);
+router.get('/:name/projects', getClub);
+router.get('/:name/projects/:projectId', getProject);
+router.get('/', getAllClubs);
 router.post("/projects", seedProjects);
 router.post("/seedclubs", seedClubs);
 

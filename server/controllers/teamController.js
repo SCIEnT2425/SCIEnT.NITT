@@ -1,5 +1,4 @@
 const TeamMember = require('../models/TeamMember'); // Adjust path as needed
-const seedTeams = require('../scripts/AddTeamInDB.js');
 // Get all team members
 const getAllTeamMembers = async (req, res) => {
   try {
