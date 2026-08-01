@@ -7,8 +7,12 @@ const { sendOtpEmail } = require('../utils/sendEmail');
 
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
+  if (!username || !password) {
+    return res.status(400).json({ message: 'Username and password are required' });
+  }
+
   try {
-    const admin = await Admin.findOne({ username });
+    const admin = await Admin.findOne({ username: username.toLowerCase().trim() });
     if (admin && (await admin.matchPassword(password))) {
       const token = jwt.sign({ id: admin._id, role: admin.role }, process.env.JWT_SECRET, {
         expiresIn: '24h',
