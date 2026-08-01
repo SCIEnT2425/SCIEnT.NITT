@@ -86,17 +86,17 @@
 }
 
 /* Contact Info (GET IN TOUCH) */
-.contact-info {
+.footer .contact-info {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    background-color: transparent !important; 
+    background-color: transparent; 
     flex-grow: 1; 
-    padding: 0 !important;
-    margin :0 !important;
+    padding: 0;
+    margin: 0;
 }
 
-.contact-info > p {
+.footer .contact-info > p {
     display: flex;
     align-items: flex-start;
     gap: 12px;
@@ -104,17 +104,17 @@
     color: #ffffff;
     font-size: 16px;
     line-height: 1.6;
-    background-color: transparent !important; 
+    background-color: transparent; 
 }
 
-.contact-info i {
+.footer .contact-info i {
     color: #fcd34d;
     font-size: 18px;
     margin-top: 2px;
     flex-shrink: 0;
 }
 
-.contact-info svg {
+.footer .contact-info svg {
     color: #fcd34d;
     width: 18px;
     height: 18px;
@@ -122,14 +122,14 @@
     flex-shrink: 0;
 }
 
-.contact-info p span {
+.footer .contact-info p span {
     margin: 0;
     display: inline;
     color: #ffffff;
-    background-color: transparent !important; 
+    background-color: transparent; 
 }
 
-.contact-info .fas {
+.footer .contact-info .fas {
     color: #fcd34d;
 }
 
@@ -149,7 +149,8 @@
     justify-content: center;
 }
 
-.social-icons a:hover {
+.social-icons a:hover,
+.social-icons a:focus-visible {
     color: #fcd34d;
 }
 

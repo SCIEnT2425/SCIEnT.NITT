@@ -74,22 +74,31 @@
   position: relative;
   padding: 4px; /* border thickness */
   border-radius: 14px;
-  background-image: conic-gradient(
-    from var(--angle),
-    gold,
-    gold,
-    #000000,
-    #000000,
-    gold
-  );
-  animation: spin 3s linear infinite;
+  /* Fallback for non-Houdini browsers */
+  background-image: linear-gradient(90deg, gold, #000000, gold);
+  background-size: 200% 200%;
+  animation: fallback-spin 3s linear infinite;
   z-index: 0;
   display: flex;
   flex-direction: column;
-  width: 600px;
-  max-width: 100%; /* ✅ Prevent overflow on small screens */
+  width: 100%;
+  max-width: 600px; /* ✅ Prevent overflow on small screens and fix width */
   border: none;
   text-decoration: none;
+}
+
+@supports (background: paint(houdini)) {
+  .gallery-page .card-wrapper {
+    background-image: conic-gradient(
+      from var(--angle),
+      gold,
+      gold,
+      #000000,
+      #000000,
+      gold
+    );
+    animation: spin 3s linear infinite;
+  }
 }
 
 .gallery-page .card-wrapper::before {
@@ -110,6 +119,12 @@
   to {
     --angle: 360deg;
   }
+}
+
+@keyframes fallback-spin {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* ✅ Responsive Design */
