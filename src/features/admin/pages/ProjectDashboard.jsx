@@ -28,8 +28,10 @@ const ProjectDashboard = () => {
         axios.get(`${API_BASE}/api/projects`),
         axios.get(`${API_BASE}/api/clubs`)
       ]);
-      setProjects(projectsRes.data.data || projectsRes.data || []);
-      setClubs(clubsRes.data.data || clubsRes.data || []);
+      const pData = Array.isArray(projectsRes.data) ? projectsRes.data : (projectsRes.data?.data || []);
+      const cData = Array.isArray(clubsRes.data) ? clubsRes.data : (clubsRes.data?.data || []);
+      setProjects(pData);
+      setClubs(cData);
     } catch (error) {
       toast.error('Failed to fetch data');
       console.error(error);
@@ -49,29 +51,34 @@ const ProjectDashboard = () => {
 
   const confirmDelete = async () => {
     if (!projectToDelete) return;
-    
-    setIsDeleting(true);
     try {
+      setIsDeleting(true);
       await axios.delete(`${API_BASE}/api/projects/${projectToDelete._id || projectToDelete.id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success('Project deleted successfully');
-      setShowDeleteModal(false);
       setProjectToDelete(null);
+      setShowDeleteModal(false);
       fetchData();
     } catch (error) {
       toast.error(error.response?.data?.message || 'Failed to delete project');
+      console.error(error);
     } finally {
       setIsDeleting(false);
     }
   };
 
-  const years = [...new Set(projects.map(p => p.year))].filter(Boolean).sort((a, b) => b - a);
+  const projectList = Array.isArray(projects) ? projects : [];
+  const clubList = Array.isArray(clubs) ? clubs : [];
 
-  const filteredProjects = projects.filter(project => {
-    const matchesSearch = project.name.toLowerCase().includes(search.toLowerCase());
+  const years = [...new Set(projectList.map(p => p?.year))].filter(Boolean).sort((a, b) => b - a);
+
+  const filteredProjects = projectList.filter(project => {
+    if (!project) return false;
+    const nameStr = project.name ? String(project.name) : '';
+    const matchesSearch = nameStr.toLowerCase().includes((search || '').toLowerCase());
     const matchesClub = clubFilter ? (project.club?._id === clubFilter || project.club === clubFilter) : true;
-    const matchesYear = yearFilter ? project.year.toString() === yearFilter.toString() : true;
+    const matchesYear = yearFilter ? (project.year != null && String(project.year) === String(yearFilter)) : true;
     return matchesSearch && matchesClub && matchesYear;
   });
 
@@ -147,7 +154,7 @@ const ProjectDashboard = () => {
             className="w-full md:w-48 px-4 py-2 bg-zinc-950 border border-zinc-700 rounded-lg focus:outline-none focus:border-yellow-400 text-white"
           >
             <option value="">All Clubs</option>
-            {clubs.map(c => <option key={c._id} value={c._id}>{c.name}</option>)}
+            {clubList.map(c => <option key={c._id || c.id} value={c._id || c.id}>{c.name}</option>)}
           </select>
           <select 
             value={yearFilter} 
