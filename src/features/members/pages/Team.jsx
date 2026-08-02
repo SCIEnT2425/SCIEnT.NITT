@@ -8,12 +8,12 @@ import ScientMembers from '../components/ScientMembers'
 
 const Team = () => {
   return (
-    <div className='w-screen m-0 p-0 '>
+    <div className='w-full m-0 p-0 overflow-hidden'>
       <nav className='clear-both'>
         <Navbar/>
       </nav>
       <ScientMembers/>
-      <footer className='w-screen clear-both'>
+      <footer className='w-full clear-both'>
         <Footer/>
       </footer>
     </div>

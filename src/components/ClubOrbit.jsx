@@ -24,7 +24,7 @@ import { data } from 'autoprefixer';
 // import logo from "../assets/logo.svg";
 const ClubOrbit = () => {
     return (
-        <div>
+        <div className="overflow-hidden max-w-full">
             <div class="orbit">
 
                 <ul class="orbit-wrap">

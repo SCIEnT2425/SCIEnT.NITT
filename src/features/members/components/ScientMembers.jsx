@@ -297,7 +297,7 @@ const SCIentMembers = () => {
               SCIEnT Admin
             </h1>
         </div>
-        <div className='Admins flex w-screen align-center laptop:px-16 justify-center'>
+        <div className='Admins flex w-full align-center laptop:px-16 justify-center gap-8'>
             <FacilityAdminCard  adminData={FacilityAdmin}/>
             <FacultyAdvisorCard  AdvisorData={FacultyAdvisor}/>
         </div>
@@ -381,7 +381,7 @@ const SCIentMembers = () => {
       </div>
 
       {/* Members Sections */}
-      <div className="relative w-screen mx-auto px-36 pb-20">
+      <div className="relative w-full max-w-7xl mx-auto px-4 mobile:px-8 laptop:px-12 pb-20">
         {activeSection === 'team' && renderTeamSections()}
         {activeSection === 'cores' && renderCores()}
         {activeSection === 'excores' && renderExCores()}

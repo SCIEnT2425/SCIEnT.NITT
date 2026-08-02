@@ -15,7 +15,7 @@ function CarouselPage() {
       <div className="headingcarousel">
         <p className='text-yellow-500 scient-title'>SCIEnT</p>
         <p className="text-xs mobile:text-lg
-         laptop:text-3xl text-white whitespace-nowrap mb-4">
+         laptop:text-3xl text-white mb-4">
           Student Centre for Innovation in Engineering and Technology
         </p>
         <p className="text-sm mobile:text-lg laptop:text-3xl text-[#79d9ff] font-semibold">

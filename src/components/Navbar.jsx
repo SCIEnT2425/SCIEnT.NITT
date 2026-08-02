@@ -1,157 +1,148 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import "./Navbar.css";
 import logo from "../assets/logo_s.png";
-import search from "../assets/search.svg";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 
 const Navbar = () => {
     const location = useLocation();
-    const [clicked, setClicked] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [initiativesOpen, setInitiativesOpen] = useState(false);
+    const [aboutOpen, setAboutOpen] = useState(false);
 
-    const handleClick = () => {
-        setClicked(clicked => !clicked);
-        console.log(clicked)
+    const closeAll = () => {
+        setMenuOpen(false);
+        setInitiativesOpen(false);
+        setAboutOpen(false);
     };
-    const handleClick2 = () => {
-        setClicked(false);
 
-    };
-
-    // Helper function to check if a link is active
     const isActive = (path) => location.pathname === path;
 
+    // Tailwind-only nav link with animated underline
+    const linkClasses = (path) => {
+        const active = isActive(path);
+        return [
+            'relative py-2 px-3 font-semibold no-underline transition-colors duration-200',
+            "after:content-[''] after:block after:absolute after:bottom-0",
+            'after:h-[2px] after:bg-[#f9c203] after:transition-all after:duration-300 after:ease-in-out',
+            'hover:after:left-0 hover:after:w-full hover:text-[#91ff00]',
+            active
+                ? 'text-[#f9c203] font-bold after:left-0 after:w-full'
+                : 'text-white after:left-1/2 after:w-0',
+        ].join(' ');
+    };
+
     return (
-        <div>
-            <nav className="nav py-2 relative">
-                <Link to="/" className="mr-10"
-                    onClick={handleClick2}>
-                    <img className="logo" src={logo} alt="Logo" />
+        <nav className="flex items-center justify-between min-[760px]:justify-center bg-black w-full py-2 px-4 min-[760px]:px-6 relative z-[1000]">
+            {/* Logo */}
+            <Link to="/" className="mr-4 min-[760px]:mr-10 shrink-0 z-[201]" onClick={closeAll}>
+                <img className="h-[50px] min-[760px]:h-[65px]" src={logo} alt="SCIEnT Logo" />
+            </Link>
+
+            {/* Nav links container
+                Desktop (>=760px): always visible, flex-row, static
+                Mobile (<760px), closed: hidden (display:none — no ghost element)
+                Mobile (<760px), open: fixed full-screen overlay */}
+            <div
+                className={[
+                    // Desktop overrides (always visible, inline)
+                    'min-[760px]:flex min-[760px]:flex-row min-[760px]:items-center min-[760px]:gap-6',
+                    'min-[760px]:static min-[760px]:bg-transparent min-[760px]:h-auto min-[760px]:w-auto min-[760px]:p-0 min-[760px]:text-base min-[760px]:overflow-visible',
+                    // Mobile states
+                    menuOpen
+                        ? 'flex fixed inset-0 z-40 flex-col items-center justify-start pt-24 gap-6 bg-gradient-to-b from-[#1b1b1b] via-[rgba(27,27,27,0.9)] to-[rgba(27,27,27,0.3)] text-xl overflow-y-auto'
+                        : 'hidden',
+                ].join(' ')}
+            >
+                <Link to="/" onClick={closeAll} className={linkClasses('/')}>
+                    Home
                 </Link>
 
-                <div className={`links ${!clicked ? 'active1 text-2xl' : ''}`}>
-                    <Link
-                        to="/"
-                        onClick={handleClick}
-                        className={`nav-link ${isActive('/') ? 'active font-bold text-2xl' : ''}`}
-                    >
-                        Home
-                    </Link>
+                <Link to="/inventory" onClick={closeAll} className={linkClasses('/inventory')}>
+                    Inventory
+                </Link>
 
-                    {/* <Link
-                        to="/gallery"
-                        onClick={handleClick}
-                        className={`nav-link ${isActive('/gallery') ? 'active font-bold text-lg' : ''}`}
-                    >
-                        Gallery
-                    </Link> */}
+                <Link to="/openhouse" onClick={closeAll} className={linkClasses('/openhouse')}>
+                    OpenHouse
+                </Link>
 
-                    <Link
-                        to="/inventory"
-                        onClick={handleClick}
-                        className={`nav-link ${isActive('/inventory') ? 'active font-bold text-2xl' : ''}`}
-                    >
-                        Inventory
-                    </Link>
-                    <Link
-                        to="/openhouse"
-                        onClick={handleClick}
-                        className={`nav-link ${isActive('/openhouse') ? 'active font-bold text-2xl' : ''}`}
-                    >
-                        OpenHouse
-                    </Link>
+                <Link to="/clubs" onClick={closeAll} className={linkClasses('/clubs')}>
+                    Projects
+                </Link>
 
-                    <Link
-                        to="/clubs"
-                        onClick={handleClick}
-                        className={`nav-link ${isActive('/clubs') ? 'active font-bold text-2xl' : ''}`}
+                {/* Initiatives Dropdown */}
+                <div className="relative">
+                    <button
+                        className="flex items-center gap-1 text-white hover:text-[#91ff00] font-semibold px-3 py-2 cursor-pointer bg-transparent border-none"
+                        onClick={() => { setInitiativesOpen(v => !v); setAboutOpen(false); }}
                     >
-                        Projects
-                    </Link>
-
-                    {/* <Link
-                        to="/roombook"
-                        onClick={handleClick}
-                        className={`nav-link ${isActive('/roombook') ? 'active font-bold text-lg' : ''}`}
-                    >
-                        Room Booking
-                    </Link> */}
-
-                    <div className="relative inline-block group">
-                        <div className="cursor-pointer rounded-md px-4 py-2 flex items-center">
-                            <div className="mr-2">Initiatives</div>
-                            <ChevronDown />
+                        Initiatives
+                        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${initiativesOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {initiativesOpen && (
+                        <div className="min-[760px]:absolute min-[760px]:left-0 min-[760px]:top-full mt-1 bg-black rounded-lg shadow-lg border border-gray-700 min-w-[160px] z-50 text-center">
+                            <Link to="/inventive" onClick={closeAll}
+                                className="block px-4 py-2 text-white hover:bg-gray-700 hover:text-[#f9c203] rounded-t-lg whitespace-nowrap no-underline">
+                                Inventive '25
+                            </Link>
+                            <Link to="/contrive" onClick={closeAll}
+                                className="block px-4 py-2 text-white hover:bg-gray-700 hover:text-[#f9c203] rounded-b-lg whitespace-nowrap no-underline">
+                                Contrive '25
+                            </Link>
                         </div>
-
-                        <div className="absolute left-0 hidden w-150 rounded-lg bg-black shadow group-hover:block text-center border">
-                            <div className="cursor-pointer px-4 py-2 hover:bg-gray-500 whitespace-nowrap">
-                                <Link to="/inventive"
-                                    onClick={handleClick}
-                                    className={`nav-link ${isActive('/inventive') ? 'active font-bold text-2xl' : ''} `}
-                                >
-                                    Inventive '25
-                                </Link>
-                            </div>
-                            <div className="cursor-pointer px-4 py-2 hover:bg-gray-500 whitespace-nowrap">
-                                <Link to="/contrive"
-                                    onClick={handleClick}
-                                    className={`nav-link ${isActive('/contrive') ? 'active font-bold text-2xl' : ''} `}
-                                >
-                                    Contrive '25
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-
-                    <a
-                        href="https://faculty-connect-1.onrender.com/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={handleClick}
-                        className={`nav-link ${isActive('/faculty-connect') ? 'active font-bold text-2xl' : ''}`}
-                    >
-                        Faculty Connect
-                    </a>
-
-                    <div className="relative inline-block group">
-                        <div className="cursor-pointer rounded-md px-4 py-2 flex items-center">
-                            <div className="mr-2">About Us</div>
-                            <ChevronDown />
-                        </div>
-
-                        <div className="absolute left-0 hidden w-100 rounded-lg bg-black shadow group-hover:block">
-                            <div className="cursor-pointer px-4 py-2 hover:bg-gray-500">
-                                <Link to="/timeline"
-                                    onClick={handleClick}
-                                    className={`nav-link ${isActive('/timeline') ? 'active font-bold text-2xl' : ''} `}
-                                >
-                                    Timeline
-                                </Link>
-                            </div>
-                            <div className="cursor-pointer px-4 py-2 hover:bg-gray-500">
-                                <Link to="/team"
-                                    onClick={handleClick}
-                                    className={`nav-link ${isActive('/team') ? 'active font-bold text-2xl' : ''} `}
-                                >
-                                    Team
-                                </Link>
-                            </div>
-                            <div className="cursor-pointer px-4 py-2 hover:bg-gray-500">
-                                <Link to="/gallery"
-                                    onClick={handleClick}
-                                    className={`nav-link ${isActive('/gallery') ? 'active font-bold text-2xl' : ''} `}
-                                >
-                                    Gallery
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
+                    )}
                 </div>
-                <div id="mobile" onClick={handleClick} aria-expanded={clicked} aria-label="Toggle navigation menu">
-                    <i id="bar" className={clicked ? 'fas fa-times' : 'fas fa-bars'}></i>
+
+                <a
+                    href="https://faculty-connect-1.onrender.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={closeAll}
+                    className={linkClasses('/faculty-connect')}
+                >
+                    Faculty Connect
+                </a>
+
+                {/* About Us Dropdown */}
+                <div className="relative">
+                    <button
+                        className="flex items-center gap-1 text-white hover:text-[#91ff00] font-semibold px-3 py-2 cursor-pointer bg-transparent border-none"
+                        onClick={() => { setAboutOpen(v => !v); setInitiativesOpen(false); }}
+                    >
+                        About Us
+                        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${aboutOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {aboutOpen && (
+                        <div className="min-[760px]:absolute min-[760px]:left-0 min-[760px]:top-full mt-1 bg-black rounded-lg shadow-lg border border-gray-700 min-w-[140px] z-50">
+                            <Link to="/timeline" onClick={closeAll}
+                                className="block px-4 py-2 text-white hover:bg-gray-700 hover:text-[#f9c203] rounded-t-lg no-underline">
+                                Timeline
+                            </Link>
+                            <Link to="/team" onClick={closeAll}
+                                className="block px-4 py-2 text-white hover:bg-gray-700 hover:text-[#f9c203] no-underline">
+                                Team
+                            </Link>
+                            <Link to="/gallery" onClick={closeAll}
+                                className="block px-4 py-2 text-white hover:bg-gray-700 hover:text-[#f9c203] rounded-b-lg no-underline">
+                                Gallery
+                            </Link>
+                        </div>
+                    )}
                 </div>
-            </nav>
-        </div>
+            </div>
+
+            {/* Mobile hamburger — hidden on desktop, visible on mobile */}
+            <button
+                className="block min-[760px]:hidden z-[201] bg-transparent border-none cursor-pointer p-1"
+                onClick={() => setMenuOpen(v => !v)}
+                aria-label="Toggle navigation menu"
+                aria-expanded={menuOpen}
+            >
+                {menuOpen
+                    ? <X className="text-white w-7 h-7" />
+                    : <Menu className="text-white w-7 h-7" />
+                }
+            </button>
+        </nav>
     );
 };
 
