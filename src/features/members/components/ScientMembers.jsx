@@ -247,23 +247,23 @@ const SCIentMembers = () => {
 
   const currentFilter = filterOptions.find(opt => opt.id === activeSection);
   const dummyAdmin = {
-      name: "John Smith",
-      role: "Facility Admin",
-      Department: "Facility Management",
-      photoUrl: "/Team/facility_admin.png",
-      email: "FacultyAdvsor@gamil.com",
-      bio: "Ensuring smooth operations and maintenance of all facilities",
-      linkedin: "https://linkedin.com/in/example"
-    };
-    const dummyAdvisor = {
-      name: "Dr. Jane Doe",
-      role: "Faculty Advisor",
-      Department: "Computer Science",
-      photoUrl: "/Team/faculty_advisor.png",
-      email: "FacilityAdmin@gamil.com",
-      bio: "Guiding and mentoring the team towards excellence",
-      linkedin: "https://linkedin.com/in/example"
-    };
+    name: "Mr. Sivanesan S",
+    role: "Admin Executive",
+    Department: "SCIEnT Facility Operations",
+    photoUrl: "/Team/Sivaneshan.jpg",
+    email: "sivaneshan@nitt.edu",
+    description: "Overseeing facility management and operational excellence at SCIEnT",
+    linkedin: "https://www.linkedin.com/company/scientnitt/"
+  };
+  const dummyAdvisor = {
+    name: "Dr. A. K. Bakthavatsalam",
+    role: "Faculty Advisor",
+    Department: "Energy & Environment Engineering",
+    photoUrl: "/Team/Dr_A_K_Bakthavatsalam.png",
+    email: "baktha@nitt.edu",
+    description: "Guiding research, innovation, and strategic initiatives at SCIEnT",
+    linkedin: "https://www.linkedin.com/company/scientnitt/"
+  };
     const FacultyAdvisor = membersData.team.find(m => m.role === 'Faculty Advisor') || dummyAdvisor;
     const FacilityAdmin = membersData.team.find(m => m.role === 'Admin Executive') || dummyAdmin;
 
@@ -291,13 +291,13 @@ const SCIentMembers = () => {
           Student Centre for Innovation in Engineering and Technology
         </p>
       </div>
-      <div className='AdminSection'>
+      <div className='AdminSection mb-16 px-4'>
         <div className='flex justify-center text-center'>
-            <h1 className="text-4xl laptop:text-5xl font-black mb-4 text-[#facc15]">
+            <h1 className="text-4xl laptop:text-5xl font-black mb-6 text-[#facc15]">
               SCIEnT Admin
             </h1>
         </div>
-        <div className='Admins flex w-full align-center laptop:px-16 justify-center gap-8'>
+        <div className='w-full max-w-6xl mx-auto grid grid-cols-1 laptop:grid-cols-2 gap-8'>
             <FacilityAdminCard  adminData={FacilityAdmin}/>
             <FacultyAdvisorCard  AdvisorData={FacultyAdvisor}/>
         </div>

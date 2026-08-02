@@ -83,6 +83,11 @@ const teamMemberSchema = new mongoose.Schema({
     default: 0
   },
 
+  cardColor: {
+    type: String,
+    default: "#facc15"
+  },
+
   createdAt: {
     type: Date,
     default: Date.now

@@ -211,9 +211,23 @@ const TeamDashboard = () => {
                 </div>
                 
                 <div className="p-4 flex-1 flex flex-col">
-                  <h3 className="text-lg font-bold text-white mb-1">{member.name}</h3>
+                  <div className="flex items-center justify-between gap-2 mb-1">
+                    <h3 className="text-lg font-bold text-white truncate">{member.name}</h3>
+                    <span 
+                      className="w-4 h-4 rounded-full border border-white/20 shrink-0 shadow-sm"
+                      style={{ backgroundColor: member.cardColor || '#facc15' }}
+                      title={`Card Accent: ${member.cardColor || '#facc15'}`}
+                    ></span>
+                  </div>
                   <div className="flex flex-wrap gap-2 mb-3">
-                    <span className="px-2 py-1 bg-yellow-400/10 text-yellow-400 text-xs rounded-md border border-yellow-400/20 font-medium">
+                    <span 
+                      className="px-2 py-1 text-xs rounded-md border font-medium"
+                      style={{
+                        backgroundColor: `${member.cardColor || '#facc15'}18`,
+                        color: member.cardColor || '#facc15',
+                        borderColor: `${member.cardColor || '#facc15'}40`
+                      }}
+                    >
                       {member.role}
                     </span>
                     {member.subteam && (

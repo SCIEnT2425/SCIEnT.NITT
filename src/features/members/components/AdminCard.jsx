@@ -1,77 +1,108 @@
 import React from 'react';
-import { Mail, Linkedin, Sparkles, Wrench, GraduationCap } from 'lucide-react';
+import { Mail, Linkedin, GraduationCap, Wrench } from 'lucide-react';
+import scient from '../../../assets/scient.png';
 
 const AdminCard = ({ admin, type = 'facility' }) => {
-    // Determine icon based on type
     const Icon = type === 'faculty' ? GraduationCap : Wrench;
+    const accentColor = admin?.cardColor || '#facc15';
+    const departmentText = admin.Department || (type === 'faculty' ? 'Energy & Environment Engineering' : 'SCIEnT Facility Operations');
 
     return (
-        <div className="w-full px-4 desktop:w-4/5 desktop:flex desktop:flex-col desktop:justify-around desktop:mx-auto desktop:px-12">
-            {/* Card */}
-            <div className="relative max-w-full mx-auto w-[80vw] laptop:w-[45vw] desktop:w-[58vw] desktop:scale-110">
-                <div className="relative rounded-3xl bg-gradient-to-br from-blue-400 via-cyan-500 to-teal-600 p-1 overflow-hidden">
-                    <div className="absolute inset-0 bg-black/20"></div>
-                    <div className="relative rounded-3xl bg-gray-950 overflow-hidden">
-                        <div className="flex flex-col laptop:flex-row">
-                            {/* Photo Section - Left Half */}
-                            <div className="relative w-full h-72 laptop:w-1/2 laptop:h-[25rem] desktop:h-[35rem]">
-                                {admin.photoUrl ? (
-                                    <img
-                                        src={admin.photoUrl}
-                                        alt={admin.name}
-                                        className="absolute inset-0 w-full h-full object-cover laptop:border-8 laptop:border-black rounded-3xl"
-                                    />
-                                ) : (
-                                    <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-400 via-cyan-500 to-teal-600 flex items-center justify-center">
-                                        <Icon className="w-20 h-20 text-white opacity-50 laptop:w-32 laptop:h-32" />
-                                    </div>
-                                )}
+        <div className="w-full max-w-2xl mx-auto p-2 h-full flex flex-col">
+            <div 
+                className="relative rounded-3xl bg-zinc-950 p-[2px] overflow-hidden transition-all duration-300 shadow-xl hover:scale-[1.01] h-full flex flex-col"
+                style={{
+                    boxShadow: `0 0 25px ${accentColor}25`,
+                    borderColor: accentColor,
+                    borderWidth: '2px',
+                    borderStyle: 'solid'
+                }}
+            >
+                {/* Background radial glow */}
+                <div 
+                    className="absolute -top-12 -left-12 w-56 h-56 rounded-full blur-3xl opacity-20 pointer-events-none"
+                    style={{ backgroundColor: accentColor }}
+                ></div>
+
+                {/* Top Logo */}
+                <div className="absolute top-4 right-4 z-20 w-8 h-8 opacity-80">
+                    <img src={scient} alt="SCIEnT" className="w-full h-full object-contain" />
+                </div>
+
+                <div className="relative rounded-3xl bg-zinc-950/90 backdrop-blur-md overflow-hidden flex flex-col sm:flex-row items-stretch flex-1 min-h-[26rem] sm:min-h-[28rem]">
+                    {/* Photo / Avatar Section */}
+                    <div className="relative w-full sm:w-1/2 h-80 sm:h-auto min-h-[22rem] sm:min-h-[28rem] bg-zinc-900/50 flex items-center justify-center p-3 overflow-hidden border-b sm:border-b-0 sm:border-r border-zinc-800/60">
+                        {admin.photoUrl ? (
+                            <img
+                                src={admin.photoUrl}
+                                alt={admin.name}
+                                className="w-full h-full object-contain sm:object-contain [object-position:center_top] rounded-2xl transition-transform duration-500 hover:scale-105"
+                                onError={(e) => {
+                                    e.target.style.display = 'none';
+                                }}
+                            />
+                        ) : (
+                            <div 
+                                className="w-32 h-32 rounded-full flex items-center justify-center border-2 shadow-inner"
+                                style={{ borderColor: accentColor, backgroundColor: `${accentColor}15` }}
+                            >
+                                <Icon className="w-16 h-16" style={{ color: accentColor }} />
                             </div>
+                        )}
+                    </div>
 
-                            {/* Info Section - Right Half */}
-                            <div className="w-full flex flex-col justify-center gap-3 p-4 laptop:w-1/2 laptop:gap-6 laptop:p-10 desktop:p-12">
-                                {/* Name and Role */}
-                                <div className="flex flex-col">
-                                    <h3 className="text-xl leading-6 font-bold text-white mb-2 laptop:text-4xl laptop:leading-10">
-                                        {admin.name}
-                                    </h3>
-                                    <p className="text-base leading-5 font-semibold bg-gradient-to-r from-blue-400 via-cyan-500 to-teal-600 bg-clip-text text-transparent laptop:text-xl laptop:leading-7">
-                                        {admin.role}
-                                    </p>
-                                </div>
+                    {/* Info Section - Equalized fields & spacing */}
+                    <div className="w-full sm:w-1/2 p-6 sm:p-8 flex flex-col justify-between gap-4 flex-1">
+                        <div className="space-y-3">
+                            <span 
+                                className="text-xs font-semibold px-3 py-1 rounded-full border inline-block"
+                                style={{ 
+                                    backgroundColor: `${accentColor}18`, 
+                                    color: accentColor,
+                                    borderColor: `${accentColor}40`
+                                }}
+                            >
+                                {admin.role}
+                            </span>
+                            <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-wide leading-tight break-words">
+                                {admin.name}
+                            </h3>
+                            <p className="text-xs sm:text-sm text-zinc-400 font-medium">
+                                {departmentText}
+                            </p>
+                            <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed pt-1 break-words">
+                                {admin.description || (type === 'faculty' ? 'Guiding our team to technical & innovative excellence' : 'Managing facility operations and student innovation workspace')}
+                            </p>
+                        </div>
 
-                                <p className="text-gray-400 text-xs  laptop:text-xl ">
-                                    {type === 'faculty'
-                                        ? 'Guiding our Team to excellence'
-                                        : 'Managing our facilities with excellence'}
-                                </p>
+                        <div className="pt-4 border-t border-zinc-800/80 flex flex-wrap items-center justify-between gap-3 mt-auto">
+                            {admin.email ? (
+                                <a
+                                    href={`mailto:${admin.email}`}
+                                    className="flex items-center gap-2 text-xs sm:text-sm font-medium text-zinc-300 hover:text-white truncate max-w-full"
+                                >
+                                    <Mail className="w-4 h-4 shrink-0" style={{ color: accentColor }} />
+                                    <span className="truncate">{admin.email}</span>
+                                </a>
+                            ) : <div></div>}
 
-                                {/* Email */}
-                                {admin.email && (
-                                    <div className="flex items-center gap-2">
-                                        <Mail className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-                                        <a
-                                            href={`mailto:${admin.email}`}
-                                            className="text-xs text-gray-300 transition-colors break-all hover:text-cyan-400 laptop:text-xl"
-                                        >
-                                            {admin.email}
-                                        </a>
-                                    </div>
+                            <div className="flex items-center gap-2">
+                                {admin.linkedin && (
+                                    <a
+                                        href={admin.linkedin}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="LinkedIn"
+                                        className="w-9 h-9 rounded-full flex items-center justify-center transition-transform hover:scale-110 border"
+                                        style={{
+                                            backgroundColor: `${accentColor}15`,
+                                            borderColor: `${accentColor}50`,
+                                            color: accentColor
+                                        }}
+                                    >
+                                        <Linkedin className="w-4 h-4" />
+                                    </a>
                                 )}
-
-                                {/* Social Media Icons */}
-                                <div className="flex gap-2 pt-2">
-                                    {admin.linkedin && (
-                                        <a
-                                            href={admin.linkedin}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 via-cyan-500 to-teal-600 flex items-center justify-center transition-transform hover:scale-110 laptop:w-14 laptop:h-14"
-                                        >
-                                            <Linkedin className="w-4 h-4 text-white laptop:w-7 laptop:h-7" />
-                                        </a>
-                                    )}
-                                </div>
                             </div>
                         </div>
                     </div>

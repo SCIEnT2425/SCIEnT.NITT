@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import AdminCard from './AdminCard';
 
-export default function FacilityAdminSection({adminData}) {
-  const [admin, setAdmin] = useState(adminData);
-
-  
+export default function FacilityAdminSection({ adminData }) {
+  const [admin] = useState(adminData);
 
   return (
-    <div className="min-h-screen bg-black py-12">
+    <div className="w-full">
       <AdminCard admin={admin} type="facility" />
     </div>
   );
