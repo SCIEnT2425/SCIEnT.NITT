@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
-import { Plus, Edit, Trash2, Search, LogOut, Users, Loader2 } from 'lucide-react';
+import { Plus, Edit, Trash2, Search, LogOut, Users, Loader2, RefreshCw } from 'lucide-react';
 import { toast } from 'react-toastify';
 
 const TeamDashboard = () => {
@@ -80,6 +80,25 @@ const TeamDashboard = () => {
     return matchesSearch && matchesRole && matchesSubteam;
   });
 
+  const [isSeeding, setIsSeeding] = useState(false);
+
+  const handleSeed = async () => {
+    if (!window.confirm('Are you sure you want to seed the database? This will reset/update team members, clubs, and projects with default seed data.')) {
+      return;
+    }
+    setIsSeeding(true);
+    try {
+      const response = await axios.post(`${API_BASE}/api/admin/seed`);
+      toast.success(response.data.message || 'Database seeded successfully!');
+      fetchMembers();
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Failed to seed database');
+      console.error(error);
+    } finally {
+      setIsSeeding(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-black text-white p-4 md:p-8">
       {/* Header */}
@@ -91,10 +110,20 @@ const TeamDashboard = () => {
           </h1>
           <p className="text-zinc-400 mt-1">Manage team members and roles</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
+          <button
+            onClick={handleSeed}
+            disabled={isSeeding}
+            className="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-yellow-400 border border-yellow-400/30 px-3.5 py-2 rounded-lg font-semibold transition-colors disabled:opacity-50 text-sm"
+            title="Seed Database with initial team, projects, and club data"
+          >
+            {isSeeding ? <Loader2 className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
+            <span>{isSeeding ? 'Seeding...' : 'Seed Database'}</span>
+          </button>
+
           <Link 
             to="/admin/team/new" 
-            className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-black px-4 py-2 rounded-lg font-semibold transition-colors"
+            className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-black px-4 py-2 rounded-lg font-semibold transition-colors text-sm"
           >
             <Plus className="w-5 h-5" />
             Add Member

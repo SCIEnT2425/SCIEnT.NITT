@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const Admin = require('../models/Admin');
 const { protect } = require('../middleware/auth');
 const { sendOtpEmail } = require('../utils/sendEmail');
+const runSeedAll = require('../scripts/seedAll');
 
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
@@ -160,5 +161,26 @@ router.post('/reset-password', async (req, res) => {
   }
 });
 
-module.exports = router;
+// POST /api/admin/seed & GET /api/admin/seed - Run seedAll.js database initialization
+const handleSeedRequest = async (req, res) => {
+  try {
+    const summary = await runSeedAll({ skipConnect: true });
+    res.status(200).json({
+      success: true,
+      message: 'Database seeded successfully!',
+      details: summary
+    });
+  } catch (error) {
+    console.error('Seed API Error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to seed database',
+      error: error.message
+    });
+  }
+};
 
+router.post('/seed', handleSeedRequest);
+router.get('/seed', handleSeedRequest);
+
+module.exports = router;
