@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
-import { ArrowLeft, Save, Loader2 } from 'lucide-react';
+import { ArrowLeft, Save, Loader2, Palette } from 'lucide-react';
 import { toast } from 'react-toastify';
+import MemberCard from '../../members/components/MemberCard';
 
 const TeamMemberForm = () => {
   const { id } = useParams();
@@ -25,7 +26,8 @@ const TeamMemberForm = () => {
     email: '',
     year: '',
     description: '',
-    order: 0
+    order: 0,
+    cardColor: '#facc15'
   });
 
   const roles = [
@@ -40,6 +42,17 @@ const TeamMemberForm = () => {
     'Cores', 'Ex-Cores', 'Project Management', 'DevOps', 'Corporate Communications', 'Creatives'
   ];
 
+  const presetColors = [
+    { name: 'SCIEnT Gold', hex: '#facc15' },
+    { name: 'Cyber Cyan', hex: '#38bdf8' },
+    { name: 'Electric Purple', hex: '#a78bfa' },
+    { name: 'Neon Pink', hex: '#f472b6' },
+    { name: 'Emerald Green', hex: '#34d399' },
+    { name: 'Sunset Orange', hex: '#fb923c' },
+    { name: 'Cobalt Blue', hex: '#60a5fa' },
+    { name: 'Crimson Red', hex: '#f87171' }
+  ];
+
   useEffect(() => {
     if (isEditMode) {
       const fetchMember = async () => {
@@ -47,10 +60,9 @@ const TeamMemberForm = () => {
           const response = await axios.get(`${API_BASE}/api/team/${id}`);
           const data = response.data.data || response.data;
           
-          // Ensure null/undefined values become empty strings for inputs
           const sanitizedData = {};
           Object.keys(formData).forEach(key => {
-            sanitizedData[key] = data[key] !== null && data[key] !== undefined ? data[key] : '';
+            sanitizedData[key] = data[key] !== null && data[key] !== undefined ? data[key] : (key === 'cardColor' ? '#facc15' : '');
           });
           
           setFormData(sanitizedData);
@@ -70,6 +82,10 @@ const TeamMemberForm = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleColorSelect = (hex) => {
+    setFormData(prev => ({ ...prev, cardColor: hex }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -83,7 +99,6 @@ const TeamMemberForm = () => {
     try {
       const payload = { ...formData };
       
-      // Clean up empty strings for optional fields that might expect null or specific types
       if (payload.subteam === '') payload.subteam = null;
       if (payload.order !== '') payload.order = Number(payload.order);
 
@@ -117,7 +132,7 @@ const TeamMemberForm = () => {
 
   return (
     <div className="min-h-screen bg-black text-white p-4 md:p-8">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <div className="flex items-center gap-4 mb-8">
           <Link 
             to="/admin/team" 
@@ -127,14 +142,59 @@ const TeamMemberForm = () => {
           </Link>
           <div>
             <h1 className="text-2xl font-bold">{isEditMode ? 'Edit Member' : 'Add New Member'}</h1>
-            <p className="text-zinc-500 text-sm">Fill in the details below</p>
+            <p className="text-zinc-500 text-sm">Fill in the details below & customize your card</p>
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 md:p-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Left Column */}
-            <div className="space-y-5">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Left: Form Controls */}
+          <form onSubmit={handleSubmit} className="lg:col-span-7 bg-zinc-900 border border-zinc-800 rounded-xl p-6 md:p-8 space-y-6">
+            
+            {/* Color Customization Section */}
+            <div className="p-4 bg-zinc-950/60 border border-zinc-800 rounded-xl space-y-3">
+              <div className="flex items-center gap-2">
+                <Palette className="w-5 h-5 text-yellow-400" />
+                <label className="text-sm font-semibold text-white">Custom Card Accent Color</label>
+              </div>
+              <p className="text-xs text-zinc-400">Choose a signature color accent for this member's card</p>
+              
+              <div className="flex flex-wrap gap-2 pt-1">
+                {presetColors.map((color) => (
+                  <button
+                    key={color.hex}
+                    type="button"
+                    title={color.name}
+                    onClick={() => handleColorSelect(color.hex)}
+                    className={`w-8 h-8 rounded-full border-2 transition-all transform hover:scale-110 flex items-center justify-center ${
+                      formData.cardColor?.toLowerCase() === color.hex.toLowerCase()
+                        ? 'border-white scale-110 shadow-lg'
+                        : 'border-transparent opacity-80 hover:opacity-100'
+                    }`}
+                    style={{ backgroundColor: color.hex }}
+                  >
+                    {formData.cardColor?.toLowerCase() === color.hex.toLowerCase() && (
+                      <span className="w-2 h-2 rounded-full bg-white shadow"></span>
+                    )}
+                  </button>
+                ))}
+              </div>
+
+              <div className="flex items-center gap-3 pt-2">
+                <span className="text-xs text-zinc-400">Custom Picker:</span>
+                <input
+                  type="color"
+                  name="cardColor"
+                  value={formData.cardColor || '#facc15'}
+                  onChange={handleChange}
+                  className="w-10 h-8 bg-transparent border-0 cursor-pointer rounded overflow-hidden"
+                />
+                <span className="text-xs font-mono text-zinc-300 uppercase bg-zinc-900 px-2 py-1 rounded border border-zinc-800">
+                  {formData.cardColor || '#facc15'}
+                </span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
                 <label className="block text-sm font-medium text-zinc-300 mb-1">Name *</label>
                 <input
@@ -198,10 +258,7 @@ const TeamMemberForm = () => {
                   placeholder="E.g., 2024"
                 />
               </div>
-            </div>
 
-            {/* Right Column */}
-            <div className="space-y-5">
               <div>
                 <label className="block text-sm font-medium text-zinc-300 mb-1">Photo URL</label>
                 <input
@@ -227,6 +284,20 @@ const TeamMemberForm = () => {
               </div>
 
               <div>
+                <label className="block text-sm font-medium text-zinc-300 mb-1">Order</label>
+                <input
+                  type="number"
+                  name="order"
+                  value={formData.order}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg focus:outline-none focus:border-yellow-400 text-white"
+                  placeholder="0"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
                 <label className="block text-sm font-medium text-zinc-300 mb-1">LinkedIn URL</label>
                 <input
                   type="text"
@@ -249,51 +320,76 @@ const TeamMemberForm = () => {
                   placeholder="https://instagram.com/..."
                 />
               </div>
-
-              <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-1">Display Order</label>
-                <input
-                  type="number"
-                  name="order"
-                  value={formData.order}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg focus:outline-none focus:border-yellow-400 text-white"
-                  placeholder="0"
-                />
-              </div>
             </div>
-            
-            {/* Full Width */}
-            <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-zinc-300 mb-1">Description</label>
+
+            <div>
+              <label className="block text-sm font-medium text-zinc-300 mb-1">Description / Bio</label>
               <textarea
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
-                rows={4}
-                className="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg focus:outline-none focus:border-yellow-400 text-white resize-y"
-                placeholder="Brief bio or description..."
+                rows={3}
+                className="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg focus:outline-none focus:border-yellow-400 text-white resize-none"
+                placeholder="Brief intro..."
               />
             </div>
-          </div>
 
-          <div className="mt-8 flex justify-end gap-4 border-t border-zinc-800 pt-6">
-            <Link 
-              to="/admin/team"
-              className="px-6 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg font-medium transition-colors"
-            >
-              Cancel
-            </Link>
-            <button
-              type="submit"
-              disabled={saving}
-              className="px-6 py-2.5 bg-yellow-400 hover:bg-yellow-500 text-black rounded-lg font-semibold transition-colors flex items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
-            >
-              {saving ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
-              {isEditMode ? 'Update Member' : 'Save Member'}
-            </button>
+            <div className="flex justify-end gap-4 pt-4 border-t border-zinc-800">
+              <Link 
+                to="/admin/team"
+                className="px-6 py-2.5 bg-zinc-800 hover:bg-zinc-700 rounded-lg font-medium transition-colors"
+              >
+                Cancel
+              </Link>
+              <button
+                type="submit"
+                disabled={saving}
+                className="flex items-center gap-2 px-6 py-2.5 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold rounded-lg transition-colors disabled:opacity-50"
+              >
+                {saving ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>Saving...</span>
+                  </>
+                ) : (
+                  <>
+                    <Save className="w-4 h-4" />
+                    <span>{isEditMode ? 'Update Member' : 'Create Member'}</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </form>
+
+          {/* Right: Live Preview Panel */}
+          <div className="lg:col-span-5 flex flex-col items-center">
+            <div className="sticky top-8 w-full flex flex-col items-center p-6 bg-zinc-900 border border-zinc-800 rounded-xl space-y-4">
+              <div className="text-center">
+                <span className="text-xs font-bold text-yellow-400 tracking-wider uppercase">Live Card Preview</span>
+                <p className="text-xs text-zinc-500">Hover or click to flip the card</p>
+              </div>
+
+              <div className="w-full flex justify-center py-4">
+                <MemberCard 
+                  member={{
+                    name: formData.name || 'Member Name',
+                    role: formData.role || 'Role Title',
+                    subteam: formData.subteam || 'Subteam',
+                    Department: formData.Department || 'Department',
+                    year: formData.year || '4th Year',
+                    photoUrl: formData.photoUrl,
+                    email: formData.email || 'email@example.com',
+                    linkedin: formData.linkedin || 'https://linkedin.com',
+                    instagram: formData.instagram || 'https://instagram.com',
+                    description: formData.description || 'Custom member bio will be displayed here on card flip.',
+                    cardColor: formData.cardColor || '#facc15'
+                  }}
+                  index={0}
+                />
+              </div>
+            </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );
