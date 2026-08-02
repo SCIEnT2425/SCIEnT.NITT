@@ -371,3 +371,53 @@ ul[class^="ring"]::after,
   display: none !important;
   content: none !important;
 }
+
+/* ===== Very narrow phones (320px-370px): scale orbit down aggressively ===== */
+@media screen and (max-width: 370px) {
+  .orbit-wrap {
+    --ring2-radius: 2.2em;
+    --ring3-radius: 1.4em;
+    height: 6.5em;
+    font-size: 2em;
+  }
+
+  .ring-2 {
+    width: 5em;
+    height: 5em;
+  }
+
+  .ring-3 {
+    width: 3.2em;
+    height: 3.2em;
+  }
+
+  .ring-2 li img {
+    max-width: 36px;
+    max-height: 36px;
+  }
+
+  .ring-3 li img {
+    height: 30px;
+    width: 28px;
+    border-radius: 6px;
+  }
+
+  .orbit-center .p1 {
+    font-size: 10px;
+    padding-bottom: 6px;
+  }
+  .orbit-center p {
+    font-size: 9px;
+  }
+  .orbit-center {
+    font-size: 18px;
+    padding: 4px;
+  }
+
+  ul[class^="ring"] li {
+    width: 0.9em;
+    height: 0.9em;
+    margin: -0.6em;
+  }
+}
+

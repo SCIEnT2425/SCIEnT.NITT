@@ -64,6 +64,7 @@
   background: black;
   color: #ffffff;
   padding: 3rem 1rem;
+  overflow: hidden;
 }
 .container-ini {
   display: flex;
@@ -183,3 +184,16 @@
   .box p { font-size: 16px; }
   .no-container1 { gap: 0; }
 }
+
+@media screen and (max-width: 370px) {
+  .horizontal-text { font-size: 28px; }
+  .yr { font-size: 48px; }
+  .vertical-text { font-size: 34px; }
+  .content-column p { font-size: 13px; }
+  .initiative-container { gap: 1rem; padding: 2rem 0.5rem; }
+  .container-ini { gap: 0.5rem; }
+  .card, .Mission_card { min-height: 340px; }
+  .overlay h2 { font-size: 20px; }
+  .overlay p { font-size: 13px; }
+}
+

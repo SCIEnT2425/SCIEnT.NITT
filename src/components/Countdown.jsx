@@ -23,7 +23,7 @@ const Countdown = () => {
   }, []);
 
   return (
-    <div className="fixed bottom-4 right-4 min-w-[200px] max-w-[350px] w-auto h-auto min-h-[100px] bg-[#111420] border-2 border-[#6c5b13] rounded-2xl shadow-lg flex flex-col items-center justify-center text-center p-4">
+    <div className="fixed bottom-2 right-2 md:bottom-4 md:right-4 min-w-[150px] md:min-w-[200px] max-w-[280px] md:max-w-[350px] w-auto h-auto min-h-[80px] md:min-h-[100px] bg-[#111420] border-2 border-[#6c5b13] rounded-2xl shadow-lg flex flex-col items-center justify-center text-center p-2 md:p-4 z-50">
         <div className="flex flex-col justify-center">
             <div>
                 <p className="text-md font-extrabold text-yellow-400">Registration ends</p>
