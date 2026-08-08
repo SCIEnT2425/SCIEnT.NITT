@@ -82,16 +82,7 @@ export default function Inventory() {
   // Handle card interactions
   const handleCardMouseMove = (e, cardElement) => {
     if (!window.matchMedia("(hover: hover)").matches) return;
-    const rect = cardElement.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const mouseX = e.clientX;
-    const mouseY = e.clientY;
-
-    const rotateX = (mouseY - centerY) / 15;
-    const rotateY = (centerX - mouseX) / 15;
-
-    cardElement.style.transform = `translateY(-15px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    cardElement.style.transform = "translateY(-10px)";
   };
 
   const handleCardMouseLeave = (cardElement) => {

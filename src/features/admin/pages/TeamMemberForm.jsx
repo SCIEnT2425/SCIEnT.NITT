@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
-import { ArrowLeft, Save, Loader2, Palette } from 'lucide-react';
+import { ArrowLeft, Save, Loader2 } from 'lucide-react';
 import { toast } from 'react-toastify';
 import MemberCard from '../../members/components/MemberCard';
+import HexagonColorPicker from '../../../components/HexagonColorPicker';
 
 const TeamMemberForm = () => {
   const { id } = useParams();
@@ -42,17 +43,6 @@ const TeamMemberForm = () => {
     'Cores', 'Ex-Cores', 'Project Management', 'DevOps', 'Corporate Communications', 'Creatives'
   ];
 
-  const presetColors = [
-    { name: 'SCIEnT Gold', hex: '#facc15' },
-    { name: 'Cyber Cyan', hex: '#38bdf8' },
-    { name: 'Electric Purple', hex: '#a78bfa' },
-    { name: 'Neon Pink', hex: '#f472b6' },
-    { name: 'Emerald Green', hex: '#34d399' },
-    { name: 'Sunset Orange', hex: '#fb923c' },
-    { name: 'Cobalt Blue', hex: '#60a5fa' },
-    { name: 'Crimson Red', hex: '#f87171' }
-  ];
-
   useEffect(() => {
     if (isEditMode) {
       const fetchMember = async () => {
@@ -80,10 +70,6 @@ const TeamMemberForm = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleColorSelect = (hex) => {
-    setFormData(prev => ({ ...prev, cardColor: hex }));
   };
 
   const handleSubmit = async (e) => {
@@ -151,47 +137,12 @@ const TeamMemberForm = () => {
           <form onSubmit={handleSubmit} className="lg:col-span-7 bg-zinc-900 border border-zinc-800 rounded-xl p-6 md:p-8 space-y-6">
             
             {/* Color Customization Section */}
-            <div className="p-4 bg-zinc-950/60 border border-zinc-800 rounded-xl space-y-3">
-              <div className="flex items-center gap-2">
-                <Palette className="w-5 h-5 text-yellow-400" />
-                <label className="text-sm font-semibold text-white">Custom Card Accent Color</label>
-              </div>
-              <p className="text-xs text-zinc-400">Choose a signature color accent for this member's card</p>
-              
-              <div className="flex flex-wrap gap-2 pt-1">
-                {presetColors.map((color) => (
-                  <button
-                    key={color.hex}
-                    type="button"
-                    title={color.name}
-                    onClick={() => handleColorSelect(color.hex)}
-                    className={`w-8 h-8 rounded-full border-2 transition-all transform hover:scale-110 flex items-center justify-center ${
-                      formData.cardColor?.toLowerCase() === color.hex.toLowerCase()
-                        ? 'border-white scale-110 shadow-lg'
-                        : 'border-transparent opacity-80 hover:opacity-100'
-                    }`}
-                    style={{ backgroundColor: color.hex }}
-                  >
-                    {formData.cardColor?.toLowerCase() === color.hex.toLowerCase() && (
-                      <span className="w-2 h-2 rounded-full bg-white shadow"></span>
-                    )}
-                  </button>
-                ))}
-              </div>
-
-              <div className="flex items-center gap-3 pt-2">
-                <span className="text-xs text-zinc-400">Custom Picker:</span>
-                <input
-                  type="color"
-                  name="cardColor"
-                  value={formData.cardColor || '#facc15'}
-                  onChange={handleChange}
-                  className="w-10 h-8 bg-transparent border-0 cursor-pointer rounded overflow-hidden"
-                />
-                <span className="text-xs font-mono text-zinc-300 uppercase bg-zinc-900 px-2 py-1 rounded border border-zinc-800">
-                  {formData.cardColor || '#facc15'}
-                </span>
-              </div>
+            <div className="p-4 bg-zinc-950/60 border border-zinc-800 rounded-xl flex flex-col items-center">
+              <HexagonColorPicker
+                label="Custom Card Accent Color"
+                value={formData.cardColor || '#facc15'}
+                onChange={(color) => setFormData((prev) => ({ ...prev, cardColor: color }))}
+              />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
