@@ -54,7 +54,23 @@ const generateHoneycombGrid = () => {
   return grid;
 };
 
-const HexagonColorPicker = ({ value = '#facc15', onChange, label = 'Select Color' }) => {
+const defaultPresets = [
+  { name: 'SCIEnT Gold', hex: '#facc15' },
+  { name: 'Cyber Cyan', hex: '#38bdf8' },
+  { name: 'Electric Purple', hex: '#a78bfa' },
+  { name: 'Neon Pink', hex: '#f472b6' },
+  { name: 'Emerald Green', hex: '#34d399' },
+  { name: 'Sunset Orange', hex: '#fb923c' },
+  { name: 'Deep Violet', hex: '#2F293A' },
+  { name: 'Magenta Glow', hex: '#FF9FFC' },
+];
+
+const HexagonColorPicker = ({
+  value = '#facc15',
+  onChange,
+  label = 'Select Color',
+  presets = defaultPresets,
+}) => {
   const [selectedColor, setSelectedColor] = useState(value);
   const [inputValue, setInputValue] = useState(value);
 
@@ -76,7 +92,7 @@ const HexagonColorPicker = ({ value = '#facc15', onChange, label = 'Select Color
   const handleCustomInputSubmit = (e) => {
     e.preventDefault();
     let formatted = inputValue.trim();
-    if (formatted && !formatted.startsWith('#') && /^[0-[#a-fA-F0-9]{3,6}$/.test(formatted)) {
+    if (formatted && !formatted.startsWith('#') && /^[0-9a-fA-F]{3,6}$/.test(formatted)) {
       formatted = `#${formatted}`;
     }
     if (/^#([0-9a-fA-F]{3}){1,2}$/.test(formatted)) {
@@ -88,6 +104,31 @@ const HexagonColorPicker = ({ value = '#facc15', onChange, label = 'Select Color
   return (
     <div className="hexagon-color-picker-container">
       {label && <h4 className="picker-title">{label}</h4>}
+
+      {/* Standard Preset Swatch Buttons */}
+      {presets && presets.length > 0 && (
+        <div className="picker-section">
+          <span className="picker-section-heading">Preset Colors:</span>
+          <div className="picker-presets-row">
+            {presets.map((preset) => (
+              <button
+                key={preset.hex}
+                type="button"
+                title={preset.name}
+                onClick={() => handleSelectColor(preset.hex)}
+                className={`preset-swatch-btn ${
+                  selectedColor.toLowerCase() === preset.hex.toLowerCase() ? 'active' : ''
+                }`}
+                style={{ backgroundColor: preset.hex }}
+              >
+                {selectedColor.toLowerCase() === preset.hex.toLowerCase() && (
+                  <span className="preset-swatch-check">✓</span>
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Section 1: Honeycomb Hexagon Matrix */}
       <div className="picker-section">
