@@ -29,12 +29,38 @@ const Timeline = () => {
   const [selectedYear, setSelectedYear] = useState('all');
   const [carouselIndex, setCarouselIndex] = useState(0);
   
+  const [gridSettings, setGridSettings] = useState({
+    linesColor: '#2F293A',
+    scanColor: '#FF9FFC',
+  });
+
   // Modal State
   const [activeModalItem, setActiveModalItem] = useState(null);
   const [modalActiveImgIndex, setModalActiveImgIndex] = useState(0);
 
   // Stage Slider (Carousel) active photo index state
   const [stageActiveImgIndex, setStageActiveImgIndex] = useState(0);
+
+  // Fetch Admin Configured Settings on Mount
+  useEffect(() => {
+    const MODE = process.env.NODE_ENV || 'development';
+    const API_BASE = MODE === 'development' ? 'http://localhost:5000' : '';
+    fetch(`${API_BASE}/api/admin/settings/public`)
+      .then((res) => res.json())
+      .then((resData) => {
+        if (resData?.data) {
+          const s = resData.data;
+          if (s.timelineDefaultView) {
+            setViewMode(s.timelineDefaultView);
+          }
+          setGridSettings({
+            linesColor: s.gridScanLinesColor || '#2F293A',
+            scanColor: s.gridScanColor || '#FF9FFC',
+          });
+        }
+      })
+      .catch((err) => console.log('Using default timeline settings:', err));
+  }, []);
 
   // Extract unique years for the Year Jumper
   const uniqueYears = useMemo(() => {
@@ -94,9 +120,9 @@ const Timeline = () => {
         <GridScan
           sensitivity={0.55}
           lineThickness={1}
-          linesColor="#2F293A"
+          linesColor={gridSettings.linesColor}
           gridScale={0.1}
-          scanColor="#FF9FFC"
+          scanColor={gridSettings.scanColor}
           scanOpacity={0.4}
           enablePost
           bloomIntensity={0.6}
