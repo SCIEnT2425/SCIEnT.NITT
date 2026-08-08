@@ -20,6 +20,15 @@
   position: relative;
 }
 
+/* Ensure Footer sits cleanly above WebGL background & decor layers */
+.timeline-page-root .footer {
+  position: relative;
+  z-index: 10;
+  background-color: #05070d;
+  border-top: 1px solid var(--sci-border-glow);
+}
+
+
 /* Background GridScan WebGL Component Container */
 .timeline-gridscan-bg-container {
   position: fixed;
@@ -922,28 +931,150 @@
    RESPONSIVE BREAKPOINTS (Mobile, Tablet, Desktop)
 ------------------------------------------------------- */
 
-/* Mobile (< 768px) */
+/* Desktop & Wide Screens (> 1024px) */
+@media (min-width: 1025px) {
+  .timeline-hero-section {
+    padding-top: 130px;
+  }
+}
+
+/* Tablet & Intermediate (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .timeline-hero-section {
+    padding: 110px 24px 36px;
+  }
+
+  .circuit-card {
+    max-width: 420px;
+  }
+
+  .stage-img-box {
+    height: 320px;
+  }
+
+  .matrix-grid-wrapper {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
+/* General Mobile (< 768px) */
 @media (max-width: 768px) {
   .timeline-hero-section {
-    padding: 100px 16px 30px;
+    padding: 95px 16px 28px;
+  }
+
+  .timeline-badge-glow {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    padding: 5px 12px;
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .timeline-sub-heading {
+    margin-bottom: 24px;
   }
 
   .timeline-stats-row {
     grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+
+  .timeline-stat-card {
+    padding: 14px 10px;
+  }
+
+  .timeline-stat-val {
+    font-size: 1.5rem;
+  }
+
+  .timeline-stat-lbl {
+    font-size: 0.72rem;
+    letter-spacing: 0.5px;
+  }
+
+  .timeline-controls-deck {
+    padding: 0 14px;
+    margin-bottom: 30px;
+    gap: 14px;
   }
 
   .timeline-top-controls {
     flex-direction: column;
     align-items: stretch;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .timeline-search-box {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .timeline-search-input {
+    font-size: 0.88rem;
+    padding: 9px 12px 9px 38px;
   }
 
   .timeline-view-switcher {
-    justify-content: center;
+    width: 100%;
+    justify-content: space-between;
   }
 
-  /* Single Column Node Flow for Mobile */
+  .view-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 8px 6px;
+    font-size: 0.78rem;
+    gap: 5px;
+    white-space: nowrap;
+  }
+
+  .timeline-category-pills {
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+  }
+
+  .cat-pill-btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .timeline-year-jumper {
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding: 10px 12px;
+    gap: 8px;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+  }
+
+  .year-jumper-label {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .year-tag-btn {
+    flex-shrink: 0;
+    padding: 4px 10px;
+    font-size: 0.8rem;
+  }
+
+  .timeline-content-container {
+    padding: 0 14px;
+    margin-bottom: 60px;
+  }
+
+  /* Single Column Circuit Spine Node Flow for Mobile */
+  .circuit-stream-wrapper {
+    padding: 10px 0;
+  }
+
   .circuit-spine {
-    left: 20px;
+    left: 18px;
     transform: none;
   }
 
@@ -951,45 +1082,221 @@
   .circuit-item-row.right-side {
     width: 100%;
     margin-left: 0;
-    padding-left: 50px;
+    padding-left: 44px;
     padding-right: 0;
     justify-content: flex-start;
+    margin: 24px 0;
   }
 
   .circuit-node-dot,
   .circuit-item-row.right-side .circuit-node-dot {
-    left: 10px;
+    left: 9px;
     right: auto;
+    top: 20px;
+    width: 18px;
+    height: 18px;
   }
 
   .circuit-card {
     max-width: 100%;
+    padding: 16px 14px;
+    border-radius: 14px;
+  }
+
+  .circuit-card-header {
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+
+  .circuit-card-title {
+    font-size: 1.15rem;
+  }
+
+  .circuit-card-desc {
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+  }
+
+  .circuit-card-img-wrap {
+    height: 190px;
+  }
+
+  .mini-strip-thumb {
+    width: 44px;
+    height: 34px;
+  }
+
+  .circuit-card-footer {
+    flex-wrap: wrap;
+    gap: 8px;
+    row-gap: 6px;
+    padding-top: 10px;
+  }
+
+  .circuit-inspect-btn {
+    font-size: 0.78rem;
   }
 
   /* Stage Slider Mobile */
+  .slider-view-wrapper {
+    padding: 16px 14px;
+    border-radius: 16px;
+  }
+
+  .slider-top-nav {
+    margin-bottom: 16px;
+  }
+
   .stage-card-body {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .stage-img-box {
+    height: 230px;
+    border-radius: 12px;
+  }
+
+  .stage-photo-picker {
+    max-width: 92%;
+    overflow-x: auto;
+    padding: 4px 8px;
+    bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .stage-picker-thumb {
+    width: 32px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  .stage-info-box {
+    gap: 12px;
+  }
+
+  .stage-year-pill {
+    font-size: 2rem;
+  }
+
+  .stage-title {
+    font-size: 1.4rem;
+  }
+
+  .stage-desc {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .stage-hl-item {
+    font-size: 0.85rem;
+  }
+
+  /* Matrix Grid Mobile */
+  .matrix-grid-wrapper {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .matrix-card {
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .matrix-card-img-box {
+    height: 150px;
+  }
+
+  .matrix-card-title {
+    font-size: 1.05rem;
+  }
+
+  .matrix-card-text {
+    font-size: 0.84rem;
+  }
+
+  /* Modal Lightbox Mobile */
+  .modal-backdrop {
+    padding: 12px 8px;
+  }
+
+  .modal-content-card {
+    padding: 20px 14px 16px;
+    max-height: 90vh;
+    border-radius: 16px;
+  }
+
+  .modal-close-btn {
+    top: 12px;
+    right: 12px;
+    width: 34px;
+    height: 34px;
+    z-index: 20;
+  }
+
+  .modal-main-photo-wrap {
+    height: 220px;
+    max-height: 240px;
+    border-radius: 10px;
+  }
+
+  .modal-photo-arrow {
+    width: 32px;
+    height: 32px;
+  }
+
+  .modal-photo-arrow.left { left: 8px; }
+  .modal-photo-arrow.right { right: 8px; }
+
+  .modal-photo-counter-badge {
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    bottom: 8px;
+    right: 8px;
+  }
+
+  .modal-thumb-item {
+    width: 58px;
+    height: 42px;
+  }
+
+  .modal-title {
+    font-size: 1.35rem;
+  }
+
+  .modal-full-desc {
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+}
+
+/* Extra Small Devices (< 480px & Foldables < 360px) */
+@media (max-width: 480px) {
+  .timeline-hero-section {
+    padding-top: 85px;
+  }
+
+  .timeline-main-heading {
+    font-size: 1.8rem;
+  }
+
+  .view-btn {
+    font-size: 0.74rem;
+    padding: 6px 4px;
+    gap: 3px;
+  }
+
+  .matrix-grid-wrapper {
     grid-template-columns: 1fr;
   }
 
   .stage-img-box {
-    height: 240px;
+    height: 190px;
   }
 
   .modal-main-photo-wrap {
-    height: 240px;
-  }
-
-  .modal-content-card {
-    padding: 20px;
+    height: 190px;
   }
 }
 
-/* Tablet (768px - 1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .circuit-card {
-    max-width: 360px;
-  }
-  .stage-img-box {
-    height: 300px;
-  }
-}
