@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { Settings as SettingsIcon, LogOut, Save, Loader2, Zap, Layers, Grid, Palette, Eye } from 'lucide-react';
 import { toast } from 'react-toastify';
 import GridScan from '../../../components/GridScan';
+import HexagonColorPicker from '../../../components/HexagonColorPicker';
 
 const SettingsDashboard = () => {
   const [loading, setLoading] = useState(true);
@@ -83,22 +84,6 @@ const SettingsDashboard = () => {
       icon: Grid,
       desc: 'High-density tile matrix grid display.',
     },
-  ];
-
-  const linePresets = [
-    { name: 'Deep Violet', hex: '#2F293A' },
-    { name: 'Dark Slate', hex: '#1E2638' },
-    { name: 'Midnight Navy', hex: '#0F172A' },
-    { name: 'Charcoal', hex: '#18181B' },
-    { name: 'Pure Obsidian', hex: '#000000' },
-  ];
-
-  const scanPresets = [
-    { name: 'Neon Pink', hex: '#FF9FFC' },
-    { name: 'SCIEnT Gold', hex: '#FFB800' },
-    { name: 'Cyber Cyan', hex: '#00E5FF' },
-    { name: 'Laser Red', hex: '#FF2A6D' },
-    { name: 'Emerald', hex: '#34D399' },
   ];
 
   if (loading) {
@@ -238,79 +223,23 @@ const SettingsDashboard = () => {
               Customize the WebGL 3D GridScan background mesh colors rendered on the Timeline page.
             </p>
 
-            {/* Grid Lines Color Picker */}
-            <div className="p-4 bg-zinc-950/60 border border-zinc-800/80 rounded-xl space-y-3">
-              <label className="text-sm font-semibold text-zinc-200 block">Grid Lines Mesh Color</label>
-              <div className="flex flex-wrap gap-2">
-                {linePresets.map((preset) => (
-                  <button
-                    key={preset.hex}
-                    type="button"
-                    title={preset.name}
-                    onClick={() => setSettings((prev) => ({ ...prev, gridScanLinesColor: preset.hex }))}
-                    className={`w-8 h-8 rounded-full border-2 transition-all transform hover:scale-110 flex items-center justify-center ${
-                      settings.gridScanLinesColor?.toLowerCase() === preset.hex.toLowerCase()
-                        ? 'border-yellow-400 scale-110 shadow'
-                        : 'border-zinc-700 opacity-80 hover:opacity-100'
-                    }`}
-                    style={{ backgroundColor: preset.hex }}
-                  >
-                    {settings.gridScanLinesColor?.toLowerCase() === preset.hex.toLowerCase() && (
-                      <span className="w-2 h-2 rounded-full bg-yellow-400 shadow"></span>
-                    )}
-                  </button>
-                ))}
-              </div>
-
-              <div className="flex items-center gap-3 pt-2">
-                <span className="text-xs text-zinc-400">Custom Picker:</span>
-                <input
-                  type="color"
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Grid Lines Color Picker */}
+              <div className="p-4 bg-zinc-950/60 border border-zinc-800/80 rounded-xl flex flex-col items-center">
+                <HexagonColorPicker
+                  label="Grid Lines Mesh Color"
                   value={settings.gridScanLinesColor || '#2F293A'}
-                  onChange={(e) => setSettings((prev) => ({ ...prev, gridScanLinesColor: e.target.value }))}
-                  className="w-10 h-8 bg-transparent border-0 cursor-pointer rounded overflow-hidden"
+                  onChange={(color) => setSettings((prev) => ({ ...prev, gridScanLinesColor: color }))}
                 />
-                <span className="text-xs font-mono text-zinc-300 uppercase bg-zinc-900 px-2.5 py-1 rounded border border-zinc-800">
-                  {settings.gridScanLinesColor || '#2F293A'}
-                </span>
-              </div>
-            </div>
-
-            {/* Scan Beam Color Picker */}
-            <div className="p-4 bg-zinc-950/60 border border-zinc-800/80 rounded-xl space-y-3">
-              <label className="text-sm font-semibold text-zinc-200 block">Scan Laser Beam Color</label>
-              <div className="flex flex-wrap gap-2">
-                {scanPresets.map((preset) => (
-                  <button
-                    key={preset.hex}
-                    type="button"
-                    title={preset.name}
-                    onClick={() => setSettings((prev) => ({ ...prev, gridScanColor: preset.hex }))}
-                    className={`w-8 h-8 rounded-full border-2 transition-all transform hover:scale-110 flex items-center justify-center ${
-                      settings.gridScanColor?.toLowerCase() === preset.hex.toLowerCase()
-                        ? 'border-yellow-400 scale-110 shadow'
-                        : 'border-zinc-700 opacity-80 hover:opacity-100'
-                    }`}
-                    style={{ backgroundColor: preset.hex }}
-                  >
-                    {settings.gridScanColor?.toLowerCase() === preset.hex.toLowerCase() && (
-                      <span className="w-2 h-2 rounded-full bg-yellow-400 shadow"></span>
-                    )}
-                  </button>
-                ))}
               </div>
 
-              <div className="flex items-center gap-3 pt-2">
-                <span className="text-xs text-zinc-400">Custom Picker:</span>
-                <input
-                  type="color"
+              {/* Scan Beam Color Picker */}
+              <div className="p-4 bg-zinc-950/60 border border-zinc-800/80 rounded-xl flex flex-col items-center">
+                <HexagonColorPicker
+                  label="Scan Laser Beam Color"
                   value={settings.gridScanColor || '#FF9FFC'}
-                  onChange={(e) => setSettings((prev) => ({ ...prev, gridScanColor: e.target.value }))}
-                  className="w-10 h-8 bg-transparent border-0 cursor-pointer rounded overflow-hidden"
+                  onChange={(color) => setSettings((prev) => ({ ...prev, gridScanColor: color }))}
                 />
-                <span className="text-xs font-mono text-zinc-300 uppercase bg-zinc-900 px-2.5 py-1 rounded border border-zinc-800">
-                  {settings.gridScanColor || '#FF9FFC'}
-                </span>
               </div>
             </div>
           </div>
