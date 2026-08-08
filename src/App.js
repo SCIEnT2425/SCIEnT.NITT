@@ -61,6 +61,7 @@ import TeamDashboard from './features/admin/pages/TeamDashboard';
 import TeamMemberForm from './features/admin/pages/TeamMemberForm';
 import ProjectDashboard from './features/admin/pages/ProjectDashboard';
 import ProjectForm from './features/admin/pages/ProjectForm';
+import SettingsDashboard from './features/admin/pages/SettingsDashboard';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const App = () => {
@@ -142,6 +143,7 @@ const App = () => {
         <Route path="/admin/projects" element={<ProtectedRoute><ProjectDashboard /></ProtectedRoute>} />
         <Route path="/admin/projects/new" element={<ProtectedRoute><ProjectForm /></ProtectedRoute>} />
         <Route path="/admin/projects/edit/:id" element={<ProtectedRoute><ProjectForm /></ProtectedRoute>} />
+        <Route path="/admin/settings" element={<ProtectedRoute><SettingsDashboard /></ProtectedRoute>} />
 
       </Routes>
     </>

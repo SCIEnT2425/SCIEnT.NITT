@@ -129,7 +129,17 @@ const TeamDashboard = () => {
               : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'
           }`}
         >
-          Projects
+          Projects & Clubs
+        </Link>
+        <Link 
+          to="/admin/settings"
+          className={`flex-1 sm:flex-none text-center px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
+            location.pathname.includes('/admin/settings') 
+              ? 'bg-yellow-400 text-black shadow-md shadow-yellow-400/10' 
+              : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'
+          }`}
+        >
+          Timeline Settings
         </Link>
       </div>
 

@@ -1,274 +1,635 @@
-
-// export default About;
-import React, { useEffect } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  Search, 
+  Zap, 
+  Layers, 
+  Grid, 
+  Calendar, 
+  MapPin, 
+  ChevronLeft, 
+  ChevronRight, 
+  X, 
+  CheckCircle2, 
+  Sparkles,
+  Info,
+  Images,
+  Maximize2
+} from 'lucide-react';
 import Navbar from '../components/Navbar';
-import './About.css';
 import Footer from '../components/footer';
+import GridScan from '../components/GridScan';
+import { timelineData, CATEGORIES, STATS } from '../data/timelineData';
+import './Timeline.css';
 
-const TimelineItem = ({ data }) => (
-  <div className="timeline-item">
-    <div className="timeline-item-content">
-      <span className="tag" style={{ background: data.category.color }}>
-        {data.category.tag}
-      </span>
-      <time>{data.date}</time>
-      <p>{data.text}</p>
-      <label className="label-info">{data.author}</label>
-      <span className="circle" />
-    </div>
-  </div>
-);
+const Timeline = () => {
+  const [viewMode, setViewMode] = useState('stream'); // 'stream' | 'carousel' | 'grid'
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedYear, setSelectedYear] = useState('all');
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  
+  const [gridSettings, setGridSettings] = useState({
+    linesColor: '#2F293A',
+    scanColor: '#FF9FFC',
+  });
 
-const SimpleTimeLine = ({ timelineData }) => {
+  // Modal State
+  const [activeModalItem, setActiveModalItem] = useState(null);
+  const [modalActiveImgIndex, setModalActiveImgIndex] = useState(0);
+
+  // Stage Slider (Carousel) active photo index state
+  const [stageActiveImgIndex, setStageActiveImgIndex] = useState(0);
+
+  // Fetch Admin Configured Settings on Mount
   useEffect(() => {
-    const timelineItems = document.querySelectorAll('.timeline-item');
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('show');
+    const MODE = process.env.NODE_ENV || 'development';
+    const API_BASE = MODE === 'development' ? 'http://localhost:5000' : '';
+    fetch(`${API_BASE}/api/admin/settings/public`)
+      .then((res) => res.json())
+      .then((resData) => {
+        if (resData?.data) {
+          const s = resData.data;
+          if (s.timelineDefaultView) {
+            setViewMode(s.timelineDefaultView);
           }
-        });
-      },
-      {
-        threshold: 0.1, // When 10% of the element is in view
-      }
-    );
-
-    timelineItems.forEach((item) => {
-      observer.observe(item);
-    });
-
-    // Clean up the observer when the component unmounts
-    return () => {
-      timelineItems.forEach((item) => {
-        observer.unobserve(item);
-      });
-    };
+          setGridSettings({
+            linesColor: s.gridScanLinesColor || '#2F293A',
+            scanColor: s.gridScanColor || '#FF9FFC',
+          });
+        }
+      })
+      .catch((err) => console.log('Using default timeline settings:', err));
   }, []);
 
-  return (
-    <div className="timeline-container">
-      {timelineData.map((data, idx) => (
-        <TimelineItem data={data} key={idx} />
-      ))}
-    </div>
-  );
-};
+  // Extract unique years for the Year Jumper
+  const uniqueYears = useMemo(() => {
+    const years = Array.from(new Set(timelineData.map(item => item.year)));
+    return ['all', ...years.sort()];
+  }, []);
 
-// About page component
-const Timeline = () => {
-    const timelineData = [
-        {
-            text: "At their Silver Jubilee, the 1990’s batch of REC, came up with a vision to further support and nurture the development of technology and innovation at NITT. SCIEnT was founded as a means for alumni to contribute to their alma mater. On the 24th of December of 2015, the SCIEnT Facility was inaugurated by Mr. Uma Maheswaran, Mission Director, GSLV, ISRO in the presence of Dr. Sundarrajan, then Director of NIT, Trichy.",
-            date: "2015",
-            category: {
-                tag: "Genesis of SCIEnT",
-                color: "#28282B"
-            },
-            // author: "Me"
-        },
-        {
-            text: "The annual project showcase event, called \"Open House,\" was initiated in 2018. SCIEnT hosted the event, where multiple technical clubs and students displayed their projects. The showcase featured a credited judging panel and an attractive cash prize, motivating individuals to present their best work.",
-            date: "2018",
-            category: {
-                tag: "Launch of 'Open House' Project Showcase",
-                color: "#28282B"
-            },
-            // author: "Me"
-        },
-        {
-            text: "During the lockdown period, when physical gatherings were restricted, the focus shifted to online platforms. Guest lectures, workshops, and informative tech series were organised across various social media platforms. These virtual events helped keep the tech community engaged and connected during the challenging times.",
-            date: "2020",
-            category: {
-                tag: "Transitioning Online due to Lockdown",
-                color: "#28282B"
-            },
-            // author: "Me"
-        },
-        {
-            text: "After the lockdown, in collaboration with the Technical Council a 48-hour hackathon called 'Transfinitte' was organised. The hackathon aimed to bring back the glory days of technical innovation on campus.",
-            date: "2022",
-            category: {
-                tag: "Return to Campus - 'Transfinitte' Hackathon",
-                color: "#28282B"
-            },
-            // author: "Me"
-        },
-        {
-            text: "In collaboration with E-Cell, we organised an event called 'E-Summit,' focusing on entrepreneurship. Renowned guest speakers and panel discussions were featured over a span of three days.",
-            date: "2023",
-            category: {
-                tag: "'E-Summit'",
-                color: "#28282B"
-            },
-            // author: "Me"
-        },
-        {
-            text: "The annual showcase event, 'Open House,' made a comeback in collaboration with Pragyan at Golden Jubilee Convention Hall (GJCH). The display included the work of tech clubs from the past year and 4 exhibits from Pragyan team. This event provided an opportunity for students to exhibit their technological achievements and creations.",
-            date: "2023",
-            category: {
-                tag: "'Open House' in collaboration with Pragyan",
-                color: "#28282B"
-            },
-            // author: "Me"
-        },
-        {
-            text: "TransfiNITTe[the flagship hackathon of NIT Tiruchirappalli] in collaboration with the Technical Council, and Genesis in collaboration with IIC.",
-            date: "2023",
-            category: {
-                tag: "'TransFinitte' and 'Genesis",
-                color: "#28282B"
-            },
-            // author: "Me"
-        },
-        {
-            text: "Pragyan, in collaboration with SCIEnT, presents another edition of Open House ’24. Witnessing the best inventions, and great opportunity to showcase innovative projects and creations.",
-            date: "2024",
-            category: {
-                tag: "Open House",
-                color: "#28282B"
-            },
-            // author: "Me"
-        },
-        {
-            text: "SCIEnT proudly presents its annual Project Showcase, a chance to witness groundbreaking engineering marvels by NIT Trichy’s students in the SCIEnT Lab which was followed by the Annual Day Celebrations.",
-            date: "2024",
-            category: {
-                tag: "Annual Day",
-                color: "#28282B"
-            },
-            // author: "Me"
-        },
-        {
-          text:"This is a project showcase event. It features all the technical clubs presenting their projects, which are then individually judged by professors.",
-          date:"August 2024",
-          category:{
-            tag:"Open Day",
-            color:"#28282B"
-          }
-        },
-        {
-          text:"This is the flagship 42-hour hackathon , conducted by the Technical Council in association with SCIENT. The event sees participation from over 100 teams who collaborate to build innovative software and hardware projects.",
-          date:"August 2024",
-          category:{
-            tag:"TransfiNITTE",
-            color:"#28282B"
-          }
-        },
-        {
-          text:"This is a product design competition organized in collaboration with the Designer Consortium club of NIT Trichy. The 2024-2025 event was a 'Campus Development Edition' with prizes worth ₹7K. It was open to students of all years and offered participants the chance to use fabrication facilities , along with opportunities for publishing, patenting , and receiving 'Fully Funded Project Development and Implementation'.",
-          date:"October 2024",
-          category:{
-            tag:"Contrive",
-            color:"#28282B"
-          }
-        },
-        {
-          text:"On October 22, 2024, a team of 12 SCIENT students, accompanied by the SCIENT Manager, Mr. Sivanesan, visited the Centre for Innovation (CFI) at the Indian Institute of Technology Madras (IITM). The team had the opportunity to interact with several student teams at CFI, including ABHIYAAN, AGNIRATH, ABHYUDAY, ANVESHAK, AVISHKAR HYPERLOOP, ENVISAGE, NIRMAAN, and RAFTAR RACING. The visit was described as 'eye-opening' and helped the team better understand the scope and potential of a student-run innovation lab.",
-          date:"October 2024",
-          category:{
-            tag:"CFI Visit",
-            color:"#28282B"
-          }
-        },
-        {
-          text:"This is an initiative focused on 'CONNECT-ing students & faculties on multi-disciplinary projects'. The program's goal is to reach out to professors to identify project requirements and then match interested students with those on-campus projects. Its mission is to bridge the gap between students and faculty from various disciplines to foster an interdisciplinary environment.",
-          date:"December 2024",
-          category:{
-            tag:"CONNECT Program",
-            color:"#28282B"
-          }
-        },
-        {
-          text:"This is a two-day exhibition held during Pragyan, NIT Trichy's annual techno-managerial fest. During the event, students showcase the academic projects they have developed throughout the year in their tech clubs and departments. It serves as a platform for students to present their work to faculty, investors, and the wider community, which could potentially lead to real-world implementation.",
-          date:"December 2024",
-          category:{
-            tag:"Openhouse",
-            color:"#28282B"
-          }
-        },
-        {
-          text:"The official SCIENT website, scient.nitt.edu, was launched. Its primary aim is to centralize information and improve accessibility for all student-led initiatives under SCIENT. Key features of the website include a Room Booking Portal for managing club meeting rooms, an Inventory Database listing available equipment and hardware, and Project and Event Showcases.",
-          date:"January 2025 ",
-          category:{
-            tag:"SCIENT Website Launch",
-            color:"#28282B"
-          }
-        },
-        {
-          text:"This event was focused on allowing participants to explore the workspace, advanced tools, and various projects that are 'shaping the future'.",
-          date:"February 2025 ",
-          category:{
-            tag:"Facility Visit",
-            color:"#28282B"
-          }
-        },
-        {
-          text:"A three-day event held from April 3rd-5th , this workshop provided practical, hands-on learning experiences across various domains. The workshops included topics such as 3D Printing, Lathe operation, Welding, and Drones. All participants were given a chance to work hands-on with the equipment and received a certificate of participation.",
-          date:"April  2025 ",
-          category:{
-            tag:"Workshop",
-            color:"#28282B"
-          }
-        },
-        {
-          text:"This initiative, proposed by alumna Dr. Sangeetha, aims to introduce Class 6 students of REC Middle School to the basics of robotics in collaboration with Apeksha. The session will offer a hands-on learning experience using LEGO WeDo 2.0 educational kits generously provided by Dr. Sangeetha. Facilitated by the SCIEnT team, the workshop is designed to ignite curiosity and inspire young minds toward innovation and technology.",
-          date:"July 2025 ",
-          category:{
-            tag:"ROBOTICS AWARENESS PROGRAM",
-            color:"#28282B"
-          }
-        },
-        {
-          text:"A major milestone — the official launch of the SCIENt App! Designed to simplify operations, the app introduces key features like room booking, inventory tracking, and facility access management. It marks a step toward digital transformation, making SCIEnT’s resources and systems more accessible to the NIT Trichy community.",
-          date:"August 2025",
-          category:{
-            tag:"APP LAUNCH",
-            color:"#28282B"
-          }
-        },
-        {
-          text:"The SCIEnT team visited the Centre for Innovation (CFI) at IIT Madras to explore its innovation ecosystem. The visit provided valuable insights into collaborative ideation, research culture, and project incubation. It served as an inspiration for nurturing a similar environment of creativity and experimentation at NIT Trichy.",
-          date:"September 2025",
-          category:{
-            tag:"CFI VISIT",
-            color:"#28282B"
-          }
-        },
-        {
-          text:"The first cohort of INVENTIVE—a semester-long innovation journey—was launched in collaboration with Makers's Bhavan's  Vishwakarma awards. This program empowers participants to transform raw ideas into impactful prototypes and patents. Through expert mentorship, cutting-edge resources, and a collaborative network, students gain the opportunity to Identify real-world challenges,  Build and test solutions, Access incubation and patent support and Connect with faculty, alumni, and industry professionals",
-          date:"September 2025",
-          category:{
-            tag:"INVENTIVE × VISHWAKARMA",
-            color:"#28282B"
-          }
-        },
-        {
-          text:"The Orientation Exhibition served as an introductory platform for freshmen to explore SCIEnT’s vision, ongoing projects, and innovative ecosystem. It encouraged new students to engage in interdisciplinary collaboration and become active contributors to the institute’s culture of innovation.",
-          date:"September 2025",
-          category:{
-            tag:"ORIENTATION EXHIBITION",
-            color:"#28282B"
-          }
-        },
-        {
-          text:"SCIEnT proudly hosted the Smart India Hackathon (SIH) Final Exhibition, showcasing the culmination of months of innovation and teamwork. Students presented their prototypes and solutions developed for real-world industry and societal problems, reflecting the spirit of creativity and technical excellence at NIT Trichy.",
-          date:"October 2025",
-          category:{
-            tag:"SIH FINAL EXHIBITION",
-            color:"#28282B"
-          }
-        },
-    ];;
-    
+  // Filtered dataset
+  const filteredData = useMemo(() => {
+    return timelineData.filter(item => {
+      const matchesCategory = selectedCategory === 'all' || item.category.id === selectedCategory;
+      const matchesYear = selectedYear === 'all' || item.year === selectedYear;
+      const query = searchQuery.toLowerCase().trim();
+      const matchesSearch = !query || 
+        item.title.toLowerCase().includes(query) ||
+        item.summary.toLowerCase().includes(query) ||
+        item.description.toLowerCase().includes(query) ||
+        item.date.toLowerCase().includes(query) ||
+        item.category.label.toLowerCase().includes(query);
+
+      return matchesCategory && matchesYear && matchesSearch;
+    });
+  }, [selectedCategory, selectedYear, searchQuery]);
+
+  // Keep Carousel Index bounded when filters change
+  useEffect(() => {
+    setCarouselIndex(0);
+    setStageActiveImgIndex(0);
+  }, [selectedCategory, selectedYear, searchQuery]);
+
+  // Reset Modal Active Image when Modal Item changes
+  const openModal = (item) => {
+    setActiveModalItem(item);
+    setModalActiveImgIndex(0);
+  };
+
+  // Handle Body Scroll Lock for Lightbox Modal
+  useEffect(() => {
+    if (activeModalItem) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [activeModalItem]);
+
+  const currentStageItem = filteredData[carouselIndex] || null;
 
   return (
-    <div>
-      <Navbar/>
-      <h1>About Page</h1>
-      <SimpleTimeLine timelineData={timelineData} />
+    <div className="timeline-page-root">
+      <Navbar />
+
+      {/* GridScan 3D WebGL Background */}
+      <div className="timeline-gridscan-bg-container">
+        <GridScan
+          sensitivity={0.55}
+          lineThickness={1}
+          linesColor={gridSettings.linesColor}
+          gridScale={0.1}
+          scanColor={gridSettings.scanColor}
+          scanOpacity={0.4}
+          enablePost
+          bloomIntensity={0.6}
+          chromaticAberration={0.002}
+          noiseIntensity={0.01}
+        />
+      </div>
+
+      {/* Futuristic Background Ambient Glows */}
+      <div className="timeline-bg-decor" />
+
+      {/* Hero Section */}
+      <section className="timeline-hero-section">
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="timeline-badge-glow"
+        >
+          <Sparkles size={16} /> SCIEnT Grand Decadal Archive (2015 – 2026)
+        </motion.div>
+
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="timeline-main-heading"
+        >
+          A Grand Odyssey of Technology & Innovation
+        </motion.h1>
+
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="timeline-sub-heading"
+        >
+          Immerse yourself in the rich visual history of NIT Trichy’s multi-disciplinary innovation lab. Featuring high-resolution event galleries, inauguration marvels, national hackathons, and breakthrough exhibitions.
+        </motion.p>
+
+        {/* Stats Row */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="timeline-stats-row"
+        >
+          {STATS.map((st, idx) => (
+            <div key={idx} className="timeline-stat-card">
+              <div className="timeline-stat-val">{st.value}</div>
+              <div className="timeline-stat-lbl">{st.label}</div>
+            </div>
+          ))}
+        </motion.div>
+      </section>
+
+      {/* Control Deck */}
+      <section className="timeline-controls-deck">
+        <div className="timeline-top-controls">
+          {/* Search Box */}
+          <div className="timeline-search-box">
+            <Search className="timeline-search-icon" size={18} />
+            <input 
+              type="text"
+              placeholder="Search hackathons, CFI visit, workshops, showcases..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="timeline-search-input"
+            />
+          </div>
+
+          {/* View Switcher */}
+          <div className="timeline-view-switcher">
+            <button 
+              className={`view-btn ${viewMode === 'stream' ? 'active' : ''}`}
+              onClick={() => setViewMode('stream')}
+              title="Circuit Node Stream"
+            >
+              <Zap size={16} /> Circuit Stream
+            </button>
+            <button 
+              className={`view-btn ${viewMode === 'carousel' ? 'active' : ''}`}
+              onClick={() => setViewMode('carousel')}
+              title="3D Stage Slider"
+            >
+              <Layers size={16} /> Stage Slider
+            </button>
+            <button 
+              className={`view-btn ${viewMode === 'grid' ? 'active' : ''}`}
+              onClick={() => setViewMode('grid')}
+              title="Matrix Grid"
+            >
+              <Grid size={16} /> Matrix Grid
+            </button>
+          </div>
+        </div>
+
+        {/* Category Pill Filters */}
+        <div className="timeline-category-pills">
+          {Object.values(CATEGORIES).map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => setSelectedCategory(cat.id)}
+              className={`cat-pill-btn ${selectedCategory === cat.id ? 'active' : ''}`}
+              style={{ '--cat-color': cat.color }}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Year Jumper Bar */}
+        <div className="timeline-year-jumper">
+          <span className="year-jumper-label">Jump to Year:</span>
+          {uniqueYears.map((yr) => (
+            <button
+              key={yr}
+              onClick={() => setSelectedYear(yr)}
+              className={`year-tag-btn ${selectedYear === yr ? 'active' : ''}`}
+            >
+              {yr === 'all' ? 'All Years' : yr}
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* Main Dynamic Content Display */}
+      <section className="timeline-content-container">
+        {filteredData.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '60px 20px', color: '#94a3b8' }}>
+            <Info size={40} style={{ color: 'var(--sci-gold)', marginBottom: '16px' }} />
+            <h3>No Milestones Found</h3>
+            <p>Try adjusting your search criteria or resetting filters.</p>
+          </div>
+        ) : (
+          <>
+            {/* VIEW 1: CIRCUIT STREAM (Default) */}
+            {viewMode === 'stream' && (
+              <div className="circuit-stream-wrapper">
+                <div className="circuit-spine" />
+                {filteredData.map((item, index) => {
+                  const isRight = index % 2 !== 0;
+                  const itemImages = item.images && item.images.length > 0 ? item.images : (item.image ? [item.image] : []);
+                  return (
+                    <motion.div 
+                      key={item.id}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: '-50px' }}
+                      transition={{ duration: 0.5, delay: index * 0.05 }}
+                      className={`circuit-item-row ${isRight ? 'right-side' : ''}`}
+                    >
+                      {/* Node Dot */}
+                      <div className="circuit-node-dot" />
+
+                      {/* Event Card */}
+                      <div 
+                        className="circuit-card"
+                        onClick={() => openModal(item)}
+                      >
+                        <div className="circuit-card-header">
+                          <span 
+                            className="circuit-cat-badge"
+                            style={{ background: item.category.bg, color: item.category.color }}
+                          >
+                            {item.category.label}
+                          </span>
+                          <span className="circuit-date-lbl">{item.date}</span>
+                        </div>
+
+                        <h3 className="circuit-card-title">{item.title}</h3>
+                        <p className="circuit-card-desc">{item.summary}</p>
+
+                        {/* Image Gallery Cover */}
+                        {itemImages.length > 0 && (
+                          <div className="circuit-card-img-wrap">
+                            <img 
+                              src={itemImages[0]} 
+                              alt={item.title} 
+                              className="circuit-card-img"
+                              loading="lazy"
+                            />
+                            {itemImages.length > 1 && (
+                              <span className="gallery-count-badge">
+                                <Images size={13} /> {itemImages.length} Photos
+                              </span>
+                            )}
+                          </div>
+                        )}
+
+                        {/* Mini Gallery Strip Preview */}
+                        {itemImages.length > 1 && (
+                          <div className="card-mini-gallery-strip">
+                            {itemImages.slice(0, 4).map((imgUrl, i) => (
+                              <img 
+                                key={i} 
+                                src={imgUrl} 
+                                alt="" 
+                                className="mini-strip-thumb"
+                              />
+                            ))}
+                          </div>
+                        )}
+
+                        <div className="circuit-card-footer">
+                          <span className="circuit-location">
+                            <MapPin size={14} style={{ color: 'var(--sci-gold)' }} /> {item.location}
+                          </span>
+                          <button className="circuit-inspect-btn">
+                            Explore Gallery <Maximize2 size={14} />
+                          </button>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* VIEW 2: STAGE SLIDER (Carousel) */}
+            {viewMode === 'carousel' && currentStageItem && (
+              <div className="slider-view-wrapper">
+                <div className="slider-top-nav">
+                  <span className="slider-count-lbl">
+                    Milestone {carouselIndex + 1} of {filteredData.length}
+                  </span>
+                  <div className="slider-nav-btns">
+                    <button 
+                      className="slide-arrow-btn"
+                      disabled={carouselIndex === 0}
+                      onClick={() => {
+                        setCarouselIndex(prev => prev - 1);
+                        setStageActiveImgIndex(0);
+                      }}
+                    >
+                      <ChevronLeft size={20} />
+                    </button>
+                    <button 
+                      className="slide-arrow-btn"
+                      disabled={carouselIndex === filteredData.length - 1}
+                      onClick={() => {
+                        setCarouselIndex(prev => prev + 1);
+                        setStageActiveImgIndex(0);
+                      }}
+                    >
+                      <ChevronRight size={20} />
+                    </button>
+                  </div>
+                </div>
+
+                <AnimatePresence mode="wait">
+                  <motion.div 
+                    key={currentStageItem.id}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.4 }}
+                    className="stage-card-body"
+                  >
+                    <div className="stage-img-box">
+                      {(() => {
+                        const imgs = currentStageItem.images && currentStageItem.images.length > 0 ? currentStageItem.images : [currentStageItem.image || '/assets/timeline/tools_board.jpg'];
+                        const activeImg = imgs[stageActiveImgIndex] || imgs[0];
+                        return (
+                          <>
+                            <img 
+                              src={activeImg} 
+                              alt={currentStageItem.title} 
+                              className="stage-img"
+                            />
+                            {imgs.length > 1 && (
+                              <div className="stage-photo-picker">
+                                {imgs.map((imgUrl, i) => (
+                                  <img 
+                                    key={i}
+                                    src={imgUrl}
+                                    alt=""
+                                    className={`stage-picker-thumb ${stageActiveImgIndex === i ? 'active' : ''}`}
+                                    onClick={() => setStageActiveImgIndex(i)}
+                                  />
+                                ))}
+                              </div>
+                            )}
+                          </>
+                        );
+                      })()}
+                    </div>
+
+                    <div className="stage-info-box">
+                      <div className="stage-year-pill">{currentStageItem.year}</div>
+                      <span 
+                        className="circuit-cat-badge"
+                        style={{ 
+                          background: currentStageItem.category.bg, 
+                          color: currentStageItem.category.color,
+                          alignSelf: 'flex-start'
+                        }}
+                      >
+                        {currentStageItem.category.label} • {currentStageItem.date}
+                      </span>
+                      
+                      <h2 className="stage-title">{currentStageItem.title}</h2>
+                      <p className="stage-desc">{currentStageItem.description}</p>
+
+                      {currentStageItem.highlights && (
+                        <div className="stage-highlights-list">
+                          {currentStageItem.highlights.map((hl, i) => (
+                            <div key={i} className="stage-hl-item">
+                              <CheckCircle2 size={16} className="stage-hl-icon" />
+                              <span>{hl}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      <button 
+                        className="circuit-inspect-btn" 
+                        style={{ marginTop: '12px', fontSize: '1rem', color: 'var(--sci-gold)' }}
+                        onClick={() => openModal(currentStageItem)}
+                      >
+                        View Full Photo Gallery ({currentStageItem.images ? currentStageItem.images.length : 1}) <Maximize2 size={16} />
+                      </button>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            )}
+
+            {/* VIEW 3: MATRIX GRID */}
+            {viewMode === 'grid' && (
+              <div className="matrix-grid-wrapper">
+                {filteredData.map((item) => {
+                  const itemImages = item.images && item.images.length > 0 ? item.images : (item.image ? [item.image] : []);
+                  return (
+                    <motion.div 
+                      key={item.id}
+                      layout
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3 }}
+                      className="matrix-card"
+                      onClick={() => openModal(item)}
+                    >
+                      <div>
+                        {itemImages.length > 0 && (
+                          <div className="matrix-card-img-box">
+                            <img src={itemImages[0]} alt={item.title} className="matrix-card-img" />
+                            {itemImages.length > 1 && (
+                              <span className="gallery-count-badge">
+                                <Images size={12} /> {itemImages.length}
+                              </span>
+                            )}
+                          </div>
+                        )}
+
+                        <div className="matrix-card-top" style={{ marginTop: '12px' }}>
+                          <span 
+                            className="circuit-cat-badge"
+                            style={{ background: item.category.bg, color: item.category.color }}
+                          >
+                            {item.category.label}
+                          </span>
+                          <span className="matrix-year-badge">{item.year}</span>
+                        </div>
+
+                        <h3 className="matrix-card-title">{item.title}</h3>
+                        <p className="matrix-card-text">{item.summary}</p>
+                      </div>
+
+                      <div className="circuit-card-footer" style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '10px' }}>
+                        <span className="circuit-location">
+                          <Calendar size={14} style={{ color: 'var(--sci-gold)' }} /> {item.date}
+                        </span>
+                        <span className="circuit-inspect-btn">
+                          View Gallery <Maximize2 size={14} />
+                        </span>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            )}
+          </>
+        )}
+      </section>
+
+      {/* GRAND LIGHTBOX MODAL & MULTI-PHOTO GALLERY OVERLAY */}
+      <AnimatePresence>
+        {activeModalItem && (
+          <div className="modal-backdrop" onClick={() => setActiveModalItem(null)}>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              transition={{ duration: 0.3 }}
+              className="modal-content-card"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button 
+                className="modal-close-btn"
+                onClick={() => setActiveModalItem(null)}
+              >
+                <X size={20} />
+              </button>
+
+              <div className="modal-body">
+                {/* Multi-Photo Grand Stage Showcase */}
+                {(() => {
+                  const modalImgs = activeModalItem.images && activeModalItem.images.length > 0 
+                    ? activeModalItem.images 
+                    : (activeModalItem.image ? [activeModalItem.image] : []);
+
+                  if (modalImgs.length === 0) return null;
+
+                  const activePhoto = modalImgs[modalActiveImgIndex] || modalImgs[0];
+
+                  return (
+                    <div className="modal-gallery-stage">
+                      <div className="modal-main-photo-wrap">
+                        <img 
+                          src={activePhoto} 
+                          alt={activeModalItem.title} 
+                          className="modal-main-photo"
+                        />
+                        {modalImgs.length > 1 && (
+                          <>
+                            <button 
+                              className="modal-photo-arrow left"
+                              disabled={modalActiveImgIndex === 0}
+                              onClick={() => setModalActiveImgIndex(prev => Math.max(0, prev - 1))}
+                            >
+                              <ChevronLeft size={24} />
+                            </button>
+                            <button 
+                              className="modal-photo-arrow right"
+                              disabled={modalActiveImgIndex === modalImgs.length - 1}
+                              onClick={() => setModalActiveImgIndex(prev => Math.min(modalImgs.length - 1, prev + 1))}
+                            >
+                              <ChevronRight size={24} />
+                            </button>
+                            <span className="modal-photo-counter-badge">
+                              Photo {modalActiveImgIndex + 1} of {modalImgs.length}
+                            </span>
+                          </>
+                        )}
+                      </div>
+
+                      {/* Thumbnail Grid Selector */}
+                      {modalImgs.length > 1 && (
+                        <div className="modal-thumbs-grid">
+                          {modalImgs.map((imgUrl, i) => (
+                            <img 
+                              key={i}
+                              src={imgUrl}
+                              alt=""
+                              className={`modal-thumb-item ${modalActiveImgIndex === i ? 'active' : ''}`}
+                              onClick={() => setModalActiveImgIndex(i)}
+                            />
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })()}
+
+                <div>
+                  <span 
+                    className="circuit-cat-badge"
+                    style={{ background: activeModalItem.category.bg, color: activeModalItem.category.color }}
+                  >
+                    {activeModalItem.category.label} • {activeModalItem.date}
+                  </span>
+                  <h2 className="modal-title" style={{ marginTop: '10px' }}>
+                    {activeModalItem.title}
+                  </h2>
+                </div>
+
+                <p className="modal-full-desc">{activeModalItem.description}</p>
+
+                {activeModalItem.highlights && (
+                  <div>
+                    <div className="modal-hl-title">Key Milestone Highlights</div>
+                    <div className="stage-highlights-list">
+                      {activeModalItem.highlights.map((hl, i) => (
+                        <div key={i} className="stage-hl-item">
+                          <CheckCircle2 size={16} className="stage-hl-icon" />
+                          <span>{hl}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <div className="circuit-card-footer" style={{ marginTop: '10px', paddingTop: '16px' }}>
+                  <span className="circuit-location">
+                    <MapPin size={16} style={{ color: 'var(--sci-gold)' }} /> {activeModalItem.location}
+                  </span>
+                  <span className="circuit-location">
+                    <Calendar size={16} style={{ color: 'var(--sci-cyan)' }} /> {activeModalItem.year} SCIEnT Archive Entry
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
       <Footer />
     </div>
   );

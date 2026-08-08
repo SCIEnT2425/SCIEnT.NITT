@@ -160,5 +160,88 @@ router.post('/reset-password', async (req, res) => {
   }
 });
 
+// Settings Management Routes
+const Settings = require('../models/Settings');
+
+const DEFAULT_SETTINGS = {
+  timelineDefaultView: 'stream',
+  gridScanLinesColor: '#2F293A',
+  gridScanColor: '#FF9FFC',
+};
+
+// GET /api/admin/settings/public - Public settings (no auth required)
+router.get('/settings/public', async (req, res) => {
+  try {
+    const settingsDocs = await Settings.find();
+    const settingsMap = { ...DEFAULT_SETTINGS };
+    settingsDocs.forEach((doc) => {
+      settingsMap[doc.key] = doc.value;
+    });
+    res.json({ success: true, data: settingsMap });
+  } catch (error) {
+    console.error('Error fetching public settings:', error);
+    res.json({ success: true, data: DEFAULT_SETTINGS });
+  }
+});
+
+// GET /api/admin/settings - Protected settings retrieve
+router.get('/settings', protect, async (req, res) => {
+  try {
+    const settingsDocs = await Settings.find();
+    const settingsMap = { ...DEFAULT_SETTINGS };
+    settingsDocs.forEach((doc) => {
+      settingsMap[doc.key] = doc.value;
+    });
+    res.json({ success: true, data: settingsMap });
+  } catch (error) {
+    console.error('Error fetching admin settings:', error);
+    res.status(500).json({ message: 'Server error fetching settings' });
+  }
+});
+
+// PUT /api/admin/settings - Protected settings update
+router.put('/settings', protect, async (req, res) => {
+  try {
+    const { timelineDefaultView, gridScanLinesColor, gridScanColor } = req.body;
+    
+    const updates = [];
+    if (timelineDefaultView !== undefined) {
+      updates.push(Settings.findOneAndUpdate(
+        { key: 'timelineDefaultView' },
+        { key: 'timelineDefaultView', value: timelineDefaultView },
+        { upsert: true, new: true }
+      ));
+    }
+    if (gridScanLinesColor !== undefined) {
+      updates.push(Settings.findOneAndUpdate(
+        { key: 'gridScanLinesColor' },
+        { key: 'gridScanLinesColor', value: gridScanLinesColor },
+        { upsert: true, new: true }
+      ));
+    }
+    if (gridScanColor !== undefined) {
+      updates.push(Settings.findOneAndUpdate(
+        { key: 'gridScanColor' },
+        { key: 'gridScanColor', value: gridScanColor },
+        { upsert: true, new: true }
+      ));
+    }
+
+    await Promise.all(updates);
+
+    const allDocs = await Settings.find();
+    const updatedMap = { ...DEFAULT_SETTINGS };
+    allDocs.forEach((doc) => {
+      updatedMap[doc.key] = doc.value;
+    });
+
+    res.json({ success: true, message: 'Settings updated successfully', data: updatedMap });
+  } catch (error) {
+    console.error('Error updating admin settings:', error);
+    res.status(500).json({ message: 'Server error updating settings' });
+  }
+});
+
 module.exports = router;
+
 

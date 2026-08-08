@@ -298,8 +298,8 @@ const SCIentMembers = () => {
             </h1>
         </div>
         <div className='w-full max-w-6xl mx-auto grid grid-cols-1 laptop:grid-cols-2 gap-8'>
-            <FacilityAdminCard  adminData={FacilityAdmin}/>
             <FacultyAdvisorCard  AdvisorData={FacultyAdvisor}/>
+            <FacilityAdminCard  adminData={FacilityAdmin}/>
         </div>
       </div>
       <div className='mb-12'>
