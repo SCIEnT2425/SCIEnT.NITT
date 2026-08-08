@@ -14,6 +14,7 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "face-api.js": "^0.22.2",
     "framer-motion": "^11.3.8",
     "fs": "^0.0.1-security",
     "googleapis": "^157.0.0",
@@ -22,6 +23,7 @@
     "mongoose": "^8.19.1",
     "multer-storage-cloudinary": "^4.0.0",
     "nodemon": "^3.1.4",
+    "postprocessing": "^6.39.4",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18.3.1",
@@ -31,6 +33,7 @@
     "react-simple-typewriter": "^5.0.1",
     "react-toastify": "^11.0.0",
     "swiper": "^11.1.9",
+    "three": "^0.185.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
