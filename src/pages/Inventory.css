@@ -340,20 +340,10 @@
   z-index: -1;
   opacity: 0;
   transition: opacity 0.3s ease;
-  animation: borderRotate 3s linear infinite;
 }
 
 .inventorycard:hover::before {
   opacity: 1;
-}
-
-@keyframes borderRotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 /* Inner box container - FIXED TRANSFORM CONFLICTS */
@@ -493,11 +483,11 @@
 
 @keyframes particleFloat {
   0%, 100% {
-    transform: translateY(0px) rotate(0deg);
+    transform: translateY(0px);
     opacity: 1;
   }
   50% {
-    transform: translateY(-10px) rotate(180deg);
+    transform: translateY(-6px);
     opacity: 0.8;
   }
 }
