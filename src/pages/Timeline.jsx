@@ -304,6 +304,10 @@ const Timeline = () => {
                               alt={item.title} 
                               className="circuit-card-img"
                               loading="lazy"
+                              onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop';
+                              }}
                             />
                             {itemImages.length > 1 && (
                               <span className="gallery-count-badge">
@@ -322,6 +326,10 @@ const Timeline = () => {
                                 src={imgUrl} 
                                 alt="" 
                                 className="mini-strip-thumb"
+                                onError={(e) => {
+                                  e.target.onerror = null;
+                                  e.target.src = 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop';
+                                }}
                               />
                             ))}
                           </div>
@@ -392,6 +400,10 @@ const Timeline = () => {
                               src={activeImg} 
                               alt={currentStageItem.title} 
                               className="stage-img"
+                              onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop';
+                              }}
                             />
                             {imgs.length > 1 && (
                               <div className="stage-photo-picker">
@@ -402,6 +414,10 @@ const Timeline = () => {
                                     alt=""
                                     className={`stage-picker-thumb ${stageActiveImgIndex === i ? 'active' : ''}`}
                                     onClick={() => setStageActiveImgIndex(i)}
+                                    onError={(e) => {
+                                      e.target.onerror = null;
+                                      e.target.src = 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop';
+                                    }}
                                   />
                                 ))}
                               </div>
@@ -468,8 +484,16 @@ const Timeline = () => {
                     >
                       <div>
                         {itemImages.length > 0 && (
-                          <div className="matrix-card-img-box">
-                            <img src={itemImages[0]} alt={item.title} className="matrix-card-img" />
+                          <div className="matrix-card-img-wrap">
+                            <img 
+                              src={itemImages[0]} 
+                              alt={item.title} 
+                              className="matrix-card-img"
+                              onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop';
+                              }}
+                            />
                             {itemImages.length > 1 && (
                               <span className="gallery-count-badge">
                                 <Images size={12} /> {itemImages.length}
@@ -546,6 +570,10 @@ const Timeline = () => {
                           src={activePhoto} 
                           alt={activeModalItem.title} 
                           className="modal-main-photo"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop';
+                          }}
                         />
                         {modalImgs.length > 1 && (
                           <>
@@ -580,6 +608,10 @@ const Timeline = () => {
                               alt=""
                               className={`modal-thumb-item ${modalActiveImgIndex === i ? 'active' : ''}`}
                               onClick={() => setModalActiveImgIndex(i)}
+                              onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop';
+                              }}
                             />
                           ))}
                         </div>
