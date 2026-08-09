@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Search, 
@@ -23,15 +24,16 @@ import { timelineData, CATEGORIES, STATS } from '../data/timelineData';
 import './Timeline.css';
 
 const Timeline = () => {
+  const navigate = useNavigate();
+
   const [viewMode, setViewMode] = useState('stream'); // 'stream' | 'carousel' | 'grid'
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedYear, setSelectedYear] = useState('all');
   const [carouselIndex, setCarouselIndex] = useState(0);
   
   const [gridSettings, setGridSettings] = useState({
-    linesColor: '#2F293A',
-    scanColor: '#FF9FFC',
+    linesColor: '#1f1a00',
+    scanColor: '#FFC700',
   });
 
   // Modal State
@@ -54,25 +56,23 @@ const Timeline = () => {
             setViewMode(s.timelineDefaultView);
           }
           setGridSettings({
-            linesColor: s.gridScanLinesColor || '#2F293A',
-            scanColor: s.gridScanColor || '#FF9FFC',
+            linesColor: s.gridScanLinesColor || '#1f1a00',
+            scanColor: s.gridScanColor || '#FFC700',
           });
         }
       })
       .catch((err) => console.log('Using default timeline settings:', err));
   }, []);
 
-  // Extract unique years for the Year Jumper
+  // Unique list of sorted years (for the jump-to-year tab bar)
   const uniqueYears = useMemo(() => {
-    const years = Array.from(new Set(timelineData.map(item => item.year)));
-    return ['all', ...years.sort()];
+    return Array.from(new Set(timelineData.map(item => item.year))).sort();
   }, []);
 
-  // Filtered dataset
+  // All events filtered by category and search (no year filter — all years shown)
   const filteredData = useMemo(() => {
     return timelineData.filter(item => {
       const matchesCategory = selectedCategory === 'all' || item.category.id === selectedCategory;
-      const matchesYear = selectedYear === 'all' || item.year === selectedYear;
       const query = searchQuery.toLowerCase().trim();
       const matchesSearch = !query || 
         item.title.toLowerCase().includes(query) ||
@@ -80,24 +80,24 @@ const Timeline = () => {
         item.description.toLowerCase().includes(query) ||
         item.date.toLowerCase().includes(query) ||
         item.category.label.toLowerCase().includes(query);
-
-      return matchesCategory && matchesYear && matchesSearch;
+      return matchesCategory && matchesSearch;
     });
-  }, [selectedCategory, selectedYear, searchQuery]);
+  }, [selectedCategory, searchQuery]);
 
   // Keep Carousel Index bounded when filters change
   useEffect(() => {
     setCarouselIndex(0);
     setStageActiveImgIndex(0);
-  }, [selectedCategory, selectedYear, searchQuery]);
+  }, [selectedCategory, searchQuery]);
 
-  // Reset Modal Active Image when Modal Item changes
+
+  // Modal handlers
   const openModal = (item) => {
     setActiveModalItem(item);
     setModalActiveImgIndex(0);
   };
 
-  // Handle Body Scroll Lock for Lightbox Modal
+  // Lock body scroll when Lightbox Modal is open
   useEffect(() => {
     if (activeModalItem) {
       document.body.style.overflow = 'hidden';
@@ -115,7 +115,7 @@ const Timeline = () => {
     <div className="timeline-page-root">
       <Navbar />
 
-      {/* GridScan 3D WebGL Background */}
+      {/* GridScan 3D WebGL Background - Black & Yellow theme */}
       <div className="timeline-gridscan-bg-container">
         <GridScan
           sensitivity={0.55}
@@ -131,7 +131,7 @@ const Timeline = () => {
         />
       </div>
 
-      {/* Futuristic Background Ambient Glows */}
+      {/* Background Ambient Yellow/Gold Glows */}
       <div className="timeline-bg-decor" />
 
       {/* Hero Section */}
@@ -145,13 +145,13 @@ const Timeline = () => {
           <Sparkles size={16} /> SCIEnT Grand Decadal Archive (2015 – 2026)
         </motion.div>
 
-        <motion.h1 
+          <motion.h1 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
           className="timeline-main-heading"
         >
-          A Grand Odyssey of Technology & Innovation
+          A Grand Odyssey of Technology &amp; Innovation
         </motion.h1>
 
         <motion.p 
@@ -160,7 +160,7 @@ const Timeline = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="timeline-sub-heading"
         >
-          Immerse yourself in the rich visual history of NIT Trichy’s multi-disciplinary innovation lab. Featuring high-resolution event galleries, inauguration marvels, national hackathons, and breakthrough exhibitions.
+          Immerse yourself in the rich visual history of NIT Trichy&apos;s multi-disciplinary innovation lab. Select any year tab to open its dedicated timeline page.
         </motion.p>
 
         {/* Stats Row */}
@@ -181,6 +181,7 @@ const Timeline = () => {
 
       {/* Control Deck */}
       <section className="timeline-controls-deck">
+        {/* Top Controls: Search Bar & View Switcher */}
         <div className="timeline-top-controls">
           {/* Search Box */}
           <div className="timeline-search-box">
@@ -234,32 +235,34 @@ const Timeline = () => {
           ))}
         </div>
 
-        {/* Year Jumper Bar */}
+        {/* Horizontal Year Jumper Bar */}
         <div className="timeline-year-jumper">
-          <span className="year-jumper-label">Jump to Year:</span>
-          {uniqueYears.map((yr) => (
-            <button
-              key={yr}
-              onClick={() => setSelectedYear(yr)}
-              className={`year-tag-btn ${selectedYear === yr ? 'active' : ''}`}
-            >
-              {yr === 'all' ? 'All Years' : yr}
-            </button>
-          ))}
+          <span className="year-jumper-label">JUMP TO YEAR:</span>
+          <div className="year-jumper-buttons-wrap">
+            {uniqueYears.map((yr) => (
+              <button
+                key={yr}
+                onClick={() => navigate(`/timeline/${yr}`)}
+                className="year-tag-btn"
+              >
+                {yr}
+              </button>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Main Dynamic Content Display */}
       <section className="timeline-content-container">
         {filteredData.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '60px 20px', color: '#94a3b8' }}>
-            <Info size={40} style={{ color: 'var(--sci-gold)', marginBottom: '16px' }} />
-            <h3>No Milestones Found</h3>
-            <p>Try adjusting your search criteria or resetting filters.</p>
+          <div className="no-milestones-box">
+            <Info size={40} className="no-milestones-icon" />
+            <h3>No Milestones Match Your Filters</h3>
+            <p>Try adjusting your search or switching categories.</p>
           </div>
         ) : (
           <>
-            {/* VIEW 1: CIRCUIT STREAM (Default) */}
+            {/* VIEW 1: CIRCUIT STREAM */}
             {viewMode === 'stream' && (
               <div className="circuit-stream-wrapper">
                 <div className="circuit-spine" />
@@ -350,7 +353,7 @@ const Timeline = () => {
               </div>
             )}
 
-            {/* VIEW 2: STAGE SLIDER (Carousel) */}
+            {/* VIEW 2: STAGE SLIDER (Carousel Mode) */}
             {viewMode === 'carousel' && currentStageItem && (
               <div className="slider-view-wrapper">
                 <div className="slider-top-nav">
@@ -516,7 +519,7 @@ const Timeline = () => {
                         <p className="matrix-card-text">{item.summary}</p>
                       </div>
 
-                      <div className="circuit-card-footer" style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '10px' }}>
+                      <div className="circuit-card-footer" style={{ borderTop: '1px solid rgba(255,199,0,0.15)', paddingTop: '10px' }}>
                         <span className="circuit-location">
                           <Calendar size={14} style={{ color: 'var(--sci-gold)' }} /> {item.date}
                         </span>
@@ -653,7 +656,7 @@ const Timeline = () => {
                     <MapPin size={16} style={{ color: 'var(--sci-gold)' }} /> {activeModalItem.location}
                   </span>
                   <span className="circuit-location">
-                    <Calendar size={16} style={{ color: 'var(--sci-cyan)' }} /> {activeModalItem.year} SCIEnT Archive Entry
+                    <Calendar size={16} style={{ color: 'var(--sci-gold)' }} /> {activeModalItem.year} SCIEnT Archive Entry
                   </span>
                 </div>
               </div>
