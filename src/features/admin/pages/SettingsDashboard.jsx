@@ -14,7 +14,7 @@ const SettingsDashboard = () => {
   const [settings, setSettings] = useState({
     timelineDefaultView: 'stream',
     gridScanLinesColor: '#2F293A',
-    gridScanColor: '#FF9FFC',
+    gridScanColor: '#FFC700',
   });
 
   const { token, logout, API_BASE } = useAuth();
@@ -237,7 +237,7 @@ const SettingsDashboard = () => {
               <div className="p-4 bg-zinc-950/60 border border-zinc-800/80 rounded-xl flex flex-col items-center">
                 <HexagonColorPicker
                   label="Scan Laser Beam Color"
-                  value={settings.gridScanColor || '#FF9FFC'}
+                  value={settings.gridScanColor || '#FFC700'}
                   onChange={(color) => setSettings((prev) => ({ ...prev, gridScanColor: color }))}
                 />
               </div>
@@ -264,7 +264,7 @@ const SettingsDashboard = () => {
                 lineThickness={1}
                 linesColor={settings.gridScanLinesColor || '#2F293A'}
                 gridScale={0.1}
-                scanColor={settings.gridScanColor || '#FF9FFC'}
+                scanColor={settings.gridScanColor || '#FFC700'}
                 scanOpacity={0.5}
                 enablePost={false}
               />

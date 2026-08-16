@@ -112,7 +112,7 @@ const Timeline = () => {
   const currentStageItem = filteredData[carouselIndex] || null;
 
   return (
-    <div className="timeline-page-root">
+    <div className="timeline-page-root timeline-archive-page">
       <Navbar />
 
       {/* GridScan 3D WebGL Background - Black & Yellow theme */}
@@ -134,8 +134,10 @@ const Timeline = () => {
       {/* Background Ambient Yellow/Gold Glows */}
       <div className="timeline-bg-decor" />
 
-      {/* Hero Section */}
-      <section className="timeline-hero-section">
+      <main className="timeline-workspace">
+        <aside className="timeline-sidebar">
+          {/* Hero Section */}
+          <section className="timeline-hero-section">
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -177,83 +179,63 @@ const Timeline = () => {
             </div>
           ))}
         </motion.div>
-      </section>
+          </section>
 
-      {/* Control Deck */}
-      <section className="timeline-controls-deck">
-        {/* Top Controls: Search Bar & View Switcher */}
-        <div className="timeline-top-controls">
-          {/* Search Box */}
-          <div className="timeline-search-box">
-            <Search className="timeline-search-icon" size={18} />
-            <input 
-              type="text"
-              placeholder="Search hackathons, CFI visit, workshops, showcases..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="timeline-search-input"
-            />
-          </div>
+        </aside>
 
-          {/* View Switcher */}
-          <div className="timeline-view-switcher">
-            <button 
-              className={`view-btn ${viewMode === 'stream' ? 'active' : ''}`}
-              onClick={() => setViewMode('stream')}
-              title="Circuit Node Stream"
-            >
-              <Zap size={16} /> Circuit Stream
-            </button>
-            <button 
-              className={`view-btn ${viewMode === 'carousel' ? 'active' : ''}`}
-              onClick={() => setViewMode('carousel')}
-              title="3D Stage Slider"
-            >
-              <Layers size={16} /> Stage Slider
-            </button>
-            <button 
-              className={`view-btn ${viewMode === 'grid' ? 'active' : ''}`}
-              onClick={() => setViewMode('grid')}
-              title="Matrix Grid"
-            >
-              <Grid size={16} /> Matrix Grid
-            </button>
-          </div>
-        </div>
+        {/* Main Dynamic Content Display */}
+        <section className="timeline-content-container">
+          {/* Timeline filters and navigation */}
+          <section className="timeline-controls-deck">
+            <div className="timeline-top-controls">
+              <div className="timeline-search-box">
+                <Search className="timeline-search-icon" size={18} />
+                <input
+                  type="text"
+                  placeholder="Search hackathons, CFI visit, workshops, showcases..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="timeline-search-input"
+                />
+              </div>
 
-        {/* Category Pill Filters */}
-        <div className="timeline-category-pills">
-          {Object.values(CATEGORIES).map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setSelectedCategory(cat.id)}
-              className={`cat-pill-btn ${selectedCategory === cat.id ? 'active' : ''}`}
-              style={{ '--cat-color': cat.color }}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
+              <div className="timeline-view-switcher">
+                <button className={`view-btn ${viewMode === 'stream' ? 'active' : ''}`} onClick={() => setViewMode('stream')} title="Circuit Node Stream">
+                  <Zap size={16} /> Circuit Stream
+                </button>
+                <button className={`view-btn ${viewMode === 'carousel' ? 'active' : ''}`} onClick={() => setViewMode('carousel')} title="3D Stage Slider">
+                  <Layers size={16} /> Stage Slider
+                </button>
+                <button className={`view-btn ${viewMode === 'grid' ? 'active' : ''}`} onClick={() => setViewMode('grid')} title="Matrix Grid">
+                  <Grid size={16} /> Matrix Grid
+                </button>
+              </div>
+            </div>
 
-        {/* Horizontal Year Jumper Bar */}
-        <div className="timeline-year-jumper">
-          <span className="year-jumper-label">JUMP TO YEAR:</span>
-          <div className="year-jumper-buttons-wrap">
-            {uniqueYears.map((yr) => (
-              <button
-                key={yr}
-                onClick={() => navigate(`/timeline/${yr}`)}
-                className="year-tag-btn"
-              >
-                {yr}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
+            <div className="timeline-category-pills">
+              {Object.values(CATEGORIES).map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => setSelectedCategory(cat.id)}
+                  className={`cat-pill-btn ${selectedCategory === cat.id ? 'active' : ''}`}
+                  style={{ '--cat-color': cat.color }}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
 
-      {/* Main Dynamic Content Display */}
-      <section className="timeline-content-container">
+            <div className="timeline-year-jumper">
+              <span className="year-jumper-label">JUMP TO YEAR:</span>
+              <div className="year-jumper-buttons-wrap">
+                {uniqueYears.map((yr) => (
+                  <button key={yr} onClick={() => navigate(`/timeline/${yr}`)} className="year-tag-btn">
+                    {yr}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </section>
         {filteredData.length === 0 ? (
           <div className="no-milestones-box">
             <Info size={40} className="no-milestones-icon" />
@@ -534,7 +516,8 @@ const Timeline = () => {
             )}
           </>
         )}
-      </section>
+        </section>
+      </main>
 
       {/* GRAND LIGHTBOX MODAL & MULTI-PHOTO GALLERY OVERLAY */}
       <AnimatePresence>

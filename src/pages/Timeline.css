@@ -135,6 +135,24 @@
   line-height: 1.15;
 }
 
+.timeline-archive-page .timeline-main-heading {
+  background: none;
+  -webkit-text-fill-color: var(--sci-gold);
+  color: var(--sci-gold);
+}
+
+.timeline-archive-page .timeline-sub-heading {
+  color: #ffffff;
+}
+
+.timeline-year-page .timeline-hero-section {
+  text-align: center;
+}
+
+.timeline-year-page .timeline-sub-heading {
+  color: #ffffff;
+}
+
 .timeline-sub-heading {
   font-size: clamp(0.95rem, 2vw, 1.2rem);
   color: #94a3b8;
@@ -479,6 +497,68 @@
   max-width: 1200px;
   margin: 0 auto 80px;
   padding: 0 20px;
+}
+
+.timeline-content-container .timeline-controls-deck {
+  max-width: none;
+  margin: 0 0 30px;
+  padding: 0;
+}
+
+/* On wide screens, keep the archive introduction in a left rail and reserve
+   the larger share of the page for the timeline and its controls. */
+.timeline-workspace {
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 1025px) {
+  .timeline-workspace {
+    display: grid;
+    grid-template-columns: minmax(300px, 0.8fr) minmax(0, 2fr);
+    gap: 32px;
+    max-width: 1560px;
+    margin: 0 auto;
+    padding: 24px 32px 0;
+  }
+
+  .timeline-sidebar {
+    align-self: start;
+    position: sticky;
+    top: 92px;
+  }
+
+  .timeline-workspace .timeline-hero-section {
+    max-width: none;
+    margin: 0;
+    padding: 0 0 24px;
+    text-align: left;
+  }
+
+  .timeline-workspace .timeline-sub-heading,
+  .timeline-workspace .timeline-stats-row {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .timeline-workspace .timeline-stats-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-bottom: 0;
+  }
+
+  .timeline-content-container .timeline-controls-deck {
+    max-width: none;
+    margin: 0 0 24px;
+    padding: 0;
+  }
+
+  .timeline-content-container {
+    max-width: none;
+    margin: 0 0 80px;
+    padding: 0;
+    min-width: 0;
+  }
 }
 
 /* ----------------------------------------------------
@@ -1093,12 +1173,6 @@
    RESPONSIVE BREAKPOINTS (Mobile, Tablet, Desktop)
 ------------------------------------------------------- */
 
-@media (min-width: 1025px) {
-  .timeline-hero-section {
-    padding-top: 24px;
-  }
-}
-
 @media (min-width: 769px) and (max-width: 1024px) {
   .timeline-hero-section {
     padding: 20px 24px 30px;
@@ -1233,6 +1307,11 @@
   .timeline-content-container {
     padding: 0 14px;
     margin-bottom: 60px;
+  }
+
+  .timeline-content-container .timeline-controls-deck {
+    margin-bottom: 24px;
+    padding: 0;
   }
 
   .circuit-stream-wrapper {
@@ -1520,4 +1599,3 @@
   font-weight: 700;
   letter-spacing: 0.5px;
 }
-

@@ -89,7 +89,7 @@ const TimelineYear = () => {
   const currentStageItem = filteredData[carouselIndex] || null;
 
   return (
-    <div className="timeline-page-root">
+    <div className="timeline-page-root timeline-year-page">
       <Navbar />
 
       <div className="timeline-gridscan-bg-container">
