@@ -166,7 +166,7 @@ const Settings = require('../models/Settings');
 const DEFAULT_SETTINGS = {
   timelineDefaultView: 'stream',
   gridScanLinesColor: '#2F293A',
-  gridScanColor: '#FF9FFC',
+  gridScanColor: '#FFC700',
 };
 
 // GET /api/admin/settings/public - Public settings (no auth required)

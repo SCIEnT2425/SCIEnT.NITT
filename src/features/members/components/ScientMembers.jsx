@@ -7,6 +7,23 @@ import FacultyAdvisorCard from './FacultyAdvisor.jsx';
 import FacilityAdminCard from './FacilityAdmin.jsx';
 import '../styles/ScientMembers.css';
 
+const DEV_DUMMY_MEMBER = [
+  {
+    _id: "test-m-1",
+    name: "Alex Dev (Test Member)",
+    role: "Core",
+    subteam: "Cores",
+    Department: "Computer Science & Engg",
+    year: "4th Year",
+    photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
+    email: "alex.dev@nitt.edu",
+    linkedin: "https://linkedin.com",
+    instagram: "https://instagram.com",
+    description: "Development test member for testing card click, blur background, and detail panel interaction.",
+    cardColor: "#facc15"
+  }
+];
+
 const SCIentMembers = () => {
   const [activeSection, setActiveSection] = useState('team');
   const [membersData, setMembersData] = useState({
@@ -29,7 +46,14 @@ const SCIentMembers = () => {
           axios.get(`${API_BASE}/all`),
         ]);
 
-        const allMembers = teamRes.data.data || [];
+        let fetchedMembers = teamRes.data.data || [];
+        const isDev = process.env.NODE_ENV !== 'production';
+        let allMembers = fetchedMembers;
+
+        if (isDev) {
+          allMembers = fetchedMembers.length > 0 ? [...fetchedMembers, ...DEV_DUMMY_MEMBER] : DEV_DUMMY_MEMBER;
+        }
+
         setMembersData({
           team: allMembers,
           cores: allMembers.filter(m => m.role === 'Core' || m.subteam === 'Cores') || [],
@@ -41,6 +65,17 @@ const SCIentMembers = () => {
         });
       } catch (err) {
         console.error('Error fetching members:', err);
+        const isDev = process.env.NODE_ENV !== 'production';
+        const allMembers = isDev ? DEV_DUMMY_MEMBER : [];
+        setMembersData({
+          team: allMembers,
+          cores: allMembers.filter(m => m.role === 'Core' || m.subteam === 'Cores') || [],
+          excores: allMembers.filter(m => m.role === 'Ex-Core' || m.subteam === 'Ex-Cores') || [],
+          corporate: allMembers.filter(m => m.subteam === 'Corporate Communications') || [],
+          devops: allMembers.filter(m => m.subteam === 'DevOps') || [],
+          creative: allMembers.filter(m => m.subteam === 'Creatives') || [],
+          projectManagement: allMembers.filter(m => m.subteam === 'Project Management') || [],
+        });
       } finally {
         setLoading(false);
       }
