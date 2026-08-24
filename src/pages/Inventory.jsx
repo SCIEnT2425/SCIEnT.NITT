@@ -3,17 +3,42 @@ import "./Inventory.css";
 import Footer from "../components/footer";
 import Navbar from "../components/Navbar";
 
+const DEV_DUMMY_INVENTORY = [
+  {
+    _id: "test-inv-1",
+    name: "3D Printer - Ultimaker S5 (Test Item)",
+    category: "Prototyping & Printing",
+    description: "High-precision dual-extrusion 3D printer for industrial composite materials, complex prototypes, and PLA/ABS models.",
+    image: { url: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" },
+  }
+];
+
 export default function Inventory() {
   const [inventoryItems, setInventoryItems] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [expandedCardKey, setExpandedCardKey] = useState(null);
   const cardRefs = useRef([]);
 
   useEffect(() => {
     fetch("/api/inventory")
       .then((res) => res.json())
-      .then((data) => setInventoryItems(data))
-      .catch((err) => console.error(err));
+      .then((data) => {
+        const isDev = process.env.NODE_ENV !== 'production';
+        if (Array.isArray(data) && data.length > 0) {
+          setInventoryItems(isDev ? [...data, ...DEV_DUMMY_INVENTORY] : data);
+        } else if (isDev) {
+          setInventoryItems(DEV_DUMMY_INVENTORY);
+        } else {
+          setInventoryItems([]);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        if (process.env.NODE_ENV !== 'production') {
+          setInventoryItems(DEV_DUMMY_INVENTORY);
+        }
+      });
   }, []);
 
   // Extract unique categories for filter buttons
@@ -89,21 +114,25 @@ export default function Inventory() {
     cardElement.style.transform = "";
   };
 
-  const handleCardClick = (e, cardElement) => {
-    const ripple = document.createElement("div");
-    const rect = cardElement.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
-    const x = e.clientX - rect.left - size / 2;
-    const y = e.clientY - rect.top - size / 2;
+  const handleCardClick = (e, cardElement, itemKey) => {
+    setExpandedCardKey((prev) => (prev === itemKey ? null : itemKey));
 
-    ripple.className = "ripple";
-    ripple.style.width = `${size}px`;
-    ripple.style.height = `${size}px`;
-    ripple.style.left = `${x}px`;
-    ripple.style.top = `${y}px`;
+    if (cardElement) {
+      const ripple = document.createElement("div");
+      const rect = cardElement.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const x = e.clientX - rect.left - size / 2;
+      const y = e.clientY - rect.top - size / 2;
 
-    cardElement.appendChild(ripple);
-    setTimeout(() => ripple.remove(), 600);
+      ripple.className = "ripple";
+      ripple.style.width = `${size}px`;
+      ripple.style.height = `${size}px`;
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+
+      cardElement.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    }
   };
 
   const handleClearSearch = () => {
@@ -233,10 +262,12 @@ export default function Inventory() {
                       (sum, cat) => sum + groupedItems[cat].length,
                       0
                     ) + idx;
+                const itemKey = item._id || `${category}-${idx}`;
+                const isExpanded = expandedCardKey === itemKey;
 
                 return (
                   <div
-                    className="inventorycard"
+                    className={`inventorycard ${isExpanded ? "active" : ""}`}
                     key={idx}
                     ref={(el) => (cardRefs.current[globalIndex] = el)}
                     onMouseMove={(e) =>
@@ -246,12 +277,12 @@ export default function Inventory() {
                       handleCardMouseLeave(cardRefs.current[globalIndex])
                     }
                     onClick={(e) =>
-                      handleCardClick(e, cardRefs.current[globalIndex])
+                      handleCardClick(e, cardRefs.current[globalIndex], itemKey)
                     }
                     onKeyDown={(e) => {
                       if (e.key === "Enter" || e.key === " ") {
                         e.preventDefault();
-                        handleCardClick(e, cardRefs.current[globalIndex]);
+                        handleCardClick(e, cardRefs.current[globalIndex], itemKey);
                       }
                     }}
                     role="button"
@@ -263,8 +294,24 @@ export default function Inventory() {
                     <div className="inventorybox">
                       <div className="imagebox">
                         <img src={item.image.url} alt={item.name} />
+                        {!isExpanded && (
+                          <div className="inventory-click-hint">
+                            Click for details
+                          </div>
+                        )}
                       </div>
                       <div className="inventcontentbox">
+                        <button
+                          type="button"
+                          className="inventory-close-btn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setExpandedCardKey(null);
+                          }}
+                          aria-label="Close details"
+                        >
+                          ✕
+                        </button>
                         <h2>{item.name}</h2>
                         <h3>{item.category}</h3>
                         <p>{item.description}</p>

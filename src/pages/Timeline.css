@@ -47,7 +47,7 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  background: 
+  background:
     radial-gradient(circle at 50% 10%, rgba(255, 199, 0, 0.12) 0%, transparent 50%),
     radial-gradient(circle at 80% 60%, rgba(255, 215, 0, 0.06) 0%, transparent 40%),
     radial-gradient(circle at 20% 80%, rgba(255, 184, 0, 0.06) 0%, transparent 40%);
@@ -86,7 +86,8 @@
   transition: color 0.2s ease;
 }
 
-.breadcrumb-item-link:hover, .breadcrumb-item-link.active {
+.breadcrumb-item-link:hover,
+.breadcrumb-item-link.active {
   color: var(--sci-gold);
 }
 
@@ -301,6 +302,7 @@
 .timeline-category-pills::-webkit-scrollbar {
   height: 4px;
 }
+
 .timeline-category-pills::-webkit-scrollbar-thumb {
   background: var(--sci-gold);
   border-radius: 4px;
@@ -875,7 +877,8 @@
   transition: all 0.2s ease;
 }
 
-.stage-picker-thumb.active, .stage-picker-thumb:hover {
+.stage-picker-thumb.active,
+.stage-picker-thumb:hover {
   opacity: 1;
   border-color: var(--sci-gold);
   transform: scale(1.1);
@@ -1098,8 +1101,13 @@
   z-index: 2;
 }
 
-.modal-photo-arrow.left { left: 14px; }
-.modal-photo-arrow.right { right: 14px; }
+.modal-photo-arrow.left {
+  left: 14px;
+}
+
+.modal-photo-arrow.right {
+  right: 14px;
+}
 
 .modal-photo-arrow:hover:not(:disabled) {
   background: var(--sci-gold);
@@ -1144,7 +1152,8 @@
   flex-shrink: 0;
 }
 
-.modal-thumb-item.active, .modal-thumb-item:hover {
+.modal-thumb-item.active,
+.modal-thumb-item:hover {
   opacity: 1;
   border-color: var(--sci-gold);
   transform: scale(1.05);
@@ -1488,8 +1497,13 @@
     height: 32px;
   }
 
-  .modal-photo-arrow.left { left: 8px; }
-  .modal-photo-arrow.right { right: 8px; }
+  .modal-photo-arrow.left {
+    left: 8px;
+  }
+
+  .modal-photo-arrow.right {
+    right: 8px;
+  }
 
   .modal-photo-counter-badge {
     font-size: 0.72rem;
