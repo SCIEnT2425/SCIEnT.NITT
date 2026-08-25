@@ -29,11 +29,13 @@ const Contact = () => {
             </div>
             <div className='flex flex-wrap items-center gap-1.5 text-xs mobile:text-sm laptop:text-base'>
               <span className='text-gray-300 font-medium'>For technical info, contact:</span>
-              <span className='text-yellow-500 font-semibold'>Arjun B K (8610450988)</span>
+              <span className='text-yellow-500 font-semibold'>Pranesh S K (9345718019)</span>
             </div>
             <div className='flex flex-wrap items-center gap-1.5 text-xs mobile:text-sm laptop:text-base'>
               <span className='text-gray-300 font-medium'>For facility related info, contact:</span>
-              <span className='text-yellow-500 font-semibold'>Alan (9360845683), Alok (7408092857)</span>
+              <span className='text-yellow-500 font-semibold'> 
+                <br/>Advaith S (9345682446) <br/> D Sai Sri Mouriya (6374239764) <br/> A M Yafea Nazz (8838376991)
+              </span>
             </div>
           </div>
 
