@@ -32,8 +32,20 @@
   }
 }
   
-.card {
-  perspective: 1000px;
+/* Custom scrollbar for member description overlay */
+.card ::-webkit-scrollbar {
+  width: 4px;
+}
+.card ::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+.card ::-webkit-scrollbar-thumb {
+  background: rgba(250, 204, 21, 0.4);
+  border-radius: 4px;
+}
+.card ::-webkit-scrollbar-thumb:hover {
+  background: rgba(250, 204, 21, 0.7);
 }
 
 

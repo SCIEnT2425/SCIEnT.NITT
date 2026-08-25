@@ -1,10 +1,10 @@
 export const CATEGORIES = {
-  ALL: { id: "all", label: "All Milestones", color: "#FFB800" },
-  GENESIS: { id: "genesis", label: "Genesis & Facilities", color: "#FFB800", bg: "rgba(255, 184, 0, 0.15)" },
-  SHOWCASE: { id: "showcase", label: "Showcases & Exhibitions", color: "#00E5FF", bg: "rgba(0, 229, 255, 0.15)" },
-  HACKATHONS: { id: "hackathons", label: "Hackathons & Contests", color: "#FF2A6D", bg: "rgba(255, 42, 109, 0.15)" },
-  WORKSHOPS: { id: "workshops", label: "Workshops & Outreach", color: "#05FFA1", bg: "rgba(5, 255, 161, 0.15)" },
-  DIGITAL: { id: "digital", label: "Digital Innovations", color: "#9D4EDD", bg: "rgba(157, 78, 221, 0.15)" }
+  ALL: { id: "all", label: "All Milestones", color: "#FFC700" },
+  GENESIS: { id: "genesis", label: "Genesis & Facilities", color: "#FFC700", bg: "rgba(255, 199, 0, 0.15)" },
+  SHOWCASE: { id: "showcase", label: "Showcases & Exhibitions", color: "#FFE066", bg: "rgba(255, 224, 102, 0.15)" },
+  HACKATHONS: { id: "hackathons", label: "Hackathons & Contests", color: "#FFB800", bg: "rgba(255, 184, 0, 0.15)" },
+  WORKSHOPS: { id: "workshops", label: "Workshops & Outreach", color: "#E6B800", bg: "rgba(230, 184, 0, 0.15)" },
+  DIGITAL: { id: "digital", label: "Digital Innovations", color: "#D4AF37", bg: "rgba(212, 175, 55, 0.15)" }
 };
 
 let timelineMapping = {};

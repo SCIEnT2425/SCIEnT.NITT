@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./pages/Home";
 import Timeline from "./pages/Timeline";
+import TimelineYear from "./pages/TimelineYear";
 import Gallery from "./pages/Gallery";
 import ProjectSection from "./pages/ProjectSection";
 import Contact from "./pages/Contacts";
@@ -82,6 +83,7 @@ const App = () => {
 
         <Route path="/" element={<Home />} />
         <Route path="/timeline" element={<Timeline />} />
+        <Route path="/timeline/:year" element={<TimelineYear />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/project" element={<ProjectSection />} />
         <Route path="/inventive" element={<Inventive />} />
