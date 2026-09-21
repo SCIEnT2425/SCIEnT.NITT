@@ -30,14 +30,10 @@ import {
 } from "lucide-react";
 
 const PRESENTATION_DATES = [
-  { date: "29th September", day: "Sunday" },
-  { date: "30th September", day: "Monday" },
-  { date: "1st October", day: "Tuesday" },
-  { date: "2nd October", day: "Wednesday" },
-  { date: "3rd October", day: "Thursday" },
-  { date: "4th October", day: "Friday" },
-  { date: "5th October", day: "Saturday" },
-  { date: "6th October", day: "Sunday" },
+  { date: "5th October", day: "Monday" },
+  { date: "6th October", day: "Tuesday" },
+  { date: "7th October", day: "Wednesday" },
+  { date: "8th October", day: "Thursday" },
 ];
 
 const SECTIONS = [
