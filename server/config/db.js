@@ -34,8 +34,7 @@ const connectDB = async () => {
       }
     }
 
-    console.error("Please start local MongoDB (mongod / Docker) or check your connection string.");
-    process.exit(1);
+    console.error("⚠️ Warning: MongoDB not connected. Database routes may fail, but non-DB routes (like Inventive Google Sheets) will remain active.");
   }
 };
 

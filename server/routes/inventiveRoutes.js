@@ -17,7 +17,7 @@ const auth = new google.auth.GoogleAuth({
 });
 
 // Your Google Sheet ID
-const SPREADSHEET_ID = "1VSNr5noRbT4gczPtKP3Abc67yLId1lrW8tmqKjXba5s";
+const SPREADSHEET_ID = "1_nos2EuvfgDLDqHtKDR1egBnB6nTMCkUzuGmDPef3po";
 
 router.post("/submit", async (req, res) => {
   try {
@@ -36,6 +36,7 @@ router.post("/submit", async (req, res) => {
       otherSource,
       projectDescription,
       teamSize,
+      availableDates,
     } = req.body;
 
     // Validate required fields
@@ -52,6 +53,9 @@ router.post("/submit", async (req, res) => {
     ) {
       return res.status(400).send("All fields are required");
     }
+    if (Number(age) <= 15) {
+      return res.status(400).send("Age must be greater than 15");
+    }
     if (!source) {
       return res.status(400).send("Source is required");
     }
@@ -59,12 +63,15 @@ router.post("/submit", async (req, res) => {
       return res.status(400).send("Please specify other source");
     }
 
-    // Append row with all eight fields
+    // Format source and dates
     const finalSource = source === "Other" ? otherSource : source;
+    const formattedDates = Array.isArray(availableDates) 
+      ? availableDates.join(", ") 
+      : (availableDates || "");
 
     await sheets.spreadsheets.values.append({
       spreadsheetId: SPREADSHEET_ID,
-      range: "Sheet1!A:K",
+      range: "Sheet1!A:L",
       valueInputOption: "RAW",
       requestBody: {
         values: [
@@ -79,6 +86,7 @@ router.post("/submit", async (req, res) => {
             finalSource,
             projectDescription,
             teamSize,
+            formattedDates,
           ],
         ],
       },
