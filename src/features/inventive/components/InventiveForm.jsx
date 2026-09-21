@@ -776,13 +776,16 @@ export default function ProjectForm() {
               Select Source <span className="text-yellow-400">*</span>
             </label>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
               {[
-                { label: "Instagram", icon: <Instagram className="w-4 h-4" /> },
-                { label: "Linkedin", icon: <Linkedin className="w-4 h-4" /> },
-                { label: "WhatsApp Groups", icon: <MessageCircle className="w-4 h-4" /> },
-                { label: "Offline QR Codes", icon: <QrCode className="w-4 h-4" /> },
-                { label: "Other", icon: <HelpCircle className="w-4 h-4" /> },
+                { label: "Instagram", icon: <Instagram className="w-3.5 h-3.5" /> },
+                { label: "Linkedin", icon: <Linkedin className="w-3.5 h-3.5" /> },
+                { label: "WhatsApp Groups", icon: <MessageCircle className="w-3.5 h-3.5" /> },
+                { label: "Offline QR Codes", icon: <QrCode className="w-3.5 h-3.5" /> },
+                { label: "Classroom Briefing", icon: <BookOpen className="w-3.5 h-3.5" /> },
+                { label: "Senior / Friend", icon: <Users className="w-3.5 h-3.5" /> },
+                { label: "Faculty", icon: <GraduationCap className="w-3.5 h-3.5" /> },
+                { label: "Other", icon: <HelpCircle className="w-3.5 h-3.5" /> },
               ].map(({ label, icon }) => {
                 const isSelected = formData.source === label;
                 return (
@@ -790,16 +793,16 @@ export default function ProjectForm() {
                     key={label}
                     type="button"
                     onClick={() => setFormData({ ...formData, source: label })}
-                    className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl border text-sm font-bold transition-all duration-300 ${
+                    className={`flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl border text-xs sm:text-sm font-bold transition-all duration-200 ${
                       isSelected
-                        ? "bg-yellow-400 text-black border-yellow-400 shadow-lg shadow-yellow-400/20 scale-[1.02]"
+                        ? "bg-yellow-400 text-black border-yellow-400 shadow-md shadow-yellow-400/20 scale-[1.01]"
                         : "bg-zinc-900/90 text-gray-300 border-zinc-800 hover:border-yellow-400/50 hover:bg-zinc-900"
                     }`}
                   >
                     <span className={isSelected ? "text-black" : "text-yellow-400"}>
                       {icon}
                     </span>
-                    <span>{label}</span>
+                    <span className="truncate">{label}</span>
                   </button>
                 );
               })}
