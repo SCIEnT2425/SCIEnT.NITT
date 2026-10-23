@@ -10,7 +10,7 @@ const Home = () => {
     <div className="home-main-container">
       <MagicCardGroup className="card-container">
         <MagicCard className="card">
-          <img src={a} alt="Our Vision" />
+          <img src={a} alt="Our Vision" loading="lazy" />
           <div className="overlay">
             <h2>OUR VISION</h2>
             <p>
@@ -28,7 +28,7 @@ To build an ecosystem that will encourage more students to aspire and build real
           </div>
         </MagicCard>
         <MagicCard className="Mission_card">
-          <img src={b} alt="Our Mission" />
+          <img src={b} alt="Our Mission" loading="lazy" />
           <div className="overlay">
             <h2>OUR MISSION</h2>
             <p>

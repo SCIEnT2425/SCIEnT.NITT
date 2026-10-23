@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { MagicCard } from "./MagicBento";
+import { optimizedImage } from "../utils/optimizedImage";
 
 const ProjectCard = ({ project }) => {
   const { name } = useParams();
@@ -15,8 +16,10 @@ const ProjectCard = ({ project }) => {
     );
   }
 
-  const imageSrc =
-    project?.image?.url || project?.image || "https://picsum.photos/400/300?random";
+  const imageSrc = optimizedImage(
+    project?.image?.url || project?.image || "https://picsum.photos/400/300?random",
+    600
+  );
 
   const handleClick = () => {
     navigate(`/clubs/${name}/projects/${project._id}`);
