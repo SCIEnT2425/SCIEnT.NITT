@@ -3,6 +3,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const TeamMember = require('../models/TeamMember');
 const { getBucket } = require('../config/firebaseConfig');
+const { resizeTeamPhoto, uploadTeamPhoto } = require('../utils/teamPhotos');
 
 const LOCAL_STORE_FILE = path.join(__dirname, '../data/local_team_members.json');
 
@@ -219,30 +220,21 @@ const uploadTeamMemberImage = async (req, res) => {
       });
     }
 
-    // 3. Build destination path
+    // 3. Build destination path (always .jpg: the photo is re-encoded below)
     const { year, memberId } = req.query;
     const subfolder = year ? year : 'admin';
     const prefix    = memberId ? `${memberId}_` : `${Date.now()}_`;
-    const safeName  = req.file.originalname.replace(/[^a-zA-Z0-9._-]/g, '_');
-    const destPath  = `Team/team-members/${subfolder}/${prefix}${safeName}`;
+    const safeName  = req.file.originalname.replace(/\.[^.]*$/, '').replace(/[^a-zA-Z0-9._-]/g, '_');
+    const destPath  = `Team/team-members/${subfolder}/${prefix}${safeName}.jpg`;
 
-    // 4. Upload buffer to Firebase Storage
-    const fileRef = bucket.file(destPath);
-    await fileRef.save(req.file.buffer, {
-      contentType: req.file.mimetype,
-      metadata: { cacheControl: 'public, max-age=31536000' },
-    });
-
-    // 5. Generate a download token and build a firebasestorage.googleapis.com URL
-    // This matches the approach used by the Firebase console and linkFirebasePhotos.js
-    const { randomUUID } = require('crypto');
-    const token = randomUUID();
-    await fileRef.setMetadata({
-      metadata: { firebaseStorageDownloadTokens: token },
-    });
-    const encodedPath = encodeURIComponent(destPath);
-    const downloadUrl =
-      `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${encodedPath}?alt=media&token=${token}`;
+    // 4. Resize (phone photos are often 5-8 MB) and upload to Firebase Storage
+    let resized;
+    try {
+      resized = await resizeTeamPhoto(req.file.buffer);
+    } catch (err) {
+      return res.status(400).json({ success: false, message: 'That file could not be read as an image.' });
+    }
+    const downloadUrl = await uploadTeamPhoto(bucket, destPath, resized);
 
     console.log(`[Firebase] Uploaded → ${destPath}`);
 
