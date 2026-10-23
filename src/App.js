@@ -63,6 +63,7 @@ const NewTeamYear = lazy(() => import('./features/admin/pages/NewTeamYear'));
 const ProjectDashboard = lazy(() => import('./features/admin/pages/ProjectDashboard'));
 const ProjectForm = lazy(() => import('./features/admin/pages/ProjectForm'));
 const SettingsDashboard = lazy(() => import('./features/admin/pages/SettingsDashboard'));
+const MessagesDashboard = lazy(() => import('./features/admin/pages/MessagesDashboard'));
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const prefersReducedMotion =
@@ -194,6 +195,7 @@ const App = () => {
         <Route path="/admin/projects/new" element={<ProtectedRoute><ProjectForm /></ProtectedRoute>} />
         <Route path="/admin/projects/edit/:id" element={<ProtectedRoute><ProjectForm /></ProtectedRoute>} />
         <Route path="/admin/settings" element={<ProtectedRoute><SettingsDashboard /></ProtectedRoute>} />
+        <Route path="/admin/messages" element={<ProtectedRoute><MessagesDashboard /></ProtectedRoute>} />
 
       </Routes>
         </Suspense>

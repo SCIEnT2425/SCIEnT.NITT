@@ -12,6 +12,7 @@ const inventiveRoutes = require('./routes/inventiveRoutes');
 const contriveRoutes = require('./routes/contriveRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const projectRoutes = require('./routes/projectRoutes');
+const contactRoutes = require('./routes/contactRoutes');
 
 // Load environment variables
 dotenv.config({ path: __dirname + "/.env" });
@@ -35,6 +36,7 @@ app.use('/api/inventiveForm', inventiveRoutes);
 app.use('/api/contriveForm', contriveRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/projects', projectRoutes);
+app.use('/api/contact', contactRoutes);
 
 
 // Error handler middleware
