@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
+import AdminTabs from '../components/AdminTabs';
 import { Settings as SettingsIcon, LogOut, Save, Loader2, Zap, Layers, Grid } from 'lucide-react';
 import { toast } from 'react-toastify';
 
@@ -15,7 +16,6 @@ const SettingsDashboard = () => {
 
   const { token, logout, API_BASE } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     const fetchSettings = async () => {
@@ -121,38 +121,7 @@ const SettingsDashboard = () => {
       </div>
 
       {/* Navigation Tabs */}
-      <div className="max-w-7xl mx-auto mb-8 flex bg-zinc-900/90 border border-zinc-800 p-1 rounded-xl w-full sm:w-fit gap-1 backdrop-blur-sm">
-        <Link
-          to="/admin/team"
-          className={`flex-1 sm:flex-none text-center px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
-            location.pathname.includes('/admin/team')
-              ? 'bg-yellow-400 text-black shadow-md shadow-yellow-400/10'
-              : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'
-          }`}
-        >
-          Team Members
-        </Link>
-        <Link
-          to="/admin/projects"
-          className={`flex-1 sm:flex-none text-center px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
-            location.pathname.includes('/admin/projects')
-              ? 'bg-yellow-400 text-black shadow-md shadow-yellow-400/10'
-              : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'
-          }`}
-        >
-          Projects & Clubs
-        </Link>
-        <Link
-          to="/admin/settings"
-          className={`flex-1 sm:flex-none text-center px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
-            location.pathname.includes('/admin/settings')
-              ? 'bg-yellow-400 text-black shadow-md shadow-yellow-400/10'
-              : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'
-          }`}
-        >
-          Timeline Settings
-        </Link>
-      </div>
+      <AdminTabs className="mb-8" />
 
       <div className="max-w-7xl mx-auto">
         <div className="max-w-4xl space-y-6">

@@ -1,128 +1,193 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import { Linkedin, Instagram, MapPin, CheckCircle2, Loader2 } from "lucide-react";
 
+const API_BASE = process.env.NODE_ENV === 'development' ? 'http://localhost:5000' : '';
+
+const CONTACTS = [
+  { topic: 'Admin', people: [{ name: 'Sivanesan S', phone: '9092559610' }] },
+  { topic: 'Technical', people: [{ name: 'Pranesh S K', phone: '9345718019' }] },
+  {
+    topic: 'Facility',
+    people: [
+      { name: 'Advaith S', phone: '9345682446' },
+      { name: 'D Sai Sri Mouriya', phone: '6374239764' },
+      { name: 'A M Yafea Nazz', phone: '8838376991' },
+    ],
+  },
+];
+
+const MAPS_URL = 'https://www.google.com/maps/search/?api=1&query=SCIEnT%2C+NIT+Trichy';
+const EMPTY_FORM = { name: '', email: '', subject: '', message: '', website: '' };
+
+// Shared input styling; bracket values because Bootstrap's spacing/border
+// utilities are !important and would override Tailwind's
+const fieldClass =
+  'w-full rounded-[10px] border-[1px] border-zinc-800 bg-zinc-900 px-[14px] text-sm text-zinc-50 placeholder-zinc-500 outline-none transition-colors focus:border-[#facc15]';
+
+const Field = ({ label, children }) => (
+  <label className="m-0 flex flex-col gap-1.5 text-[13px] font-medium text-zinc-300">
+    {label}
+    {children}
+  </label>
+);
+
+// Contact Us card (used on the home page and /contact). Messages are saved by
+// the backend, emailed to the SCIEnT inbox and listed in the admin portal.
 const Contact = () => {
+  const [form, setForm] = useState(EMPTY_FORM);
+  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
+  const [error, setError] = useState('');
+
+  const update = (e) => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('sending');
+    setError('');
+    try {
+      await axios.post(`${API_BASE}/api/contact`, form);
+      setStatus('sent');
+      setForm(EMPTY_FORM);
+    } catch (err) {
+      setStatus('error');
+      setError(err.response?.data?.message || 'Could not send your message. Please try again later.');
+    }
+  };
+
   return (
-    <div className='text-white mt-10 laptop:mt-24 mb-24 w-full flex flex-col items-center px-4 mobile:px-6 laptop:px-12'>
-      <div className='w-full max-w-6xl grid grid-cols-1 laptop:grid-cols-2 gap-8 laptop:gap-0 items-stretch'>
-        {/* Left Card - Info */}
-        <div className="
-          w-full
-          border-2 border-yellow-500
-          shadow-[0_0_15px_2px_rgba(234,179,8,0.4)]
-          bg-[#0A0D16]
-          rounded-2xl laptop:rounded-r-none laptop:rounded-l-3xl
-          flex flex-col justify-between p-6 mobile:p-8 gap-6
-        ">
-          <div className="flex flex-col gap-4">
-            <h1 className='text-3xl mobile:text-4xl laptop:text-5xl font-extrabold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent'>
-              CONTACT US
-            </h1>
-            <p className='text-gray-300 text-sm mobile:text-base laptop:text-lg font-medium leading-relaxed'>
-              Tell us about your vision, challenges you're facing or a new project idea, or just say hi. We would love to hear you out!
+    <section className="mb-24 mt-10 flex w-full justify-center px-[16px] text-white md:mt-24 md:px-6 lg:px-12">
+      <div className="grid w-full max-w-6xl grid-cols-1 overflow-hidden rounded-[20px] border-[1px] border-zinc-800 bg-zinc-950 lg:grid-cols-2">
+
+        {/* ── Left: intro, who to call, links ── */}
+        <div className="flex flex-col gap-6 border-b-[1px] border-zinc-800 p-[24px] md:p-[40px] lg:border-b-0 lg:border-r-[1px]">
+          <div className="flex flex-col gap-2.5">
+            <p className="m-0 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#facc15]">Contact us</p>
+            <h2 className="m-0 text-[28px] font-bold leading-tight text-zinc-50 md:text-[30px]">Talk to the SCIEnT team</h2>
+            <p className="m-0 text-sm leading-relaxed text-zinc-400">
+              Tell us about your idea, a challenge you're facing, or just say hi. We'd love to hear from you.
             </p>
           </div>
 
-          <div className='flex flex-col gap-3 py-2'>
-            <div className='flex flex-wrap items-center gap-1.5 text-xs mobile:text-sm laptop:text-base'>
-              <span className='text-gray-300 font-medium'>For admin related info, contact:</span>
-              <span className='text-yellow-500 font-semibold'>Sivanesan (9092559610)</span>
-            </div>
-            <div className='flex flex-wrap items-center gap-1.5 text-xs mobile:text-sm laptop:text-base'>
-              <span className='text-gray-300 font-medium'>For technical info, contact:</span>
-              <span className='text-yellow-500 font-semibold'>Pranesh S K (9345718019)</span>
-            </div>
-            <div className='flex flex-wrap items-center gap-1.5 text-xs mobile:text-sm laptop:text-base'>
-              <span className='text-gray-300 font-medium'>For facility related info, contact:</span>
-              <span className='text-yellow-500 font-semibold'> 
-                <br/>Advaith S (9345682446) <br/> D Sai Sri Mouriya (6374239764) <br/> A M Yafea Nazz (8838376991)
-              </span>
-            </div>
+          <div className="flex flex-col">
+            {CONTACTS.map(({ topic, people }) => (
+              <div key={topic} className="flex flex-col gap-1 border-t-[1px] border-zinc-800 py-[14px]">
+                <p className="m-0 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#facc15]">{topic}</p>
+                {people.map(({ name, phone }) => (
+                  <div key={phone} className="flex items-center justify-between gap-[12px] text-sm">
+                    <span className="font-medium text-zinc-50">{name}</span>
+                    <a href={`tel:+91${phone}`} className="py-[6px] text-zinc-400 no-underline transition-colors hover:text-[#facc15]">
+                      {phone.replace(/(\d{5})(\d{5})/, '$1 $2')}
+                    </a>
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
 
-          <div className="pt-4 border-t border-gray-800 flex flex-wrap items-center gap-6"> 
-            <a href="https://www.linkedin.com/company/scientnitt/mycompany/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:opacity-80 transition-opacity"> 
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#eab308" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-linkedin">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                <rect width="4" height="12" x="2" y="9"/>
-                <circle cx="4" cy="4" r="2"/>
-              </svg> 
-            </a> 
-            <a href="https://www.instagram.com/scient_nitt/?hl=en" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:opacity-80 transition-opacity"> 
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#eab308" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-instagram">
-                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
-              </svg> 
+          <div className="mt-auto flex items-center gap-1 border-t-[1px] border-zinc-800 pt-[16px]">
+            <a
+              href="https://www.linkedin.com/company/scientnitt/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="SCIEnT on LinkedIn"
+              className="-ml-[13px] flex h-11 w-11 items-center justify-center text-zinc-400 transition-colors hover:text-[#facc15]"
+            >
+              <Linkedin className="h-[18px] w-[18px]" strokeWidth={1.75} aria-hidden="true" />
             </a>
-            <a href="#map" className='flex gap-2 items-center hover:opacity-80 transition-opacity' aria-label="Location"> 
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#eab308" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-map-pin">
-                <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/>
-                <circle cx="12" cy="10" r="3"/>
-              </svg> 
-              <span className='text-sm laptop:text-base text-gray-300 font-semibold'>SCIEnT, NIT Trichy</span> 
-            </a> 
+            <a
+              href="https://www.instagram.com/scient_nitt/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="SCIEnT on Instagram"
+              className="flex h-11 w-11 items-center justify-center text-zinc-400 transition-colors hover:text-[#facc15]"
+            >
+              <Instagram className="h-[18px] w-[18px]" strokeWidth={1.75} aria-hidden="true" />
+            </a>
+            <a
+              href={MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-auto flex min-h-[44px] items-center gap-2 text-[13px] text-zinc-400 no-underline transition-colors hover:text-[#facc15]"
+            >
+              <MapPin className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
+              SCIEnT, NIT Trichy
+            </a>
           </div>
-        </div>  
+        </div>
 
-        {/* Right Card - Form */}
-        <div className="
-          w-full
-          border-2 border-yellow-500 laptop:border-l-0
-          shadow-[0_0_15px_2px_rgba(234,179,8,0.4)]
-          bg-[#0E121E]
-          rounded-2xl laptop:rounded-l-none laptop:rounded-r-3xl
-          flex flex-col justify-between p-6 mobile:p-8 gap-5
-        ">
-          <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-4">
-            <div className='flex flex-col gap-1.5'>
-              <label className='text-lg font-semibold text-yellow-500'>Name</label>
-              <input
-                type="text"
-                aria-label="Name"
-                className="bg-transparent border-b-2 border-gray-600 text-white placeholder-gray-500 text-sm mobile:text-base focus:border-yellow-500 outline-none py-1.5 transition-colors"
-                placeholder="Your Name"
-              />
-            </div>
-            <div className='flex flex-col gap-1.5'>
-              <label className='text-lg font-semibold text-yellow-500'>Email</label>
-              <input
-                type="email"
-                aria-label="Email"
-                className="bg-transparent border-b-2 border-gray-600 text-white placeholder-gray-500 text-sm mobile:text-base focus:border-yellow-500 outline-none py-1.5 transition-colors"
-                placeholder="your.email@example.com"
-              />
-            </div>
-            <div className='flex flex-col gap-1.5'>
-              <label className='text-lg font-semibold text-yellow-500'>Subject</label>
-              <input
-                type="text"
-                aria-label="Subject"
-                className="bg-transparent border-b-2 border-gray-600 text-white placeholder-gray-500 text-sm mobile:text-base focus:border-yellow-500 outline-none py-1.5 transition-colors"
-                placeholder="Subject of your message"
-              />
-            </div>
-            <div className='flex flex-col gap-1.5'>
-              <label className='text-lg font-semibold text-yellow-500'>What do you want to tell us?</label>
-              <textarea
-                rows={3}
-                aria-label="Message"
-                className="bg-transparent border-2 border-gray-600 rounded-lg text-white placeholder-gray-500 text-sm mobile:text-base focus:border-yellow-500 outline-none p-3 transition-colors resize-none"
-                placeholder="Hey! I'd love to ask you about..."
-              ></textarea>
-            </div>
-            <div className='w-full flex justify-center pt-2'>
-              <button 
-                type="submit"
-                className='rounded-full w-full mobile:w-2/3 laptop:w-1/2 bg-yellow-500 hover:bg-yellow-400 text-gray-950 font-bold py-2.5 px-6 transition-all duration-200 shadow-md hover:shadow-yellow-500/50 cursor-pointer'
+        {/* ── Right: message form ── */}
+        <div className="bg-[#09090b] p-[24px] md:p-[40px]">
+          {status === 'sent' ? (
+            <div className="flex h-full min-h-[320px] flex-col items-center justify-center gap-[12px] text-center" role="status">
+              <CheckCircle2 className="h-12 w-12 text-[#facc15]" strokeWidth={1.5} aria-hidden="true" />
+              <h3 className="m-0 text-xl font-semibold text-zinc-50">Message sent</h3>
+              <p className="m-0 max-w-xs text-sm text-zinc-400">Thanks for writing to us. We'll get back to you by email.</p>
+              <button
+                type="button"
+                onClick={() => setStatus('idle')}
+                className="mt-2 rounded-[10px] border-[1px] border-zinc-700 px-[18px] py-[10px] text-sm font-semibold text-zinc-200 transition-colors hover:border-[#facc15] hover:text-[#facc15]"
               >
-                Submit
+                Send another message
               </button>
             </div>
-          </form>
+          ) : (
+            <form onSubmit={handleSubmit} className="flex h-full flex-col gap-[16px]">
+              <div className="grid grid-cols-1 gap-[16px] sm:grid-cols-2">
+                <Field label="Name">
+                  <input name="name" value={form.name} onChange={update} required maxLength={100} placeholder="Your name" className={`${fieldClass} h-11`} />
+                </Field>
+                <Field label="Email">
+                  <input name="email" type="email" value={form.email} onChange={update} required maxLength={200} placeholder="you@example.com" className={`${fieldClass} h-11`} />
+                </Field>
+              </div>
+              <Field label="Subject">
+                <input name="subject" value={form.subject} onChange={update} maxLength={200} placeholder="What is this about?" className={`${fieldClass} h-11`} />
+              </Field>
+              <label className="m-0 flex flex-1 flex-col gap-1.5 text-[13px] font-medium text-zinc-300">
+                Message
+                <textarea
+                  name="message"
+                  value={form.message}
+                  onChange={update}
+                  required
+                  maxLength={5000}
+                  rows={6}
+                  placeholder="Hi! I'd love to ask about..."
+                  className={`${fieldClass} min-h-[140px] flex-1 resize-none py-[12px]`}
+                />
+              </label>
+
+              {/* Honeypot: hidden from people, filled in by spam bots */}
+              <input
+                name="website"
+                value={form.website}
+                onChange={update}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="absolute -left-[9999px] h-0 w-0 opacity-0"
+              />
+
+              {status === 'error' && <p className="m-0 text-sm text-red-400" role="alert">{error}</p>}
+
+              <div className="flex flex-wrap items-center justify-between gap-[16px]">
+                <p className="m-0 text-xs text-zinc-500">We usually reply within a few days.</p>
+                <button
+                  type="submit"
+                  disabled={status === 'sending'}
+                  className="flex h-11 items-center gap-2 rounded-[10px] bg-[#facc15] px-[28px] text-sm font-bold text-zinc-950 transition-colors hover:bg-yellow-300 disabled:opacity-60"
+                >
+                  {status === 'sending' && <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />}
+                  {status === 'sending' ? 'Sending…' : 'Send message'}
+                </button>
+              </div>
+            </form>
+          )}
         </div>
       </div>
-    </div>
-  )
-}
+    </section>
+  );
+};
 
 export default Contact;

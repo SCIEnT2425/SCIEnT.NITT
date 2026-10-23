@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
+import AdminTabs from '../components/AdminTabs';
 import { Plus, Edit, Trash2, Search, LogOut, Users, Loader2, CalendarPlus } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { ALL_ROLES, ALL_SUBTEAMS, teamYears } from '../../members/data/teamStructure';
@@ -20,7 +21,6 @@ const TeamDashboard = () => {
 
   const { token, logout, API_BASE } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const fetchMembers = async () => {
     try {
@@ -121,38 +121,7 @@ const TeamDashboard = () => {
       </div>
 
       {/* Navigation Tabs */}
-      <div className="max-w-7xl mx-auto mb-6 flex bg-zinc-900/90 border border-zinc-800 p-1 rounded-xl w-full sm:w-fit gap-1 backdrop-blur-sm">
-        <Link 
-          to="/admin/team"
-          className={`flex-1 sm:flex-none text-center px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
-            location.pathname.includes('/admin/team') 
-              ? 'bg-yellow-400 text-black shadow-md shadow-yellow-400/10' 
-              : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'
-          }`}
-        >
-          Team Members
-        </Link>
-        <Link 
-          to="/admin/projects"
-          className={`flex-1 sm:flex-none text-center px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
-            location.pathname.includes('/admin/projects') 
-              ? 'bg-yellow-400 text-black shadow-md shadow-yellow-400/10' 
-              : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'
-          }`}
-        >
-          Projects & Clubs
-        </Link>
-        <Link 
-          to="/admin/settings"
-          className={`flex-1 sm:flex-none text-center px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
-            location.pathname.includes('/admin/settings') 
-              ? 'bg-yellow-400 text-black shadow-md shadow-yellow-400/10' 
-              : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'
-          }`}
-        >
-          Timeline Settings
-        </Link>
-      </div>
+      <AdminTabs />
 
       <div className="max-w-7xl mx-auto">
         {/* Filters */}
