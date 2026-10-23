@@ -2,7 +2,7 @@ import React from 'react';
 import { Typewriter } from 'react-simple-typewriter';
 import Carousel from 'react-bootstrap/Carousel';
 import img1 from '../assets/home1.jpeg';
-import img2 from '../assets/home2.png';
+import img2 from '../assets/home2.jpg';
 import img3 from '../assets/home3.jpg';
 import img4 from '../assets/home6.jpg';
 import img5 from '../assets/home5.jpg';

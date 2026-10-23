@@ -1,8 +1,28 @@
-# Secrets live outside git:
-#   ./.env        – Mongo root credentials used below (see .env.example)
-#   ./server/.env – backend app secrets (see server/.env.example)
-# Both are read on the server only; never commit or upload them from a dev machine.
+# Secrets live in ./server/.env (see server/.env.example), read on the server only.
+# The database is the local "db" container (MongoDB), not Atlas: the backend's
+# MONGO_URI is set below and overrides any Atlas URI left in server/.env.
+# deploy_script.sh starts db, seeds it, then starts backend and frontend.
+#
+# Pinned project name keeps the db-data volume the same whatever the folder is called.
+name: scient
+
 services:
+  db:
+    # deploy_script.sh writes MONGO_IMAGE=mongo:4.4 to ./.env on CPUs without AVX
+    image: ${MONGO_IMAGE:-mongo:7.0}
+    restart: unless-stopped
+    volumes:
+      - db-data:/data/db
+    # No published port: only containers on scient-network can reach it
+    healthcheck:
+      test: ["CMD-SHELL", "mongosh --quiet --eval 'db.runCommand({ ping: 1 }).ok' || mongo --quiet --eval 'db.runCommand({ ping: 1 }).ok'"]
+      interval: 5s
+      timeout: 10s
+      retries: 30
+      start_period: 20s
+    networks:
+      - scient-network
+
   frontend:
     build:
       context: ./
@@ -20,51 +40,18 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3001
-      - MONGO_URI=mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@db:27017/scient?authSource=admin
-    restart: unless-stopped
+      - MONGO_URI=mongodb://db:27017/scient
+      - MONGO_URI_ATLAS=
     depends_on:
       db:
         condition: service_healthy
-    networks:
-      - scient-network
-
-  db:
-    image: mongo:8.0.1
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME:?set MONGO_ROOT_USERNAME in .env}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:?set MONGO_ROOT_PASSWORD in .env}
-    volumes:
-      - db-data:/data/db
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 20s
     networks:
       - scient-network
 
-  # Optional DB admin UI, not exposed publicly. Start it with
-  #   docker compose --profile tools up -d db-client
-  # and reach it through an SSH tunnel: ssh -L 8081:127.0.0.1:8081 user@server
-  db-client:
-    image: mongo-express:1.0.2-20-alpine3.19
-    profiles: ["tools"]
-    environment:
-      ME_CONFIG_MONGODB_URL: mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@db:27017/scient?authSource=admin
-      ME_CONFIG_BASICAUTH_USERNAME: ${ME_BASICAUTH_USERNAME:-admin}
-      ME_CONFIG_BASICAUTH_PASSWORD: ${ME_BASICAUTH_PASSWORD:?set ME_BASICAUTH_PASSWORD in .env}
-    ports:
-      - "127.0.0.1:8081:8081"
-    depends_on:
-      - db
-    networks:
-      - scient-network
+volumes:
+  db-data:
 
 networks:
   scient-network:
     external: true
-
-volumes:
-  db-data:

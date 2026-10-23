@@ -3,17 +3,19 @@ const dns = require('dns');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
-// Use public DNS to reliably resolve MongoDB Atlas SRV records
-// (fixes querySrv ECONNREFUSED on campus/mobile networks)
-try {
-  dns.setServers(['8.8.8.8', '8.8.4.4', '1.1.1.1']);
-} catch (e) {
-  // Fall back to default DNS if setServers is restricted
-}
-
 dotenv.config({ path: __dirname + '/../.env' });
 
-// Resolves to { isLocal } — true when connected to the local database
+// Use public DNS to reliably resolve MongoDB Atlas SRV records
+// (fixes querySrv ECONNREFUSED on campus/mobile networks).
+// Not needed for the db container (mongodb://db:27017), which Docker resolves.
+if ((process.env.MONGO_URI_ATLAS || process.env.MONGO_URI || '').startsWith('mongodb+srv://')) {
+  try {
+    dns.setServers(['8.8.8.8', '8.8.4.4', '1.1.1.1']);
+  } catch (e) {
+    // Fall back to default DNS if setServers is restricted
+  }
+}
+
 const connectDB = async () => {
   const atlasUri   = process.env.MONGO_URI_ATLAS || process.env.MONGO_URI;
   const localUri   = process.env.MONGO_URI_LOCAL  || 'mongodb://localhost:27017/scient';
@@ -23,7 +25,8 @@ const connectDB = async () => {
   // Always prefer Atlas when MONGO_URI_ATLAS (or MONGO_URI) is set.
   // Fall back to local only when neither Atlas variable is configured.
   const primaryUri   = atlasUri  || localUri;
-  const primaryLabel = atlasUri  ? 'MongoDB Atlas' : 'Local MongoDB';
+  const primaryLabel = !atlasUri ? 'Local MongoDB'
+    : atlasUri.startsWith('mongodb+srv://') ? 'MongoDB Atlas' : 'MongoDB (MONGO_URI)';
   const fallbackUri  = atlasUri  ? localUri : null;   // fallback only when primary is Atlas
   const fallbackLabel = 'Local MongoDB (fallback)';
 
@@ -36,7 +39,7 @@ const connectDB = async () => {
       serverSelectionTimeoutMS: 15000,
     });
     console.log(`✅ Connected to ${primaryLabel}`);
-    return { isLocal: !atlasUri };
+    return;
   } catch (primaryErr) {
     console.warn(`❌ ${primaryLabel} connection failed:`, primaryErr.message);
   }
@@ -49,7 +52,7 @@ const connectDB = async () => {
         serverSelectionTimeoutMS: 5000,
       });
       console.log(`✅ Connected to ${fallbackLabel}`);
-      return { isLocal: true };
+      return;
     } catch (fallbackErr) {
       console.warn(`❌ ${fallbackLabel} connection failed:`, fallbackErr.message);
     }

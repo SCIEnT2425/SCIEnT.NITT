@@ -1,19 +1,15 @@
 /**
  * seedDevData.js
  *
- * Fills an empty local MongoDB with preview data so the site is usable in
- * development when Atlas is unreachable. Runs automatically from app.js when
- * the server ends up on the local database outside production.
+ * Fills an empty MongoDB with the site's initial data: team members, clubs,
+ * projects and inventory tools. Used by scripts/seedLocalDb.js, which
+ * deploy_script.sh runs against the db container on every deploy.
  *
- * Each collection is seeded only when it is empty, so local edits survive
- * restarts. Drop a collection to reseed it.
- *
- * Run manually from server/ directory:
- *   node scripts/seedDevData.js
+ * Each collection is seeded only when it is empty, so edits made through the
+ * admin portal survive redeploys. Drop a collection to reseed it.
  */
 const fs = require('fs');
 const path = require('path');
-const mongoose = require('mongoose');
 const Club = require('../models/Club');
 const Project = require('../models/Project');
 const Tool = require('../models/Tool');
@@ -135,20 +131,6 @@ async function seedDevData() {
     const docs = await Tool.insertMany([...tools, ...bpclTools]);
     return docs.length;
   });
-}
-
-if (require.main === module) {
-  const connectDB = require('../config/db');
-  connectDB()
-    .then(({ isLocal }) => {
-      if (!isLocal) throw new Error('refusing to seed a non-local database');
-      return seedDevData();
-    })
-    .catch((err) => {
-      console.error('❌ Dev seed failed:', err.message);
-      process.exitCode = 1;
-    })
-    .finally(() => mongoose.disconnect());
 }
 
 module.exports = { seedDevData };

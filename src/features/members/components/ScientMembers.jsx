@@ -154,6 +154,9 @@ const SCIentMembers = () => {
       ? 'http://localhost:5000/api/team'
       : '/api/team');
 
+  // Atlas round trips can take several seconds, especially right after a restart
+  const FETCH_TIMEOUT_MS = 20000;
+
   // ── Fetch ──────────────────────────────────────────────────────────────────
   useEffect(() => {
     const fetchMembers = async () => {
@@ -162,13 +165,15 @@ const SCIentMembers = () => {
         setApiError(null);
         let res;
         try {
-          res = await axios.get(`${API_BASE}/all`, { timeout: 6000 });
+          res = await axios.get(`${API_BASE}/all`, { timeout: FETCH_TIMEOUT_MS });
         } catch (firstErr) {
-          // If port 5000 or relative endpoint failed, try the alternate endpoint
+          // In development only, retry the other local endpoint (CRA proxy vs. port 5000).
+          // In production localhost would be the visitor's own machine.
+          if (process.env.NODE_ENV !== 'development') throw firstErr;
           const altEndpoint = API_BASE.includes('localhost:5000')
             ? '/api/team/all'
             : 'http://localhost:5000/api/team/all';
-          res = await axios.get(altEndpoint, { timeout: 6000 });
+          res = await axios.get(altEndpoint, { timeout: FETCH_TIMEOUT_MS });
         }
         const fetched = res.data.data || [];
         if (fetched.length > 0) {

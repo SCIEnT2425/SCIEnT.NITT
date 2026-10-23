@@ -216,7 +216,8 @@ const BPCL_TOOLS = [
 // ── Main ─────────────────────────────────────────────────────────────────────
 async function main() {
   console.log('Connecting to MongoDB...');
-  await mongoose.connect(process.env.MONGO_URI);
+  // Same precedence as config/db.js
+  await mongoose.connect(process.env.MONGO_URI_ATLAS || process.env.MONGO_URI);
   console.log('Connected.\n');
 
   let uploaded = 0;

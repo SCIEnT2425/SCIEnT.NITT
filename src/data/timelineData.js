@@ -25,11 +25,11 @@ export const timelineData = [
     category: CATEGORIES.GENESIS,
     summary: "Inauguration of SCIEnT by Mr. Uma Maheswaran (Mission Director, GSLV ISRO) and Dr. Sundarrajan (Director, NIT Trichy).",
     description: "At their Silver Jubilee, the 1990's batch of REC came up with a vision to support and nurture technological development and innovation at NITT. SCIEnT was founded as a platform for alumni to contribute to their alma mater. On December 24, 2015, the facility was officially inaugurated.",
-    image: resolveImg("/assets/timeline/foam_board_1.png"),
+    image: resolveImg("/assets/timeline/foam_board_1.jpg"),
     images: [
-      resolveImg("/assets/timeline/foam_board_1.png"),
-      resolveImg("/assets/timeline/foam_board_2.png"),
-      resolveImg("/assets/timeline/foam_board_3.png"),
+      resolveImg("/assets/timeline/foam_board_1.jpg"),
+      resolveImg("/assets/timeline/foam_board_2.jpg"),
+      resolveImg("/assets/timeline/foam_board_3.jpg"),
       resolveImg("/assets/timeline/tools_board.jpg")
     ],
     location: "SCIEnT Lab, NIT Trichy",
@@ -46,7 +46,7 @@ export const timelineData = [
     image: resolveImg("/assets/timeline/tools_board.jpg"),
     images: [
       resolveImg("/assets/timeline/tools_board.jpg"),
-      resolveImg("/assets/timeline/foam_board_4.png"),
+      resolveImg("/assets/timeline/foam_board_4.jpg"),
       resolveImg("/assets/timeline/open_house_1.jpg")
     ],
     location: "SCIEnT Complex",
@@ -163,9 +163,9 @@ export const timelineData = [
     category: CATEGORIES.SHOWCASE,
     summary: "Next-gen annual exhibition of ground-breaking engineering marvels.",
     description: "Pragyan and SCIEnT presented Open House '24, providing student builders an unmatched stage to demonstrate robotic, electrical, and AI solutions to guest professors and industry judges.",
-    image: resolveImg("/assets/timeline/annual_day_invite.png"),
+    image: resolveImg("/assets/timeline/annual_day_invite.jpg"),
     images: [
-      resolveImg("/assets/timeline/annual_day_invite.png"),
+      resolveImg("/assets/timeline/annual_day_invite.jpg"),
       resolveImg("/assets/timeline/open_house_1.jpg"),
       resolveImg("/assets/timeline/open_house_3.jpg")
     ],
@@ -232,9 +232,9 @@ export const timelineData = [
     category: CATEGORIES.HACKATHONS,
     summary: "Campus Development Edition design challenge with Designer Consortium.",
     description: "A product design competition offering ₹7K in prizes and opportunities for patenting, publishing, and 'Fully Funded Project Development and Implementation' using SCIEnT fabrication facilities.",
-    image: resolveImg("/assets/timeline/foam_board_3.png"),
+    image: resolveImg("/assets/timeline/foam_board_3.jpg"),
     images: [
-      resolveImg("/assets/timeline/foam_board_3.png"),
+      resolveImg("/assets/timeline/foam_board_3.jpg"),
       resolveImg("/assets/timeline/tools_board.jpg")
     ],
     location: "SCIEnT Prototyping Workshop",
@@ -297,10 +297,10 @@ export const timelineData = [
     category: CATEGORIES.DIGITAL,
     summary: "Launch of scient.nitt.edu with Room Booking & Inventory Database.",
     description: "The official web platform scient.nitt.edu was launched to centralize operations, featuring automated room booking portals, inventory equipment tracking, and digital project showcases.",
-    image: resolveImg("/assets/timeline/foam_board_2.png"),
+    image: resolveImg("/assets/timeline/foam_board_2.jpg"),
     images: [
-      resolveImg("/assets/timeline/foam_board_2.png"),
-      resolveImg("/assets/timeline/foam_board_1.png")
+      resolveImg("/assets/timeline/foam_board_2.jpg"),
+      resolveImg("/assets/timeline/foam_board_1.jpg")
     ],
     location: "scient.nitt.edu",
     highlights: ["Online Room Booking Portal", "Live Hardware Inventory Search", "Centralized Project Repository"]
@@ -362,10 +362,10 @@ export const timelineData = [
     category: CATEGORIES.DIGITAL,
     summary: "Digital transformation with room booking, inventory tracking, and RFID lab access.",
     description: "Major milestone launching the official mobile application to streamline facility access, automated inventory checkout, meeting room scheduling, and real-time announcements.",
-    image: resolveImg("/assets/timeline/foam_board_4.png"),
+    image: resolveImg("/assets/timeline/foam_board_4.jpg"),
     images: [
-      resolveImg("/assets/timeline/foam_board_4.png"),
-      resolveImg("/assets/timeline/foam_board_1.png")
+      resolveImg("/assets/timeline/foam_board_4.jpg"),
+      resolveImg("/assets/timeline/foam_board_1.jpg")
     ],
     location: "Android & iOS Stores",
     highlights: ["RFID Lab Access", "Mobile Inventory Checkout", "Instant Room Reservations"]
@@ -394,9 +394,9 @@ export const timelineData = [
     category: CATEGORIES.GENESIS,
     summary: "Grand inauguration of the state-of-the-art SCIEnT Annexe facility.",
     description: "Unveiling of the brand new SCIEnT Annexe expansion, equipped with advanced BPCL laboratory tools, augmented collaboration bays, and expanded prototyping hardware.",
-    image: resolveImg("/assets/timeline/annexe_1.png"),
+    image: resolveImg("/assets/timeline/annexe_1.jpg"),
     images: [
-      resolveImg("/assets/timeline/annexe_1.png"),
+      resolveImg("/assets/timeline/annexe_1.jpg"),
       resolveImg("/assets/timeline/annexe_2.jpg"),
       resolveImg("/assets/timeline/annexe_3.jpg"),
       resolveImg("/assets/timeline/annexe_4.jpg")

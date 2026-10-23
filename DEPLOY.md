@@ -1,60 +1,69 @@
-# Deploying SCIEnT
+# Deploying SCIEnT on the college server
 
-The site runs as four Docker containers on one network: `frontend` (React build served by nginx), `backend` (Express API), `db` (MongoDB) and `nginx` (public reverse proxy on port 6600).
+Everything runs in Docker on the server: `db` (MongoDB), `backend` (Express API), `frontend` (React build served by nginx), and `nginx` (public reverse proxy on port 4020). MongoDB Atlas is not used because the college network blocks it. The database runs in its own container and its data lives in the Docker volume `scient_db-data`.
 
-## 1. Build the upload folder (on your machine)
+## Deploy (first time and every update)
+
+1. Copy this whole `scient` folder to the server, by FTP or `scp`, including `server/.env`. FTP clients often hide dotfiles, so check that `server/.env` arrived. You don't need to upload `node_modules/` or `build/`.
+2. On the server, run:
+
+   ```bash
+   cd ~/scient
+   bash deploy_script.sh
+   ```
+
+The script asks for the sudo password if it needs it, then:
+
+1. Installs Docker if it's missing.
+2. Checks `server/.env`.
+3. Builds the images (`npm ci` and the React build run inside Docker).
+4. Starts MongoDB and seeds it.
+5. Starts the site.
+6. Checks that `/` and `/api/clubs` respond.
+
+At the end it prints the address, for example `http://SERVER_IP:4020/`. If anything goes wrong, it stops with a red `[FAIL]` line explaining what to fix.
+
+To use another port, run `PUBLIC_PORT=8080 bash deploy_script.sh`. `bash deploy_script.sh --help` lists the options.
+
+## Database and seeding
+
+On every deploy, `server/scripts/seedLocalDb.js` fills each collection only while it is empty:
+
+| Collection | Source |
+|---|---|
+| team members | `server/scripts/seedTeamMembers.js` (photos from Firebase, or `public/Team/`) |
+| clubs, projects, tools | `server/data/devSeed/` and the BPCL list in `server/scripts/seedBpclTools.js` |
+| admin account | `ADMIN_USERNAME` / `ADMIN_PASSWORD` in `server/.env` |
+
+If `ADMIN_PASSWORD` is missing, the first deploy generates one, saves it in `server/.env` and prints the login once.
+
+Data changed through the admin portal is never overwritten. To throw the data away and reseed from scratch:
 
 ```bash
-git status                      # commit everything you want deployed first
-./scripts/make-deploy-bundle.sh # creates deploy/scient/
+sudo docker compose down -v      # deletes ALL site data
+bash deploy_script.sh
 ```
 
-Upload the **contents** of `deploy/scient/` to the server, e.g. `/opt/scient`. The bundle never contains `node_modules`, `build/`, `.git`, database dumps or `.env` files, and the script stops if it finds a private key.
-
-## 2. Create the secrets (on the server, first deploy only)
-
-```bash
-cd /opt/scient
-
-cp .env.example .env                 # Mongo root user/password for compose
-cp server/.env.example server/.env   # JWT, email, Google, Cloudinary, Firebase, Resend
-nano .env                            # MONGO_ROOT_PASSWORD: openssl rand -hex 24
-nano server/.env                     # leave MONGO_URI_ATLAS unset to use the db container
-chmod 600 .env server/.env
-```
-
-`MONGO_ROOT_*` is only applied when the `db-data` volume is first created. If the volume already exists, keep the password it was created with, or change it inside Mongo with `mongosh`.
-
-## 3. Build, start and verify
-
-```bash
-chmod +x deploy_setup.sh
-./deploy_setup.sh --seed      # first deploy: also loads initial data
-```
-
-The script checks Docker and both `.env` files, creates the Docker network, builds the images (dependencies and the React build are installed inside Docker), waits for MongoDB, starts everything, and checks that the site and `/api/clubs` respond on port 6600. It stops with a red `[FAIL]` line explaining what to fix. `./deploy_setup.sh --help` lists the options.
-
-There are no database migrations: MongoDB is used through Mongoose, which creates collections and indexes on startup.
+There are no migrations, because Mongoose creates collections and indexes on startup.
 
 ## Updating
 
-Rebuild the bundle, upload it over the old files (your `.env` files are not in the bundle, so they stay), then run:
+Upload the new files over the old ones, keeping the server's `server/.env` (it holds the admin password) and `./.env` (the MongoDB version picked for this CPU). Then run `bash deploy_script.sh` again. The database volume is kept.
+
+## Backups
 
 ```bash
-./deploy_setup.sh
+# Back up
+sudo docker compose exec -T db sh -c 'mongodump --archive --gzip --db scient' > scient-db.archive.gz
+
+# Restore (replaces the current data)
+sudo docker compose exec -T db sh -c 'mongorestore --archive --gzip --drop' < scient-db.archive.gz
 ```
 
-## Database admin UI (optional)
+On MongoDB 4.4, use the same commands. The database port is not published outside Docker.
 
-mongo-express is not publicly reachable. Start it on demand and open it through an SSH tunnel:
+## Notes
 
-```bash
-./deploy_setup.sh --with-tools --no-build             # on the server
-ssh -L 8081:127.0.0.1:8081 user@server              # on your machine → http://localhost:8081
-```
-
-## Seeding
-
-`--seed` loads the BPCL inventory tools (existing tools are skipped) and the team members, but the team seed runs only while the `teammembers` collection is empty, because it overwrites matching members with the seed file's values, including photos uploaded in the admin portal. `--force-team-seed` runs it anyway.
-
-The seed HTTP endpoints (`/api/clubs/projects`, `/api/clubs/seedclubs`) require an admin token.
+- **Old CPUs.** MongoDB 7 needs a CPU with AVX. On servers without it, the script picks MongoDB 4.4 and records that in `./.env`.
+- **Internet access.** The server still needs internet access for Docker Hub and npm during the build. It also needs Cloudinary, Firebase and Resend for image uploads and emails, but not for Atlas.
+- **Logs and stopping.** View logs with `sudo docker compose logs -f backend`. Stop the site with `sudo docker compose down && sudo docker compose -f nginx/compose.yaml down`.
