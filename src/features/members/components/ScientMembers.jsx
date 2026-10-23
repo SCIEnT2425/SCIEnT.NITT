@@ -3,8 +3,6 @@ import axios from 'axios';
 import { Rocket, ChevronDown, AlertTriangle } from 'lucide-react';
 import GooeyNav from '../../../components/GooeyNav';
 import MemberCard from './MemberCard';
-import FacultyAdvisorCard from './FacultyAdvisor.jsx';
-import FacilityAdminCard from './FacilityAdmin.jsx';
 import { MOCK_TEAM_MEMBERS, MOCK_PRINCE_ADVISOR } from '../data/mockTeamMembers';
 import { teamYears } from '../data/teamStructure';
 import '../styles/ScientMembers.css';
@@ -204,7 +202,7 @@ const SCIentMembers = () => {
     ? { ...MOCK_PRINCE_ADVISOR, ...princeFromDb, photoUrl: princeFromDb.photoUrl || MOCK_PRINCE_ADVISOR.photoUrl }
     : MOCK_PRINCE_ADVISOR;
 
-  const facultyAdvisors = [bakthaData, princeData];
+  const adminMembers = [bakthaData, facilityAdmin, princeData];
 
   // ── Handlers ───────────────────────────────────────────────────────────────
   const handleYearClick = year => {
@@ -270,22 +268,16 @@ const SCIentMembers = () => {
       )}
 
       {/* ══ SCIEnT Admin (always visible) ════════════════════════════════════ */}
-      <div className="AdminSection mb-16 px-4">
-        <div className="flex justify-center mb-6">
+      <div className="AdminSection relative max-w-7xl mx-auto mb-16 px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-center mb-8">
           <h2 className="text-3xl md:text-4xl font-black text-[#facc15]">SCIEnT Admin</h2>
         </div>
 
-        {/* Row 1 — Bakthavatsalam (left) · Sivanesan (right) */}
-        <div className="adminGrid">
-          <FacultyAdvisorCard AdvisorData={facultyAdvisors[0]} />
-          <FacilityAdminCard adminData={facilityAdmin} />
-        </div>
-
-        {/* Row 2 — Prince centered below */}
-        <div className="adminGrid__prince">
-          <div className="adminGrid__prince-card">
-            <FacultyAdvisorCard AdvisorData={facultyAdvisors[1]} />
-          </div>
+        {/* Faculty advisors and the facility admin, in the same card as the student team */}
+        <div className="membersGrid">
+          {adminMembers.map(m => (
+            <MemberCard key={m._id} member={m} />
+          ))}
         </div>
       </div>
 

@@ -1,56 +1,62 @@
-.card {
+/* Team member card: height follows the front's content, so cards in a grid
+   row stretch to the tallest one and their icon rows line up. The back is
+   laid over the front and scrolls a long bio instead of growing the card. */
+.memberCard {
   width: 100%;
-  max-width: 18rem;  /* Mobile base */
-  height: 24rem;
+  max-width: 20rem;
+  perspective: 1200px;
 }
-.Admins {
-  flex-direction: column;
+.memberCard__inner {
+  position: relative;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-@media (min-width: 640px) { /* sm breakpoint */
-  .card {
-    max-width: 19rem;
-    height: 25rem;
-  }
+.memberCard__inner.is-flipped {
+  transform: rotateY(180deg);
 }
-
-@media (min-width: 768px) { /* md breakpoint */
-  .card {
-    max-width: 20rem;
-    height: 26rem;
-  }
-  .Admins {
-    flex-direction: row;
-  }
+.memberCard__face {
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid #27272a;
+  border-radius: 1rem;
+  background: #09090b;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: border-color 0.3s;
 }
-
-@media (min-width: 1024px) { /* lg breakpoint */
-  .card {
-    max-width: 21rem;
-    height: 27rem;
-  }
+.memberCard:hover .memberCard__face {
+  border-color: #52525b;
 }
-
-@media (min-width: 1280px) { /* xl breakpoint */
-  .card {
-    max-width: 22rem;
-    height: 28rem;
-  }
+.memberCard__face--back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
 }
-  
-/* Custom scrollbar for member description overlay */
-.card ::-webkit-scrollbar {
+.memberCard__photo {
+  aspect-ratio: 8 / 9;
+}
+.memberCard__bio::-webkit-scrollbar {
   width: 4px;
 }
-.card ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-}
-.card ::-webkit-scrollbar-thumb {
+.memberCard__bio::-webkit-scrollbar-thumb {
   background: rgba(250, 204, 21, 0.4);
   border-radius: 4px;
 }
-.card ::-webkit-scrollbar-thumb:hover {
-  background: rgba(250, 204, 21, 0.7);
+@media (prefers-reduced-motion: reduce) {
+  .memberCard__inner {
+    transition: none;
+  }
+}
+
+.Admins {
+  flex-direction: column;
+}
+
+@media (min-width: 768px) { /* md breakpoint */
+  .Admins {
+    flex-direction: row;
+  }
 }
 
 

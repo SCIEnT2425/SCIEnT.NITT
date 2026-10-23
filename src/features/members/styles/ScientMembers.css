@@ -59,40 +59,6 @@
   }
 }
 
-/* ── SCIEnT Admin section layout ─────────────────────────────────────────── */
-
-/* Mobile: single-column stack */
-.adminGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  max-width: 64rem;
-  margin: 0 auto;
-}
-
-/* Row 2: Prince card — centred, full width on mobile */
-.adminGrid__prince {
-  display: flex;
-  justify-content: center;
-  max-width: 64rem;
-  margin: 1.5rem auto 0;
-}
-
-/* Wrapper that controls Prince card width */
-.adminGrid__prince-card {
-  width: 100%;
-}
-
-/* Tablet+: 2-col row 1, Prince at single-column width */
-@media (min-width: 768px) {
-  .adminGrid {
-    grid-template-columns: 1fr 1fr;
-  }
-  /* Match one column: 50% of container minus half the gap (1.5rem / 2) */
-  .adminGrid__prince-card {
-    width: calc(50% - 0.75rem);
-  }
-}
 /* Department tabs reuse the navbar's GooeyNav; let them wrap and centre on narrow screens */
 .teamTabs .gooey-nav-container nav {
   justify-content: center;
