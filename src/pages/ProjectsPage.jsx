@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Footer from "../components/footer";
 import ProjectCard from "../components/ProjectCard";
-import { MagicCardGroup } from "../components/MagicBento";
 import { optimizedImage } from "../utils/optimizedImage";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import "./ProjectsPage.css";
@@ -102,7 +101,7 @@ export default function ProjectsPage() {
         </div>
 
         {/* Projects by Year */}
-        <MagicCardGroup>
+        <>
         {Object.keys(groupedProjects)
           .sort((a, b) => b - a)
           .filter((year) => selectedYear === "ALL" || Number(year) === selectedYear)
@@ -135,7 +134,7 @@ export default function ProjectsPage() {
       </div>
     </div>
   ))}
-        </MagicCardGroup>
+        </>
 
 
         {projects.length === 0 && (
