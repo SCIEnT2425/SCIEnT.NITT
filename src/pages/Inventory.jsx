@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useRef, useMemo } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import "./Inventory.css";
 import Footer from "../components/footer";
-import bpclBanner from "../assets/bpcl-banner.jpg";
+import InventoryCard from "../components/InventoryCard";
+import ParticleText from "../components/ParticleText";
 
 const DEV_DUMMY_INVENTORY = [
   {
@@ -13,12 +14,16 @@ const DEV_DUMMY_INVENTORY = [
   }
 ];
 
+// Phones and narrow windows get a lighter particle title: the glow is the most
+// expensive part to draw, and touch screens have no hover to show it off
+const lightTitle =
+  typeof window !== "undefined" &&
+  window.matchMedia?.("(pointer: coarse), (max-width: 767px)").matches;
+
 export default function Inventory() {
   const [inventoryItems, setInventoryItems] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [expandedCardKey, setExpandedCardKey] = useState(null);
-  const cardRefs = useRef([]);
 
   useEffect(() => {
     fetch("/api/inventory")
@@ -86,55 +91,6 @@ export default function Inventory() {
     orderedGroupedItems[k] = groupedItems[k];
   });
 
-  // Add entrance animation after items load
-  useEffect(() => {
-    if (filteredItems.length > 0) {
-      cardRefs.current.forEach((card, index) => {
-        if (card) {
-          card.style.opacity = "0";
-          card.style.transform = "translateY(50px)";
-
-          setTimeout(() => {
-            card.style.opacity = "1";
-            card.style.transform = "translateY(0)";
-            card.classList.add("animate-in");
-          }, index * 150);
-        }
-      });
-    }
-  }, [filteredItems]);
-
-  // Handle card interactions
-  const handleCardMouseMove = (e, cardElement) => {
-    if (!window.matchMedia("(hover: hover)").matches) return;
-    cardElement.style.transform = "translateY(-10px)";
-  };
-
-  const handleCardMouseLeave = (cardElement) => {
-    cardElement.style.transform = "";
-  };
-
-  const handleCardClick = (e, cardElement, itemKey) => {
-    setExpandedCardKey((prev) => (prev === itemKey ? null : itemKey));
-
-    if (cardElement) {
-      const ripple = document.createElement("div");
-      const rect = cardElement.getBoundingClientRect();
-      const size = Math.max(rect.width, rect.height);
-      const x = e.clientX - rect.left - size / 2;
-      const y = e.clientY - rect.top - size / 2;
-
-      ripple.className = "ripple";
-      ripple.style.width = `${size}px`;
-      ripple.style.height = `${size}px`;
-      ripple.style.left = `${x}px`;
-      ripple.style.top = `${y}px`;
-
-      cardElement.appendChild(ripple);
-      setTimeout(() => ripple.remove(), 600);
-    }
-  };
-
   const handleClearSearch = () => {
     setSearchQuery("");
     setSelectedCategory("All");
@@ -143,7 +99,33 @@ export default function Inventory() {
   return (
     <>
       <div className="inventorypage ">
-        <h1 className="inventory-heading">Inventory</h1>
+        {/* Real heading for screen readers; the particle version is decorative */}
+        <h1 className="sr-only">Inventory</h1>
+        <div className="inventory-title" aria-hidden="true">
+          <ParticleText
+            text="INVENTORY"
+            color="#facc15"
+            highlightColor="#ffffff"
+            highlightMode="motion"
+            particleSize={2}
+            density={lightTitle ? 5 : 4}
+            shape="circle"
+            intro="gather"
+            scatter={180}
+            gatherDuration={1600}
+            stagger={420}
+            clickBurst
+            burstStrength={1}
+            pointerRepel={40}
+            repelRadius={120}
+            idleDrift={0}
+            trigger="hover"
+            fontSize="clamp(2.5rem, 9vw, 6rem)"
+            fontWeight={800}
+            fontFamily="inherit"
+            glow={!lightTitle}
+          />
+        </div>
 
         {/* Search & Filter Section */}
         <div className="inventory-search-section">
@@ -249,88 +231,23 @@ export default function Inventory() {
         {Object.keys(orderedGroupedItems).map((category, categoryIndex) => (
           <div key={categoryIndex} className="category-section">
             {/* Category Heading */}
-            <h1 className="category-title">{category}</h1>
+            <h2 className="category-title">{category}</h2>
 
             {/* Inventory Cards under this category */}
             <div className="mainbox">
-              {groupedItems[category].map((item, idx) => {
-                const globalIndex =
-                  Object.keys(groupedItems)
-                    .slice(0, categoryIndex)
-                    .reduce(
-                      (sum, cat) => sum + groupedItems[cat].length,
-                      0
-                    ) + idx;
-                const itemKey = item._id || `${category}-${idx}`;
-                const isExpanded = expandedCardKey === itemKey;
-
-                return (
-                  <div
-                    className={`inventorycard ${isExpanded ? "active" : ""}`}
-                    key={idx}
-                    ref={(el) => (cardRefs.current[globalIndex] = el)}
-                    onMouseMove={(e) =>
-                      handleCardMouseMove(e, cardRefs.current[globalIndex])
-                    }
-                    onMouseLeave={() =>
-                      handleCardMouseLeave(cardRefs.current[globalIndex])
-                    }
-                    onClick={(e) =>
-                      handleCardClick(e, cardRefs.current[globalIndex], itemKey)
-                    }
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        handleCardClick(e, cardRefs.current[globalIndex], itemKey);
-                      }
-                    }}
-                    role="button"
-                    tabIndex={0}
-                    style={{
-                      transition: "opacity 0.6s ease, transform 0.3s ease",
-                    }}
-                  >
-                    <div className="inventorybox">
-                      {item.poweredBy === "BPCL" && (
-                        <div className="bpcl-banner-strip">
-                          <img
-                            src={bpclBanner}
-                            alt="Powered by BPCL – Bharat Petroleum"
-                            className="bpcl-banner-img"
-                          />
-                        </div>
-                      )}
-                      <div className={`imagebox${item.poweredBy === "BPCL" ? " imagebox--bpcl" : ""}`}>
-                        <img src={item.image.url} alt={item.name} />
-                        {!isExpanded && (
-                          <div className="inventory-click-hint">
-                            Click for details
-                          </div>
-                        )}
-                      </div>
-                      <div className="inventcontentbox">
-                        <button
-                          type="button"
-                          className="inventory-close-btn"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setExpandedCardKey(null);
-                          }}
-                          aria-label="Close details"
-                        >
-                          ✕
-                        </button>
-                        <h2>{item.name}</h2>
-                        <h3>{item.category}</h3>
-                        <p>{item.description}</p>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+              {groupedItems[category].map((item, idx) => (
+                <InventoryCard key={item._id || `${category}-${idx}`} item={item} />
+              ))}
             </div>
           </div>
         ))}
+
+        {/* Most BPCL photos are licensed from Wikimedia Commons and need credit */}
+        {inventoryItems.some((item) => item.poweredBy === "BPCL") && (
+          <p className="inventory-credits">
+            <a href="/assets/inventory/bpcl/credits.html">Photo credits for BPCL-sponsored equipment</a>
+          </p>
+        )}
       </div>
       <Footer />
     </>
