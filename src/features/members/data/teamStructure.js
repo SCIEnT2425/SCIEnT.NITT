@@ -42,6 +42,44 @@ export const STAFF_ROLES = ['Faculty Advisor', 'Admin Executive'];
 export const ALL_ROLES = [...new Set([...Object.values(ROLES_BY_SUBTEAM).flat(), ...STAFF_ROLES])];
 export const ALL_SUBTEAMS = [CORE_SUBTEAM, ...DOMAINS];
 
+// ── Departments ──────────────────────────────────────────────────────────────
+
+// NIT Trichy departments, shown on every card by their short code
+export const DEPARTMENTS = [
+  { code: 'ARCH', name: 'Architecture' },
+  { code: 'CHEM', name: 'Chemical Engineering' },
+  { code: 'CIVIL', name: 'Civil Engineering' },
+  { code: 'CSE', name: 'Computer Science and Engineering' },
+  { code: 'ECE', name: 'Electronics and Communication Engineering' },
+  { code: 'EEE', name: 'Electrical and Electronics Engineering' },
+  { code: 'ICE', name: 'Instrumentation and Control Engineering' },
+  { code: 'MECH', name: 'Mechanical Engineering' },
+  { code: 'MME', name: 'Metallurgical and Materials Engineering' },
+  { code: 'PROD', name: 'Production Engineering' },
+  { code: 'BSc.BEd', name: 'B.Sc. B.Ed.' },
+];
+
+// Other spellings found in the data, keyed by lower-case letters only
+const DEPARTMENT_VARIANTS = {
+  computerscienceengineering: 'CSE',
+  computerscience: 'CSE',
+  chemical: 'CHEM',
+  civil: 'CIVIL',
+  mechanical: 'MECH',
+  production: 'PROD',
+  meta: 'MME',
+};
+
+const departmentKey = value => (value || '').toLowerCase().replace(/[^a-z]/g, '');
+const CODE_BY_KEY = {
+  ...DEPARTMENT_VARIANTS,
+  ...Object.fromEntries(DEPARTMENTS.flatMap(d => [[departmentKey(d.code), d.code], [departmentKey(d.name), d.code]])),
+};
+
+// Short code ('CSE') for a department's code, full name or variant; anything else
+// (faculty departments, 'SCIEnT Facility Operations') is returned trimmed
+export const departmentCode = value => CODE_BY_KEY[departmentKey(value)] || (value || '').trim();
+
 // ── Team years ('25-26' style) ───────────────────────────────────────────────
 
 const YEAR_RE = /^(\d{2})-(\d{2})$/;

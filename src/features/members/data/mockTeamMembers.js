@@ -43,7 +43,7 @@ export const MOCK_TEAM_MEMBERS = [
     "year": "24-25",
     "role": "Faculty Advisor",
     "subteam": null,
-    "Department": "Metallurgical and Materials Engineering",
+    "Department": "MME",
     "photoUrl": "https://www.nitt.edu/home/academics/departments/meta/faculty/prince/Prince200x238.jpg",
     "linkedin": "https://nitt.irins.org/profile/214573",
     "instagram": "",

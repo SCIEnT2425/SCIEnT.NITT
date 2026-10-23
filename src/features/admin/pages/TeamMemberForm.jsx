@@ -7,8 +7,8 @@ import { toast } from 'react-toastify';
 import MemberCard from '../../members/components/MemberCard';
 import HexagonColorPicker from '../../../components/HexagonColorPicker';
 import {
-  ROLES_BY_SUBTEAM, ALL_ROLES, ALL_SUBTEAMS, DOMAINS,
-  entryRole, teamYears, nextTeamYear, currentTeamYear,
+  ROLES_BY_SUBTEAM, ALL_ROLES, ALL_SUBTEAMS, DOMAINS, DEPARTMENTS,
+  entryRole, departmentCode, teamYears, nextTeamYear, currentTeamYear,
 } from '../../members/data/teamStructure';
 
 // Years offered in the form: every year that has members plus the one after
@@ -237,7 +237,7 @@ const TeamMemberForm = () => {
 
     setSaving(true);
     try {
-      const payload = { ...formData, photoUrl: finalPhotoUrl || null };
+      const payload = { ...formData, photoUrl: finalPhotoUrl || null, Department: departmentCode(formData.Department) };
       if (payload.subteam === '') payload.subteam = null;
       if (payload.order !== '') payload.order = Number(payload.order) || 0;
       if (payload.year === '') payload.year = null;
@@ -361,11 +361,17 @@ const TeamMemberForm = () => {
                 <input
                   type="text"
                   name="Department"
+                  list="department-codes"
                   value={formData.Department}
                   onChange={handleChange}
+                  onBlur={() => setFormData(prev => ({ ...prev, Department: departmentCode(prev.Department) }))}
                   className="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg focus:outline-none focus:border-yellow-400 text-white"
-                  placeholder="E.g., Computer Science"
+                  placeholder="E.g., CSE"
                 />
+                <datalist id="department-codes">
+                  {DEPARTMENTS.map(d => <option key={d.code} value={d.code}>{d.name}</option>)}
+                </datalist>
+                <p className="text-zinc-600 text-xs mt-1">Short code like CSE or ECE; full names are converted.</p>
               </div>
 
               {/* ── Year — existing team years plus the next one ── */}
@@ -568,7 +574,7 @@ const TeamMemberForm = () => {
             <div className="sticky top-8 w-full flex flex-col items-center p-6 bg-zinc-900 border border-zinc-800 rounded-xl space-y-4">
               <div className="text-center">
                 <span className="text-xs font-bold text-yellow-400 tracking-wider uppercase">Live Card Preview</span>
-                <p className="text-xs text-zinc-500">Hover or click to flip the card</p>
+                <p className="text-xs text-zinc-500">As it appears on the team page</p>
               </div>
 
               <div className="w-full flex justify-center py-4">
