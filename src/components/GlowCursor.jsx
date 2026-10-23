@@ -183,11 +183,19 @@ const GlowCursor = ({
     if (!container || !canvas) return;
 
     const initialConfig = propsRef.current;
-    const renderer = new Renderer({
-      canvas,
-      alpha: true,
-      dpr: Math.min(window.devicePixelRatio || 1, initialConfig.maxDevicePixelRatio)
-    });
+    let renderer;
+    try {
+      renderer = new Renderer({
+        canvas,
+        alpha: true,
+        dpr: Math.min(window.devicePixelRatio || 1, initialConfig.maxDevicePixelRatio)
+      });
+    } catch (err) {
+      // No WebGL (disabled, blocklisted GPU, some VMs and headless browsers): ogl throws
+      // when it gets no context, which would unmount the whole site. Skip the trail instead.
+      console.warn('GlowCursor disabled: WebGL is unavailable', err);
+      return undefined;
+    }
     const gl = renderer.gl;
     gl.clearColor(0, 0, 0, 0);
 
