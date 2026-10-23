@@ -6,75 +6,18 @@ import { ArrowLeft, Save, Loader2, Upload, X, ImageIcon } from 'lucide-react';
 import { toast } from 'react-toastify';
 import MemberCard from '../../members/components/MemberCard';
 import HexagonColorPicker from '../../../components/HexagonColorPicker';
+import {
+  ROLES_BY_SUBTEAM, ALL_ROLES, ALL_SUBTEAMS, DOMAINS,
+  entryRole, teamYears, nextTeamYear, currentTeamYear,
+} from '../../members/data/teamStructure';
 
-// Standard SCIEnT team years. Add new years here as needed.
-const SCIENT_YEARS = ['26-27', '25-26', '24-25'];
-
-// ── Roles per sub-team (used when adding/editing a member) ──────────────────
-// NOTE: These must exactly match the enum values in server/models/TeamMember.js
-const ROLES_BY_SUBTEAM = {
-  Cores: [
-    'External Affairs Executive',
-    'Internal Affairs Executive',
-    'Technical Executive',
-    'Facility Executive',
-    'Project Operations Executive',
-    'Core',
-    'Ex-Core',
-  ],
-  'Project Management': [
-    'Senior Project Manager',
-    'Project Manager',
-    'Senior Manager',
-  ],
-  'Corporate Communications': [
-    'Senior Manager',
-    'Manager',
-    'Deputy Manager',
-    'Ex-Manager',
-  ],
-  DevOps: [
-    'Senior Manager',
-    'Manager',
-    'Deputy Manager',
-    'Ex-Manager',
-  ],
-  Creatives: [
-    'Senior Manager',
-    'Manager',
-    'Deputy Manager',
-    'Ex-Manager',
-  ],
+// Years offered in the form: every year that has members plus the one after
+// the latest, newest first, so next year's team can be started from here
+const yearOptions = (members) => {
+  const years = teamYears(members);
+  const next = years.length ? nextTeamYear(years[years.length - 1]) : currentTeamYear();
+  return [next, ...years.reverse()];
 };
-
-// Fallback — shown when no sub-team is selected yet
-const ALL_ADD_ROLES = [
-  'Senior Manager',
-  'Manager',
-  'Deputy Manager',
-  'Senior Project Manager',
-  'Project Manager',
-  'External Affairs Executive',
-  'Internal Affairs Executive',
-  'Technical Executive',
-  'Facility Executive',
-  'Project Operations Executive',
-  'Faculty Advisor',
-  'Admin Executive',
-  'Core',
-  'Ex-Core',
-  'Ex-Manager',
-];
-
-// Sub-team options for the add/edit form
-// NOTE: These must exactly match the enum values in server/models/TeamMember.js
-const ADD_SUBTEAMS = [
-  'Cores',
-  'Project Management',
-  'DevOps',
-  'Corporate Communications',
-  'Creatives',
-];
 
 const TeamMemberForm = () => {
   const { id } = useParams();
@@ -106,10 +49,24 @@ const TeamMemberForm = () => {
     cardColor: '#facc15'
   });
 
+  const [years, setYears] = useState([]);
+
   // Dynamically compute which roles are available based on the currently selected sub-team.
   const availableRoles = formData.subteam && ROLES_BY_SUBTEAM[formData.subteam]
     ? ROLES_BY_SUBTEAM[formData.subteam]
-    : ALL_ADD_ROLES;
+    : ALL_ROLES;
+
+  // Load the existing team years; a new member defaults to the latest one
+  useEffect(() => {
+    axios.get(`${API_BASE}/api/team/all`)
+      .then(res => {
+        const members = res.data.data || [];
+        setYears(yearOptions(members));
+        const latest = teamYears(members).pop();
+        if (!isEditMode && latest) setFormData(prev => (prev.year ? prev : { ...prev, year: latest }));
+      })
+      .catch(() => setYears(yearOptions([])));
+  }, [API_BASE, isEditMode]);
 
   useEffect(() => {
     if (isEditMode) {
@@ -147,11 +104,15 @@ const TeamMemberForm = () => {
     const { name, value } = e.target;
     setFormData(prev => {
       const updated = { ...prev, [name]: value };
-      // When sub-team changes, reset role if it's no longer valid for the new sub-team
+      // When sub-team changes, reset role if it's no longer valid for the new sub-team,
+      // and start new domain members at the role people join that domain with
       if (name === 'subteam') {
-        const validRoles = ROLES_BY_SUBTEAM[value] || ALL_ADD_ROLES;
+        const validRoles = ROLES_BY_SUBTEAM[value] || ALL_ROLES;
         if (updated.role && !validRoles.includes(updated.role)) {
           updated.role = '';
+        }
+        if (!updated.role && DOMAINS.includes(value)) {
+          updated.role = entryRole(value);
         }
       }
       return updated;
@@ -366,7 +327,7 @@ const TeamMemberForm = () => {
                   className="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg focus:outline-none focus:border-yellow-400 text-white"
                 >
                   <option value="">— Select Sub-team —</option>
-                  {ADD_SUBTEAMS.map(s => <option key={s} value={s}>{s}</option>)}
+                  {ALL_SUBTEAMS.map(s => <option key={s} value={s}>{s}</option>)}
                 </select>
                 <p className="text-zinc-600 text-xs mt-1">Sub-team determines which roles are available below.</p>
               </div>
@@ -386,6 +347,11 @@ const TeamMemberForm = () => {
                 {formData.subteam && ROLES_BY_SUBTEAM[formData.subteam] && (
                   <p className="text-zinc-600 text-xs mt-1">
                     Showing roles valid for <span className="text-yellow-400">{formData.subteam}</span>.
+                    {DOMAINS.includes(formData.subteam) && (
+                      entryRole(formData.subteam) === 'Deputy Manager'
+                        ? ' New members join as Deputy Manager; lateral inductees join directly as Manager.'
+                        : ' New members join as Manager.'
+                    )}
                   </p>
                 )}
               </div>
@@ -402,7 +368,7 @@ const TeamMemberForm = () => {
                 />
               </div>
 
-              {/* ── Year — now a dropdown with standard SCIEnT team years ── */}
+              {/* ── Year — existing team years plus the next one ── */}
               <div>
                 <label className="block text-sm font-medium text-zinc-300 mb-1">
                   SCIEnT Team Year
@@ -413,16 +379,18 @@ const TeamMemberForm = () => {
                   onChange={handleChange}
                   className="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded-lg focus:outline-none focus:border-yellow-400 text-white"
                 >
-                  <option value="">— Select Year —</option>
-                  {SCIENT_YEARS.map(y => (
+                  <option value="">No year (faculty / admin)</option>
+                  {years.map(y => (
                     <option key={y} value={y}>Team of {y}</option>
                   ))}
-                  {/* If existing member has a non-standard year value, show it so it isn't lost */}
-                  {formData.year && !SCIENT_YEARS.includes(formData.year) && (
-                    <option value={formData.year}>{formData.year} (legacy)</option>
+                  {/* Keep the member's current year selectable while the list loads */}
+                  {formData.year && !years.includes(formData.year) && (
+                    <option value={formData.year}>Team of {formData.year}</option>
                   )}
                 </select>
-                <p className="text-zinc-600 text-xs mt-1">Which year's team does this member belong to?</p>
+                <p className="text-zinc-600 text-xs mt-1">
+                  Which year's team does this member belong to? Pick the newest year to start next year's team.
+                </p>
               </div>
 
               <div>

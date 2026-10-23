@@ -1,5 +1,11 @@
 const mongoose = require("mongoose");
 
+const isTeamYear = (year) => {
+  if (year == null) return true;
+  const m = /^(\d{2})-(\d{2})$/.exec(year);
+  return !!m && Number(m[2]) === (Number(m[1]) + 1) % 100;
+};
+
 const teamMemberSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -73,10 +79,15 @@ const teamMemberSchema = new mongoose.Schema({
     default: ""
   },
 
+  // Team year such as "26-27" (null for faculty/admin). Any consecutive pair is
+  // accepted so a new year's team can be added from the admin portal.
   year: {
     type: String,
-    enum: ["24-25", "25-26", "26-27", null],
-    default: null
+    default: null,
+    validate: {
+      validator: isTeamYear,
+      message: props => `"${props.value}" is not a team year like "26-27"`
+    }
   },
 
   description: {
@@ -109,3 +120,4 @@ teamMemberSchema.index({ year: 1, subteam: 1, order: 1 });
 const TeamMember = mongoose.model("TeamMember", teamMemberSchema);
 
 module.exports = TeamMember;
+module.exports.isTeamYear = isTeamYear;

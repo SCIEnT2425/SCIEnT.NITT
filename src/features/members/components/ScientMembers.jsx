@@ -6,11 +6,10 @@ import MemberCard from './MemberCard';
 import FacultyAdvisorCard from './FacultyAdvisor.jsx';
 import FacilityAdminCard from './FacilityAdmin.jsx';
 import { MOCK_TEAM_MEMBERS, MOCK_PRINCE_ADVISOR } from '../data/mockTeamMembers';
+import { teamYears } from '../data/teamStructure';
 import '../styles/ScientMembers.css';
 
 // ─── Constants ───────────────────────────────────────────────────────────────
-
-const SCIENT_YEARS = ['24-25', '25-26', '26-27'];
 
 // id null = complete team view
 const CATEGORIES = [
@@ -71,36 +70,20 @@ const getCoreMembers = (all, year) =>
     .filter(m => m.year === year && isCoreMember(m))
     .sort((a, b) => (a.order || 0) - (b.order || 0));
 
-// Filter Senior Managers across all depts (includes Project Managers)
-const getSeniorManagersAll = (all, year) =>
-  all
-    .filter(m => {
-      if (m.year !== year) return false;
-      if (isCoreMember(m)) return false;
-      return m.role === 'Senior Manager' || m.role === 'Project Manager';
-    })
-    .sort((a, b) => (a.order || 0) - (b.order || 0));
+// Section a member's role is listed under. Senior Manager only exists from
+// 26-27, so Project Managers (25-26 and earlier) sit with the Managers.
+const sectionRole = m => (m.role === 'Project Manager' ? 'Manager' : m.role);
 
 // Filter by role across all non-Core depts
 const getRoleAll = (all, year, role) =>
   all
-    .filter(m => m.year === year && !isCoreMember(m) && m.role === role)
-    .sort((a, b) => (a.order || 0) - (b.order || 0));
-
-// Filter Senior Managers for a specific department
-const getSeniorManagersDept = (all, year, dept) =>
-  all
-    .filter(m => {
-      if (m.year !== year) return false;
-      if (normSubteam(m.subteam) !== dept) return false;
-      return m.role === 'Senior Manager' || m.role === 'Project Manager';
-    })
+    .filter(m => m.year === year && !isCoreMember(m) && sectionRole(m) === role)
     .sort((a, b) => (a.order || 0) - (b.order || 0));
 
 // Filter by specific role in a specific department
 const getRoleDept = (all, year, dept, role) =>
   all
-    .filter(m => m.year === year && normSubteam(m.subteam) === dept && m.role === role)
+    .filter(m => m.year === year && normSubteam(m.subteam) === dept && sectionRole(m) === role)
     .sort((a, b) => (a.order || 0) - (b.order || 0));
 
 // ─── RoleSection sub-component ───────────────────────────────────────────────
@@ -128,8 +111,9 @@ const RoleSection = ({ title, members }) => {
 // ─── Main Component ──────────────────────────────────────────────────────────
 
 const SCIentMembers = () => {
-  // 26-27 selected initially; no category selected initially
-  const [selectedYear, setSelectedYear] = useState('26-27');
+  // Latest team year selected initially (null until the visitor picks one);
+  // no category selected initially
+  const [pickedYear, setPickedYear] = useState(null);
   const [selectedDept, setSelectedDept] = useState(null); // null = show complete team
   const [isYearDropdownOpen, setIsYearDropdownOpen] = useState(false);
   const yearDropdownRef = useRef(null);
@@ -224,7 +208,7 @@ const SCIentMembers = () => {
 
   // ── Handlers ───────────────────────────────────────────────────────────────
   const handleYearClick = year => {
-    setSelectedYear(year);
+    setPickedYear(year);
   };
 
   const handleDeptClick = dept => {
@@ -241,6 +225,10 @@ const SCIentMembers = () => {
   }
 
   // ── Derived view state ─────────────────────────────────────────────────────
+  // Years come from the members themselves, so a new year added in the admin
+  // portal shows up here without a code change
+  const years = teamYears(allMembers);
+  const selectedYear = years.includes(pickedYear) ? pickedYear : years[years.length - 1];
   const showCompleteTeam = selectedDept === null;
 
   return (
@@ -328,7 +316,7 @@ const SCIentMembers = () => {
 
             {isYearDropdownOpen && (
               <div className="absolute left-1/2 -translate-x-1/2 mt-2 w-56 bg-zinc-950 border-2 border-[#facc15]/60 rounded-2xl shadow-2xl shadow-black/80 py-2 z-50 backdrop-blur-xl overflow-hidden animate-in fade-in duration-150">
-                {SCIENT_YEARS.map(year => {
+                {years.map(year => {
                   const isSelected = selectedYear === year;
                   return (
                     <button
@@ -379,7 +367,7 @@ const SCIentMembers = () => {
           {/* ── COMPLETE TEAM VIEW (no dept selected) ──────────────────────── */}
           {showCompleteTeam && (() => {
             const coreMembers = getCoreMembers(allMembers, selectedYear);
-            const seniorManagers = getSeniorManagersAll(allMembers, selectedYear);
+            const seniorManagers = getRoleAll(allMembers, selectedYear, 'Senior Manager');
             const managers = getRoleAll(allMembers, selectedYear, 'Manager');
             const deputies = getRoleAll(allMembers, selectedYear, 'Deputy Manager');
             const anyMembers = coreMembers.length + seniorManagers.length + managers.length + deputies.length > 0;
@@ -404,7 +392,7 @@ const SCIentMembers = () => {
                   </section>
                 )}
 
-                {/* Senior Managers (includes Project Managers) */}
+                {/* Senior Managers */}
                 <RoleSection title="Senior Managers" members={seniorManagers} />
                 {/* Managers */}
                 <RoleSection title="Managers" members={managers} />
@@ -456,7 +444,7 @@ const SCIentMembers = () => {
 
             // Project Management / Corporate Communications / DevOps / Creatives:
             // Senior Managers, Managers, Deputy Managers
-            const seniors = getSeniorManagersDept(allMembers, selectedYear, selectedDept);
+            const seniors = getRoleDept(allMembers, selectedYear, selectedDept, 'Senior Manager');
             const managers = getRoleDept(allMembers, selectedYear, selectedDept, 'Manager');
             const deputies = getRoleDept(allMembers, selectedYear, selectedDept, 'Deputy Manager');
             const anyMems = seniors.length + managers.length + deputies.length > 0;
