@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useMemo } from "react";
 import "./Inventory.css";
 import Footer from "../components/footer";
-import bpclBanner from "../assets/bpcl-banner.png";
+import bpclBanner from "../assets/bpcl-banner.jpg";
 
 const DEV_DUMMY_INVENTORY = [
   {

@@ -96,7 +96,7 @@ const Footer = () => {
       <div className="footer-divider"></div>
 
       <div className="footer-bottom">
-        <p>&copy; 2025 SCIEnT NITT. All rights reserved.</p>
+        <p>&copy; 2026 SCIEnT NITT. All rights reserved.</p>
         <p>
           Made with <span className="heart">♥</span> by SCIEnT NITT
         </p>

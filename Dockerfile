@@ -13,7 +13,9 @@ ENV CI=false
 
 RUN npm run build
 
-FROM nginx:alpine
+# Debian-based and pinned (same as the public proxy): newer nginx:alpine images
+# crash on the server's CentOS 7 kernel (3.10) with pwrite() "Operation not permitted"
+FROM nginx:1.27.2
 
 COPY --from=build /app/build /usr/share/nginx/html
 

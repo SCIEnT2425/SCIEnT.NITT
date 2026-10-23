@@ -1,5 +1,5 @@
 import React from "react";
-import a from "../assets/a.png";
+import a from "../assets/a.jpg";
 import b from "../assets/b.jpg";
 import "./Home.css";
 import { MagicCardGroup, MagicCard } from "./MagicBento";

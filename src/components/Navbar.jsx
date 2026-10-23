@@ -17,7 +17,7 @@ const NAV_ITEMS = [
         label: 'Initiatives',
         key: 'initiatives',
         children: [
-            { label: "Inventive '25", href: '/inventive', match: ['/inventiveForm'] },
+            { label: "Inventive '26", href: '/inventive', match: ['/inventiveForm'] },
             { label: "Contrive '25", href: '/contrive', match: ['/contriveForm'] },
         ],
     },

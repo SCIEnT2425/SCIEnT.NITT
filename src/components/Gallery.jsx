@@ -9,7 +9,7 @@ import I4 from "../assets/Gallery/Facility/FC4.jpg";
 import I5 from "../assets/Gallery/Facility/FC5.jpeg";
 import I6 from "../assets/Gallery/Facility/FC6.jpg";
 
-import Open_day from "../assets/Gallery/Openday_gallery.png";
+import Open_day from "../assets/Gallery/Openday_gallery.jpg";
 import Esummit from "../assets/Gallery/ES_gallery.jpeg";
 import Open_house from "../assets/Gallery/openhouse_gallery.jpeg";
 import Tranfinite from "../assets/Gallery/Transfinitte/TF1.jpg";
