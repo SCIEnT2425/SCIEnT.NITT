@@ -1,0 +1,13 @@
+# Files left out of `gcloud run deploy --source server` (the backend upload).
+# Secrets reach Cloud Run as environment variables, never as files.
+.gcloudignore
+.git
+.env
+.env.*
+!.env.example
+cloudrun.env.yaml
+node_modules/
+npm-debug.log
+*.log
+data/backup/
+resized-photo-urls.json
