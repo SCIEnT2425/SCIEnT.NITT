@@ -1,14 +1,17 @@
 /**
  * seedBpclTools.js
  * ─────────────────────────────────────────────────────────────────────────────
- * One-time idempotent script to:
- *   1. Upload BPCL tool images to Cloudinary (folder: Inventory_BPCL)
- *   2. Insert Tool documents into MongoDB with poweredBy: "BPCL"
+ * Idempotent sync of the BPCL-sponsored tools (poweredBy: "BPCL"):
+ *   - inserts any tool whose name is not in the DB yet
+ *   - replaces the old stock placeholder photo of an existing BPCL tool with
+ *     its real photo; an image uploaded through the admin is left alone
+ *
+ * Photos ship with the frontend in public/assets/inventory/bpcl/ (credits:
+ * public/assets/inventory/bpcl/credits.html), so imageUrl is a site path.
  *
  * Usage (from repo root):
  *   cd server && node scripts/seedBpclTools.js
- *
- * Re-run safe: skips any tool whose name already exists in the DB.
+ * Also run by POST /api/inventory/seed-bpcl (routes/bpclSeedRoutes.js).
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
@@ -16,18 +19,10 @@ const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '../.env') });
 
 const mongoose = require('mongoose');
-const cloudinary = require('cloudinary').v2;
 const Tool = require('../models/Tool');
 
-// ── Cloudinary config ────────────────────────────────────────────────────────
-cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key:    process.env.CLOUD_API_KEY,
-  api_secret: process.env.CLOUD_API_SECRET,
-});
-
 // ── BPCL Tool definitions ────────────────────────────────────────────────────
-// Each entry: name, category, description, quantity, imageUrl (source to upload)
+// Each entry: name, category, description, quantity, imageUrl (site path of its photo)
 const BPCL_TOOLS = [
   // ── i. Machines - CAPEX ──────────────────────────────────────────────────
   {
@@ -35,63 +30,63 @@ const BPCL_TOOLS = [
     category: 'BPCL Sponsored',
     description: 'Precision computer-controlled lathe for turning, facing, and threading metal workpieces with high accuracy. Cost: Rs.8,85,000.',
     quantity: 1,
-    imageUrl: 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/cnc-lathe.jpg',
   },
   {
     name: 'CNC Laser Cutter',
     category: 'BPCL Sponsored',
     description: 'High-power CNC laser cutter for precision cutting and engraving of metals, acrylic, wood, and composites. Cost: Rs.7,67,000.',
     quantity: 1,
-    imageUrl: 'https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/cnc-laser-cutter.jpg',
   },
   {
     name: 'Vertical Drilling Machine',
     category: 'BPCL Sponsored',
     description: 'Industrial vertical drill press for accurate hole drilling in metal, wood, and plastic with variable speed control. Cost: Rs.59,157.',
     quantity: 1,
-    imageUrl: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/vertical-drilling-machine.jpg',
   },
   {
     name: 'Spot Welding Machine',
     category: 'BPCL Sponsored',
     description: 'Resistance spot welder for joining sheet metal components quickly and cleanly without filler material. Cost: Rs.44,999.',
     quantity: 1,
-    imageUrl: 'https://images.unsplash.com/photo-1581093806997-124204d9fa9d?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/spot-welding-machine.jpg',
   },
   {
     name: 'Sheet Metal Bender',
     category: 'BPCL Sponsored',
     description: 'Precision sheet metal bending machine (press brake) for forming accurate angles and channels in metal sheets. Cost: Rs.35,999.',
     quantity: 1,
-    imageUrl: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/sheet-metal-bender.jpg',
   },
   {
     name: 'Bambu Lab X1 Carbon Combo 3D Printer',
     category: 'BPCL Sponsored',
     description: 'Professional multi-material 3D printer with carbon-fibre reinforced frame, 16-colour support, and 20,000 mm/s2 acceleration for ultra-fast prototyping. Cost: Rs.1,82,000.',
     quantity: 1,
-    imageUrl: 'https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/bambu-x1-carbon.jpg',
   },
   {
     name: '3D Scanner',
     category: 'BPCL Sponsored',
     description: 'High-resolution 3D scanner for reverse engineering, quality inspection, and digitising physical objects into CAD models. Cost: Rs.1,88,800.',
     quantity: 1,
-    imageUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/3d-scanner.jpg',
   },
   {
     name: 'Pipe Bending Machine',
     category: 'BPCL Sponsored',
     description: 'Hydraulic pipe bending machine for forming precise bends in metal tubing for structural and fluid-system applications. Cost: Rs.75,000.',
     quantity: 1,
-    imageUrl: 'https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/pipe-bending-machine.jpg',
   },
   {
     name: 'Chop Saw - Boschcut Off Machine 14 inch',
     category: 'BPCL Sponsored',
     description: '14-inch abrasive chop saw for rapid, clean cross-cuts through steel bars, pipes, and profiles. Cost: Rs.14,804 each.',
     quantity: 2,
-    imageUrl: 'https://images.unsplash.com/photo-1572981779307-38b8cabb2407?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/chop-saw.jpg',
   },
 
   // ── ii. High-Speed Processors - CAPEX ───────────────────────────────────
@@ -100,49 +95,49 @@ const BPCL_TOOLS = [
     category: 'BPCL Sponsored',
     description: 'NVIDIA Jetson Orin Nano - edge AI module with 1024-core Ampere GPU for real-time vision, robotics, and autonomous systems. Cost: Rs.53,231.',
     quantity: 1,
-    imageUrl: 'https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/jetson-orin-nano.jpg',
   },
   {
     name: 'Intel RealSense Depth Camera',
     category: 'BPCL Sponsored',
     description: 'Intel RealSense D-series depth camera for 3D perception, obstacle avoidance, and SLAM in robotics applications. Cost: Rs.31,999 each.',
     quantity: 2,
-    imageUrl: 'https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/intel-realsense.jpg',
   },
   {
     name: 'NVIDIA GeForce RTX 3090',
     category: 'BPCL Sponsored',
     description: '24 GB VRAM flagship GPU for deep learning model training, simulation rendering, and GPU-accelerated compute. Cost: Rs.2,07,999 each.',
     quantity: 2,
-    imageUrl: 'https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/rtx-3090.jpg',
   },
   {
     name: 'AMD Ryzen 5600x Processor',
     category: 'BPCL Sponsored',
     description: '6-core, 12-thread Zen 3 desktop processor for high-performance simulation workstations and embedded compute nodes. Cost: Rs.14,890 each.',
     quantity: 2,
-    imageUrl: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/ryzen-5600x.jpg',
   },
   {
     name: 'BeagleBone Black Development Board',
     category: 'BPCL Sponsored',
     description: 'Open-source single-board computer with dual-core PRU subsystem for real-time I/O control in robotics and automation projects. Cost: Rs.5,899 each.',
     quantity: 4,
-    imageUrl: 'https://images.unsplash.com/photo-1563770660941-20978e870e26?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/beaglebone-black.jpg',
   },
   {
     name: 'Artix FPGA BASYS3 for Vivado',
     category: 'BPCL Sponsored',
     description: 'Xilinx Artix-7 FPGA development board for digital design, HDL prototyping, and custom hardware acceleration experiments. Cost: Rs.17,999.',
     quantity: 1,
-    imageUrl: 'https://images.unsplash.com/photo-1597852074816-d933c7d2b988?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/basys3.jpg',
   },
   {
     name: 'Precision 3260 Compact Workstation',
     category: 'BPCL Sponsored',
     description: 'Dell Precision 3260 mini-workstation for CAD, simulation, and engineering compute tasks in a compact form factor. Cost: Rs.99,370 each.',
     quantity: 5,
-    imageUrl: 'https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/dell-precision-3260.jpg',
   },
 
   // ── iii. Equipment - CAPEX ───────────────────────────────────────────────
@@ -151,42 +146,42 @@ const BPCL_TOOLS = [
     category: 'BPCL Sponsored',
     description: 'DJI Mini 3 Pro with Fly More Kit - sub-250g drone featuring 4K/60fps camera, obstacle sensing, and extended-range controller for aerial surveys. Cost: Rs.1,06,374 each.',
     quantity: 2,
-    imageUrl: 'https://images.unsplash.com/photo-1506947411487-a56738267384?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/dji-mini-3-pro.jpg',
   },
   {
     name: 'Hot Air Blower Gun',
     category: 'BPCL Sponsored',
     description: 'Industrial hot air blower (heat gun) for SMD rework, heat-shrink tubing, and plastic forming in electronics assembly. Cost: Rs.21,500 each.',
     quantity: 2,
-    imageUrl: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/hot-air-gun.jpg',
   },
   {
     name: 'Vacuum Pump',
     category: 'BPCL Sponsored',
     description: 'High-vacuum rotary vane pump for laboratory vacuum systems, composite layup bagging, and vacuum-assisted resin infusion. Cost: Rs.3,400 each.',
     quantity: 2,
-    imageUrl: 'https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/vacuum-pump.jpg',
   },
   {
     name: 'Oscilloscope - RIGOL DS1054Z',
     category: 'BPCL Sponsored',
     description: 'RIGOL DS1054Z 4-channel, 50 MHz digital oscilloscope with 1 GSa/s sample rate for electronics debugging and signal analysis. Cost: Rs.39,990 each.',
     quantity: 2,
-    imageUrl: 'https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/rigol-ds1054z.jpg',
   },
   {
     name: 'Swarm Robotics System',
     category: 'BPCL Sponsored',
     description: 'Complete swarm robotics platform including multiple drones, ground control station, and flight controller software for autonomous multi-agent research. Cost: Rs.6,50,000.',
     quantity: 1,
-    imageUrl: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/swarm-robotics.jpg',
   },
   {
     name: 'Adjustable Power Supply',
     category: 'BPCL Sponsored',
     description: 'Bench DC power supply with adjustable voltage and dual current ranges (>5A and <5A) for powering and testing electronic circuits. Cost: Rs.34,987.',
     quantity: 1,
-    imageUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/power-supply.jpg',
   },
 
   // ── Sub-Project 2: TechClubs - Select Lab Instruments ───────────────────
@@ -195,23 +190,58 @@ const BPCL_TOOLS = [
     category: 'BPCL Sponsored',
     description: 'Laboratory homogenizer for mixing, emulsifying, and dispersing biological and chemical samples in biodegradable films and coatings research. Cost: Rs.1,94,051.',
     quantity: 1,
-    imageUrl: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/homogenizer.jpg',
   },
   {
     name: 'Refractometer',
     category: 'BPCL Sponsored',
     description: 'Precision optical refractometer for measuring the refractive index of liquids and thin films in materials characterisation experiments. Cost: Rs.11,42,040.',
     quantity: 1,
-    imageUrl: 'https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/refractometer.jpg',
   },
   {
     name: 'Humidity Chamber',
     category: 'BPCL Sponsored',
     description: 'Programmable environmental test chamber for controlled humidity and temperature testing of materials and electronic assemblies. Cost: Rs.3,19,780.',
     quantity: 1,
-    imageUrl: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/assets/inventory/bpcl/humidity-chamber.jpg',
   },
 ];
+
+// The stock placeholder photos the first seed used: Unsplash links, and the
+// copies of them uploaded to Cloudinary's Inventory_BPCL folder
+const isPlaceholderImage = (image = {}) =>
+  !image.url ||
+  image.url.includes('images.unsplash.com') ||
+  (image.filename || '').startsWith('Inventory_BPCL/');
+
+// Inserts missing BPCL tools and swaps placeholder photos for the real ones.
+// Returns { inserted, updated, unchanged, details }.
+async function syncBpclTools() {
+  const results = { inserted: 0, updated: 0, unchanged: 0, details: [] };
+
+  for (const { imageUrl, ...tool } of BPCL_TOOLS) {
+    const image = { url: imageUrl, filename: '' };
+    // Match on poweredBy too: a regular tool can share a BPCL tool's name
+    // (both have a "Vertical Drilling Machine")
+    const existing = await Tool.findOne({ name: tool.name, poweredBy: 'BPCL' });
+
+    if (!existing) {
+      await Tool.create({ ...tool, image, poweredBy: 'BPCL' });
+      results.inserted++;
+      results.details.push({ name: tool.name, status: 'inserted' });
+    } else if (existing.image?.url !== imageUrl && isPlaceholderImage(existing.image)) {
+      existing.image = image;
+      await existing.save();
+      results.updated++;
+      results.details.push({ name: tool.name, status: 'photo updated' });
+    } else {
+      results.unchanged++;
+      results.details.push({ name: tool.name, status: 'unchanged' });
+    }
+  }
+  return results;
+}
 
 // ── Main ─────────────────────────────────────────────────────────────────────
 async function main() {
@@ -220,58 +250,16 @@ async function main() {
   await mongoose.connect(process.env.MONGO_URI_ATLAS || process.env.MONGO_URI);
   console.log('Connected.\n');
 
-  let uploaded = 0;
-  let skipped  = 0;
-  let failed   = 0;
-
-  for (const tool of BPCL_TOOLS) {
-    // Idempotency check
-    const existing = await Tool.findOne({ name: tool.name });
-    if (existing) {
-      console.log(`SKIP (already in DB): ${tool.name}`);
-      skipped++;
-      continue;
-    }
-
-    try {
-      console.log(`Uploading image for: ${tool.name}`);
-      const result = await cloudinary.uploader.upload(tool.imageUrl, {
-        folder: 'Inventory_BPCL',
-        transformation: [
-          { width: 800, height: 800, crop: 'limit', quality: 'auto', fetch_format: 'auto' },
-        ],
-        resource_type: 'image',
-      });
-
-      const doc = await Tool.create({
-        name:        tool.name,
-        category:    tool.category,
-        description: tool.description,
-        quantity:    tool.quantity,
-        image: {
-          url:      result.secure_url,
-          filename: result.public_id,
-        },
-        poweredBy: 'BPCL',
-      });
-
-      console.log(`  OK: ${doc.name}`);
-      console.log(`      Cloudinary: ${result.secure_url}\n`);
-      uploaded++;
-    } catch (err) {
-      console.error(`  FAILED for "${tool.name}": ${err.message}\n`);
-      failed++;
-    }
-  }
+  const { inserted, updated, unchanged, details } = await syncBpclTools();
+  details.forEach(d => console.log(`${d.status.padEnd(14)} ${d.name}`));
 
   console.log('-----------------------------------------');
-  console.log(`Uploaded & inserted : ${uploaded}`);
-  console.log(`Skipped (duplicate) : ${skipped}`);
-  console.log(`Failed              : ${failed}`);
+  console.log(`Inserted      : ${inserted}`);
+  console.log(`Photo updated : ${updated}`);
+  console.log(`Unchanged     : ${unchanged}`);
   console.log('-----------------------------------------');
 
   await mongoose.disconnect();
-  process.exit(failed > 0 ? 1 : 0);
 }
 
 if (require.main === module) {
@@ -281,4 +269,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { BPCL_TOOLS };
+module.exports = { BPCL_TOOLS, syncBpclTools };
