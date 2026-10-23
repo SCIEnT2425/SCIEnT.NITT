@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
-import { Plus, Edit, Trash2, Search, LogOut, Users, Loader2 } from 'lucide-react';
+import { Plus, Edit, Trash2, Search, LogOut, Users, Loader2, CalendarPlus } from 'lucide-react';
 import { toast } from 'react-toastify';
+import { ALL_ROLES, ALL_SUBTEAMS, teamYears } from '../../members/data/teamStructure';
 
 const TeamDashboard = () => {
   const [members, setMembers] = useState([]);
@@ -63,34 +64,9 @@ const TeamDashboard = () => {
     }
   };
 
-  // ─── Filter constants (shown in search/filter dropdowns only) ────────────────
-  const FILTER_ROLES = [
-    'Faculty Advisor',
-    'Core',
-    'Ex-Core',
-    'Senior Manager',
-    'Manager',
-    'Deputy Manager',
-    'Ex-Manager',
-    'Senior Project Manager',
-    'Project Manager',
-    'Admin Executive',
-    'Technical Executive',
-    'Facility Executive',
-    'External Affairs Executive',
-    'Internal Affairs Executive',
-    'Project Operations Executive',
-  ];
-
-  const FILTER_SUBTEAMS = [
-    'Cores',
-    'Project Management',
-    'DevOps',
-    'Corporate Communications',
-    'Creatives',
-  ];
-
-  const SCIENT_YEARS = ['26-27', '25-26', '24-25'];
+  // ─── Filter options (shown in search/filter dropdowns only) ──────────────────
+  // Years are taken from the members, newest first
+  const SCIENT_YEARS = teamYears(members).reverse();
 
   // ─── Filter logic ─────────────────────────────────────────────────────────────
   const filteredMembers = members.filter(member => {
@@ -126,6 +102,13 @@ const TeamDashboard = () => {
           >
             <Plus className="w-5 h-5" />
             Add Member
+          </Link>
+          <Link
+            to="/admin/team/new-year"
+            className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-zinc-900 hover:bg-zinc-800 text-yellow-400 border border-yellow-400/40 px-4 py-2 rounded-lg font-semibold transition-colors"
+          >
+            <CalendarPlus className="w-5 h-5" />
+            Start Next Year
           </Link>
           <button 
             onClick={handleLogout}
@@ -204,7 +187,7 @@ const TeamDashboard = () => {
             className="w-full md:w-52 px-4 py-2 bg-zinc-950 border border-zinc-700 rounded-lg focus:outline-none focus:border-yellow-400 text-white"
           >
             <option value="">All Roles</option>
-            {FILTER_ROLES.map(r => <option key={r} value={r}>{r}</option>)}
+            {ALL_ROLES.map(r => <option key={r} value={r}>{r}</option>)}
           </select>
 
           {/* Sub-team filter */}
@@ -214,7 +197,7 @@ const TeamDashboard = () => {
             className="w-full md:w-52 px-4 py-2 bg-zinc-950 border border-zinc-700 rounded-lg focus:outline-none focus:border-yellow-400 text-white"
           >
             <option value="">All Sub-teams</option>
-            {FILTER_SUBTEAMS.map(s => <option key={s} value={s}>{s}</option>)}
+            {ALL_SUBTEAMS.map(s => <option key={s} value={s}>{s}</option>)}
           </select>
 
           {/* Clear all filters */}

@@ -128,6 +128,63 @@ const deleteTeamMember = async (req, res) => {
 };
 
 /**
+ * Start a new year's team from the previous one.
+ *
+ * Body: { fromYear: "26-27", toYear: "27-28", members: [{ id, role, subteam }] }
+ * Each listed member of fromYear is copied into toYear with the given role and
+ * sub-team (promotion, same role, or a Core role); members left out are not
+ * carried over. Members already in toYear (same name) are skipped, so running
+ * it twice doesn't create duplicates. New inductees are added separately.
+ */
+const carryOverTeam = async (req, res) => {
+  try {
+    const { fromYear, toYear, members } = req.body || {};
+    if (!TeamMember.isTeamYear(fromYear) || !TeamMember.isTeamYear(toYear) || !fromYear || !toYear || fromYear === toYear) {
+      return res.status(400).json({ success: false, message: 'fromYear and toYear must be two different team years like "26-27"' });
+    }
+    if (!Array.isArray(members) || members.length === 0) {
+      return res.status(400).json({ success: false, message: 'Select at least one member to carry over' });
+    }
+
+    const sources = await TeamMember.find({ _id: { $in: members.map(m => m.id) }, year: fromYear }).lean();
+    const sourceById = new Map(sources.map(s => [String(s._id), s]));
+    const nameKey = (name) => name.trim().toLowerCase();
+    const existing = new Set((await TeamMember.find({ year: toYear }, 'name').lean()).map(m => nameKey(m.name)));
+
+    const docs = [];
+    const skipped = [];
+    for (const { id, role, subteam } of members) {
+      const source = sourceById.get(String(id));
+      if (!source) {
+        return res.status(400).json({ success: false, message: `Member ${id} is not in the ${fromYear} team` });
+      }
+      if (existing.has(nameKey(source.name))) {
+        skipped.push(source.name);
+        continue;
+      }
+      const { _id, __v, createdAt, ...details } = source;
+      const doc = new TeamMember({ ...details, year: toYear, role, subteam });
+      const invalid = doc.validateSync();
+      if (invalid) {
+        const messages = Object.values(invalid.errors).map(e => e.message).join('; ');
+        return res.status(400).json({ success: false, message: `${source.name}: ${messages}` });
+      }
+      docs.push(doc);
+      existing.add(nameKey(source.name));
+    }
+
+    const created = docs.length ? await TeamMember.insertMany(docs) : [];
+    res.status(201).json({
+      success: true,
+      message: `Carried ${created.length} member(s) over to ${toYear}`,
+      data: { created: created.length, skipped },
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server error', error: error.message });
+  }
+};
+
+/**
  * Upload a team member photo to Firebase Storage.
  *
  * Expects multer memoryStorage → req.file contains:
@@ -213,5 +270,6 @@ module.exports = {
   createTeamMember,
   updateTeamMember,
   deleteTeamMember,
+  carryOverTeam,
   uploadTeamMemberImage,
 };

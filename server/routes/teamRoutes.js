@@ -24,6 +24,10 @@ router.post(
   teamController.uploadTeamMemberImage
 );
 
+// POST /api/team/carry-over - Start a new year's team from the previous one (Admin only)
+// Declared before /:id for the same reason as upload-image.
+router.post('/carry-over', protect, adminOnly, teamController.carryOverTeam);
+
 // GET /api/team/:id - Get single member by ID (public)
 router.get('/:id', teamController.getTeamMemberById);
 

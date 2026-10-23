@@ -62,6 +62,7 @@ import AdminLogin from './features/admin/pages/AdminLogin';
 import ForgotPassword from './features/admin/pages/ForgotPassword';
 import TeamDashboard from './features/admin/pages/TeamDashboard';
 import TeamMemberForm from './features/admin/pages/TeamMemberForm';
+import NewTeamYear from './features/admin/pages/NewTeamYear';
 import ProjectDashboard from './features/admin/pages/ProjectDashboard';
 import ProjectForm from './features/admin/pages/ProjectForm';
 import SettingsDashboard from './features/admin/pages/SettingsDashboard';
@@ -182,6 +183,7 @@ const App = () => {
         <Route path="/admin/forgot-password" element={<ForgotPassword />} />
         <Route path="/admin/team" element={<ProtectedRoute><TeamDashboard /></ProtectedRoute>} />
         <Route path="/admin/team/new" element={<ProtectedRoute><TeamMemberForm /></ProtectedRoute>} />
+        <Route path="/admin/team/new-year" element={<ProtectedRoute><NewTeamYear /></ProtectedRoute>} />
         <Route path="/admin/team/edit/:id" element={<ProtectedRoute><TeamMemberForm /></ProtectedRoute>} />
         <Route path="/admin/projects" element={<ProtectedRoute><ProjectDashboard /></ProtectedRoute>} />
         <Route path="/admin/projects/new" element={<ProtectedRoute><ProjectForm /></ProtectedRoute>} />

@@ -1206,7 +1206,7 @@ const realTeamMembers = [
   // ─── 2026-27 Core ────────────────────────────────────────────────────────
   {
     "name": "D Sai Sri Mouriya",
-    "role": "Core",
+    "role": "Facility Executive",
     "subteam": "Cores",
     "Department": "Electrical and Electronics Engineering",
     "photoUrl": "https://storage.googleapis.com/scient-website-f2fbe.firebasestorage.app/team-photos/1790249648278-Saishreemouriya.jpeg",
@@ -1221,7 +1221,7 @@ const realTeamMembers = [
   },
   {
     "name": "Advaith S",
-    "role": "Core",
+    "role": "Facility Executive",
     "subteam": "Cores",
     "Department": "Computer Science Engineering",
     "photoUrl": "https://storage.googleapis.com/scient-website-f2fbe.firebasestorage.app/team-photos/1790249630618-Advaith_S.jpg",
@@ -1236,7 +1236,7 @@ const realTeamMembers = [
   },
   {
     "name": "Pranesh S K",
-    "role": "Core",
+    "role": "Technical Executive",
     "subteam": "Cores",
     "Department": "Metallurgical and Materials Engineering",
     "photoUrl": "https://storage.googleapis.com/scient-website-f2fbe.firebasestorage.app/team-photos/1790249639463-Pranesh_S_K.jpg",
@@ -1251,7 +1251,7 @@ const realTeamMembers = [
   },
   {
     "name": "A M Yafea Nazz",
-    "role": "Core",
+    "role": "Facility Executive",
     "subteam": "Cores",
     "Department": "Mechanical Engineering",
     "photoUrl": "https://storage.googleapis.com/scient-website-f2fbe.firebasestorage.app/team-photos/1790249650128-Am_Yafea.jpg",
@@ -1647,7 +1647,7 @@ const realTeamMembers = [
   // ─── 2026-27 Managers (Project Management) ──────────────────────────────
   {
     "name": "A DURGESH",
-    "role": "Manager",
+    "role": "Senior Manager",
     "subteam": "Project Management",
     "Department": "Mechanical Engineering",
     "photoUrl": "https://storage.googleapis.com/scient-website-f2fbe.firebasestorage.app/team-photos/1790250156908-A_Durgesh.jpg",
