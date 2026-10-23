@@ -4,6 +4,7 @@ import axios from "axios";
 import Footer from "../components/footer";
 import ProjectCard from "../components/ProjectCard";
 import { MagicCardGroup } from "../components/MagicBento";
+import { optimizedImage } from "../utils/optimizedImage";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import "./ProjectsPage.css";
 
@@ -73,7 +74,7 @@ export default function ProjectsPage() {
             </div>
             {club.logo && (
               <img
-                src={club.logo}
+                src={optimizedImage(club.logo, 400)}
                 alt={`${club.name} Logo`}
                 className="club-logo"
               />

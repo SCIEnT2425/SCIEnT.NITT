@@ -10,6 +10,8 @@ COPY . .
 ENV NODE_ENV=production
 ENV DISABLE_ESLINT_PLUGIN=true
 ENV CI=false
+# Source maps would publish the readable source (and add ~8 MB to the image)
+ENV GENERATE_SOURCEMAP=false
 
 RUN npm run build
 
@@ -19,8 +21,9 @@ FROM nginx:1.27.2
 
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Serve the SPA: unknown paths fall back to index.html for React Router;
-# hashed static assets are cached long-term
+# Serve the SPA: unknown paths fall back to index.html for React Router.
+# Hashed bundles are cached for a year; photos in public/ for a week;
+# index.html is always revalidated so a deploy never serves stale bundle names.
 RUN printf '%s\n' \
   'server {' \
   '    listen 3000;' \
@@ -29,8 +32,13 @@ RUN printf '%s\n' \
   '        expires 1y;' \
   '        add_header Cache-Control "public, immutable";' \
   '    }' \
+  '    location ~* \.(?:jpe?g|png|webp|gif|svg|ico)$ {' \
+  '        expires 7d;' \
+  '        add_header Cache-Control "public";' \
+  '    }' \
   '    location / {' \
   '        index index.html;' \
+  '        add_header Cache-Control "no-cache";' \
   '        try_files $uri $uri/ /index.html;' \
   '    }' \
   '}' > /etc/nginx/conf.d/default.conf
