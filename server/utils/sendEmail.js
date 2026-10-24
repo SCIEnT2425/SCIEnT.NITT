@@ -57,4 +57,40 @@ const sendOtpEmail = async ({ to, otp, username }) => {
   }
 };
 
-module.exports = { sendOtpEmail };
+const escapeHtml = (text = '') =>
+  String(text).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+
+// Forwards a Contact Us message to the SCIEnT inbox (CONTACT_INBOX_EMAIL, else
+// ADMIN_EMAIL). Replying to the email replies to the visitor. Returns false when
+// email isn't configured; the message is still saved and shown in the admin portal.
+const sendContactEmail = async ({ name, email, subject, message }) => {
+  const apiKey = process.env.RESEND_API_KEY;
+  const to = process.env.CONTACT_INBOX_EMAIL || process.env.ADMIN_EMAIL;
+  const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
+
+  if (!apiKey || apiKey === 're_your_resend_api_key' || apiKey === 'your_resend_api_key_here' || !to) {
+    console.warn('[Contact] RESEND_API_KEY or CONTACT_INBOX_EMAIL/ADMIN_EMAIL not set; message saved without email.');
+    return false;
+  }
+
+  const resend = new Resend(apiKey);
+  const { error } = await resend.emails.send({
+    from: `SCIEnT Website <${fromEmail}>`,
+    to: [to],
+    replyTo: email,
+    subject: `[SCIEnT Contact] ${subject || `Message from ${name}`}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #111;">
+        <h2 style="margin: 0 0 4px; font-size: 18px;">New message from the SCIEnT website</h2>
+        <p style="margin: 0 0 16px; color: #555; font-size: 14px;">${escapeHtml(name)} &lt;${escapeHtml(email)}&gt;</p>
+        ${subject ? `<p style="margin: 0 0 12px; font-weight: bold;">${escapeHtml(subject)}</p>` : ''}
+        <p style="white-space: pre-wrap; line-height: 1.5; margin: 0;">${escapeHtml(message)}</p>
+        <p style="margin-top: 24px; color: #888; font-size: 12px;">Reply to this email to answer them. All messages are also in the admin portal under Messages.</p>
+      </div>
+    `,
+  });
+  if (error) throw new Error(error.message || 'Failed to send email via Resend');
+  return true;
+};
+
+module.exports = { sendOtpEmail, sendContactEmail };

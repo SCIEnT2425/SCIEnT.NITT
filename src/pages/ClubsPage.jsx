@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Navbar from "../components/Navbar";
 import Footer from "../components/footer";
 import ClubCard from "../components/ClubCard";
+import StrokeText from "../components/StrokeText";
 import "./ClubsPage.css";
 
 
 export default function ClubsPage() {
-  const navigate = useNavigate();
   const [clubs, setClubs] = useState([]);
 
   useEffect(() => {
@@ -28,17 +26,30 @@ export default function ClubsPage() {
 
   return (
     <>
-      <Navbar />
       <div className="clubs-page">
-        <h1 className="clubs-title">CLUBS</h1>
+        <h1 className="clubs-title">
+          <StrokeText
+            text="CLUBS"
+            strokeColor="#facc15"
+            fillColor="#facc15"
+            strokeWidth={1.6}
+            drawDuration={1.4}
+            fillDelay={0.15}
+            stagger={0.08}
+            ease="power2.out"
+            trigger="mount"
+            fillMode="wipe"
+            wipeFrom="left"
+            fontSize={80}
+            fontWeight={900}
+            letterSpacing={4}
+            hoverRedraw
+          />
+        </h1>
 
         <div className="clubs-grid">
           {clubs.map((club) => (
-            <ClubCard
-              key={club._id}
-              club={club}
-              onClick={() => navigate(`/clubs/${club.name}/projects`)}
-            />
+            <ClubCard key={club._id} club={club} />
           ))}
         </div>
       </div>

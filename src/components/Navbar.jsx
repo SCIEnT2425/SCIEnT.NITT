@@ -1,27 +1,147 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from "../assets/logo_s.png";
 import { ChevronDown, Menu, X } from "lucide-react";
+import GooeyNav from './GooeyNav';
+
+const FACULTY_CONNECT_URL = 'https://faculty-connect-1.onrender.com/';
+
+// Top-level tabs. Dropdowns list their pages in `children`; `match` adds
+// extra paths that count as being in that section.
+const NAV_ITEMS = [
+    { label: 'Home', href: '/' },
+    { label: 'Inventory', href: '/inventory' },
+    { label: 'OpenHouse', href: '/openhouse' },
+    { label: 'Projects', href: '/clubs' },
+    {
+        label: 'Initiatives',
+        key: 'initiatives',
+        children: [
+            { label: "Inventive '26", href: '/inventive', match: ['/inventiveForm'] },
+            { label: "Contrive '25", href: '/contrive', match: ['/contriveForm'] },
+        ],
+    },
+    { label: 'Faculty Connect', href: FACULTY_CONNECT_URL, external: true },
+    {
+        label: 'About Us',
+        key: 'about',
+        children: [
+            { label: 'Timeline', href: '/timeline' },
+            { label: 'Team', href: '/team' },
+            { label: 'Gallery', href: '/gallery' },
+            { label: 'Reports', href: '/reports' },
+        ],
+    },
+];
+
+const matchesPath = (pathname, { href, match = [] }) => {
+    const path = pathname.toLowerCase();
+    return [href, ...match].some((p) => {
+        const target = p.toLowerCase();
+        return target === '/' ? path === '/' : path === target || path.startsWith(`${target}/`);
+    });
+};
+
+const isItemActive = (pathname, item) =>
+    item.children
+        ? item.children.some((child) => matchesPath(pathname, child))
+        : !item.external && matchesPath(pathname, item);
+
+const dropdownLinkClasses = (index, count) => [
+    'block px-4 py-3 lg:py-2 text-white hover:bg-gray-700 hover:text-[#f9c203] whitespace-nowrap no-underline',
+    index === 0 ? 'rounded-t-lg' : '',
+    index === count - 1 ? 'rounded-b-lg' : '',
+].join(' ');
 
 const Navbar = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
-    const [initiativesOpen, setInitiativesOpen] = useState(false);
-    const [aboutOpen, setAboutOpen] = useState(false);
+    const [openDropdown, setOpenDropdown] = useState(null);
 
     const closeAll = () => {
         setMenuOpen(false);
-        setInitiativesOpen(false);
-        setAboutOpen(false);
+        setOpenDropdown(null);
     };
 
+    const toggleDropdown = (key) => setOpenDropdown((current) => (current === key ? null : key));
+
+    // The Navbar persists across routes, so close menus on any navigation
+    // (including browser back/forward)
+    useEffect(() => {
+        setMenuOpen(false);
+        setOpenDropdown(null);
+    }, [location.pathname]);
+
+    // While the mobile overlay is open: lock page scroll and close on Escape
+    useEffect(() => {
+        if (!menuOpen) return undefined;
+        const previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        const onKeyDown = (e) => {
+            if (e.key === 'Escape') setMenuOpen(false);
+        };
+        window.addEventListener('keydown', onKeyDown);
+        return () => {
+            document.body.style.overflow = previousOverflow;
+            window.removeEventListener('keydown', onKeyDown);
+        };
+    }, [menuOpen]);
+
     const isActive = (path) => location.pathname === path;
+
+    const gooeyActiveIndex = NAV_ITEMS.findIndex((item) => isItemActive(location.pathname, item));
+
+    const handleGooeyClick = (e, item) => {
+        // Dropdown tabs only open their menu; the pill moves once a page is chosen
+        if (item.hasMenu) {
+            toggleDropdown(item.key);
+            return false;
+        }
+        setOpenDropdown(null);
+        // External link (new tab) and modifier-clicks: let the browser handle
+        // it and keep the pill on the current page
+        if (item.target || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return false;
+        e.preventDefault();
+        if (item.href !== location.pathname) navigate(item.href);
+    };
+
+    const renderDropdownLinks = (children) =>
+        children.map((child, i) => (
+            <Link key={child.href} to={child.href} onClick={closeAll} className={dropdownLinkClasses(i, children.length)}>
+                {child.label}
+            </Link>
+        ));
+
+    const chevron = (key) => (
+        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${openDropdown === key ? 'rotate-180' : ''}`} />
+    );
+
+    const gooeyItems = NAV_ITEMS.map((item) => {
+        if (item.children) {
+            return {
+                label: item.label,
+                key: item.key,
+                hasMenu: true,
+                icon: chevron(item.key),
+                expanded: openDropdown === item.key,
+                menu: openDropdown === item.key && (
+                    <div className="absolute left-0 top-full mt-1 bg-black rounded-lg shadow-lg border border-gray-700 min-w-[160px] z-50 text-center [text-shadow:none]">
+                        {renderDropdownLinks(item.children)}
+                    </div>
+                ),
+            };
+        }
+        return item.external
+            ? { label: item.label, href: item.href, target: '_blank', rel: 'noopener noreferrer' }
+            : { label: item.label, href: item.href };
+    });
 
     // Tailwind-only nav link with animated underline
     const linkClasses = (path) => {
         const active = isActive(path);
         return [
-            'relative py-2 px-3 font-semibold no-underline transition-colors duration-200',
+            'relative inline-flex items-center min-h-[44px] py-2 px-3 font-semibold no-underline transition-colors duration-200',
             "after:content-[''] after:block after:absolute after:bottom-0",
             'after:h-[2px] after:bg-[#f9c203] after:transition-all after:duration-300 after:ease-in-out',
             'hover:after:left-0 hover:after:w-full hover:text-[#91ff00]',
@@ -32,107 +152,84 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="flex items-center justify-between min-[760px]:justify-center bg-black w-full py-2 px-4 min-[760px]:px-6 relative z-[1000]">
+        <nav className="flex items-center justify-between lg:justify-center bg-black w-full py-2 px-4 lg:px-6 relative z-[1000]">
             {/* Logo */}
-            <Link to="/" className="mr-4 min-[760px]:mr-10 shrink-0 z-[201]" onClick={closeAll}>
-                <img className="h-[50px] min-[760px]:h-[65px]" src={logo} alt="SCIEnT Logo" />
+            <Link to="/" className="mr-4 lg:mr-10 shrink-0 z-[201]" onClick={closeAll}>
+                <img className="h-[50px] lg:h-[65px]" src={logo} alt="SCIEnT Logo" />
             </Link>
 
             {/* Nav links container
-                Desktop (>=760px): always visible, flex-row, static
-                Mobile (<760px), closed: hidden (display:none — no ghost element)
-                Mobile (<760px), open: fixed full-screen overlay */}
+                Desktop (>=1024px): always visible, flex-row, static
+                Mobile (<1024px), closed: hidden (display:none — no ghost element)
+                Mobile (<1024px), open: fixed full-screen overlay */}
             <div
                 className={[
                     // Desktop overrides (always visible, inline)
-                    'min-[760px]:flex min-[760px]:flex-row min-[760px]:items-center min-[760px]:gap-6',
-                    'min-[760px]:static min-[760px]:bg-transparent min-[760px]:h-auto min-[760px]:w-auto min-[760px]:p-0 min-[760px]:text-base min-[760px]:overflow-visible',
+                    'lg:flex lg:flex-row lg:items-center lg:gap-6',
+                    'lg:static lg:bg-transparent lg:h-auto lg:w-auto lg:p-0 lg:text-base lg:overflow-visible',
                     // Mobile states
                     menuOpen
                         ? 'flex fixed inset-0 z-40 flex-col items-center justify-start pt-24 gap-6 bg-gradient-to-b from-[#1b1b1b] via-[rgba(27,27,27,0.9)] to-[rgba(27,27,27,0.3)] text-xl overflow-y-auto'
                         : 'hidden',
                 ].join(' ')}
             >
-                <Link to="/" onClick={closeAll} className={linkClasses('/')}>
-                    Home
-                </Link>
-
-                <Link to="/inventory" onClick={closeAll} className={linkClasses('/inventory')}>
-                    Inventory
-                </Link>
-
-                <Link to="/openhouse" onClick={closeAll} className={linkClasses('/openhouse')}>
-                    OpenHouse
-                </Link>
-
-                <Link to="/clubs" onClick={closeAll} className={linkClasses('/clubs')}>
-                    Projects
-                </Link>
-
-                {/* Initiatives Dropdown */}
-                <div className="relative">
-                    <button
-                        className="flex items-center gap-1 text-white hover:text-[#91ff00] font-semibold px-3 py-2 cursor-pointer bg-transparent border-none"
-                        onClick={() => { setInitiativesOpen(v => !v); setAboutOpen(false); }}
-                    >
-                        Initiatives
-                        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${initiativesOpen ? 'rotate-180' : ''}`} />
-                    </button>
-                    {initiativesOpen && (
-                        <div className="min-[760px]:absolute min-[760px]:left-0 min-[760px]:top-full mt-1 bg-black rounded-lg shadow-lg border border-gray-700 min-w-[160px] z-50 text-center">
-                            <Link to="/inventive" onClick={closeAll}
-                                className="block px-4 py-2 text-white hover:bg-gray-700 hover:text-[#f9c203] rounded-t-lg whitespace-nowrap no-underline">
-                                Inventive '25
-                            </Link>
-                            <Link to="/contrive" onClick={closeAll}
-                                className="block px-4 py-2 text-white hover:bg-gray-700 hover:text-[#f9c203] rounded-b-lg whitespace-nowrap no-underline">
-                                Contrive '25
-                            </Link>
-                        </div>
-                    )}
+                {/* Desktop: every tab uses the gooey effect */}
+                <div className="hidden lg:block">
+                    <GooeyNav
+                        items={gooeyItems}
+                        activeIndex={gooeyActiveIndex}
+                        onItemClick={handleGooeyClick}
+                        particleCount={18}
+                        particleDistances={[90, 10]}
+                        particleR={300}
+                        animationTime={600}
+                        timeVariance={500}
+                        colors={[1, 2, 3, 1, 2, 3, 1, 4]}
+                    />
                 </div>
 
-                <a
-                    href="https://faculty-connect-1.onrender.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={closeAll}
-                    className={linkClasses('/faculty-connect')}
-                >
-                    Faculty Connect
-                </a>
-
-                {/* About Us Dropdown */}
-                <div className="relative">
-                    <button
-                        className="flex items-center gap-1 text-white hover:text-[#91ff00] font-semibold px-3 py-2 cursor-pointer bg-transparent border-none"
-                        onClick={() => { setAboutOpen(v => !v); setInitiativesOpen(false); }}
-                    >
-                        About Us
-                        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${aboutOpen ? 'rotate-180' : ''}`} />
-                    </button>
-                    {aboutOpen && (
-                        <div className="min-[760px]:absolute min-[760px]:left-0 min-[760px]:top-full mt-1 bg-black rounded-lg shadow-lg border border-gray-700 min-w-[140px] z-50">
-                            <Link to="/timeline" onClick={closeAll}
-                                className="block px-4 py-2 text-white hover:bg-gray-700 hover:text-[#f9c203] rounded-t-lg no-underline">
-                                Timeline
+                {/* Mobile overlay menu: plain links and inline dropdowns */}
+                <div className="contents lg:hidden">
+                    {NAV_ITEMS.map((item) => {
+                        if (item.children) {
+                            return (
+                                <div key={item.key} className="relative">
+                                    <button
+                                        className="flex items-center gap-1 min-h-[44px] text-white hover:text-[#91ff00] font-semibold px-3 py-2 cursor-pointer bg-transparent border-none"
+                                        onClick={() => toggleDropdown(item.key)}
+                                        aria-expanded={openDropdown === item.key}
+                                    >
+                                        {item.label}
+                                        {chevron(item.key)}
+                                    </button>
+                                    {openDropdown === item.key && (
+                                        <div className="mt-1 bg-black rounded-lg shadow-lg border border-gray-700 min-w-[160px] z-50 text-center">
+                                            {renderDropdownLinks(item.children)}
+                                        </div>
+                                    )}
+                                </div>
+                            );
+                        }
+                        if (item.external) {
+                            return (
+                                <a key={item.href} href={item.href} target="_blank" rel="noopener noreferrer"
+                                    onClick={closeAll} className={linkClasses(item.href)}>
+                                    {item.label}
+                                </a>
+                            );
+                        }
+                        return (
+                            <Link key={item.href} to={item.href} onClick={closeAll} className={linkClasses(item.href)}>
+                                {item.label}
                             </Link>
-                            <Link to="/team" onClick={closeAll}
-                                className="block px-4 py-2 text-white hover:bg-gray-700 hover:text-[#f9c203] no-underline">
-                                Team
-                            </Link>
-                            <Link to="/gallery" onClick={closeAll}
-                                className="block px-4 py-2 text-white hover:bg-gray-700 hover:text-[#f9c203] rounded-b-lg no-underline">
-                                Gallery
-                            </Link>
-                        </div>
-                    )}
+                        );
+                    })}
                 </div>
             </div>
 
             {/* Mobile hamburger — hidden on desktop, visible on mobile */}
             <button
-                className="block min-[760px]:hidden z-[201] bg-transparent border-none cursor-pointer p-1"
+                className="flex lg:hidden items-center justify-center w-11 h-11 shrink-0 z-[201] bg-transparent border-none cursor-pointer"
                 onClick={() => setMenuOpen(v => !v)}
                 aria-label="Toggle navigation menu"
                 aria-expanded={menuOpen}

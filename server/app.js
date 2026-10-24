@@ -7,10 +7,12 @@ const errorHandler = require("./middleware/errorHandler");
 const teamRoutes = require('./routes/teamRoutes');
 const clubRoutes = require('./routes/clubRoutes');
 const inventoryRoutes = require('./routes/inventoryRoutes');
+const bpclSeedRoutes = require('./routes/bpclSeedRoutes');
 const inventiveRoutes = require('./routes/inventiveRoutes');
 const contriveRoutes = require('./routes/contriveRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const projectRoutes = require('./routes/projectRoutes');
+const contactRoutes = require('./routes/contactRoutes');
 
 // Load environment variables
 dotenv.config({ path: __dirname + "/.env" });
@@ -29,10 +31,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/team', teamRoutes);
 app.use('/api/clubs', clubRoutes);
 app.use('/api/inventory', inventoryRoutes);
+app.use('/api/inventory', bpclSeedRoutes);
 app.use('/api/inventiveForm', inventiveRoutes);
 app.use('/api/contriveForm', contriveRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/projects', projectRoutes);
+app.use('/api/contact', contactRoutes);
 
 
 // Error handler middleware

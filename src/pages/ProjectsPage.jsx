@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import Navbar from "../components/Navbar";
 import Footer from "../components/footer";
 import ProjectCard from "../components/ProjectCard";
+import { optimizedImage } from "../utils/optimizedImage";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import "./ProjectsPage.css";
 
@@ -58,7 +58,6 @@ export default function ProjectsPage() {
 
   return (
     <>
-      <Navbar />
       <div className="projects-page">
         {/* Club Info */}
         {club && (
@@ -74,7 +73,7 @@ export default function ProjectsPage() {
             </div>
             {club.logo && (
               <img
-                src={club.logo}
+                src={optimizedImage(club.logo, 400)}
                 alt={`${club.name} Logo`}
                 className="club-logo"
               />
@@ -102,6 +101,7 @@ export default function ProjectsPage() {
         </div>
 
         {/* Projects by Year */}
+        <>
         {Object.keys(groupedProjects)
           .sort((a, b) => b - a)
           .filter((year) => selectedYear === "ALL" || Number(year) === selectedYear)
@@ -134,6 +134,7 @@ export default function ProjectsPage() {
       </div>
     </div>
   ))}
+        </>
 
 
         {projects.length === 0 && (

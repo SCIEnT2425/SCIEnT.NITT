@@ -5,13 +5,15 @@ import Footer from '../components/footer'
 import ClubOrbit from '../components/ClubOrbit'
 import Carousel from '../components/CarouselPage'
 import Contact from '../components/Contact'
-import Navbar from '../components/Navbar'
+import MagicBento from '../components/MagicBento'
 const Home = () => {
   return (
     <div className='bg-black'>
-    <Navbar/>
     <Carousel/>
       <HomeTop />
+      <section className='py-12'>
+        <MagicBento enableTilt={true} />
+      </section>
       <ClubOrbit />
       <FAQComponent /> 
       <Contact />

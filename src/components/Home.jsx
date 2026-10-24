@@ -1,15 +1,16 @@
 import React from "react";
-import a from "../assets/a.png";
+import a from "../assets/a.jpg";
 import b from "../assets/b.jpg";
 import "./Home.css";
+import { MagicCardGroup, MagicCard } from "./MagicBento";
 
 const Home = () => {
   return (
     
     <div className="home-main-container">
-      <div className="card-container">
-        <div className="card">
-          <img src={a} alt="Our Vision" />
+      <MagicCardGroup className="card-container">
+        <MagicCard className="card">
+          <img src={a} alt="Our Vision" loading="lazy" />
           <div className="overlay">
             <h2>OUR VISION</h2>
             <p>
@@ -25,9 +26,9 @@ To build an ecosystem that will encourage more students to aspire and build real
 
             </p>
           </div>
-        </div>
-        <div className="Mission_card">
-          <img src={b} alt="Our Mission" />
+        </MagicCard>
+        <MagicCard className="Mission_card">
+          <img src={b} alt="Our Mission" loading="lazy" />
           <div className="overlay">
             <h2>OUR MISSION</h2>
             <p>
@@ -45,8 +46,8 @@ Offer a conducive space and necessary tools to collaborate and work on projects 
 Provide an ecosystem of mentorship, training, industry interface, and material assistance to help advance the progress of innovation and entrepreneurship.
             </p>
           </div>
-        </div>
-      </div>
+        </MagicCard>
+      </MagicCardGroup>
 
       <div className="initiative-container">
         <div className="container-ini">

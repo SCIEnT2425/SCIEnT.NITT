@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
-import { Plus, Edit, Trash2, Search, LogOut, Users, Loader2 } from 'lucide-react';
+import AdminTabs from '../components/AdminTabs';
+import { Plus, Edit, Trash2, Search, LogOut, Users, Loader2, CalendarPlus } from 'lucide-react';
 import { toast } from 'react-toastify';
+import { ALL_ROLES, ALL_SUBTEAMS, teamYears } from '../../members/data/teamStructure';
 
 const TeamDashboard = () => {
   const [members, setMembers] = useState([]);
@@ -11,6 +13,7 @@ const TeamDashboard = () => {
   const [search, setSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState('');
   const [subteamFilter, setSubteamFilter] = useState('');
+  const [yearFilter, setYearFilter] = useState('');
   
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [memberToDelete, setMemberToDelete] = useState(null);
@@ -18,15 +21,15 @@ const TeamDashboard = () => {
 
   const { token, logout, API_BASE } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const fetchMembers = async () => {
     try {
       setLoading(true);
       const response = await axios.get(`${API_BASE}/api/team/all`);
-      setMembers(response.data.data || []);
+      const data = response.data.data || [];
+      setMembers(data);
     } catch (error) {
-      toast.error('Failed to fetch team members');
+      toast.error('Failed to fetch team members from database');
       console.error(error);
     } finally {
       setLoading(false);
@@ -61,23 +64,24 @@ const TeamDashboard = () => {
     }
   };
 
-  const roles = [
-    'Faculty Advisor', 'Core', 'Ex-Core', 'Senior Manager', 'Manager', 'Deputy Manager', 
-    'Senior Project Manager', 'Project Manager',
-    'Admin Executive', 'Technical Executive', 'Facility Executive', 
-    'External Affairs Executive', 'Internal Affairs Executive', 
-    'Project Operations Executive'
-  ];
+  // ─── Filter options (shown in search/filter dropdowns only) ──────────────────
+  // Years are taken from the members, newest first
+  const SCIENT_YEARS = teamYears(members).reverse();
 
-  const subteams = [
-    'Cores', 'Ex-Cores', 'Project Management', 'DevOps', 'Corporate Communications', 'Creatives'
-  ];
-
+  // ─── Filter logic ─────────────────────────────────────────────────────────────
   const filteredMembers = members.filter(member => {
-    const matchesSearch = member.name.toLowerCase().includes(search.toLowerCase());
-    const matchesRole = roleFilter ? member.role === roleFilter : true;
+    const searchLower = search.toLowerCase();
+    const matchesSearch =
+      (member.name || '').toLowerCase().includes(searchLower) ||
+      (member.role || '').toLowerCase().includes(searchLower) ||
+      (member.subteam || '').toLowerCase().includes(searchLower) ||
+      (member.email || '').toLowerCase().includes(searchLower);
+    const matchesRole    = roleFilter    ? member.role    === roleFilter    : true;
     const matchesSubteam = subteamFilter ? member.subteam === subteamFilter : true;
-    return matchesSearch && matchesRole && matchesSubteam;
+    const matchesYear    = yearFilter
+      ? (yearFilter === 'none' ? !member.year : member.year === yearFilter)
+      : true;
+    return matchesSearch && matchesRole && matchesSubteam && matchesYear;
   });
 
   return (
@@ -99,6 +103,13 @@ const TeamDashboard = () => {
             <Plus className="w-5 h-5" />
             Add Member
           </Link>
+          <Link
+            to="/admin/team/new-year"
+            className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-zinc-900 hover:bg-zinc-800 text-yellow-400 border border-yellow-400/40 px-4 py-2 rounded-lg font-semibold transition-colors"
+          >
+            <CalendarPlus className="w-5 h-5" />
+            Start Next Year
+          </Link>
           <button 
             onClick={handleLogout}
             className="flex items-center justify-center p-2 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 rounded-lg border border-zinc-700 transition-colors"
@@ -110,68 +121,63 @@ const TeamDashboard = () => {
       </div>
 
       {/* Navigation Tabs */}
-      <div className="max-w-7xl mx-auto mb-6 flex bg-zinc-900/90 border border-zinc-800 p-1 rounded-xl w-full sm:w-fit gap-1 backdrop-blur-sm">
-        <Link 
-          to="/admin/team"
-          className={`flex-1 sm:flex-none text-center px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
-            location.pathname.includes('/admin/team') 
-              ? 'bg-yellow-400 text-black shadow-md shadow-yellow-400/10' 
-              : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'
-          }`}
-        >
-          Team Members
-        </Link>
-        <Link 
-          to="/admin/projects"
-          className={`flex-1 sm:flex-none text-center px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
-            location.pathname.includes('/admin/projects') 
-              ? 'bg-yellow-400 text-black shadow-md shadow-yellow-400/10' 
-              : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'
-          }`}
-        >
-          Projects & Clubs
-        </Link>
-        <Link 
-          to="/admin/settings"
-          className={`flex-1 sm:flex-none text-center px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
-            location.pathname.includes('/admin/settings') 
-              ? 'bg-yellow-400 text-black shadow-md shadow-yellow-400/10' 
-              : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'
-          }`}
-        >
-          Timeline Settings
-        </Link>
-      </div>
+      <AdminTabs />
 
       <div className="max-w-7xl mx-auto">
         {/* Filters */}
         <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 mb-6 flex flex-col md:flex-row gap-4">
+          {/* Name / text search */}
           <div className="flex-1 relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-zinc-500 w-5 h-5" />
             <input
               type="text"
-              placeholder="Search by name..."
+              placeholder="Search by name, role, email…"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full pl-10 pr-4 py-2 bg-zinc-950 border border-zinc-700 rounded-lg focus:outline-none focus:border-yellow-400 text-white"
             />
           </div>
-          <select 
-            value={roleFilter} 
+
+          {/* Year filter */}
+          <select
+            value={yearFilter}
+            onChange={(e) => setYearFilter(e.target.value)}
+            className="w-full md:w-40 px-4 py-2 bg-zinc-950 border border-zinc-700 rounded-lg focus:outline-none focus:border-yellow-400 text-white"
+          >
+            <option value="">All Years</option>
+            {SCIENT_YEARS.map(y => <option key={y} value={y}>Team of {y}</option>)}
+            <option value="none">Faculty / Admin</option>
+          </select>
+
+          {/* Role filter */}
+          <select
+            value={roleFilter}
             onChange={(e) => setRoleFilter(e.target.value)}
-            className="w-full md:w-48 px-4 py-2 bg-zinc-950 border border-zinc-700 rounded-lg focus:outline-none focus:border-yellow-400 text-white"
+            className="w-full md:w-52 px-4 py-2 bg-zinc-950 border border-zinc-700 rounded-lg focus:outline-none focus:border-yellow-400 text-white"
           >
             <option value="">All Roles</option>
-            {roles.map(r => <option key={r} value={r}>{r}</option>)}
+            {ALL_ROLES.map(r => <option key={r} value={r}>{r}</option>)}
           </select>
-          <select 
-            value={subteamFilter} 
+
+          {/* Sub-team filter */}
+          <select
+            value={subteamFilter}
             onChange={(e) => setSubteamFilter(e.target.value)}
-            className="w-full md:w-48 px-4 py-2 bg-zinc-950 border border-zinc-700 rounded-lg focus:outline-none focus:border-yellow-400 text-white"
+            className="w-full md:w-52 px-4 py-2 bg-zinc-950 border border-zinc-700 rounded-lg focus:outline-none focus:border-yellow-400 text-white"
           >
-            <option value="">All Subteams</option>
-            {subteams.map(s => <option key={s} value={s}>{s}</option>)}
+            <option value="">All Sub-teams</option>
+            {ALL_SUBTEAMS.map(s => <option key={s} value={s}>{s}</option>)}
           </select>
+
+          {/* Clear all filters */}
+          {(search || roleFilter || subteamFilter || yearFilter) && (
+            <button
+              onClick={() => { setSearch(''); setRoleFilter(''); setSubteamFilter(''); setYearFilter(''); }}
+              className="shrink-0 px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white border border-zinc-700 rounded-lg text-sm font-medium transition-colors"
+            >
+              Clear Filters
+            </button>
+          )}
         </div>
 
         {/* Content */}
@@ -247,6 +253,11 @@ const TeamDashboard = () => {
                     )}
                   </div>
                   {member.email && <p className="text-zinc-500 text-sm mt-auto truncate">{member.email}</p>}
+                  {member.year && (
+                    <span className="mt-2 inline-block px-2 py-0.5 bg-zinc-800 text-zinc-400 text-xs rounded border border-zinc-700 font-mono">
+                      Team {member.year}
+                    </span>
+                  )}
                 </div>
               </div>
             ))}

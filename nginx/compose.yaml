@@ -1,10 +1,14 @@
+# Pinned so the proxy never shares a project with another compose app in a folder named "nginx"
+name: scient-nginx
+
 services:
   nginx:
     image: nginx:1.27.2
     ports:
-      - 6600:80
+      - "${PUBLIC_PORT:-4020}:80"   # public site port; deploy_script.sh passes PUBLIC_PORT
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    restart: unless-stopped
     networks:
       - scient-network
 

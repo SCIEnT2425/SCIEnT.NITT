@@ -1,5 +1,11 @@
 const mongoose = require("mongoose");
 
+const isTeamYear = (year) => {
+  if (year == null) return true;
+  const m = /^(\d{2})-(\d{2})$/.exec(year);
+  return !!m && Number(m[2]) === (Number(m[1]) + 1) % 100;
+};
+
 const teamMemberSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -33,14 +39,19 @@ const teamMemberSchema = new mongoose.Schema({
     type: String,
     enum: [
       "Cores",
-      "Ex-Cores",
-      "Project Management",
-      "DevOps",
       "Corporate Communications",
+      "DevOps",
       "Creatives",
+      "Project Management",
+      "Ex-Cores",
       null
     ],
     default: null
+  },
+
+  isMock: {
+    type: Boolean,
+    default: false
   },
 
   Department: {
@@ -68,9 +79,15 @@ const teamMemberSchema = new mongoose.Schema({
     default: ""
   },
 
+  // Team year such as "26-27" (null for faculty/admin). Any consecutive pair is
+  // accepted so a new year's team can be added from the admin portal.
   year: {
     type: String,
-    default: null
+    default: null,
+    validate: {
+      validator: isTeamYear,
+      message: props => `"${props.value}" is not a team year like "26-27"`
+    }
   },
 
   description: {
@@ -97,6 +114,10 @@ const teamMemberSchema = new mongoose.Schema({
 // Index for faster filtering by role or subteam
 teamMemberSchema.index({ role: 1, subteam: 1 });
 
+// Compound index for filtering and sorting by year, subteam, and order
+teamMemberSchema.index({ year: 1, subteam: 1, order: 1 });
+
 const TeamMember = mongoose.model("TeamMember", teamMemberSchema);
 
 module.exports = TeamMember;
+module.exports.isTeamYear = isTeamYear;

@@ -1,236 +1,154 @@
 import React, { useState } from 'react';
-import { Mail, Linkedin, Instagram, Zap, Info, X } from 'lucide-react';
-import scient from '../../../assets/scient.png';
+import { Mail, Linkedin, Instagram, User, X } from 'lucide-react';
+import { departmentCode } from '../data/teamStructure';
 import '../styles/MembersCard.css';
 
-const MemberCard = ({ member, index }) => {
-    const [showDetails, setShowDetails] = useState(false);
+// Shorter sub-team names for the role line
+const SUBTEAM_LABELS = {
+    'Corporate Communications': 'CC',
+    'Corporate Communication': 'CC',
+};
 
-    // Fallback preset colors if cardColor is not defined
-    const presetColors = ['#facc15', '#a78bfa', '#38bdf8', '#f472b6', '#34d399', '#fb923c'];
-    const accentColor = member?.cardColor || presetColors[index % presetColors.length];
+// Core members show only their special role
+const isCoreSubteam = subteam => subteam === 'Cores' || subteam === 'Core';
 
-    const toggleDetails = (e) => {
-        e.stopPropagation();
-        setShowDetails(prev => !prev);
+// Front shows photo, role, name and department; tapping the card (or About)
+// flips it to the back with the bio, team year and links.
+// Spacing and borders use bracket values: Bootstrap's px-5/pt-5/border
+// utilities are !important and would override Tailwind's.
+const MemberCard = ({ member }) => {
+    const [imgError, setImgError] = useState(false);
+    const [flipped, setFlipped] = useState(false);
+
+    const team = member.subteam && !isCoreSubteam(member.subteam)
+        ? SUBTEAM_LABELS[member.subteam] || member.subteam
+        : null;
+    const roleLine = [member.role || 'Member', team].filter(Boolean).join(' · ');
+    const department = departmentCode(member.Department);
+    const hasPhoto = member.photoUrl && !imgError;
+
+    const links = [
+        member.email && { href: `mailto:${member.email}`, label: 'Email', Icon: Mail },
+        member.linkedin && { href: member.linkedin, label: 'LinkedIn', Icon: Linkedin, external: true },
+        member.instagram && { href: member.instagram, label: 'Instagram', Icon: Instagram, external: true },
+    ].filter(Boolean);
+
+    // Taps on the card flip it; links and buttons inside keep their own behaviour
+    const handleCardClick = (e) => {
+        if (e.target.closest('a, button')) return;
+        setFlipped(prev => !prev);
     };
 
-    return (
-        <div 
-            className="card relative group cursor-pointer select-none"
-            onClick={toggleDetails}
-        >
-            <div 
-                className="relative w-full h-full rounded-3xl bg-zinc-950 p-[2px] overflow-hidden transition-all duration-300 shadow-xl hover:scale-[1.02]"
-                style={{
-                    boxShadow: showDetails ? `0 0 30px ${accentColor}40` : `0 0 20px ${accentColor}25`,
-                    borderColor: accentColor,
-                    borderWidth: '2px',
-                    borderStyle: 'solid'
-                }}
-            >
-                {/* Background Accent Radial Glow */}
-                <div 
-                    className="absolute -top-10 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full blur-3xl opacity-20 pointer-events-none z-10"
-                    style={{ backgroundColor: accentColor }}
-                ></div>
-
-                {/* Top Logo */}
-                <div className="absolute top-4 right-4 z-30 w-8 h-8 opacity-80 group-hover:opacity-100 transition-opacity">
-                    <img src={scient} alt="SCIEnT" className="w-full h-full object-contain" />
-                </div>
-
-                {/* Photo / Background Layer */}
-                <div className="absolute inset-0 w-full h-full overflow-hidden rounded-3xl z-0">
-                    {member.photoUrl ? (
-                        <img 
-                            src={member.photoUrl} 
-                            alt={member.name} 
-                            className={`w-full h-full object-cover object-top transition-all duration-400 ease-in-out ${
-                                showDetails 
-                                    ? 'scale-108 filter blur-md brightness-[0.50]' 
-                                    : 'scale-100 filter blur-0 brightness-95 group-hover:scale-105'
-                            }`}
-                            onError={(e) => { e.target.style.display = 'none'; }}
-                        />
-                    ) : (
-                        <div 
-                            className={`w-full h-full flex items-center justify-center bg-zinc-900/80 transition-all duration-400 ease-in-out ${
-                                showDetails ? 'filter blur-md brightness-50' : ''
-                            }`}
-                        >
-                            <div 
-                                className="w-24 h-24 rounded-full flex items-center justify-center border-2 shadow-inner"
-                                style={{ borderColor: accentColor, backgroundColor: `${accentColor}15` }}
-                            >
-                                <Zap className="w-12 h-12" style={{ color: accentColor }} />
-                            </div>
-                        </div>
-                    )}
-                    {/* Dark gradient overlay for bottom readability in default view and text contrast in blurred view */}
-                    <div className={`absolute inset-0 transition-all duration-300 ${
-                        showDetails ? 'bg-zinc-950/35 opacity-100' : 'bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent opacity-90'
-                    }`}></div>
-                </div>
-
-                {/* Front Default Info View */}
-                <div 
-                    className={`absolute bottom-0 left-0 right-0 p-5 z-20 flex flex-col justify-end transition-all duration-300 ${
-                        showDetails 
-                            ? 'opacity-0 pointer-events-none invisible translate-y-2' 
-                            : 'opacity-100 pointer-events-auto visible translate-y-0'
-                    }`}
+    const linkRow = (
+        <div className="-ml-[13px] flex">
+            {links.map(({ href, label, Icon, external }) => (
+                <a
+                    key={label}
+                    href={href}
+                    aria-label={`${member.name} on ${label}`}
+                    {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                    className="flex h-11 w-11 items-center justify-center text-zinc-400 transition-colors hover:text-[#facc15]"
                 >
-                    <h3 className="text-xl font-bold text-white tracking-wide truncate mb-1">
-                        {member.name}
-                    </h3>
-                    <div className="flex flex-wrap items-center gap-2 mb-3">
-                        <span 
-                            className="text-xs font-semibold px-2.5 py-0.5 rounded-full border"
-                            style={{ 
-                                backgroundColor: `${accentColor}25`, 
-                                color: accentColor,
-                                borderColor: `${accentColor}60`
-                            }}
-                        >
-                            {member.role || 'Member'}
-                        </span>
-                        {member.subteam && (
-                            <span className="text-xs text-zinc-300 font-medium truncate">
-                                • {member.subteam}
-                            </span>
+                    <Icon className="h-[18px] w-[18px]" strokeWidth={1.75} aria-hidden="true" />
+                </a>
+            ))}
+        </div>
+    );
+
+    return (
+        // Named group: GalleryPage.css styles every `.group img` site-wide
+        <article className="memberCard group/card cursor-pointer" onClick={handleCardClick}>
+            <div className={`memberCard__inner${flipped ? ' is-flipped' : ''}`}>
+
+                {/* ── Front ── */}
+                <div className="memberCard__face flex flex-col" inert={flipped ? '' : undefined}>
+                    <div className="memberCard__photo overflow-hidden bg-zinc-900">
+                        {hasPhoto ? (
+                            <img
+                                src={member.photoUrl}
+                                alt={member.name}
+                                loading="lazy"
+                                className="h-full w-full object-cover object-top transition-transform duration-500 group-hover/card:scale-[1.03]"
+                                onError={() => setImgError(true)}
+                            />
+                        ) : (
+                            <div className="flex h-full w-full items-center justify-center">
+                                <User className="h-16 w-16 text-zinc-700" strokeWidth={1.5} aria-hidden="true" />
+                            </div>
                         )}
                     </div>
 
-                    <div className="flex justify-between items-center text-xs text-zinc-400 pt-2 border-t border-zinc-800/80">
-                        <span className="truncate max-w-[65%]">{member.Department || member.year || 'NIT Trichy'}</span>
-                        
-                        <button
-                            type="button"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                setShowDetails(true);
-                            }}
-                            className="flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-full border transition-all hover:scale-105 shadow-sm"
-                            style={{
-                                backgroundColor: `${accentColor}20`,
-                                borderColor: `${accentColor}50`,
-                                color: accentColor
-                            }}
-                            aria-label="Show details"
-                        >
-                            <span>Details</span>
-                            <Info className="w-3.5 h-3.5" />
-                        </button>
+                    <div className="flex flex-col gap-1.5 px-[20px] pt-[20px] pb-[16px]">
+                        <p className="m-0 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#facc15]">
+                            {roleLine}
+                        </p>
+                        <h3 className="m-0 text-xl font-semibold text-zinc-50">{member.name}</h3>
+                        {department && <p className="m-0 text-[13px] text-zinc-400">{department}</p>}
                     </div>
-                </div>
 
-                {/* Info Text Directly Over Blurred Image - NO OVERLAY BOX */}
-                <div 
-                    className={`absolute inset-0 p-6 z-20 flex flex-col justify-between overflow-y-auto rounded-3xl bg-transparent transition-all duration-300 text-left ${
-                        showDetails 
-                            ? 'opacity-100 pointer-events-auto visible translate-y-0' 
-                            : 'opacity-0 pointer-events-none invisible translate-y-2'
-                    }`}
-                >
-                    <div>
-                        {/* Header with Name, Role & Close Button */}
-                        <div className="flex justify-between items-start mb-3 border-b border-zinc-800/80 pb-3">
-                            <div>
-                                <h3 className="text-xl font-bold text-white tracking-wide">{member.name}</h3>
-                                <p className="text-xs font-semibold mt-1" style={{ color: accentColor }}>
-                                    {member.role} {member.subteam ? `(${member.subteam})` : ''}
-                                </p>
-                            </div>
+                    <div className="mt-auto px-[20px]">
+                        <div className="border-t border-zinc-800" />
+                        <div className="flex items-center justify-between py-[4px]">
+                            {linkRow}
                             <button
                                 type="button"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    setShowDetails(false);
-                                }}
-                                className="p-1.5 rounded-full bg-zinc-900/80 text-zinc-300 hover:text-white border border-zinc-700 transition-transform hover:scale-110 shrink-0 ml-2"
-                                aria-label="Close details"
+                                onClick={() => setFlipped(true)}
+                                aria-expanded={flipped}
+                                className="-mr-[12px] h-11 px-[12px] text-xs font-semibold uppercase tracking-[0.12em] text-zinc-400 transition-colors hover:text-[#facc15]"
                             >
-                                <X className="w-4 h-4" />
+                                About
                             </button>
-                        </div>
-
-                        {member.description && (
-                            <p className="text-xs text-zinc-200 leading-relaxed italic mb-4 max-h-36 overflow-y-auto pr-1">
-                                "{member.description}"
-                            </p>
-                        )}
-
-                        <div className="space-y-1.5 text-xs text-zinc-300">
-                            {member.Department && (
-                                <p><span className="text-zinc-500 font-medium">Department:</span> {member.Department}</p>
-                            )}
-                            {member.year && (
-                                <p><span className="text-zinc-500 font-medium">Year:</span> {member.year}</p>
-                            )}
-                        </div>
-                    </div>
-
-                    {/* Social Connect Links */}
-                    <div className="pt-4 border-t border-zinc-800/80 mt-auto">
-                        <p className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400 mb-3 text-center">
-                            Connect
-                        </p>
-                        <div className="flex gap-3 justify-center items-center">
-                            {member.email && (
-                                <a 
-                                    href={`mailto:${member.email}`}
-                                    onClick={(e) => e.stopPropagation()}
-                                    aria-label="Email"
-                                    className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 border"
-                                    style={{
-                                        backgroundColor: `${accentColor}20`,
-                                        borderColor: `${accentColor}60`,
-                                        color: accentColor
-                                    }}
-                                >
-                                    <Mail className="w-5 h-5" />
-                                </a>
-                            )}
-                            {member.linkedin && (
-                                <a 
-                                    href={member.linkedin}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    onClick={(e) => e.stopPropagation()}
-                                    aria-label="LinkedIn"
-                                    className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 border"
-                                    style={{
-                                        backgroundColor: `${accentColor}20`,
-                                        borderColor: `${accentColor}60`,
-                                        color: accentColor
-                                    }}
-                                >
-                                    <Linkedin className="w-5 h-5" />
-                                </a>
-                            )}
-                            {member.instagram && (
-                                <a 
-                                    href={member.instagram}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    onClick={(e) => e.stopPropagation()}
-                                    aria-label="Instagram"
-                                    className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 border"
-                                    style={{
-                                        backgroundColor: `${accentColor}20`,
-                                        borderColor: `${accentColor}60`,
-                                        color: accentColor
-                                    }}
-                                >
-                                    <Instagram className="w-5 h-5" />
-                                </a>
-                            )}
                         </div>
                     </div>
                 </div>
+
+                {/* ── Back ── */}
+                <div className="memberCard__face memberCard__face--back flex flex-col" inert={flipped ? undefined : ''}>
+                    {hasPhoto && (
+                        <img
+                            src={member.photoUrl}
+                            alt=""
+                            aria-hidden="true"
+                            className="pointer-events-none absolute inset-0 h-full w-full scale-110 object-cover object-top blur-xl brightness-[0.3]"
+                        />
+                    )}
+                    <div className="relative flex min-h-0 flex-1 flex-col px-[20px] pt-[16px]">
+                        <div className="flex items-start justify-between gap-2">
+                            <p className="m-0 pt-[12px] text-[11px] font-semibold uppercase tracking-[0.12em] text-[#facc15]">
+                                {roleLine}
+                            </p>
+                            <button
+                                type="button"
+                                onClick={() => setFlipped(false)}
+                                aria-label={`Close ${member.name}'s bio`}
+                                className="-mr-[12px] flex h-11 w-11 shrink-0 items-center justify-center text-zinc-400 transition-colors hover:text-white"
+                            >
+                                <X className="h-[18px] w-[18px]" aria-hidden="true" />
+                            </button>
+                        </div>
+                        <h3 className="m-0 text-xl font-semibold text-zinc-50">{member.name}</h3>
+                        {department && <p className="m-0 mt-1 text-[13px] text-zinc-400">{department}</p>}
+                        {member.year && (
+                            <p className="m-0 mt-1 text-[13px] text-zinc-500">Team of {member.year}</p>
+                        )}
+
+                        <div className="my-[16px] border-t border-zinc-700/70" />
+
+                        <div className="memberCard__bio min-h-0 flex-1 overflow-y-auto pr-1">
+                            {member.description ? (
+                                <p className="m-0 text-sm leading-relaxed text-zinc-200">{member.description}</p>
+                            ) : (
+                                <p className="m-0 text-sm text-zinc-500">No bio yet.</p>
+                            )}
+                        </div>
+                    </div>
+
+                    {links.length > 0 && (
+                        <div className="relative px-[20px] py-[4px]">{linkRow}</div>
+                    )}
+                </div>
             </div>
-        </div>
+        </article>
     );
 };
 
